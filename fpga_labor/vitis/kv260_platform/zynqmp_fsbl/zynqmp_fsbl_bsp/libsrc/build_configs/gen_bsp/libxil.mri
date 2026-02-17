@@ -1,0 +1,29 @@
+create libxil.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/zdma/src/libzdma.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/wdtps/src/libwdtps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/video_common/src/libvideo_common.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/usbpsu/src/libusbpsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/uartps/src/libuartps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/ttcps/src/libttcps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/sysmonpsu/src/libsysmonpsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/spips/src/libspips.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/sdps/src/libsdps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/scugic/src/libscugic.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/rtcpsu/src/librtcpsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/resetps/src/libresetps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/qspipsu/src/libqspipsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/ipipsu/src/libipipsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/iicps/src/libiicps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/gpiops/src/libgpiops.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/gpio/src/libgpio.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/emacps/src/libemacps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/dppsu/src/libdppsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/dpdma/src/libdpdma.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/ddrcpsu/src/libddrcpsu.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/csudma/src/libcsudma.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/coresightps_dcc/src/libcoresightps_dcc.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/clockps/src/libclockps.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/axipmon/src/libaxipmon.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/avbuf/src/libavbuf.a
+save
+end

@@ -1,0 +1,260 @@
+
+*** Running vivado
+    with args -log cpu_system_wrapper.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source cpu_system_wrapper.tcl
+
+
+****** Vivado v2025.2 (64-bit)
+  **** SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
+  **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+  **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+  **** Start of session at: Tue Feb 17 10:24:17 2026
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source cpu_system_wrapper.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/xilinx/2025.2/data/ip'.
+Command: read_checkpoint -auto_incremental -incremental /mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/utils_1/imports/synth_1/cpu_system_wrapper.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from /mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/utils_1/imports/synth_1/cpu_system_wrapper.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top cpu_system_wrapper -part xck26-sfvc784-2LV-c
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xck26'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xck26'
+INFO: [Device 21-403] Loading part xck26-sfvc784-2LV-c
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 38506
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2809.090 ; gain = 141.555 ; free physical = 189 ; free virtual = 19592
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_wrapper' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/hdl/cpu_system_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:13]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_axi_gpio_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_axi_gpio_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_axi_gpio_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_axi_gpio_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_proc_sys_reset_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_proc_sys_reset_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_proc_sys_reset_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_proc_sys_reset_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
+WARNING: [Synth 8-7023] instance 'proc_sys_reset_0' of module 'cpu_system_proc_sys_reset_0_0' has 10 connections declared, but only 7 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_smartconnect_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_smartconnect_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_smartconnect_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_smartconnect_0_0_stub.v:6]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:176]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_system_ila_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_system_ila_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_system_ila_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_system_ila_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_zynq_ultra_ps_e_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_zynq_ultra_ps_e_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_zynq_ultra_ps_e_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_zynq_ultra_ps_e_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'pl_clk1' of module 'cpu_system_zynq_ultra_ps_e_0_0' is unconnected for instance 'zynq_ultra_ps_e_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:237]
+WARNING: [Synth 8-7023] instance 'zynq_ultra_ps_e_0' of module 'cpu_system_zynq_ultra_ps_e_0_0' has 44 connections declared, but only 43 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:237]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_wrapper' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/hdl/cpu_system_wrapper.v:13]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.059 ; gain = 234.523 ; free physical = 169 ; free virtual = 19482
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.059 ; gain = 234.523 ; free physical = 169 ; free virtual = 19482
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.059 ; gain = 234.523 ; free physical = 169 ; free virtual = 19482
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2902.059 ; gain = 0.000 ; free physical = 169 ; free virtual = 19482
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0_in_context.xdc] for cell 'cpu_system_i/zynq_ultra_ps_e_0'
+create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2948.250 ; gain = 3.203 ; free physical = 175 ; free virtual = 19488
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0_in_context.xdc] for cell 'cpu_system_i/zynq_ultra_ps_e_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0_in_context.xdc] for cell 'cpu_system_i/proc_sys_reset_0'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0_in_context.xdc] for cell 'cpu_system_i/proc_sys_reset_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_smartconnect_0_0/cpu_system_smartconnect_0_0/cpu_system_smartconnect_0_0_in_context.xdc] for cell 'cpu_system_i/smartconnect_0'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_smartconnect_0_0/cpu_system_smartconnect_0_0/cpu_system_smartconnect_0_0_in_context.xdc] for cell 'cpu_system_i/smartconnect_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0_in_context.xdc] for cell 'cpu_system_i/axi_gpio_0'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0_in_context.xdc] for cell 'cpu_system_i/axi_gpio_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0_in_context.xdc] for cell 'cpu_system_i/system_ila_0'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0_in_context.xdc] for cell 'cpu_system_i/system_ila_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/constrs_1/new/pinout.xdc]
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/constrs_1/new/pinout.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/constrs_1/new/pinout.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/cpu_system_wrapper_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/cpu_system_wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2948.250 ; gain = 0.000 ; free physical = 175 ; free virtual = 19489
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2948.285 ; gain = 0.000 ; free physical = 174 ; free virtual = 19488
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 2948.285 ; gain = 280.750 ; free physical = 168 ; free virtual = 19483
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xck26-sfvc784-2LV-c
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 168 ; free virtual = 19483
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 168 ; free virtual = 19483
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 166 ; free virtual = 19482
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1248 (col length:96)
+BRAMs: 288 (col length: RAMB18 96 RAMB36 48)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 162 ; free virtual = 19482
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3602.746 ; gain = 935.211 ; free physical = 167 ; free virtual = 18902
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3602.746 ; gain = 935.211 ; free physical = 167 ; free virtual = 18902
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3612.762 ; gain = 945.227 ; free physical = 160 ; free virtual = 18895
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+-------------------------------+----------+
+|      |BlackBox name                  |Instances |
++------+-------------------------------+----------+
+|1     |cpu_system_axi_gpio_0_0        |         1|
+|2     |cpu_system_proc_sys_reset_0_0  |         1|
+|3     |cpu_system_smartconnect_0_0    |         1|
+|4     |cpu_system_system_ila_0_0      |         1|
+|5     |cpu_system_zynq_ultra_ps_e_0_0 |         1|
++------+-------------------------------+----------+
+
+Report Cell Usage: 
++------+-----------------------------+------+
+|      |Cell                         |Count |
++------+-----------------------------+------+
+|1     |cpu_system_axi_gpio_0        |     1|
+|2     |cpu_system_proc_sys_reset_0  |     1|
+|3     |cpu_system_smartconnect_0    |     1|
+|4     |cpu_system_system_ila_0      |     1|
+|5     |cpu_system_zynq_ultra_ps_e_0 |     1|
+|6     |IBUF                         |     4|
+|7     |OBUF                         |     4|
++------+-----------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 3805.574 ; gain = 1091.812 ; free physical = 151 ; free virtual = 18730
+Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3805.574 ; gain = 0.000 ; free physical = 151 ; free virtual = 18730
+INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3805.574 ; gain = 0.000 ; free physical = 304 ; free virtual = 18882
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 4 instances were transformed.
+  IBUF => IBUF (IBUFCTRL, INBUF): 4 instances
+
+Synth Design complete | Checksum: 58e30650
+INFO: [Common 17-83] Releasing license: Synthesis
+39 Infos, 7 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:54 ; elapsed = 00:00:51 . Memory (MB): peak = 3805.574 ; gain = 2176.641 ; free physical = 303 ; free virtual = 18882
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2932.895; main = 2932.895; forked = 299.646
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 4420.543; main = 3731.891; forked = 1002.660
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3805.574 ; gain = 0.000 ; free physical = 303 ; free virtual = 18882
+INFO: [Common 17-1381] The checkpoint '/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/cpu_system_wrapper.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file cpu_system_wrapper_utilization_synth.rpt -pb cpu_system_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Feb 17 10:25:20 2026...

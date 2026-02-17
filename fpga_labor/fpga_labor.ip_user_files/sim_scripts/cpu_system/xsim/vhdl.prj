@@ -1,0 +1,7 @@
+vhdl xil_defaultlib  \
+"../../../bd/cpu_system/ip/cpu_system_proc_sys_reset_0_0/sim/cpu_system_proc_sys_reset_0_0.vhd" \
+"../../../bd/cpu_system/ip/cpu_system_smartconnect_0_0/bd_0/ip/ip_1/sim/bd_7c56_psr_aclk_0.vhd" \
+"../../../bd/cpu_system/ip/cpu_system_axi_gpio_0_0/sim/cpu_system_axi_gpio_0_0.vhd" \
+
+# Do not sort compile order
+nosort
