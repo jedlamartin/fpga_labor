@@ -61,12 +61,13 @@
 
 
 #ifdef XILINX_SIMULATOR
-bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm), In0("In0"), In1("In1"), dout("dout")
+bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm), In0("In0"), In1("In1"), In2("In2"), dout("dout")
 {
 
   // initialize pins
   mp_impl->In0(In0);
   mp_impl->In1(In1);
+  mp_impl->In2(In2);
   mp_impl->dout(dout);
 
 }
@@ -81,12 +82,13 @@ void bd_38aa_slot_0_r_0::before_end_of_elaboration()
 
 
 #ifdef XM_SYSTEMC
-bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm), In0("In0"), In1("In1"), dout("dout")
+bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm), In0("In0"), In1("In1"), In2("In2"), dout("dout")
 {
 
   // initialize pins
   mp_impl->In0(In0);
   mp_impl->In1(In1);
+  mp_impl->In2(In2);
   mp_impl->dout(dout);
 
 }
@@ -101,12 +103,13 @@ void bd_38aa_slot_0_r_0::before_end_of_elaboration()
 
 
 #ifdef RIVIERA
-bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm), In0("In0"), In1("In1"), dout("dout")
+bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm), In0("In0"), In1("In1"), In2("In2"), dout("dout")
 {
 
   // initialize pins
   mp_impl->In0(In0);
   mp_impl->In1(In1);
+  mp_impl->In2(In2);
   mp_impl->dout(dout);
 
 }
@@ -121,11 +124,12 @@ void bd_38aa_slot_0_r_0::before_end_of_elaboration()
 
 
 #ifdef VCSSYSTEMC
-bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm),  In0("In0"), In1("In1"), dout("dout")
+bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm),  In0("In0"), In1("In1"), In2("In2"), dout("dout")
 {
   // initialize pins
   mp_impl->In0(In0);
   mp_impl->In1(In1);
+  mp_impl->In2(In2);
   mp_impl->dout(dout);
 
   // Instantiate Socket Stubs
@@ -143,11 +147,12 @@ void bd_38aa_slot_0_r_0::before_end_of_elaboration()
 
 
 #ifdef MTI_SYSTEMC
-bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm),  In0("In0"), In1("In1"), dout("dout")
+bd_38aa_slot_0_r_0::bd_38aa_slot_0_r_0(const sc_core::sc_module_name& nm) : bd_38aa_slot_0_r_0_sc(nm),  In0("In0"), In1("In1"), In2("In2"), dout("dout")
 {
   // initialize pins
   mp_impl->In0(In0);
   mp_impl->In1(In1);
+  mp_impl->In2(In2);
   mp_impl->dout(dout);
 
   // Instantiate Socket Stubs

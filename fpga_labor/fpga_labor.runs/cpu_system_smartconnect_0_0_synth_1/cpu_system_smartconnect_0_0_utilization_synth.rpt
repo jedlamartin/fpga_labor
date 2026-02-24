@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date         : Tue Feb 17 09:57:46 2026
+| Date         : Tue Feb 24 09:45:48 2026
 | Host         : fpgalab running 64-bit Ubuntu 24.04.4 LTS
 | Command      : report_utilization -file cpu_system_smartconnect_0_0_utilization_synth.rpt -pb cpu_system_smartconnect_0_0_utilization_synth.pb
 | Design       : cpu_system_smartconnect_0_0
@@ -32,19 +32,19 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| CLB LUTs*                  |  788 |     0 |          0 |    117120 |  0.67 |
-|   LUT as Logic             |  787 |     0 |          0 |    117120 |  0.67 |
+| CLB LUTs*                  |  965 |     0 |          0 |    117120 |  0.82 |
+|   LUT as Logic             |  964 |     0 |          0 |    117120 |  0.82 |
 |   LUT as Memory            |    1 |     0 |          0 |     57600 | <0.01 |
 |     LUT as Distributed RAM |    0 |     0 |            |           |       |
 |     LUT as Shift Register  |    1 |     0 |            |           |       |
-| CLB Registers              |  852 |     0 |          0 |    234240 |  0.36 |
-|   Register as Flip Flop    |  852 |     0 |          0 |    234240 |  0.36 |
+| CLB Registers              | 1032 |     0 |          0 |    234240 |  0.44 |
+|   Register as Flip Flop    | 1032 |     0 |          0 |    234240 |  0.44 |
 |   Register as Latch        |    0 |     0 |          0 |    234240 |  0.00 |
 | CARRY8                     |    5 |     0 |          0 |     14640 |  0.03 |
-| F7 Muxes                   |    3 |     0 |          0 |     58560 | <0.01 |
+| F7 Muxes                   |    4 |     0 |          0 |     58560 | <0.01 |
 | F8 Muxes                   |    0 |     0 |          0 |     29280 |  0.00 |
 | F9 Muxes                   |    0 |     0 |          0 |     14640 |  0.00 |
-| Unique Control Sets        |   74 |       |          0 |     29280 |  0.25 |
+| Unique Control Sets        |  134 |       |          0 |     29280 |  0.46 |
 +----------------------------+------+-------+------------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 Warning! LUT value is adjusted to account for LUT combining.
@@ -65,9 +65,9 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
-| 42    |          Yes |           - |        Reset |
-| 15    |          Yes |         Set |            - |
-| 795   |          Yes |       Reset |            - |
+| 135   |          Yes |           - |        Reset |
+| 36    |          Yes |         Set |            - |
+| 861   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -173,17 +173,17 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDRE     |  795 |            Register |
-| LUT6     |  278 |                 CLB |
-| LUT2     |  237 |                 CLB |
-| LUT3     |  184 |                 CLB |
-| LUT4     |  146 |                 CLB |
-| LUT5     |  142 |                 CLB |
-| LUT1     |   53 |                 CLB |
-| FDCE     |   42 |            Register |
-| FDSE     |   15 |            Register |
+| FDRE     |  861 |            Register |
+| LUT6     |  286 |                 CLB |
+| LUT2     |  286 |                 CLB |
+| LUT3     |  252 |                 CLB |
+| LUT4     |  164 |                 CLB |
+| LUT5     |  146 |                 CLB |
+| FDCE     |  135 |            Register |
+| LUT1     |  130 |                 CLB |
+| FDSE     |   36 |            Register |
 | CARRY8   |    5 |                 CLB |
-| MUXF7    |    3 |                 CLB |
+| MUXF7    |    4 |                 CLB |
 | SRL16E   |    1 |                 CLB |
 +----------+------+---------------------+
 

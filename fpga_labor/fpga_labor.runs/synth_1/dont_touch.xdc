@@ -21,4 +21,16 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==cpu_system_
 # IP: bd/cpu_system/ip/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==cpu_system_system_ila_0_0 || ORIG_REF_NAME==cpu_system_system_ila_0_0} -quiet] -quiet
 
+# IP: bd/cpu_system/ip/cpu_system_smartconnect_1_0/cpu_system_smartconnect_1_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==cpu_system_smartconnect_1_0 || ORIG_REF_NAME==cpu_system_smartconnect_1_0} -quiet] -quiet
+
+# IP: bd/cpu_system/ip/cpu_system_axi_dma_0_0/cpu_system_axi_dma_0_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==cpu_system_axi_dma_0_0 || ORIG_REF_NAME==cpu_system_axi_dma_0_0} -quiet] -quiet
+
+# IP: bd/cpu_system/ip/cpu_system_xlconcat_0_0/cpu_system_xlconcat_0_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==cpu_system_xlconcat_0_0 || ORIG_REF_NAME==cpu_system_xlconcat_0_0} -quiet] -quiet
+
+# IP: bd/cpu_system/ip/cpu_system_fifo_generator_0_0/cpu_system_fifo_generator_0_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==cpu_system_fifo_generator_0_0 || ORIG_REF_NAME==cpu_system_fifo_generator_0_0} -quiet] -quiet
+
 # XDC: /mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/cpu_system_ooc.xdc

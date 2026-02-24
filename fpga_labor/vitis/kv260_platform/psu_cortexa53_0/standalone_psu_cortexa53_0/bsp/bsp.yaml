@@ -216,6 +216,10 @@ include_folder: include
 lib_folder: lib
 libsrc_folder: libsrc
 drv_info:
+  axi_dma_0:
+    driver: axidma
+    ip_name: axi_dma
+    path: /xilinx/2025.2/Vitis/data/embeddedsw/XilinxProcessorIPLib/drivers/axidma_v9_20
   axi_gpio_0:
     driver: gpio
     ip_name: axi_gpio

@@ -24,6 +24,7 @@ addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_f
 addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/coresightps_dcc/src/libcoresightps_dcc.a
 addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/clockps/src/libclockps.a
 addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/axipmon/src/libaxipmon.a
+addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/axidma/src/libaxidma.a
 addlib /mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/avbuf/src/libavbuf.a
 save
 end

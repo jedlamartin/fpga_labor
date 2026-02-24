@@ -68,18 +68,20 @@ typedef bit bit_as_bool;
 module bd_38aa_slot_0_r_0 (
   input bit [0 : 0] In0,
   input bit [0 : 0] In1,
-  output bit [1 : 0] dout
+  input bit [0 : 0] In2,
+  output bit [2 : 0] dout
 );
 endmodule
 `endif
 
 `ifdef XCELIUM
 (* XMSC_MODULE_EXPORT *)
-module bd_38aa_slot_0_r_0 (In0,In1,dout)
+module bd_38aa_slot_0_r_0 (In0,In1,In2,dout)
 (* integer foreign = "SystemC";
 *);
   input bit [0 : 0] In0;
   input bit [0 : 0] In1;
-  output wire [1 : 0] dout;
+  input bit [0 : 0] In2;
+  output wire [2 : 0] dout;
 endmodule
 `endif

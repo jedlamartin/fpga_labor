@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date         : Tue Feb 17 10:25:20 2026
+| Date         : Tue Feb 24 10:48:50 2026
 | Host         : fpgalab running 64-bit Ubuntu 24.04.4 LTS
 | Command      : report_utilization -file cpu_system_wrapper_utilization_synth.rpt -pb cpu_system_wrapper_utilization_synth.pb
 | Design       : cpu_system_wrapper
@@ -185,9 +185,12 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +--------------------------------+------+
 | cpu_system_zynq_ultra_ps_e_0_0 |    1 |
 | cpu_system_system_ila_0_0      |    1 |
+| cpu_system_smartconnect_1_0    |    1 |
 | cpu_system_smartconnect_0_0    |    1 |
 | cpu_system_proc_sys_reset_0_0  |    1 |
+| cpu_system_fifo_generator_0_0  |    1 |
 | cpu_system_axi_gpio_0_0        |    1 |
+| cpu_system_axi_dma_0_0         |    1 |
 +--------------------------------+------+
 
 

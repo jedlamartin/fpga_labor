@@ -189,8 +189,8 @@ bd_38aa_slot_0_w_0_sc::bd_38aa_slot_0_w_0_sc(const sc_core::sc_module_name& nm) 
     model_param_props.addLong("IN125_WIDTH", "1");
     model_param_props.addLong("IN126_WIDTH", "1");
     model_param_props.addLong("IN127_WIDTH", "1");
-    model_param_props.addLong("dout_width", "2");
-    model_param_props.addLong("NUM_PORTS", "2");
+    model_param_props.addLong("dout_width", "3");
+    model_param_props.addLong("NUM_PORTS", "3");
     model_param_props.addString("COMPONENT_NAME", "bd_38aa_slot_0_w_0");
 
   mp_impl = new bd_38aa_slot_0_w_0_core("inst", model_param_props);

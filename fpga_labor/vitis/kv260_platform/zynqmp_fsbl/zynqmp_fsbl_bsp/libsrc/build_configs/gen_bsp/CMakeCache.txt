@@ -31,8 +31,8 @@ CMAKE_ASM_COMPILER_AR:FILEPATH=/xilinx/2025.2/Vitis/gnu/aarch64/lin/aarch64-none
 // for the GCC compiler
 CMAKE_ASM_COMPILER_RANLIB:FILEPATH=/xilinx/2025.2/Vitis/gnu/aarch64/lin/aarch64-none/bin/aarch64-none-elf-gcc-ranlib
 
-//CMAKE ASM FLAGS
-CMAKE_ASM_FLAGS:STRING=  -DSDT  -MMD -MP -specs=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/Xilinx.spec -Os -flto -ffat-lto-objects -DARMA53_64 -I/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/include -Os -flto -ffat-lto-objects -DARMA53_64
+//ASM FLAGS
+CMAKE_ASM_FLAGS:STRING= -DSDT  -MMD -MP -specs=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/Xilinx.spec -Os -flto -ffat-lto-objects -DARMA53_64 -I/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/include
 
 //Flags used by the ASM compiler during DEBUG builds.
 CMAKE_ASM_FLAGS_DEBUG:STRING=-g
@@ -81,8 +81,8 @@ CMAKE_C_COMPILER_AR:FILEPATH=/xilinx/2025.2/Vitis/gnu/aarch64/lin/aarch64-none/b
 // for the GCC compiler
 CMAKE_C_COMPILER_RANLIB:FILEPATH=/xilinx/2025.2/Vitis/gnu/aarch64/lin/aarch64-none/bin/aarch64-none-elf-gcc-ranlib
 
-//CMAKE C FLAGS
-CMAKE_C_FLAGS:STRING=  -DSDT  -MMD -MP -specs=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/Xilinx.spec -Os -flto -ffat-lto-objects -DARMA53_64 -I/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/include -Os -flto -ffat-lto-objects -DARMA53_64
+//CFLAGS
+CMAKE_C_FLAGS:STRING= -DSDT  -MMD -MP -specs=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/Xilinx.spec -Os -flto -ffat-lto-objects -DARMA53_64 -I/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/include
 
 //Flags used by the C compiler during DEBUG builds.
 CMAKE_C_FLAGS_DEBUG:STRING=-g
@@ -238,8 +238,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/xilinx/2025.2/Vitis/gnu/aarch64/lin/aarch64-none/bin/aarch64-none-elf-strip
 
-//No help, variable specified on the command line.
-CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/cortexa53_toolchain.cmake
+//The CMake toolchain file
+CMAKE_TOOLCHAIN_FILE:FILEPATH=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/cortexa53_toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -298,7 +298,7 @@ XILFFS_ramfs_start_addr:STRING=
 
 //Enables the file system in Read_Only mode if true. ZynqMP fsbl
 // will set this to true
-XILFFS_read_only:BOOL=ON
+XILFFS_read_only:BOOL=OFF
 
 //Configures relative path feature (valid values 0 to 2).
 XILFFS_set_fs_rpath:STRING=0
@@ -314,7 +314,7 @@ XILFFS_use_lfn:STRING=0
 
 //Disable(0) or Enable(1) f_mkfs function. ZynqMP fsbl will set
 // this to false
-XILFFS_use_mkfs:BOOL=OFF
+XILFFS_use_mkfs:BOOL=ON
 
 //Enables the string functions (valid values 0 to 2).
 XILFFS_use_strfunc:STRING=0
@@ -397,7 +397,7 @@ XILSECURE_secure_environment:BOOL=OFF
 //Enables decryption of bitstream to memory and then writes it
 // to PCAP, allows calculation of sha on decrypted bitstream in
 // chunks valid only for ZynqMP FSBL BSP
-XILSECURE_tpm_support:BOOL=ON
+XILSECURE_tpm_support:BOOL=OFF
 
 //Enable Interval Timer
 XILTIMER_en_interval_timer:BOOL=OFF
@@ -419,6 +419,15 @@ avbuf_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 avbuf_SOURCE_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/avbuf/src
+
+//Value Computed by CMake
+axidma_BINARY_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/axidma/src
+
+//Value Computed by CMake
+axidma_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+axidma_SOURCE_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/axidma/src
 
 //Value Computed by CMake
 axipmon_BINARY_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/axipmon/src
@@ -678,7 +687,7 @@ standalone_xpm_support:BOOL=OFF
 
 //Disable or Enable Optimization for FSBL's BSP. ZynqMP FSBL will
 // set this to true
-standalone_zynqmp_fsbl_bsp:BOOL=ON
+standalone_zynqmp_fsbl_bsp:BOOL=OFF
 
 //Value Computed by CMake
 sysmonpsu_BINARY_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/zynqmp_fsbl_bsp/libsrc/build_configs/gen_bsp/libsrc/sysmonpsu/src
@@ -900,7 +909,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=55
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=56
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

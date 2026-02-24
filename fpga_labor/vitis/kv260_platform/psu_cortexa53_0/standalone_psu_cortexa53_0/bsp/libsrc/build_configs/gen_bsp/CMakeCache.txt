@@ -238,8 +238,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/xilinx/2025.2/Vitis/gnu/aarch64/lin/aarch64-none/bin/aarch64-none-elf-strip
 
-//No help, variable specified on the command line.
-CMAKE_TOOLCHAIN_FILE:UNINITIALIZED=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/psu_cortexa53_0/standalone_psu_cortexa53_0/bsp/cortexa53_toolchain.cmake
+//The CMake toolchain file
+CMAKE_TOOLCHAIN_FILE:FILEPATH=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/psu_cortexa53_0/standalone_psu_cortexa53_0/bsp/cortexa53_toolchain.cmake
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -297,6 +297,15 @@ avbuf_IS_TOP_LEVEL:STATIC=OFF
 
 //Value Computed by CMake
 avbuf_SOURCE_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/psu_cortexa53_0/standalone_psu_cortexa53_0/bsp/libsrc/avbuf/src
+
+//Value Computed by CMake
+axidma_BINARY_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/psu_cortexa53_0/standalone_psu_cortexa53_0/bsp/libsrc/build_configs/gen_bsp/libsrc/axidma/src
+
+//Value Computed by CMake
+axidma_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+axidma_SOURCE_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/psu_cortexa53_0/standalone_psu_cortexa53_0/bsp/libsrc/axidma/src
 
 //Value Computed by CMake
 axipmon_BINARY_DIR:STATIC=/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/psu_cortexa53_0/standalone_psu_cortexa53_0/bsp/libsrc/build_configs/gen_bsp/libsrc/axipmon/src
@@ -751,7 +760,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=48
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=49
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

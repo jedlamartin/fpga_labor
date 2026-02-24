@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 12:34:56 MST 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Tue Feb 17 10:24:17 2026
-# Process ID         : 38438
+# Start of session at: Tue Feb 24 10:47:46 2026
+# Process ID         : 39411
 # Current directory  : /mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1
 # Command line       : vivado -log cpu_system_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source cpu_system_wrapper.tcl
 # Log file           : /mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/cpu_system_wrapper.vds
@@ -13,18 +13,24 @@
 # Platform           : Ubuntu
 # Operating System   : Ubuntu 24.04.4 LTS
 # Processor Detail   : Intel(R) Core(TM) i5-4460  CPU @ 3.20GHz
-# CPU Frequency      : 3278.208 MHz
+# CPU Frequency      : 3298.327 MHz
 # CPU Physical cores : 4
 # CPU Logical cores  : 4
 # Host memory        : 16429 MB
 # Swap memory        : 17179 MB
 # Total Virtual      : 33609 MB
-# Available Virtual  : 22338 MB
+# Available Virtual  : 24293 MB
 #-----------------------------------------------------------
 source cpu_system_wrapper.tcl -notrace
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/xilinx/2025.2/data/ip'.
+INFO: [Project 1-5698] Found the below utility IPs instantiated in block design /mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/sources_1/bd/cpu_system/cpu_system.bd which have equivalent inline hdl with improved performance and reduced diskspace.
+It is recommended to migrate these utility IPs to inline hdl  using the command upgrade_project -migrate_to_inline_hdl.  The utility IPs may be deprecated in future releases.
+More information on inline hdl is available in UG994.
+Utility IP Component Instances:
+ cpu_system_xlconcat_0_0
+add_files: Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1648.254 ; gain = 30.859 ; free physical = 2652 ; free virtual = 22609
 Command: read_checkpoint -auto_incremental -incremental /mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/utils_1/imports/synth_1/cpu_system_wrapper.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from /mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/utils_1/imports/synth_1/cpu_system_wrapper.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -37,50 +43,173 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 38506
+INFO: [Synth 8-7075] Helper process launched with PID 39486
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2809.090 ; gain = 141.555 ; free physical = 189 ; free virtual = 19592
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2833.379 ; gain = 141.555 ; free physical = 1139 ; free virtual = 21137
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'cpu_system_wrapper' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/hdl/cpu_system_wrapper.v:13]
 INFO: [Synth 8-6157] synthesizing module 'cpu_system' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:13]
-INFO: [Synth 8-6157] synthesizing module 'cpu_system_axi_gpio_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_axi_gpio_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cpu_system_axi_gpio_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_axi_gpio_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'cpu_system_proc_sys_reset_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_proc_sys_reset_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cpu_system_proc_sys_reset_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_proc_sys_reset_0_0_stub.v:6]
-WARNING: [Synth 8-7071] port 'mb_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
-WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
-WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
-WARNING: [Synth 8-7023] instance 'proc_sys_reset_0' of module 'cpu_system_proc_sys_reset_0_0' has 10 connections declared, but only 7 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:107]
-INFO: [Synth 8-6157] synthesizing module 'cpu_system_smartconnect_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_smartconnect_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cpu_system_smartconnect_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_smartconnect_0_0_stub.v:6]
-WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:176]
-INFO: [Synth 8-6157] synthesizing module 'cpu_system_system_ila_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_system_ila_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cpu_system_system_ila_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_system_ila_0_0_stub.v:6]
-INFO: [Synth 8-6157] synthesizing module 'cpu_system_zynq_ultra_ps_e_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_zynq_ultra_ps_e_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'cpu_system_zynq_ultra_ps_e_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-38438-fpgalab/realtime/cpu_system_zynq_ultra_ps_e_0_0_stub.v:6]
-WARNING: [Synth 8-7071] port 'pl_clk1' of module 'cpu_system_zynq_ultra_ps_e_0_0' is unconnected for instance 'zynq_ultra_ps_e_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:237]
-WARNING: [Synth 8-7023] instance 'zynq_ultra_ps_e_0' of module 'cpu_system_zynq_ultra_ps_e_0_0' has 44 connections declared, but only 43 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:237]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_axi_dma_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_axi_dma_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_axi_dma_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_axi_dma_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'mm2s_prmry_reset_out_n' of module 'cpu_system_axi_dma_0_0' is unconnected for instance 'axi_dma_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:173]
+WARNING: [Synth 8-7071] port 's2mm_prmry_reset_out_n' of module 'cpu_system_axi_dma_0_0' is unconnected for instance 'axi_dma_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:173]
+WARNING: [Synth 8-7071] port 'axi_dma_tstvec' of module 'cpu_system_axi_dma_0_0' is unconnected for instance 'axi_dma_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:173]
+WARNING: [Synth 8-7023] instance 'axi_dma_0' of module 'cpu_system_axi_dma_0_0' has 64 connections declared, but only 61 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:173]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_axi_gpio_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_axi_gpio_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_axi_gpio_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_axi_gpio_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_fifo_generator_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_fifo_generator_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_fifo_generator_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_fifo_generator_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_proc_sys_reset_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_proc_sys_reset_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_proc_sys_reset_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_proc_sys_reset_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:268]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:268]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'cpu_system_proc_sys_reset_0_0' is unconnected for instance 'proc_sys_reset_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:268]
+WARNING: [Synth 8-7023] instance 'proc_sys_reset_0' of module 'cpu_system_proc_sys_reset_0_0' has 10 connections declared, but only 7 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:268]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_smartconnect_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_smartconnect_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_smartconnect_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_smartconnect_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'M00_AXI_awprot' of module 'cpu_system_smartconnect_0_0' is unconnected for instance 'smartconnect_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:276]
+WARNING: [Synth 8-7071] port 'M00_AXI_arprot' of module 'cpu_system_smartconnect_0_0' is unconnected for instance 'smartconnect_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:276]
+WARNING: [Synth 8-7071] port 'M01_AXI_awprot' of module 'cpu_system_smartconnect_0_0' is unconnected for instance 'smartconnect_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:276]
+WARNING: [Synth 8-7071] port 'M01_AXI_wstrb' of module 'cpu_system_smartconnect_0_0' is unconnected for instance 'smartconnect_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:276]
+WARNING: [Synth 8-7071] port 'M01_AXI_arprot' of module 'cpu_system_smartconnect_0_0' is unconnected for instance 'smartconnect_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:276]
+WARNING: [Synth 8-7023] instance 'smartconnect_0' of module 'cpu_system_smartconnect_0_0' has 79 connections declared, but only 74 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:276]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_smartconnect_1_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_smartconnect_1_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_smartconnect_1_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_smartconnect_1_0_stub.v:6]
+WARNING: [Synth 8-4446] all outputs are unconnected for this instance and logic may be removed [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:420]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_system_ila_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_system_ila_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_system_ila_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_system_ila_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_xlconcat_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_xlconcat_0_0/synth/cpu_system_xlconcat_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'xlconcat_v2_1_7_xlconcat' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ipshared/9c1a/hdl/xlconcat_v2_1_vl_rfs.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'xlconcat_v2_1_7_xlconcat' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ipshared/9c1a/hdl/xlconcat_v2_1_vl_rfs.v:59]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_xlconcat_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_xlconcat_0_0/synth/cpu_system_xlconcat_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'cpu_system_zynq_ultra_ps_e_0_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_zynq_ultra_ps_e_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'cpu_system_zynq_ultra_ps_e_0_0' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/.Xil/Vivado-39411-fpgalab/realtime/cpu_system_zynq_ultra_ps_e_0_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'saxigp0_bid' of module 'cpu_system_zynq_ultra_ps_e_0_0' is unconnected for instance 'zynq_ultra_ps_e_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:487]
+WARNING: [Synth 8-7071] port 'saxigp0_rid' of module 'cpu_system_zynq_ultra_ps_e_0_0' is unconnected for instance 'zynq_ultra_ps_e_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:487]
+WARNING: [Synth 8-7071] port 'pl_clk1' of module 'cpu_system_zynq_ultra_ps_e_0_0' is unconnected for instance 'zynq_ultra_ps_e_0' [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:487]
+WARNING: [Synth 8-7023] instance 'zynq_ultra_ps_e_0' of module 'cpu_system_zynq_ultra_ps_e_0_0' has 84 connections declared, but only 81 given [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:487]
 INFO: [Synth 8-6155] done synthesizing module 'cpu_system' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/synth/cpu_system.v:13]
 INFO: [Synth 8-6155] done synthesizing module 'cpu_system_wrapper' (0#1) [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/hdl/cpu_system_wrapper.v:13]
+WARNING: [Synth 8-7129] Port In2[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In3[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In4[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In5[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In6[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In7[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In8[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In9[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In10[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In11[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In12[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In13[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In14[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In15[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In16[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In17[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In18[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In19[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In20[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In21[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In22[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In23[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In24[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In25[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In26[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In27[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In28[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In29[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In30[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In31[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In32[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In33[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In34[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In35[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In36[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In37[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In38[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In39[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In40[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In41[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In42[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In43[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In44[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In45[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In46[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In47[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In48[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In49[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In50[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In51[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In52[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In53[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In54[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In55[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In56[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In57[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In58[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In59[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In60[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In61[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In62[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In63[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In64[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In65[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In66[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In67[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In68[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In69[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In70[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In71[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In72[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In73[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In74[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In75[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In76[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In77[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In78[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In79[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In80[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In81[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In82[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In83[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In84[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In85[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In86[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In87[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In88[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In89[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In90[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In91[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In92[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In93[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In94[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In95[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In96[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In97[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In98[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In99[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In100[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+WARNING: [Synth 8-7129] Port In101[0] in module xlconcat_v2_1_7_xlconcat is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.059 ; gain = 234.523 ; free physical = 169 ; free virtual = 19482
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2929.316 ; gain = 237.492 ; free physical = 1041 ; free virtual = 21044
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.059 ; gain = 234.523 ; free physical = 169 ; free virtual = 19482
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2929.316 ; gain = 237.492 ; free physical = 1041 ; free virtual = 21044
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2902.059 ; gain = 234.523 ; free physical = 169 ; free virtual = 19482
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 2929.316 ; gain = 237.492 ; free physical = 1041 ; free virtual = 21044
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2902.059 ; gain = 0.000 ; free physical = 169 ; free virtual = 19482
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2929.316 ; gain = 0.000 ; free physical = 1041 ; free virtual = 21044
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
 Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0_in_context.xdc] for cell 'cpu_system_i/zynq_ultra_ps_e_0'
-create_clock: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2948.250 ; gain = 3.203 ; free physical = 175 ; free virtual = 19488
+create_clock: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2969.336 ; gain = 0.000 ; free physical = 1060 ; free virtual = 21066
 Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0_in_context.xdc] for cell 'cpu_system_i/zynq_ultra_ps_e_0'
 Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0_in_context.xdc] for cell 'cpu_system_i/proc_sys_reset_0'
 Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0_in_context.xdc] for cell 'cpu_system_i/proc_sys_reset_0'
@@ -90,6 +219,12 @@ Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cp
 Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0_in_context.xdc] for cell 'cpu_system_i/axi_gpio_0'
 Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0_in_context.xdc] for cell 'cpu_system_i/system_ila_0'
 Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0_in_context.xdc] for cell 'cpu_system_i/system_ila_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_smartconnect_1_0/cpu_system_smartconnect_1_0/cpu_system_smartconnect_1_0_in_context.xdc] for cell 'cpu_system_i/smartconnect_1'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_smartconnect_1_0/cpu_system_smartconnect_1_0/cpu_system_smartconnect_1_0_in_context.xdc] for cell 'cpu_system_i/smartconnect_1'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_axi_dma_0_0/cpu_system_axi_dma_0_0/cpu_system_axi_dma_0_0_in_context.xdc] for cell 'cpu_system_i/axi_dma_0'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_axi_dma_0_0/cpu_system_axi_dma_0_0/cpu_system_axi_dma_0_0_in_context.xdc] for cell 'cpu_system_i/axi_dma_0'
+Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_fifo_generator_0_0/cpu_system_fifo_generator_0_0/cpu_system_fifo_generator_0_0_in_context.xdc] for cell 'cpu_system_i/fifo_generator_0'
+Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_fifo_generator_0_0/cpu_system_fifo_generator_0_0/cpu_system_fifo_generator_0_0_in_context.xdc] for cell 'cpu_system_i/fifo_generator_0'
 Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/constrs_1/new/pinout.xdc]
 Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/constrs_1/new/pinout.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/mnt/work/fpga_labor/fpga_labor/fpga_labor.srcs/constrs_1/new/pinout.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/cpu_system_wrapper_propImpl.xdc].
@@ -98,15 +233,15 @@ Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/dont_t
 Finished Parsing XDC File [/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2948.250 ; gain = 0.000 ; free physical = 175 ; free virtual = 19489
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2969.336 ; gain = 0.000 ; free physical = 1058 ; free virtual = 21066
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2948.285 ; gain = 0.000 ; free physical = 174 ; free virtual = 19488
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2969.371 ; gain = 0.000 ; free physical = 1057 ; free virtual = 21065
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 2948.285 ; gain = 280.750 ; free physical = 168 ; free virtual = 19483
+Finished Constraint Validation : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2969.371 ; gain = 277.547 ; free physical = 1051 ; free virtual = 21058
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
@@ -114,16 +249,16 @@ Start Loading Part and Timing Information
 Loading part: xck26-sfvc784-2LV-c
 INFO: [Synth 8-6742] Reading net delay rules and data
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 168 ; free virtual = 19483
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2977.340 ; gain = 285.516 ; free physical = 1051 ; free virtual = 21058
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 168 ; free virtual = 19483
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:20 ; elapsed = 00:00:20 . Memory (MB): peak = 2977.340 ; gain = 285.516 ; free physical = 1051 ; free virtual = 21058
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 166 ; free virtual = 19482
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 2977.340 ; gain = 285.516 ; free physical = 1050 ; free virtual = 21052
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -145,25 +280,25 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 2956.254 ; gain = 288.719 ; free physical = 162 ; free virtual = 19482
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2977.340 ; gain = 285.516 ; free physical = 1046 ; free virtual = 21058
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3602.746 ; gain = 935.211 ; free physical = 167 ; free virtual = 18902
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:30 ; elapsed = 00:00:30 . Memory (MB): peak = 3627.832 ; gain = 936.008 ; free physical = 532 ; free virtual = 20540
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3602.746 ; gain = 935.211 ; free physical = 167 ; free virtual = 18902
+Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:30 . Memory (MB): peak = 3627.832 ; gain = 936.008 ; free physical = 532 ; free virtual = 20540
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 3612.762 ; gain = 945.227 ; free physical = 160 ; free virtual = 18895
+Finished Technology Mapping : Time (s): cpu = 00:00:30 ; elapsed = 00:00:30 . Memory (MB): peak = 3638.840 ; gain = 947.016 ; free physical = 524 ; free virtual = 20532
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -181,37 +316,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished IO Insertion : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -221,50 +356,56 @@ Report BlackBoxes:
 +------+-------------------------------+----------+
 |      |BlackBox name                  |Instances |
 +------+-------------------------------+----------+
-|1     |cpu_system_axi_gpio_0_0        |         1|
-|2     |cpu_system_proc_sys_reset_0_0  |         1|
-|3     |cpu_system_smartconnect_0_0    |         1|
-|4     |cpu_system_system_ila_0_0      |         1|
-|5     |cpu_system_zynq_ultra_ps_e_0_0 |         1|
+|1     |cpu_system_axi_dma_0_0         |         1|
+|2     |cpu_system_axi_gpio_0_0        |         1|
+|3     |cpu_system_fifo_generator_0_0  |         1|
+|4     |cpu_system_proc_sys_reset_0_0  |         1|
+|5     |cpu_system_smartconnect_0_0    |         1|
+|6     |cpu_system_smartconnect_1_0    |         1|
+|7     |cpu_system_system_ila_0_0      |         1|
+|8     |cpu_system_zynq_ultra_ps_e_0_0 |         1|
 +------+-------------------------------+----------+
 
 Report Cell Usage: 
 +------+-----------------------------+------+
 |      |Cell                         |Count |
 +------+-----------------------------+------+
-|1     |cpu_system_axi_gpio_0        |     1|
-|2     |cpu_system_proc_sys_reset_0  |     1|
-|3     |cpu_system_smartconnect_0    |     1|
-|4     |cpu_system_system_ila_0      |     1|
-|5     |cpu_system_zynq_ultra_ps_e_0 |     1|
-|6     |IBUF                         |     4|
-|7     |OBUF                         |     4|
+|1     |cpu_system_axi_dma_0         |     1|
+|2     |cpu_system_axi_gpio_0        |     1|
+|3     |cpu_system_fifo_generator_0  |     1|
+|4     |cpu_system_proc_sys_reset_0  |     1|
+|5     |cpu_system_smartconnect_0    |     1|
+|6     |cpu_system_smartconnect_1    |     1|
+|7     |cpu_system_system_ila_0      |     1|
+|8     |cpu_system_zynq_ultra_ps_e_0 |     1|
+|9     |IBUF                         |     4|
+|10    |OBUF                         |     4|
 +------+-----------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:37 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:34 ; elapsed = 00:00:34 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20384
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:30 ; elapsed = 00:00:31 . Memory (MB): peak = 3805.574 ; gain = 1091.812 ; free physical = 151 ; free virtual = 18730
-Synthesis Optimization Complete : Time (s): cpu = 00:00:38 ; elapsed = 00:00:38 . Memory (MB): peak = 3805.574 ; gain = 1138.039 ; free physical = 151 ; free virtual = 18730
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 3833.652 ; gain = 1101.773 ; free physical = 378 ; free virtual = 20383
+Synthesis Optimization Complete : Time (s): cpu = 00:00:34 ; elapsed = 00:00:35 . Memory (MB): peak = 3833.652 ; gain = 1141.828 ; free physical = 378 ; free virtual = 20383
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3805.574 ; gain = 0.000 ; free physical = 151 ; free virtual = 18730
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3833.652 ; gain = 0.000 ; free physical = 552 ; free virtual = 20558
 INFO: [Netlist 29-17] Analyzing 4 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3805.574 ; gain = 0.000 ; free physical = 304 ; free virtual = 18882
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3833.652 ; gain = 0.000 ; free physical = 551 ; free virtual = 20557
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 4 instances were transformed.
   IBUF => IBUF (IBUFCTRL, INBUF): 4 instances
 
-Synth Design complete | Checksum: 58e30650
+Synth Design complete | Checksum: 8a8063f3
 INFO: [Common 17-83] Releasing license: Synthesis
-39 Infos, 7 Warnings, 0 Critical Warnings and 0 Errors encountered.
+51 Infos, 119 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:54 ; elapsed = 00:00:51 . Memory (MB): peak = 3805.574 ; gain = 2176.641 ; free physical = 303 ; free virtual = 18882
-INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2932.895; main = 2932.895; forked = 299.646
-INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 4420.543; main = 3731.891; forked = 1002.660
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3805.574 ; gain = 0.000 ; free physical = 303 ; free virtual = 18882
+synth_design: Time (s): cpu = 00:00:50 ; elapsed = 00:00:48 . Memory (MB): peak = 3833.652 ; gain = 2182.430 ; free physical = 551 ; free virtual = 20557
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2937.933; main = 2889.590; forked = 282.949
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 4613.492; main = 3759.969; forked = 1002.656
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3833.652 ; gain = 0.000 ; free physical = 551 ; free virtual = 20557
 INFO: [Common 17-1381] The checkpoint '/mnt/work/fpga_labor/fpga_labor/fpga_labor.runs/synth_1/cpu_system_wrapper.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file cpu_system_wrapper_utilization_synth.rpt -pb cpu_system_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Tue Feb 17 10:25:20 2026...
+INFO: [Common 17-206] Exiting Vivado at Tue Feb 24 10:48:50 2026...

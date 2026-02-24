@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (lin64) Build 6299465 Fri Nov 14 12:34:56 MST 2025
-| Date             : Tue Feb 17 10:32:35 2026
+| Date             : Tue Feb 24 10:55:14 2026
 | Host             : fpgalab running 64-bit Ubuntu 24.04.4 LTS
 | Command          : report_power -file cpu_system_wrapper_power_routed.rpt -pb cpu_system_wrapper_power_summary_routed.pb -rpx cpu_system_wrapper_power_routed.rpx
 | Design           : cpu_system_wrapper
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 2.945        |
+| Total On-Chip Power (W)  | 2.967        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 2.621        |
-| Device Static (W)        | 0.324        |
+| Dynamic (W)              | 2.642        |
+| Device Static (W)        | 0.325        |
 | Effective TJA (C/W)      | 2.3          |
-| Max Ambient (C)          | 78.2         |
-| Junction Temperature (C) | 31.8         |
+| Max Ambient (C)          | 78.1         |
+| Junction Temperature (C) | 31.9         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,23 +52,23 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.034 |        5 |       --- |             --- |
-| CLB Logic                |     0.017 |    35719 |       --- |             --- |
-|   LUT as Logic           |     0.008 |     6943 |    117120 |            5.93 |
-|   LUT as Shift Register  |     0.008 |     3221 |     57600 |            5.59 |
-|   Register               |     0.001 |    16993 |    234240 |            7.25 |
-|   LUT as Distributed RAM |    <0.001 |      132 |     57600 |            0.23 |
-|   CARRY8                 |    <0.001 |      464 |     14640 |            3.17 |
-|   Others                 |     0.000 |     2476 |       --- |             --- |
-|   F7/F8 Muxes            |     0.000 |      555 |    117120 |            0.47 |
-| Signals                  |     0.016 |    24012 |       --- |             --- |
-| Block RAM                |     0.008 |       18 |       144 |           12.50 |
+| Clocks                   |     0.039 |        5 |       --- |             --- |
+| CLB Logic                |     0.030 |    44217 |       --- |             --- |
+|   LUT as Distributed RAM |     0.013 |      680 |     57600 |            1.18 |
+|   LUT as Logic           |     0.011 |     9369 |    117120 |            8.00 |
+|   LUT as Shift Register  |     0.004 |     3064 |     57600 |            5.32 |
+|   Register               |     0.001 |    21221 |    234240 |            9.06 |
+|   CARRY8                 |    <0.001 |      456 |     14640 |            3.11 |
+|   Others                 |     0.000 |     2875 |       --- |             --- |
+|   F7/F8 Muxes            |     0.000 |      505 |    117120 |            0.43 |
+| Signals                  |     0.015 |    29403 |       --- |             --- |
+| Block RAM                |     0.012 |     28.5 |       144 |           19.79 |
 | I/O                      |     0.001 |        8 |       189 |            4.23 |
-| PS8                      |     2.544 |        1 |       --- |             --- |
-| Static Power             |     0.324 |          |           |                 |
+| PS8                      |     2.546 |        1 |       --- |             --- |
+| Static Power             |     0.325 |          |           |                 |
 |   PS Static              |     0.000 |          |           |                 |
-|   PL Static              |     0.324 |          |           |                 |
-| Total                    |     2.945 |          |           |                 |
+|   PL Static              |     0.325 |          |           |                 |
+| Total                    |     2.967 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -78,11 +78,11 @@ Table of Contents
 +------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source           | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint           |       0.720 |     0.191 |       0.103 |      0.088 |       NA    | Unspecified | NA         |
+| Vccint           |       0.720 |     0.218 |       0.130 |      0.089 |       NA    | Unspecified | NA         |
 | Vccint_io        |       0.850 |     0.036 |       0.000 |      0.036 |       NA    | Unspecified | NA         |
-| Vccbram          |       0.850 |     0.003 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
+| Vccbram          |       0.850 |     0.003 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
 | Vccaux           |       1.800 |     0.075 |       0.000 |      0.075 |       NA    | Unspecified | NA         |
-| Vccaux_io        |       1.800 |     0.032 |       0.000 |      0.031 |       NA    | Unspecified | NA         |
+| Vccaux_io        |       1.800 |     0.031 |       0.000 |      0.031 |       NA    | Unspecified | NA         |
 | Vcco33           |       3.300 |     0.007 |       0.000 |      0.007 |       NA    | Unspecified | NA         |
 | Vcco25           |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18           |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -91,7 +91,7 @@ Table of Contents
 | Vcco12           |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco10           |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc           |       1.800 |     0.008 |       0.000 |      0.008 |       NA    | Unspecified | NA         |
-| VCC_PSINTFP      |       0.850 |     0.960 |       0.960 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSINTFP      |       0.850 |     0.963 |       0.963 |      0.000 |       NA    | Unspecified | NA         |
 | VCC_PSINTLP      |       0.850 |     0.249 |       0.249 |      0.000 |       NA    | Unspecified | NA         |
 | VPS_MGTRAVCC     |       0.850 |     0.067 |       0.067 |      0.000 |       NA    | Unspecified | NA         |
 | VCC_PSINTFP_DDR  |       0.850 |     0.726 |       0.726 |      0.000 |       NA    | Unspecified | NA         |
@@ -166,12 +166,16 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| cpu_system_wrapper       |     2.621 |
-|   cpu_system_i           |     2.618 |
-|     smartconnect_0       |     0.005 |
-|       inst               |     0.005 |
-|     system_ila_0         |     0.066 |
-|       inst               |     0.066 |
+| cpu_system_wrapper       |     2.642 |
+|   cpu_system_i           |     2.639 |
+|     axi_dma_0            |     0.004 |
+|       U0                 |     0.004 |
+|     smartconnect_0       |     0.004 |
+|       inst               |     0.004 |
+|     smartconnect_1       |     0.028 |
+|       inst               |     0.028 |
+|     system_ila_0         |     0.056 |
+|       inst               |     0.056 |
 |     zynq_ultra_ps_e_0    |     2.546 |
 |       inst               |     2.546 |
 |   dbg_hub                |     0.001 |
