@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xck26-sfvc784-2LV-c" LaunchTime="1771926462" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/cpu_system_wrapper.dcp">
-  <File Type="VDS-TIMING-PB" Name="cpu_system_wrapper_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="cpu_system_wrapper_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="cpu_system_wrapper.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="cpu_system_wrapper_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="cpu_system_wrapper_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="cpu_system_wrapper_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="cpu_system_wrapper.vds"/>
   <File Type="REPORTS-TCL" Name="cpu_system_wrapper_reports.tcl"/>
+  <File Type="RDS-UTIL" Name="cpu_system_wrapper_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="cpu_system_wrapper_utilization_synth.pb"/>
   <File Type="PA-TCL" Name="cpu_system_wrapper.tcl"/>
+  <File Type="RDS-RDS" Name="cpu_system_wrapper.vds"/>
+  <File Type="RDS-DCP" Name="cpu_system_wrapper.dcp"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/bd/cpu_system/cpu_system.bd">
@@ -65,9 +62,9 @@
   <BlockFileSet Type="BlockSrcs" Name="cpu_system_fifo_generator_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="cpu_system_zynq_ultra_ps_e_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="cpu_system_axi_gpio_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="cpu_system_smartconnect_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="cpu_system_proc_sys_reset_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="cpu_system_smartconnect_0_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="cpu_system_axi_dma_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="cpu_system_smartconnect_1_0"/>
   <BlockFileSet Type="BlockSrcs" Name="cpu_system_system_ila_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="cpu_system_axi_dma_0_0"/>
 </GenRun>

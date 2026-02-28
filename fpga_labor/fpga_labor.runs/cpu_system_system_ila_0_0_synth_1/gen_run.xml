@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="cpu_system_system_ila_0_0_synth_1" LaunchPart="xck26-sfvc784-2LV-c" LaunchTime="1771922545">
-  <File Type="VDS-TIMING-PB" Name="cpu_system_system_ila_0_0_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="cpu_system_system_ila_0_0_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="cpu_system_system_ila_0_0.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="cpu_system_system_ila_0_0_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="cpu_system_system_ila_0_0_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="cpu_system_system_ila_0_0_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="cpu_system_system_ila_0_0.vds"/>
   <File Type="REPORTS-TCL" Name="cpu_system_system_ila_0_0_reports.tcl"/>
+  <File Type="RDS-UTIL" Name="cpu_system_system_ila_0_0_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="cpu_system_system_ila_0_0_utilization_synth.pb"/>
   <File Type="PA-TCL" Name="cpu_system_system_ila_0_0.tcl"/>
+  <File Type="RDS-RDS" Name="cpu_system_system_ila_0_0.vds"/>
+  <File Type="RDS-DCP" Name="cpu_system_system_ila_0_0.dcp"/>
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/cpu_system_system_ila_0_0" RelGenDir="$PGENDIR/cpu_system_system_ila_0_0">
     <File Path="$PSRCDIR/sources_1/bd/cpu_system/ip/cpu_system_system_ila_0_0/cpu_system_system_ila_0_0.xci">
       <FileInfo>

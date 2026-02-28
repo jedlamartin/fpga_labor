@@ -488,7 +488,7 @@
         "vlnv": "xilinx.com:ip:ila:6.2",
         "ip_revision": "19",
         "xci_name": "bd_38aa_ila_lib_0",
-        "xci_path": "ip/ip_0/bd_38aa_ila_lib_0.xci",
+        "xci_path": "ip\\ip_0\\bd_38aa_ila_lib_0.xci",
         "inst_hier_path": "ila_lib",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -861,7 +861,7 @@
         "vlnv": "xilinx.com:ip:gigantic_mux:1.0",
         "ip_revision": "4",
         "xci_name": "bd_38aa_g_inst_0",
-        "xci_path": "ip/ip_1/bd_38aa_g_inst_0.xci",
+        "xci_path": "ip\\ip_1\\bd_38aa_g_inst_0.xci",
         "inst_hier_path": "g_inst",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -1142,7 +1142,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_0_aw_0",
-        "xci_path": "ip/ip_2/bd_38aa_slot_0_aw_0.xci",
+        "xci_path": "ip\\ip_2\\bd_38aa_slot_0_aw_0.xci",
         "inst_hier_path": "slot_0_aw",
         "has_run_ip_tcl": "true"
       },
@@ -1150,7 +1150,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_0_w_0",
-        "xci_path": "ip/ip_3/bd_38aa_slot_0_w_0.xci",
+        "xci_path": "ip\\ip_3\\bd_38aa_slot_0_w_0.xci",
         "inst_hier_path": "slot_0_w",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -1163,7 +1163,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_0_b_0",
-        "xci_path": "ip/ip_4/bd_38aa_slot_0_b_0.xci",
+        "xci_path": "ip\\ip_4\\bd_38aa_slot_0_b_0.xci",
         "inst_hier_path": "slot_0_b",
         "has_run_ip_tcl": "true"
       },
@@ -1171,7 +1171,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_0_ar_0",
-        "xci_path": "ip/ip_5/bd_38aa_slot_0_ar_0.xci",
+        "xci_path": "ip\\ip_5\\bd_38aa_slot_0_ar_0.xci",
         "inst_hier_path": "slot_0_ar",
         "has_run_ip_tcl": "true"
       },
@@ -1179,7 +1179,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_0_r_0",
-        "xci_path": "ip/ip_6/bd_38aa_slot_0_r_0.xci",
+        "xci_path": "ip\\ip_6\\bd_38aa_slot_0_r_0.xci",
         "inst_hier_path": "slot_0_r",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -1192,7 +1192,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_1_aw_0",
-        "xci_path": "ip/ip_7/bd_38aa_slot_1_aw_0.xci",
+        "xci_path": "ip\\ip_7\\bd_38aa_slot_1_aw_0.xci",
         "inst_hier_path": "slot_1_aw",
         "has_run_ip_tcl": "true"
       },
@@ -1200,7 +1200,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_1_w_0",
-        "xci_path": "ip/ip_8/bd_38aa_slot_1_w_0.xci",
+        "xci_path": "ip\\ip_8\\bd_38aa_slot_1_w_0.xci",
         "inst_hier_path": "slot_1_w",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -1213,7 +1213,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_1_b_0",
-        "xci_path": "ip/ip_9/bd_38aa_slot_1_b_0.xci",
+        "xci_path": "ip\\ip_9\\bd_38aa_slot_1_b_0.xci",
         "inst_hier_path": "slot_1_b",
         "has_run_ip_tcl": "true"
       },
@@ -1221,7 +1221,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_1_ar_0",
-        "xci_path": "ip/ip_10/bd_38aa_slot_1_ar_0.xci",
+        "xci_path": "ip\\ip_10\\bd_38aa_slot_1_ar_0.xci",
         "inst_hier_path": "slot_1_ar",
         "has_run_ip_tcl": "true"
       },
@@ -1229,7 +1229,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "bd_38aa_slot_1_r_0",
-        "xci_path": "ip/ip_11/bd_38aa_slot_1_r_0.xci",
+        "xci_path": "ip\\ip_11\\bd_38aa_slot_1_r_0.xci",
         "inst_hier_path": "slot_1_r",
         "has_run_ip_tcl": "true",
         "parameters": {
