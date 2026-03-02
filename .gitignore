@@ -1,17 +1,19 @@
-# --- Vivado Temporary/Generated Files ---
-*.log
-*.jou
-*.str
-*.os
-*.jou
-.Xil/
-vitis/
+# Vivado junk
+**/*.log
+**/*.jou
+**/*.str
+**/*.os
+**/metadata/
+**/.Xil/
 
-# --- Ignore the 'gen' directory (Vivado regenerates this from .bd/.xci) ---
-**/*.gen/
+# Generated folders (The heavy stuff)
+**/fpga_labor.cache/
+**/fpga_labor.gen/
+**/fpga_labor.hw/
+**/fpga_labor.ip_user_files/
+**/fpga_labor.runs/
+**/fpga_labor.sim/
 
-# --- Ignore Implementation/Synthesis results ---
-*.runs/
-*.runs/
-*.hw/
-*.ip_user_files/
+# Vitis junk
+**/vitis/
+**/*.py
