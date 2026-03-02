@@ -1,0 +1,17 @@
+# --- Vivado Temporary/Generated Files ---
+*.log
+*.jou
+*.str
+*.os
+*.jou
+.Xil/
+vitis/
+
+# --- Ignore the 'gen' directory (Vivado regenerates this from .bd/.xci) ---
+**/*.gen/
+
+# --- Ignore Implementation/Synthesis results ---
+*.runs/
+*.runs/
+*.hw/
+*.ip_user_files/
