@@ -1,0 +1,4 @@
+/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/build/CMakeFiles/fsbl.elf.dir
+/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/build/CMakeFiles/print_build_info.dir
+/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/build/CMakeFiles/edit_cache.dir
+/mnt/work/fpga_labor/fpga_labor/vitis/kv260_platform/zynqmp_fsbl/build/CMakeFiles/rebuild_cache.dir
