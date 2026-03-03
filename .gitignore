@@ -1,24 +1,28 @@
-# Vivado junk
-**/*.log
-**/*.jou
-**/*.str
-**/*.os
-**/metadata/
-**/.Xil/
+# Vivado logok és szemetek
+*.jou
+*.log
+*.str
+*.dmp
+*.zip
+*.xsa
 
-# Generated folders (The heavy stuff)
-**/fpga_labor.cache/
-**/fpga_labor.gen/
-**/fpga_labor.hw/
-**/fpga_labor.ip_user_files/
-**/fpga_labor.runs/
-**/fpga_labor.sim/
+# Vivado generált mappák
+fpga_labor/fpga_labor.cache/
+fpga_labor/fpga_labor.gen/
+fpga_labor/fpga_labor.hw/
+fpga_labor/fpga_labor.runs/
+fpga_labor/fpga_labor.sim/
+.Xil/
 
-# Ignore the whole Vitis workspace by default
-**/vitis/
+# Vitis workspace mappák
+fpga_labor/vitis/_ide/
+fpga_labor/vitis/kv260_platform/
 
-# But DO track these specific source folders
-!**/vitis/**/src/
-!**/vitis/**/*.c
-!**/vitis/**/*.h
-!**/vitis/**/*.cpp
+# Vitis C/C++ build fájlok (hogy csak a források maradjanak)
+Debug/
+Release/
+*.o
+*.d
+*.elf
+*.bin
+*.a
