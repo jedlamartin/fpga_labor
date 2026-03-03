@@ -4133,7 +4133,7 @@
             "NUM_WRITE_OUTSTANDING": [ { "value": "2", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "MAX_BURST_LENGTH": [ { "value": "16", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "PHASE": [ { "value": "0.0", "value_permission": "bd", "resolve_type": "generated", "format": "float", "is_static_object": false } ],
-            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_src": "default_prop", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
+            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
             "NUM_READ_THREADS": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "NUM_WRITE_THREADS": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "RUSER_BITS_PER_BYTE": [ { "value": "0", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
@@ -4199,7 +4199,7 @@
             "NUM_WRITE_OUTSTANDING": [ { "value": "16", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "MAX_BURST_LENGTH": [ { "value": "16", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "PHASE": [ { "value": "0.0", "value_permission": "bd", "resolve_type": "generated", "format": "float", "is_static_object": false } ],
-            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_src": "default_prop", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
+            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
             "NUM_READ_THREADS": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "NUM_WRITE_THREADS": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "RUSER_BITS_PER_BYTE": [ { "value": "0", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
@@ -4251,7 +4251,7 @@
             "HAS_TLAST": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "FREQ_HZ": [ { "value": "99999001", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "PHASE": [ { "value": "0.0", "value_permission": "bd", "resolve_type": "generated", "format": "float", "is_static_object": false } ],
-            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_src": "default_prop", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
+            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
             "LAYERED_METADATA": [ { "value": "undef", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
             "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_static_object": false } ]
           },
@@ -4279,7 +4279,7 @@
             "HAS_TLAST": [ { "value": "1", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "FREQ_HZ": [ { "value": "99999001", "value_permission": "bd", "resolve_type": "generated", "format": "long", "is_static_object": false } ],
             "PHASE": [ { "value": "0.0", "value_permission": "bd", "resolve_type": "generated", "format": "float", "is_static_object": false } ],
-            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_src": "default_prop", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
+            "CLK_DOMAIN": [ { "value": "cpu_system_zynq_ultra_ps_e_0_0_pl_clk0", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
             "LAYERED_METADATA": [ { "value": "undef", "value_permission": "bd", "resolve_type": "generated", "is_static_object": false } ],
             "INSERT_VIP": [ { "value": "0", "resolve_type": "user", "format": "long", "usage": "simulation.rtl", "is_static_object": false } ]
           },
@@ -4293,5 +4293,5 @@
       }
     }
   },
-  "checksum": "f7ca2776"
+  "checksum": "d6a66e89"
 }

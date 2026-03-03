@@ -26,3 +26,5 @@ Release/
 *.elf
 *.bin
 *.a
+*.dcp
+fpga_labor/fpga_labor.ip_user_files/
