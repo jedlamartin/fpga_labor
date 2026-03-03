@@ -1,0 +1,10 @@
+synthesis/
+designer/
+simulation/
+tooldata/
+phy_synthesis/
+*.log
+*.txt
+*.jou
+*.core
+*_syn.prj

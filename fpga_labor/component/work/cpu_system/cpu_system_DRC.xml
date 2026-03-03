@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml-stylesheet type="text/xsl" href="drcss.xsl"?>
+<drcreport>
+  <header>cpu_system</header>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin COREAXI4DMACONTROLLER_C0_0:INTERRUPT</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4DMACONTROLLER_C0_0:INTERRUPT</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message> bus interface ID width mismatch</message>
+    <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C0_0:AXI4mslave0:SLAVE0_AWID[0-1] and COREAXI4DMACONTROLLER_C0_0:AXI4TargetCtrl_IF:[0--1] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C0_0:AXI4mslave0</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output bus pin CoreGPIO_C0_0:INT[3:0]</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/CoreGPIO_C0_0:INT</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output bus pin CoreGPIO_C0_0:GPIO_OE[3:0]</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/CoreGPIO_C0_0:GPIO_OE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin CORERESET_PF_C0_0:PLL_POWERDOWN_B</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/CORERESET_PF_C0_0:PLL_POWERDOWN_B</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:FIC_0_DLL_LOCK_M2F</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_0_DLL_LOCK_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:FIC_1_DLL_LOCK_M2F</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_1_DLL_LOCK_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:FIC_3_DLL_LOCK_M2F</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_3_DLL_LOCK_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB[3:0]</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F[15:0]</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message> bus interface ID width mismatch</message>
+    <detail> There is an ID width mismatch between MPFS_DISCOVERY_KIT_MSS_0:FIC_1_AXI4_INITIATOR:FIC_1_AXI4_M_AWID[0-7] and COREAXI4INTERCONNECT_C0_0:AXI4mmaster0:MASTER0_AWID[0-0] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_1_AXI4_INITIATOR</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message> bus interface ID width mismatch</message>
+    <detail> There is an ID width mismatch between MPFS_DISCOVERY_KIT_MSS_0:FIC_0_AXI4_TARGET:FIC_0_AXI4_S_RID[0-3] and COREAXI4INTERCONNECT_C1_0:AXI4mslave0:SLAVE0_RID[0-1] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_0_AXI4_TARGET</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:PCIE_INIT_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:PCIE_INIT_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:XCVR_INIT_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:XCVR_INIT_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_FROM_SNVM_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_FROM_SNVM_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_FROM_UPROM_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_FROM_UPROM_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_FROM_SPI_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:USRAM_INIT_FROM_SPI_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_FROM_SNVM_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_FROM_SNVM_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_FROM_UPROM_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_FROM_UPROM_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_FROM_SPI_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:SRAM_INIT_FROM_SPI_DONE</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output pin PFSOC_INIT_MONITOR_C0_0:AUTOCALIB_DONE</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/PFSOC_INIT_MONITOR_C0_0:AUTOCALIB_DONE</crossprobe>
+  </drc>
+</drcreport>
