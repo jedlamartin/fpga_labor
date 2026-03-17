@@ -92,7 +92,7 @@
         "vlnv": "xilinx.com:ip:zynq_ultra_ps_e:3.5",
         "ip_revision": "8",
         "xci_name": "cpu_system_zynq_ultra_ps_e_0_0",
-        "xci_path": "ip/cpu_system_zynq_ultra_ps_e_0_0/cpu_system_zynq_ultra_ps_e_0_0.xci",
+        "xci_path": "ip\\cpu_system_zynq_ultra_ps_e_0_0\\cpu_system_zynq_ultra_ps_e_0_0.xci",
         "inst_hier_path": "zynq_ultra_ps_e_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -2611,12 +2611,12 @@
           },
           "PSU__PROTECTION__FPD_SEGMENTS": {
             "value": [
-              "SA:0xFD1A0000; SIZE:1280; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware  |   SA:0xFD000000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware",
-              " |   SA:0xFD010000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware  |   SA:0xFD020000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU",
-              "Firmware  |   SA:0xFD030000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware  |   SA:0xFD040000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write;",
-              "subsystemId:PMU Firmware  |   SA:0xFD050000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware  |   SA:0xFD610000; SIZE:512; UNIT:KB; RegionTZ:Secure;",
-              "WrAllowed:Read/Write; subsystemId:PMU Firmware  |   SA:0xFD5D0000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware  |  SA:0xFD1A0000 ; SIZE:1280; UNIT:KB;",
-              "RegionTZ:Secure ; WrAllowed:Read/Write; subsystemId:Secure Subsystem"
+              "SA:0xFD1A0000; SIZE:1280; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware   |    SA:0xFD000000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU",
+              "Firmware   |    SA:0xFD010000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware   |    SA:0xFD020000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write;",
+              "subsystemId:PMU Firmware   |    SA:0xFD030000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware   |    SA:0xFD040000; SIZE:64; UNIT:KB; RegionTZ:Secure;",
+              "WrAllowed:Read/Write; subsystemId:PMU Firmware   |    SA:0xFD050000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware   |    SA:0xFD610000; SIZE:512; UNIT:KB;",
+              "RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware   |    SA:0xFD5D0000; SIZE:64; UNIT:KB; RegionTZ:Secure; WrAllowed:Read/Write; subsystemId:PMU Firmware   |   SA:0xFD1A0000 ; SIZE:1280;",
+              "UNIT:KB; RegionTZ:Secure ; WrAllowed:Read/Write; subsystemId:Secure Subsystem"
             ]
           },
           "PSU__PROTECTION__LPD_SEGMENTS": {
@@ -3235,7 +3235,7 @@
         "vlnv": "xilinx.com:ip:proc_sys_reset:5.0",
         "ip_revision": "17",
         "xci_name": "cpu_system_proc_sys_reset_0_0",
-        "xci_path": "ip/cpu_system_proc_sys_reset_0_0/cpu_system_proc_sys_reset_0_0.xci",
+        "xci_path": "ip\\cpu_system_proc_sys_reset_0_0\\cpu_system_proc_sys_reset_0_0.xci",
         "inst_hier_path": "proc_sys_reset_0",
         "has_run_ip_tcl": "true"
       },
@@ -3243,7 +3243,7 @@
         "vlnv": "xilinx.com:ip:smartconnect:1.0",
         "ip_revision": "28",
         "xci_name": "cpu_system_smartconnect_0_0",
-        "xci_path": "ip/cpu_system_smartconnect_0_0/cpu_system_smartconnect_0_0.xci",
+        "xci_path": "ip\\cpu_system_smartconnect_0_0\\cpu_system_smartconnect_0_0.xci",
         "inst_hier_path": "smartconnect_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3382,7 +3382,7 @@
         "vlnv": "xilinx.com:ip:axi_gpio:2.0",
         "ip_revision": "37",
         "xci_name": "cpu_system_axi_gpio_0_0",
-        "xci_path": "ip/cpu_system_axi_gpio_0_0/cpu_system_axi_gpio_0_0.xci",
+        "xci_path": "ip\\cpu_system_axi_gpio_0_0\\cpu_system_axi_gpio_0_0.xci",
         "inst_hier_path": "axi_gpio_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3401,7 +3401,7 @@
         "vlnv": "xilinx.com:ip:smartconnect:1.0",
         "ip_revision": "28",
         "xci_name": "cpu_system_smartconnect_1_0",
-        "xci_path": "ip/cpu_system_smartconnect_1_0/cpu_system_smartconnect_1_0.xci",
+        "xci_path": "ip\\cpu_system_smartconnect_1_0\\cpu_system_smartconnect_1_0.xci",
         "inst_hier_path": "smartconnect_1",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3508,7 +3508,7 @@
         "vlnv": "xilinx.com:ip:axi_dma:7.1",
         "ip_revision": "37",
         "xci_name": "cpu_system_axi_dma_0_0",
-        "xci_path": "ip/cpu_system_axi_dma_0_0/cpu_system_axi_dma_0_0.xci",
+        "xci_path": "ip\\cpu_system_axi_dma_0_0\\cpu_system_axi_dma_0_0.xci",
         "inst_hier_path": "axi_dma_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3567,7 +3567,7 @@
         "vlnv": "xilinx.com:ip:xlconcat:2.1",
         "ip_revision": "7",
         "xci_name": "cpu_system_xlconcat_0_0",
-        "xci_path": "ip/cpu_system_xlconcat_0_0/cpu_system_xlconcat_0_0.xci",
+        "xci_path": "ip\\cpu_system_xlconcat_0_0\\cpu_system_xlconcat_0_0.xci",
         "inst_hier_path": "xlconcat_0",
         "has_run_ip_tcl": "true"
       },
@@ -3575,7 +3575,7 @@
         "vlnv": "xilinx.com:ip:fifo_generator:13.2",
         "ip_revision": "14",
         "xci_name": "cpu_system_fifo_generator_0_0",
-        "xci_path": "ip/cpu_system_fifo_generator_0_0/cpu_system_fifo_generator_0_0.xci",
+        "xci_path": "ip\\cpu_system_fifo_generator_0_0\\cpu_system_fifo_generator_0_0.xci",
         "inst_hier_path": "fifo_generator_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3597,7 +3597,7 @@
         "vlnv": "xilinx.com:ip:axi_iic:2.1",
         "ip_revision": "11",
         "xci_name": "cpu_system_axi_iic_0_0",
-        "xci_path": "ip/cpu_system_axi_iic_0_0/cpu_system_axi_iic_0_0.xci",
+        "xci_path": "ip\\cpu_system_axi_iic_0_0\\cpu_system_axi_iic_0_0.xci",
         "inst_hier_path": "axi_iic_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3610,7 +3610,7 @@
         "vlnv": "xilinx.com:ip:clk_wiz:6.0",
         "ip_revision": "17",
         "xci_name": "cpu_system_clk_wiz_0_0",
-        "xci_path": "ip/cpu_system_clk_wiz_0_0/cpu_system_clk_wiz_0_0.xci",
+        "xci_path": "ip\\cpu_system_clk_wiz_0_0\\cpu_system_clk_wiz_0_0.xci",
         "inst_hier_path": "clk_wiz_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3650,7 +3650,7 @@
         "vlnv": "xilinx.com:module_ref:audio_interface:1.0",
         "ip_revision": "1",
         "xci_name": "cpu_system_audio_interface_0_0",
-        "xci_path": "ip/cpu_system_audio_interface_0_0/cpu_system_audio_interface_0_0.xci",
+        "xci_path": "ip\\cpu_system_audio_interface_0_0\\cpu_system_audio_interface_0_0.xci",
         "inst_hier_path": "audio_interface_0",
         "has_run_ip_tcl": "true",
         "reference_info": {
@@ -3735,7 +3735,7 @@
         "vlnv": "xilinx.com:ip:c_counter_binary:12.0",
         "ip_revision": "22",
         "xci_name": "cpu_system_c_counter_binary_0_0",
-        "xci_path": "ip/cpu_system_c_counter_binary_0_0/cpu_system_c_counter_binary_0_0.xci",
+        "xci_path": "ip\\cpu_system_c_counter_binary_0_0\\cpu_system_c_counter_binary_0_0.xci",
         "inst_hier_path": "c_counter_binary_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3751,7 +3751,7 @@
         "vlnv": "xilinx.com:ip:system_ila:1.1",
         "ip_revision": "22",
         "xci_name": "cpu_system_system_ila_0_1",
-        "xci_path": "ip/cpu_system_system_ila_0_1/cpu_system_system_ila_0_1.xci",
+        "xci_path": "ip\\cpu_system_system_ila_0_1\\cpu_system_system_ila_0_1.xci",
         "inst_hier_path": "system_ila_0",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3787,7 +3787,7 @@
         "vlnv": "xilinx.com:ip:system_ila:1.1",
         "ip_revision": "22",
         "xci_name": "cpu_system_system_ila_1_0",
-        "xci_path": "ip/cpu_system_system_ila_1_0/cpu_system_system_ila_1_0.xci",
+        "xci_path": "ip\\cpu_system_system_ila_1_0\\cpu_system_system_ila_1_0.xci",
         "inst_hier_path": "system_ila_1",
         "has_run_ip_tcl": "true",
         "parameters": {
@@ -3999,8 +3999,8 @@
           "c_counter_binary_0/CLK",
           "system_ila_0/clk",
           "system_ila_1/clk",
-          "axi_gpio_0/s_axi_aclk",
           "smartconnect_0/aclk",
+          "axi_gpio_0/s_axi_aclk",
           "zynq_ultra_ps_e_0/maxihpm0_fpd_aclk",
           "zynq_ultra_ps_e_0/saxihpc0_fpd_aclk",
           "audio_interface_0/clk"
