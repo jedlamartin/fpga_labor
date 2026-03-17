@@ -13,7 +13,7 @@ constexpr uint32_t I2C_CR_OFFSET            = 0x100; // Control Register
 constexpr uint32_t I2C_SR_OFFSET            = 0x104; // Status Register
 constexpr uint32_t I2C_TX_FIFO_OFFSET       = 0x108; // Transmit FIFO (DTR)
 constexpr uint32_t I2C_RX_FIFO_OFFSET       = 0x10C; // Receive FIFO (DRR)
-constexpr uint32_t I2C_GPO_OFFSET           = 0x10C; // GPO Register
+constexpr uint32_t I2C_GPO_OFFSET           = 0x124; // GPO Register
 
 // Bit Masks
 constexpr uint32_t RKEY             = 0x0000000A;
@@ -25,13 +25,20 @@ constexpr uint32_t RX_EMPTY_MASK    = (1 << 6);
 constexpr uint32_t START_MASK       = (1 << 8);
 constexpr uint32_t STOP_MASK        = (1 << 9);
 
+constexpr uint32_t GPIO_BASE_ADDR = XPAR_AXI_GPIO_0_BASEADDR;
+constexpr uint32_t EN_OFFSET = 0x00;
+
 void i2c_init();
 void i2c_write(uint8_t slv_addr, uint8_t reg_addr, uint8_t data);
 uint8_t i2c_read(uint8_t slv_addr, uint8_t reg_addr);
 void codec_init();
 
 int main(){
-    
+    i2c_init();
+    sleep(5);
+    codec_init();
+    uint8_t read_val = i2c_read(I2C_DEV_ADDR, 0x03);
+    while(1);
 }
 
 void i2c_init() {
@@ -134,4 +141,7 @@ void codec_init() {
     
     // Power control: Disable unused functions to save power
     i2c_write(I2C_DEV_ADDR, 0x02, 0x08); 
+
+    // Enable with GPIO
+    MEM32(GPIO_BASE_ADDR + EN_OFFSET) = 1;
 }

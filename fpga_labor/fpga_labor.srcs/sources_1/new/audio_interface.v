@@ -49,37 +49,10 @@ always @ (posedge clk) begin
 end
 assign adc_data = adc_data_shr[31:8];
 
-wire lrclk_edge = lrclk_rise | lrclk_fall;
-reg [4:0] bit_cntr;
-always @ (posedge clk) begin
-    if(lrclk_edge) begin
-        bit_cntr <= 0;
-    end
-    else if(bclk_rise) begin
-        bit_cntr <= bit_cntr + 1;
-    end
-end
 
-reg adc_valid_l_reg;
-reg adc_valid_r_reg;
-always @ (posedge clk) begin
-    if(lrclk_shr[1] == 1 && bclk_rise == 1 && bit_cntr == 31) begin
-         adc_valid_l_reg <= 1;
-    end
-    else begin
-         adc_valid_l_reg <= 0;
-    end
 
-    if(lrclk_shr[1] == 0 && bclk_rise == 1 && bit_cntr == 31) begin
-         adc_valid_r_reg <= 1;
-    end
-    else begin
-         adc_valid_r_reg <= 0;
-    end
-end
-
-assign adc_valid_l = adc_valid_l_reg & en;
-assign adc_valid_r = adc_valid_r_reg & en;
+assign adc_valid_l = lrclk_fall & en;
+assign adc_valid_r = lrclk_rise & en;
 
 ODDRE1 #(
   .IS_C_INVERTED(1'b0),           // Optional inversion for C
