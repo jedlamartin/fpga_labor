@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Tue Mar  3 20:21:21 2026
+// Created by Microsemi SmartDesign Wed Mar 25 15:14:22 2026
 // Parameters for COREAXI4INTERCONNECT
 //--------------------------------------------------------------------
 
 
-parameter ADDR_WIDTH = 64;
+parameter ADDR_WIDTH = 32;
 parameter CROSSBAR_MODE = 0;
 parameter DATA_WIDTH = 64;
 parameter DWC_ADDR_FIFO_DEPTH_CEILING = 10;
@@ -1132,7 +1132,7 @@ parameter MASTER15_WRITE_SLAVE30 = 1;
 parameter MASTER15_WRITE_SLAVE31 = 1;
 parameter NUM_MASTERS = 1;
 parameter NUM_MASTERS_WIDTH = 1;
-parameter NUM_SLAVES = 1;
+parameter NUM_SLAVES = 2;
 parameter NUM_THREADS = 1;
 parameter OPEN_TRANS_MAX = 2;
 parameter OPTIMIZATION = 3;
@@ -1141,22 +1141,22 @@ parameter SLAVE0_CHAN_RS = 1;
 parameter SLAVE0_CLOCK_DOMAIN_CROSSING = 0;
 parameter SLAVE0_DATA_WIDTH = 32;
 parameter SLAVE0_DWC_DATA_FIFO_DEPTH = 16;
-parameter SLAVE0_END_ADDR = 'hefffffff;
+parameter SLAVE0_END_ADDR = 'he000ffff;
 parameter SLAVE0_END_ADDR_UPPER = 'h0;
 parameter SLAVE0_READ_INTERLEAVE = 0;
 parameter SLAVE0_START_ADDR = 'he0000000;
 parameter SLAVE0_START_ADDR_UPPER = 'h0;
-parameter SLAVE0_TYPE = 0;
+parameter SLAVE0_TYPE = 1;
 parameter SLAVE1_CHAN_RS = 1;
 parameter SLAVE1_CLOCK_DOMAIN_CROSSING = 0;
-parameter SLAVE1_DATA_WIDTH = 64;
+parameter SLAVE1_DATA_WIDTH = 32;
 parameter SLAVE1_DWC_DATA_FIFO_DEPTH = 16;
-parameter SLAVE1_END_ADDR = 'h8fffffff;
+parameter SLAVE1_END_ADDR = 'he001ffff;
 parameter SLAVE1_END_ADDR_UPPER = 'h0;
 parameter SLAVE1_READ_INTERLEAVE = 0;
-parameter SLAVE1_START_ADDR = 'h80000000;
+parameter SLAVE1_START_ADDR = 'he0010000;
 parameter SLAVE1_START_ADDR_UPPER = 'h0;
-parameter SLAVE1_TYPE = 0;
+parameter SLAVE1_TYPE = 1;
 parameter SLAVE2_CHAN_RS = 1;
 parameter SLAVE2_CLOCK_DOMAIN_CROSSING = 0;
 parameter SLAVE2_DATA_WIDTH = 64;

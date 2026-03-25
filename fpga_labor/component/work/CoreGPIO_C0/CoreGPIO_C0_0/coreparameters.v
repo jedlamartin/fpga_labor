@@ -1,18 +1,18 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Tue Mar  3 17:10:51 2026
+// Created by Microsemi SmartDesign Wed Mar 25 18:24:16 2026
 // Parameters for CoreGPIO
 //--------------------------------------------------------------------
 
 
 parameter APB_WIDTH = 32;
-parameter FIXED_CONFIG_0 = 0;
-parameter FIXED_CONFIG_1 = 0;
-parameter FIXED_CONFIG_2 = 0;
-parameter FIXED_CONFIG_3 = 0;
-parameter FIXED_CONFIG_4 = 0;
-parameter FIXED_CONFIG_5 = 0;
-parameter FIXED_CONFIG_6 = 0;
-parameter FIXED_CONFIG_7 = 0;
+parameter FIXED_CONFIG_0 = 1;
+parameter FIXED_CONFIG_1 = 1;
+parameter FIXED_CONFIG_2 = 1;
+parameter FIXED_CONFIG_3 = 1;
+parameter FIXED_CONFIG_4 = 1;
+parameter FIXED_CONFIG_5 = 1;
+parameter FIXED_CONFIG_6 = 1;
+parameter FIXED_CONFIG_7 = 1;
 parameter FIXED_CONFIG_8 = 0;
 parameter FIXED_CONFIG_9 = 0;
 parameter FIXED_CONFIG_10 = 0;
@@ -70,15 +70,15 @@ parameter IO_INT_TYPE_28 = 7;
 parameter IO_INT_TYPE_29 = 7;
 parameter IO_INT_TYPE_30 = 7;
 parameter IO_INT_TYPE_31 = 7;
-parameter IO_NUM = 4;
+parameter IO_NUM = 8;
 parameter IO_TYPE_0 = 0;
 parameter IO_TYPE_1 = 0;
 parameter IO_TYPE_2 = 0;
 parameter IO_TYPE_3 = 0;
-parameter IO_TYPE_4 = 0;
-parameter IO_TYPE_5 = 0;
-parameter IO_TYPE_6 = 0;
-parameter IO_TYPE_7 = 0;
+parameter IO_TYPE_4 = 1;
+parameter IO_TYPE_5 = 1;
+parameter IO_TYPE_6 = 1;
+parameter IO_TYPE_7 = 1;
 parameter IO_TYPE_8 = 0;
 parameter IO_TYPE_9 = 0;
 parameter IO_TYPE_10 = 0;

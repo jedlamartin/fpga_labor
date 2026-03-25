@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Mar  3 20:18:28 2026
+// Created by SmartDesign Wed Mar 25 14:38:09 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -14,7 +14,7 @@
 # Part Number: MPFS095T-1FCSG325E
 # Create and Configure the core component COREAXI4DMACONTROLLER_C0
 create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4DMACONTROLLER:2.2.107} -component_name {COREAXI4DMACONTROLLER_C0} -params {\
-"AXI4_STREAM_IF:false"  \
+"AXI4_STREAM_IF:true"  \
 "AXI_DMA_DWIDTH:32"  \
 "DSCRPTR_0_INT_ASSOC:0"  \
 "DSCRPTR_0_PRI_LVL:0"  \
@@ -82,12 +82,12 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4DMACONTROLLER:2.2
 "DSCRPTR_31_PRI_LVL:0"  \
 "ECC:false"  \
 "ID_WIDTH:1"  \
-"INT_0_QUEUE_DEPTH:2"  \
-"INT_1_QUEUE_DEPTH:2"  \
+"INT_0_QUEUE_DEPTH:1"  \
+"INT_1_QUEUE_DEPTH:1"  \
 "INT_2_QUEUE_DEPTH:1"  \
 "INT_3_QUEUE_DEPTH:1"  \
 "NUM_INT_BDS:4"  \
-"NUM_OF_INTS:2"  \
+"NUM_OF_INTS:1"  \
 "NUM_PRI_LVLS:1"  \
 "PRI_0_NUM_OF_BEATS:256"  \
 "PRI_1_NUM_OF_BEATS:128"  \
@@ -126,6 +126,13 @@ module COREAXI4DMACONTROLLER_C0(
     DMA_WREADY,
     RESETN,
     STRTDMAOP,
+    TDATA,
+    TDEST,
+    TID,
+    TKEEP,
+    TLAST,
+    TSTRB,
+    TVALID,
     // Outputs
     CTRL_ARREADY,
     CTRL_AWREADY,
@@ -153,7 +160,8 @@ module COREAXI4DMACONTROLLER_C0(
     DMA_WLAST,
     DMA_WSTRB,
     DMA_WVALID,
-    INTERRUPT
+    INTERRUPT,
+    TREADY
 );
 
 //--------------------------------------------------------------------
@@ -182,6 +190,13 @@ input         DMA_RVALID;
 input         DMA_WREADY;
 input         RESETN;
 input  [3:0]  STRTDMAOP;
+input  [31:0] TDATA;
+input  [1:0]  TDEST;
+input  [0:0]  TID;
+input  [3:0]  TKEEP;
+input         TLAST;
+input  [3:0]  TSTRB;
+input         TVALID;
 //--------------------------------------------------------------------
 // Output
 //--------------------------------------------------------------------
@@ -211,7 +226,8 @@ output [31:0] DMA_WDATA;
 output        DMA_WLAST;
 output [3:0]  DMA_WSTRB;
 output        DMA_WVALID;
-output [1:0]  INTERRUPT;
+output [0:0]  INTERRUPT;
+output        TREADY;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
@@ -262,10 +278,18 @@ wire          AXI4TargetCtrl_IF_WREADY;
 wire   [3:0]  CTRL_WSTRB;
 wire          CTRL_WVALID;
 wire          CLOCK;
-wire   [1:0]  INTERRUPT_net_0;
+wire   [0:0]  INTERRUPT_net_0;
 wire          RESETN;
 wire   [3:0]  STRTDMAOP;
-wire   [1:0]  INTERRUPT_net_1;
+wire   [31:0] TDATA;
+wire   [1:0]  TDEST;
+wire   [0:0]  TID;
+wire   [3:0]  TKEEP;
+wire          TLAST;
+wire          TREADY_net_0;
+wire   [3:0]  TSTRB;
+wire          TVALID;
+wire   [0:0]  INTERRUPT_net_1;
 wire   [0:0]  AXI4InitiatorDMA_IF_AWID_net_0;
 wire   [31:0] AXI4InitiatorDMA_IF_AWADDR_net_0;
 wire   [7:0]  AXI4InitiatorDMA_IF_AWLEN_net_0;
@@ -292,27 +316,12 @@ wire          AXI4TargetCtrl_IF_ARREADY_net_0;
 wire   [31:0] AXI4TargetCtrl_IF_RDATA_net_0;
 wire   [1:0]  AXI4TargetCtrl_IF_RRESP_net_0;
 wire          AXI4TargetCtrl_IF_RVALID_net_0;
-//--------------------------------------------------------------------
-// TiedOff Nets
-//--------------------------------------------------------------------
-wire          GND_net;
-wire   [31:0] TDATA_const_net_0;
-wire   [3:0]  TSTRB_const_net_0;
-wire   [3:0]  TKEEP_const_net_0;
-wire   [1:0]  TDEST_const_net_0;
-//--------------------------------------------------------------------
-// Constant assignments
-//--------------------------------------------------------------------
-assign GND_net           = 1'b0;
-assign TDATA_const_net_0 = 32'h00000000;
-assign TSTRB_const_net_0 = 4'h0;
-assign TKEEP_const_net_0 = 4'h0;
-assign TDEST_const_net_0 = 2'h0;
+wire          TREADY_net_1;
 //--------------------------------------------------------------------
 // Top level output port assignments
 //--------------------------------------------------------------------
-assign INTERRUPT_net_1                   = INTERRUPT_net_0;
-assign INTERRUPT[1:0]                    = INTERRUPT_net_1;
+assign INTERRUPT_net_1[0]                = INTERRUPT_net_0[0];
+assign INTERRUPT[0:0]                    = INTERRUPT_net_1[0];
 assign AXI4InitiatorDMA_IF_AWID_net_0[0] = AXI4InitiatorDMA_IF_AWID[0];
 assign DMA_AWID[0:0]                     = AXI4InitiatorDMA_IF_AWID_net_0[0];
 assign AXI4InitiatorDMA_IF_AWADDR_net_0  = AXI4InitiatorDMA_IF_AWADDR;
@@ -365,12 +374,14 @@ assign AXI4TargetCtrl_IF_RRESP_net_0     = AXI4TargetCtrl_IF_RRESP;
 assign CTRL_RRESP[1:0]                   = AXI4TargetCtrl_IF_RRESP_net_0;
 assign AXI4TargetCtrl_IF_RVALID_net_0    = AXI4TargetCtrl_IF_RVALID;
 assign CTRL_RVALID                       = AXI4TargetCtrl_IF_RVALID_net_0;
+assign TREADY_net_1                      = TREADY_net_0;
+assign TREADY                            = TREADY_net_1;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
 //--------COREAXI4DMACONTROLLER_C0_COREAXI4DMACONTROLLER_C0_0_COREAXI4DMACONTROLLER   -   Actel:DirectCore:COREAXI4DMACONTROLLER:2.2.107
 COREAXI4DMACONTROLLER_C0_COREAXI4DMACONTROLLER_C0_0_COREAXI4DMACONTROLLER #( 
-        .AXI4_STREAM_IF       ( 0 ),
+        .AXI4_STREAM_IF       ( 1 ),
         .AXI_DMA_DWIDTH       ( 32 ),
         .DSCRPTR_0_INT_ASSOC  ( 0 ),
         .DSCRPTR_0_PRI_LVL    ( 0 ),
@@ -439,12 +450,12 @@ COREAXI4DMACONTROLLER_C0_COREAXI4DMACONTROLLER_C0_0_COREAXI4DMACONTROLLER #(
         .ECC                  ( 0 ),
         .FAMILY               ( 27 ),
         .ID_WIDTH             ( 1 ),
-        .INT_0_QUEUE_DEPTH    ( 2 ),
-        .INT_1_QUEUE_DEPTH    ( 2 ),
+        .INT_0_QUEUE_DEPTH    ( 1 ),
+        .INT_1_QUEUE_DEPTH    ( 1 ),
         .INT_2_QUEUE_DEPTH    ( 1 ),
         .INT_3_QUEUE_DEPTH    ( 1 ),
         .NUM_INT_BDS          ( 4 ),
-        .NUM_OF_INTS          ( 2 ),
+        .NUM_OF_INTS          ( 1 ),
         .NUM_PRI_LVLS         ( 1 ),
         .PRI_0_NUM_OF_BEATS   ( 256 ),
         .PRI_1_NUM_OF_BEATS   ( 128 ),
@@ -469,8 +480,8 @@ COREAXI4DMACONTROLLER_C0_0(
         .DMA_ARREADY  ( DMA_ARREADY ),
         .DMA_RVALID   ( DMA_RVALID ),
         .DMA_RLAST    ( DMA_RLAST ),
-        .TVALID       ( GND_net ), // tied to 1'b0 from definition
-        .TLAST        ( GND_net ), // tied to 1'b0 from definition
+        .TVALID       ( TVALID ),
+        .TLAST        ( TLAST ),
         .CTRL_AWADDR  ( CTRL_AWADDR ),
         .CTRL_WSTRB   ( CTRL_WSTRB ),
         .CTRL_WDATA   ( CTRL_WDATA ),
@@ -481,11 +492,11 @@ COREAXI4DMACONTROLLER_C0_0(
         .DMA_RDATA    ( DMA_RDATA ),
         .DMA_RID      ( DMA_RID ),
         .DMA_RRESP    ( DMA_RRESP ),
-        .TDATA        ( TDATA_const_net_0 ), // tied to 32'h00000000 from definition
-        .TSTRB        ( TSTRB_const_net_0 ), // tied to 4'h0 from definition
-        .TKEEP        ( TKEEP_const_net_0 ), // tied to 4'h0 from definition
-        .TID          ( GND_net ), // tied to 1'b0 from definition
-        .TDEST        ( TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .TDATA        ( TDATA ),
+        .TSTRB        ( TSTRB ),
+        .TKEEP        ( TKEEP ),
+        .TID          ( TID ),
+        .TDEST        ( TDEST ),
         // Outputs
         .CTRL_AWREADY ( AXI4TargetCtrl_IF_AWREADY ),
         .CTRL_WREADY  ( AXI4TargetCtrl_IF_WREADY ),
@@ -498,7 +509,7 @@ COREAXI4DMACONTROLLER_C0_0(
         .DMA_BREADY   ( AXI4InitiatorDMA_IF_BREADY ),
         .DMA_ARVALID  ( AXI4InitiatorDMA_IF_ARVALID ),
         .DMA_RREADY   ( AXI4InitiatorDMA_IF_RREADY ),
-        .TREADY       (  ),
+        .TREADY       ( TREADY_net_0 ),
         .INTERRUPT    ( INTERRUPT_net_0 ),
         .CTRL_BRESP   ( AXI4TargetCtrl_IF_BRESP ),
         .CTRL_RDATA   ( AXI4TargetCtrl_IF_RDATA ),

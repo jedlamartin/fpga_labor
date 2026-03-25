@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Mar  3 20:12:55 2026
+// Created by SmartDesign Tue Mar 24 22:22:14 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -91,7 +91,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "MASTER0_WRITE_SLAVE31:true"  \
 "MASTER1_CHAN_RS:true"  \
 "MASTER1_CLOCK_DOMAIN_CROSSING:false"  \
-"MASTER1_DATA_WIDTH:64"  \
+"MASTER1_DATA_WIDTH:32"  \
 "MASTER1_DWC_DATA_FIFO_DEPTH:16"  \
 "MASTER1_READ_INTERLEAVE:false"  \
 "MASTER1_READ_SLAVE0:true"  \
@@ -1139,7 +1139,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "MASTER15_WRITE_SLAVE29:true"  \
 "MASTER15_WRITE_SLAVE30:true"  \
 "MASTER15_WRITE_SLAVE31:true"  \
-"NUM_MASTERS:1"  \
+"NUM_MASTERS:2"  \
 "NUM_MASTERS_WIDTH:1"  \
 "NUM_SLAVES:1"  \
 "NUM_THREADS:1"  \
@@ -1508,6 +1508,37 @@ module COREAXI4INTERCONNECT_C1(
     MASTER0_WSTRB,
     MASTER0_WUSER,
     MASTER0_WVALID,
+    MASTER1_ARADDR,
+    MASTER1_ARBURST,
+    MASTER1_ARCACHE,
+    MASTER1_ARID,
+    MASTER1_ARLEN,
+    MASTER1_ARLOCK,
+    MASTER1_ARPROT,
+    MASTER1_ARQOS,
+    MASTER1_ARREGION,
+    MASTER1_ARSIZE,
+    MASTER1_ARUSER,
+    MASTER1_ARVALID,
+    MASTER1_AWADDR,
+    MASTER1_AWBURST,
+    MASTER1_AWCACHE,
+    MASTER1_AWID,
+    MASTER1_AWLEN,
+    MASTER1_AWLOCK,
+    MASTER1_AWPROT,
+    MASTER1_AWQOS,
+    MASTER1_AWREGION,
+    MASTER1_AWSIZE,
+    MASTER1_AWUSER,
+    MASTER1_AWVALID,
+    MASTER1_BREADY,
+    MASTER1_RREADY,
+    MASTER1_WDATA,
+    MASTER1_WLAST,
+    MASTER1_WSTRB,
+    MASTER1_WUSER,
+    MASTER1_WVALID,
     SLAVE0_ARREADY,
     SLAVE0_AWREADY,
     SLAVE0_BID,
@@ -1535,6 +1566,19 @@ module COREAXI4INTERCONNECT_C1(
     MASTER0_RUSER,
     MASTER0_RVALID,
     MASTER0_WREADY,
+    MASTER1_ARREADY,
+    MASTER1_AWREADY,
+    MASTER1_BID,
+    MASTER1_BRESP,
+    MASTER1_BUSER,
+    MASTER1_BVALID,
+    MASTER1_RDATA,
+    MASTER1_RID,
+    MASTER1_RLAST,
+    MASTER1_RRESP,
+    MASTER1_RUSER,
+    MASTER1_RVALID,
+    MASTER1_WREADY,
     SLAVE0_ARADDR,
     SLAVE0_ARBURST,
     SLAVE0_ARCACHE,
@@ -1604,6 +1648,37 @@ input         MASTER0_WLAST;
 input  [3:0]  MASTER0_WSTRB;
 input  [0:0]  MASTER0_WUSER;
 input         MASTER0_WVALID;
+input  [63:0] MASTER1_ARADDR;
+input  [1:0]  MASTER1_ARBURST;
+input  [3:0]  MASTER1_ARCACHE;
+input  [0:0]  MASTER1_ARID;
+input  [7:0]  MASTER1_ARLEN;
+input  [1:0]  MASTER1_ARLOCK;
+input  [2:0]  MASTER1_ARPROT;
+input  [3:0]  MASTER1_ARQOS;
+input  [3:0]  MASTER1_ARREGION;
+input  [2:0]  MASTER1_ARSIZE;
+input  [0:0]  MASTER1_ARUSER;
+input         MASTER1_ARVALID;
+input  [63:0] MASTER1_AWADDR;
+input  [1:0]  MASTER1_AWBURST;
+input  [3:0]  MASTER1_AWCACHE;
+input  [0:0]  MASTER1_AWID;
+input  [7:0]  MASTER1_AWLEN;
+input  [1:0]  MASTER1_AWLOCK;
+input  [2:0]  MASTER1_AWPROT;
+input  [3:0]  MASTER1_AWQOS;
+input  [3:0]  MASTER1_AWREGION;
+input  [2:0]  MASTER1_AWSIZE;
+input  [0:0]  MASTER1_AWUSER;
+input         MASTER1_AWVALID;
+input         MASTER1_BREADY;
+input         MASTER1_RREADY;
+input  [31:0] MASTER1_WDATA;
+input         MASTER1_WLAST;
+input  [3:0]  MASTER1_WSTRB;
+input  [0:0]  MASTER1_WUSER;
+input         MASTER1_WVALID;
 input         SLAVE0_ARREADY;
 input         SLAVE0_AWREADY;
 input  [1:0]  SLAVE0_BID;
@@ -1633,6 +1708,19 @@ output [1:0]  MASTER0_RRESP;
 output [0:0]  MASTER0_RUSER;
 output        MASTER0_RVALID;
 output        MASTER0_WREADY;
+output        MASTER1_ARREADY;
+output        MASTER1_AWREADY;
+output [0:0]  MASTER1_BID;
+output [1:0]  MASTER1_BRESP;
+output [0:0]  MASTER1_BUSER;
+output        MASTER1_BVALID;
+output [31:0] MASTER1_RDATA;
+output [0:0]  MASTER1_RID;
+output        MASTER1_RLAST;
+output [1:0]  MASTER1_RRESP;
+output [0:0]  MASTER1_RUSER;
+output        MASTER1_RVALID;
+output        MASTER1_WREADY;
 output [63:0] SLAVE0_ARADDR;
 output [1:0]  SLAVE0_ARBURST;
 output [3:0]  SLAVE0_ARCACHE;
@@ -1713,6 +1801,50 @@ wire          AXI4mmaster0_WREADY;
 wire   [3:0]  MASTER0_WSTRB;
 wire   [0:0]  MASTER0_WUSER;
 wire          MASTER0_WVALID;
+wire   [63:0] MASTER1_ARADDR;
+wire   [1:0]  MASTER1_ARBURST;
+wire   [3:0]  MASTER1_ARCACHE;
+wire   [0:0]  MASTER1_ARID;
+wire   [7:0]  MASTER1_ARLEN;
+wire   [1:0]  MASTER1_ARLOCK;
+wire   [2:0]  MASTER1_ARPROT;
+wire   [3:0]  MASTER1_ARQOS;
+wire          AXI4mmaster1_ARREADY;
+wire   [3:0]  MASTER1_ARREGION;
+wire   [2:0]  MASTER1_ARSIZE;
+wire   [0:0]  MASTER1_ARUSER;
+wire          MASTER1_ARVALID;
+wire   [63:0] MASTER1_AWADDR;
+wire   [1:0]  MASTER1_AWBURST;
+wire   [3:0]  MASTER1_AWCACHE;
+wire   [0:0]  MASTER1_AWID;
+wire   [7:0]  MASTER1_AWLEN;
+wire   [1:0]  MASTER1_AWLOCK;
+wire   [2:0]  MASTER1_AWPROT;
+wire   [3:0]  MASTER1_AWQOS;
+wire          AXI4mmaster1_AWREADY;
+wire   [3:0]  MASTER1_AWREGION;
+wire   [2:0]  MASTER1_AWSIZE;
+wire   [0:0]  MASTER1_AWUSER;
+wire          MASTER1_AWVALID;
+wire   [0:0]  AXI4mmaster1_BID;
+wire          MASTER1_BREADY;
+wire   [1:0]  AXI4mmaster1_BRESP;
+wire   [0:0]  AXI4mmaster1_BUSER;
+wire          AXI4mmaster1_BVALID;
+wire   [31:0] AXI4mmaster1_RDATA;
+wire   [0:0]  AXI4mmaster1_RID;
+wire          AXI4mmaster1_RLAST;
+wire          MASTER1_RREADY;
+wire   [1:0]  AXI4mmaster1_RRESP;
+wire   [0:0]  AXI4mmaster1_RUSER;
+wire          AXI4mmaster1_RVALID;
+wire   [31:0] MASTER1_WDATA;
+wire          MASTER1_WLAST;
+wire          AXI4mmaster1_WREADY;
+wire   [3:0]  MASTER1_WSTRB;
+wire   [0:0]  MASTER1_WUSER;
+wire          MASTER1_WVALID;
 wire   [63:0] AXI4mslave0_ARADDR;
 wire   [1:0]  AXI4mslave0_ARBURST;
 wire   [3:0]  AXI4mslave0_ARCACHE;
@@ -1801,11 +1933,23 @@ wire          AXI4mmaster0_RLAST_net_0;
 wire          AXI4mmaster0_RVALID_net_0;
 wire   [0:0]  AXI4mmaster0_BUSER_net_0;
 wire   [0:0]  AXI4mmaster0_RUSER_net_0;
+wire          AXI4mmaster1_AWREADY_net_0;
+wire          AXI4mmaster1_WREADY_net_0;
+wire   [0:0]  AXI4mmaster1_BID_net_0;
+wire   [1:0]  AXI4mmaster1_BRESP_net_0;
+wire          AXI4mmaster1_BVALID_net_0;
+wire          AXI4mmaster1_ARREADY_net_0;
+wire   [0:0]  AXI4mmaster1_RID_net_0;
+wire   [31:0] AXI4mmaster1_RDATA_net_0;
+wire   [1:0]  AXI4mmaster1_RRESP_net_0;
+wire          AXI4mmaster1_RLAST_net_0;
+wire          AXI4mmaster1_RVALID_net_0;
+wire   [0:0]  AXI4mmaster1_BUSER_net_0;
+wire   [0:0]  AXI4mmaster1_RUSER_net_0;
 //--------------------------------------------------------------------
 // TiedOff Nets
 //--------------------------------------------------------------------
 wire          GND_net;
-wire   [3:0]  MASTER1_ARREGION_const_net_0;
 wire   [31:0] MASTER0_HADDR_const_net_0;
 wire   [2:0]  MASTER0_HBURST_const_net_0;
 wire   [6:0]  MASTER0_HPROT_const_net_0;
@@ -1817,7 +1961,7 @@ wire   [2:0]  MASTER1_HBURST_const_net_0;
 wire   [6:0]  MASTER1_HPROT_const_net_0;
 wire   [2:0]  MASTER1_HSIZE_const_net_0;
 wire   [1:0]  MASTER1_HTRANS_const_net_0;
-wire   [63:0] MASTER1_HWDATA_const_net_0;
+wire   [31:0] MASTER1_HWDATA_const_net_0;
 wire   [31:0] MASTER2_HADDR_const_net_0;
 wire   [2:0]  MASTER2_HBURST_const_net_0;
 wire   [6:0]  MASTER2_HPROT_const_net_0;
@@ -2057,25 +2201,6 @@ wire   [1:0]  SLAVE31_BRESP_const_net_0;
 wire   [1:0]  SLAVE31_RID_const_net_0;
 wire   [63:0] SLAVE31_RDATA_const_net_0;
 wire   [1:0]  SLAVE31_RRESP_const_net_0;
-wire   [63:0] MASTER1_AWADDR_const_net_0;
-wire   [7:0]  MASTER1_AWLEN_const_net_0;
-wire   [2:0]  MASTER1_AWSIZE_const_net_0;
-wire   [1:0]  MASTER1_AWBURST_const_net_0;
-wire   [1:0]  MASTER1_AWLOCK_const_net_0;
-wire   [3:0]  MASTER1_AWCACHE_const_net_0;
-wire   [2:0]  MASTER1_AWPROT_const_net_0;
-wire   [3:0]  MASTER1_AWQOS_const_net_0;
-wire   [3:0]  MASTER1_AWREGION_const_net_0;
-wire   [63:0] MASTER1_WDATA_const_net_0;
-wire   [7:0]  MASTER1_WSTRB_const_net_0;
-wire   [63:0] MASTER1_ARADDR_const_net_0;
-wire   [7:0]  MASTER1_ARLEN_const_net_0;
-wire   [2:0]  MASTER1_ARSIZE_const_net_0;
-wire   [1:0]  MASTER1_ARBURST_const_net_0;
-wire   [1:0]  MASTER1_ARLOCK_const_net_0;
-wire   [3:0]  MASTER1_ARCACHE_const_net_0;
-wire   [2:0]  MASTER1_ARPROT_const_net_0;
-wire   [3:0]  MASTER1_ARQOS_const_net_0;
 wire   [63:0] MASTER2_AWADDR_const_net_0;
 wire   [7:0]  MASTER2_AWLEN_const_net_0;
 wire   [2:0]  MASTER2_AWSIZE_const_net_0;
@@ -2360,7 +2485,6 @@ wire   [3:0]  MASTER15_ARREGION_const_net_0;
 // Constant assignments
 //--------------------------------------------------------------------
 assign GND_net                       = 1'b0;
-assign MASTER1_ARREGION_const_net_0  = 4'h0;
 assign MASTER0_HADDR_const_net_0     = 32'h00000000;
 assign MASTER0_HBURST_const_net_0    = 3'h0;
 assign MASTER0_HPROT_const_net_0     = 7'h00;
@@ -2372,7 +2496,7 @@ assign MASTER1_HBURST_const_net_0    = 3'h0;
 assign MASTER1_HPROT_const_net_0     = 7'h00;
 assign MASTER1_HSIZE_const_net_0     = 3'h0;
 assign MASTER1_HTRANS_const_net_0    = 2'h0;
-assign MASTER1_HWDATA_const_net_0    = 64'h0000000000000000;
+assign MASTER1_HWDATA_const_net_0    = 32'h00000000;
 assign MASTER2_HADDR_const_net_0     = 32'h00000000;
 assign MASTER2_HBURST_const_net_0    = 3'h0;
 assign MASTER2_HPROT_const_net_0     = 7'h00;
@@ -2612,25 +2736,6 @@ assign SLAVE31_BRESP_const_net_0     = 2'h0;
 assign SLAVE31_RID_const_net_0       = 2'h0;
 assign SLAVE31_RDATA_const_net_0     = 64'h0000000000000000;
 assign SLAVE31_RRESP_const_net_0     = 2'h0;
-assign MASTER1_AWADDR_const_net_0    = 64'h0000000000000000;
-assign MASTER1_AWLEN_const_net_0     = 8'h00;
-assign MASTER1_AWSIZE_const_net_0    = 3'h0;
-assign MASTER1_AWBURST_const_net_0   = 2'h3;
-assign MASTER1_AWLOCK_const_net_0    = 2'h0;
-assign MASTER1_AWCACHE_const_net_0   = 4'h0;
-assign MASTER1_AWPROT_const_net_0    = 3'h0;
-assign MASTER1_AWQOS_const_net_0     = 4'h0;
-assign MASTER1_AWREGION_const_net_0  = 4'h0;
-assign MASTER1_WDATA_const_net_0     = 64'h0000000000000000;
-assign MASTER1_WSTRB_const_net_0     = 8'hFF;
-assign MASTER1_ARADDR_const_net_0    = 64'h0000000000000000;
-assign MASTER1_ARLEN_const_net_0     = 8'h00;
-assign MASTER1_ARSIZE_const_net_0    = 3'h0;
-assign MASTER1_ARBURST_const_net_0   = 2'h3;
-assign MASTER1_ARLOCK_const_net_0    = 2'h0;
-assign MASTER1_ARCACHE_const_net_0   = 4'h0;
-assign MASTER1_ARPROT_const_net_0    = 3'h0;
-assign MASTER1_ARQOS_const_net_0     = 4'h0;
 assign MASTER2_AWADDR_const_net_0    = 64'h0000000000000000;
 assign MASTER2_AWLEN_const_net_0     = 8'h00;
 assign MASTER2_AWSIZE_const_net_0    = 3'h0;
@@ -3002,6 +3107,32 @@ assign AXI4mmaster0_BUSER_net_0[0] = AXI4mmaster0_BUSER[0];
 assign MASTER0_BUSER[0:0]          = AXI4mmaster0_BUSER_net_0[0];
 assign AXI4mmaster0_RUSER_net_0[0] = AXI4mmaster0_RUSER[0];
 assign MASTER0_RUSER[0:0]          = AXI4mmaster0_RUSER_net_0[0];
+assign AXI4mmaster1_AWREADY_net_0  = AXI4mmaster1_AWREADY;
+assign MASTER1_AWREADY             = AXI4mmaster1_AWREADY_net_0;
+assign AXI4mmaster1_WREADY_net_0   = AXI4mmaster1_WREADY;
+assign MASTER1_WREADY              = AXI4mmaster1_WREADY_net_0;
+assign AXI4mmaster1_BID_net_0[0]   = AXI4mmaster1_BID[0];
+assign MASTER1_BID[0:0]            = AXI4mmaster1_BID_net_0[0];
+assign AXI4mmaster1_BRESP_net_0    = AXI4mmaster1_BRESP;
+assign MASTER1_BRESP[1:0]          = AXI4mmaster1_BRESP_net_0;
+assign AXI4mmaster1_BVALID_net_0   = AXI4mmaster1_BVALID;
+assign MASTER1_BVALID              = AXI4mmaster1_BVALID_net_0;
+assign AXI4mmaster1_ARREADY_net_0  = AXI4mmaster1_ARREADY;
+assign MASTER1_ARREADY             = AXI4mmaster1_ARREADY_net_0;
+assign AXI4mmaster1_RID_net_0[0]   = AXI4mmaster1_RID[0];
+assign MASTER1_RID[0:0]            = AXI4mmaster1_RID_net_0[0];
+assign AXI4mmaster1_RDATA_net_0    = AXI4mmaster1_RDATA;
+assign MASTER1_RDATA[31:0]         = AXI4mmaster1_RDATA_net_0;
+assign AXI4mmaster1_RRESP_net_0    = AXI4mmaster1_RRESP;
+assign MASTER1_RRESP[1:0]          = AXI4mmaster1_RRESP_net_0;
+assign AXI4mmaster1_RLAST_net_0    = AXI4mmaster1_RLAST;
+assign MASTER1_RLAST               = AXI4mmaster1_RLAST_net_0;
+assign AXI4mmaster1_RVALID_net_0   = AXI4mmaster1_RVALID;
+assign MASTER1_RVALID              = AXI4mmaster1_RVALID_net_0;
+assign AXI4mmaster1_BUSER_net_0[0] = AXI4mmaster1_BUSER[0];
+assign MASTER1_BUSER[0:0]          = AXI4mmaster1_BUSER_net_0[0];
+assign AXI4mmaster1_RUSER_net_0[0] = AXI4mmaster1_RUSER[0];
+assign MASTER1_RUSER[0:0]          = AXI4mmaster1_RUSER_net_0[0];
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
@@ -3085,7 +3216,7 @@ COREAXI4INTERCONNECT #(
         .MASTER0_WRITE_SLAVE31          ( 1 ),
         .MASTER1_CHAN_RS                ( 1 ),
         .MASTER1_CLOCK_DOMAIN_CROSSING  ( 0 ),
-        .MASTER1_DATA_WIDTH             ( 64 ),
+        .MASTER1_DATA_WIDTH             ( 32 ),
         .MASTER1_DWC_DATA_FIFO_DEPTH    ( 16 ),
         .MASTER1_READ_INTERLEAVE        ( 0 ),
         .MASTER1_READ_SLAVE0            ( 1 ),
@@ -4133,7 +4264,7 @@ COREAXI4INTERCONNECT #(
         .MASTER15_WRITE_SLAVE29         ( 1 ),
         .MASTER15_WRITE_SLAVE30         ( 1 ),
         .MASTER15_WRITE_SLAVE31         ( 1 ),
-        .NUM_MASTERS                    ( 1 ),
+        .NUM_MASTERS                    ( 2 ),
         .NUM_MASTERS_WIDTH              ( 1 ),
         .NUM_SLAVES                     ( 1 ),
         .NUM_THREADS                    ( 1 ),
@@ -4469,7 +4600,7 @@ COREAXI4INTERCONNECT_C1_0(
         .ACLK               ( ACLK ),
         .ARESETN            ( ARESETN ),
         .MASTER0_AWVALID    ( MASTER0_AWVALID ),
-        .MASTER1_AWVALID    ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_AWVALID    ( MASTER1_AWVALID ),
         .MASTER2_AWVALID    ( GND_net ), // tied to 1'b0 from definition
         .MASTER3_AWVALID    ( GND_net ), // tied to 1'b0 from definition
         .MASTER4_AWVALID    ( GND_net ), // tied to 1'b0 from definition
@@ -4486,8 +4617,8 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER15_AWVALID   ( GND_net ), // tied to 1'b0 from definition
         .MASTER0_WLAST      ( MASTER0_WLAST ),
         .MASTER0_WVALID     ( MASTER0_WVALID ),
-        .MASTER1_WLAST      ( GND_net ), // tied to 1'b0 from definition
-        .MASTER1_WVALID     ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_WLAST      ( MASTER1_WLAST ),
+        .MASTER1_WVALID     ( MASTER1_WVALID ),
         .MASTER2_WLAST      ( GND_net ), // tied to 1'b0 from definition
         .MASTER2_WVALID     ( GND_net ), // tied to 1'b0 from definition
         .MASTER3_WLAST      ( GND_net ), // tied to 1'b0 from definition
@@ -4517,7 +4648,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER15_WLAST     ( GND_net ), // tied to 1'b0 from definition
         .MASTER15_WVALID    ( GND_net ), // tied to 1'b0 from definition
         .MASTER0_BREADY     ( MASTER0_BREADY ),
-        .MASTER1_BREADY     ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_BREADY     ( MASTER1_BREADY ),
         .MASTER2_BREADY     ( GND_net ), // tied to 1'b0 from definition
         .MASTER3_BREADY     ( GND_net ), // tied to 1'b0 from definition
         .MASTER4_BREADY     ( GND_net ), // tied to 1'b0 from definition
@@ -4533,7 +4664,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER14_BREADY    ( GND_net ), // tied to 1'b0 from definition
         .MASTER15_BREADY    ( GND_net ), // tied to 1'b0 from definition
         .MASTER0_ARVALID    ( MASTER0_ARVALID ),
-        .MASTER1_ARVALID    ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_ARVALID    ( MASTER1_ARVALID ),
         .MASTER2_ARVALID    ( GND_net ), // tied to 1'b0 from definition
         .MASTER3_ARVALID    ( GND_net ), // tied to 1'b0 from definition
         .MASTER4_ARVALID    ( GND_net ), // tied to 1'b0 from definition
@@ -4549,7 +4680,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER14_ARVALID   ( GND_net ), // tied to 1'b0 from definition
         .MASTER15_ARVALID   ( GND_net ), // tied to 1'b0 from definition
         .MASTER0_RREADY     ( MASTER0_RREADY ),
-        .MASTER1_RREADY     ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_RREADY     ( MASTER1_RREADY ),
         .MASTER2_RREADY     ( GND_net ), // tied to 1'b0 from definition
         .MASTER3_RREADY     ( GND_net ), // tied to 1'b0 from definition
         .MASTER4_RREADY     ( GND_net ), // tied to 1'b0 from definition
@@ -4879,17 +5010,17 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER0_AWREGION   ( MASTER0_AWREGION ),
         .MASTER0_AWQOS      ( MASTER0_AWQOS ),
         .MASTER0_AWUSER     ( MASTER0_AWUSER ),
-        .MASTER1_AWID       ( GND_net ), // tied to 1'b0 from definition
-        .MASTER1_AWADDR     ( MASTER1_AWADDR_const_net_0 ), // tied to 64'h0000000000000000 from definition
-        .MASTER1_AWLEN      ( MASTER1_AWLEN_const_net_0 ), // tied to 8'h00 from definition
-        .MASTER1_AWSIZE     ( MASTER1_AWSIZE_const_net_0 ), // tied to 3'h0 from definition
-        .MASTER1_AWBURST    ( MASTER1_AWBURST_const_net_0 ), // tied to 2'h3 from definition
-        .MASTER1_AWLOCK     ( MASTER1_AWLOCK_const_net_0 ), // tied to 2'h0 from definition
-        .MASTER1_AWCACHE    ( MASTER1_AWCACHE_const_net_0 ), // tied to 4'h0 from definition
-        .MASTER1_AWPROT     ( MASTER1_AWPROT_const_net_0 ), // tied to 3'h0 from definition
-        .MASTER1_AWREGION   ( MASTER1_AWREGION_const_net_0 ), // tied to 4'h0 from definition
-        .MASTER1_AWQOS      ( MASTER1_AWQOS_const_net_0 ), // tied to 4'h0 from definition
-        .MASTER1_AWUSER     ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_AWID       ( MASTER1_AWID ),
+        .MASTER1_AWADDR     ( MASTER1_AWADDR ),
+        .MASTER1_AWLEN      ( MASTER1_AWLEN ),
+        .MASTER1_AWSIZE     ( MASTER1_AWSIZE ),
+        .MASTER1_AWBURST    ( MASTER1_AWBURST ),
+        .MASTER1_AWLOCK     ( MASTER1_AWLOCK ),
+        .MASTER1_AWCACHE    ( MASTER1_AWCACHE ),
+        .MASTER1_AWPROT     ( MASTER1_AWPROT ),
+        .MASTER1_AWREGION   ( MASTER1_AWREGION ),
+        .MASTER1_AWQOS      ( MASTER1_AWQOS ),
+        .MASTER1_AWUSER     ( MASTER1_AWUSER ),
         .MASTER2_AWID       ( GND_net ), // tied to 1'b0 from definition
         .MASTER2_AWADDR     ( MASTER2_AWADDR_const_net_0 ), // tied to 64'h0000000000000000 from definition
         .MASTER2_AWLEN      ( MASTER2_AWLEN_const_net_0 ), // tied to 8'h00 from definition
@@ -5048,9 +5179,9 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER0_WSTRB      ( MASTER0_WSTRB ),
         .MASTER0_WUSER      ( MASTER0_WUSER ),
         .MASTER0_WID        ( GND_net ), // tied to 1'b0 from definition
-        .MASTER1_WDATA      ( MASTER1_WDATA_const_net_0 ), // tied to 64'h0000000000000000 from definition
-        .MASTER1_WSTRB      ( MASTER1_WSTRB_const_net_0 ), // tied to 8'hFF from definition
-        .MASTER1_WUSER      ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_WDATA      ( MASTER1_WDATA ),
+        .MASTER1_WSTRB      ( MASTER1_WSTRB ),
+        .MASTER1_WUSER      ( MASTER1_WUSER ),
         .MASTER1_WID        ( GND_net ), // tied to 1'b0 from definition
         .MASTER2_WDATA      ( MASTER2_WDATA_const_net_0 ), // tied to 64'h0000000000000000 from definition
         .MASTER2_WSTRB      ( MASTER2_WSTRB_const_net_0 ), // tied to 8'hFF from definition
@@ -5119,17 +5250,17 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER0_ARREGION   ( MASTER0_ARREGION ),
         .MASTER0_ARQOS      ( MASTER0_ARQOS ),
         .MASTER0_ARUSER     ( MASTER0_ARUSER ),
-        .MASTER1_ARID       ( GND_net ), // tied to 1'b0 from definition
-        .MASTER1_ARADDR     ( MASTER1_ARADDR_const_net_0 ), // tied to 64'h0000000000000000 from definition
-        .MASTER1_ARLEN      ( MASTER1_ARLEN_const_net_0 ), // tied to 8'h00 from definition
-        .MASTER1_ARSIZE     ( MASTER1_ARSIZE_const_net_0 ), // tied to 3'h0 from definition
-        .MASTER1_ARBURST    ( MASTER1_ARBURST_const_net_0 ), // tied to 2'h3 from definition
-        .MASTER1_ARLOCK     ( MASTER1_ARLOCK_const_net_0 ), // tied to 2'h0 from definition
-        .MASTER1_ARCACHE    ( MASTER1_ARCACHE_const_net_0 ), // tied to 4'h0 from definition
-        .MASTER1_ARPROT     ( MASTER1_ARPROT_const_net_0 ), // tied to 3'h0 from definition
-        .MASTER1_ARREGION   ( MASTER1_ARREGION_const_net_0 ), // tied to 4'h0 from definition
-        .MASTER1_ARQOS      ( MASTER1_ARQOS_const_net_0 ), // tied to 4'h0 from definition
-        .MASTER1_ARUSER     ( GND_net ), // tied to 1'b0 from definition
+        .MASTER1_ARID       ( MASTER1_ARID ),
+        .MASTER1_ARADDR     ( MASTER1_ARADDR ),
+        .MASTER1_ARLEN      ( MASTER1_ARLEN ),
+        .MASTER1_ARSIZE     ( MASTER1_ARSIZE ),
+        .MASTER1_ARBURST    ( MASTER1_ARBURST ),
+        .MASTER1_ARLOCK     ( MASTER1_ARLOCK ),
+        .MASTER1_ARCACHE    ( MASTER1_ARCACHE ),
+        .MASTER1_ARPROT     ( MASTER1_ARPROT ),
+        .MASTER1_ARREGION   ( MASTER1_ARREGION ),
+        .MASTER1_ARQOS      ( MASTER1_ARQOS ),
+        .MASTER1_ARUSER     ( MASTER1_ARUSER ),
         .MASTER2_ARID       ( GND_net ), // tied to 1'b0 from definition
         .MASTER2_ARADDR     ( MASTER2_ARADDR_const_net_0 ), // tied to 64'h0000000000000000 from definition
         .MASTER2_ARLEN      ( MASTER2_ARLEN_const_net_0 ), // tied to 8'h00 from definition
@@ -5351,7 +5482,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER1_HPROT      ( MASTER1_HPROT_const_net_0 ), // tied to 7'h00 from definition
         .MASTER1_HSIZE      ( MASTER1_HSIZE_const_net_0 ), // tied to 3'h0 from definition
         .MASTER1_HTRANS     ( MASTER1_HTRANS_const_net_0 ), // tied to 2'h0 from definition
-        .MASTER1_HWDATA     ( MASTER1_HWDATA_const_net_0 ), // tied to 64'h0000000000000000 from definition
+        .MASTER1_HWDATA     ( MASTER1_HWDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .MASTER2_HADDR      ( MASTER2_HADDR_const_net_0 ), // tied to 32'h00000000 from definition
         .MASTER2_HBURST     ( MASTER2_HBURST_const_net_0 ), // tied to 3'h0 from definition
         .MASTER2_HPROT      ( MASTER2_HPROT_const_net_0 ), // tied to 7'h00 from definition
@@ -5606,7 +5737,7 @@ COREAXI4INTERCONNECT_C1_0(
         .SLAVE31_RUSER      ( GND_net ), // tied to 1'b0 from definition
         // Outputs
         .MASTER0_AWREADY    ( AXI4mmaster0_AWREADY ),
-        .MASTER1_AWREADY    (  ),
+        .MASTER1_AWREADY    ( AXI4mmaster1_AWREADY ),
         .MASTER2_AWREADY    (  ),
         .MASTER3_AWREADY    (  ),
         .MASTER4_AWREADY    (  ),
@@ -5622,7 +5753,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER14_AWREADY   (  ),
         .MASTER15_AWREADY   (  ),
         .MASTER0_WREADY     ( AXI4mmaster0_WREADY ),
-        .MASTER1_WREADY     (  ),
+        .MASTER1_WREADY     ( AXI4mmaster1_WREADY ),
         .MASTER2_WREADY     (  ),
         .MASTER3_WREADY     (  ),
         .MASTER4_WREADY     (  ),
@@ -5638,7 +5769,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER14_WREADY    (  ),
         .MASTER15_WREADY    (  ),
         .MASTER0_BVALID     ( AXI4mmaster0_BVALID ),
-        .MASTER1_BVALID     (  ),
+        .MASTER1_BVALID     ( AXI4mmaster1_BVALID ),
         .MASTER2_BVALID     (  ),
         .MASTER3_BVALID     (  ),
         .MASTER4_BVALID     (  ),
@@ -5654,7 +5785,7 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER14_BVALID    (  ),
         .MASTER15_BVALID    (  ),
         .MASTER0_ARREADY    ( AXI4mmaster0_ARREADY ),
-        .MASTER1_ARREADY    (  ),
+        .MASTER1_ARREADY    ( AXI4mmaster1_ARREADY ),
         .MASTER2_ARREADY    (  ),
         .MASTER3_ARREADY    (  ),
         .MASTER4_ARREADY    (  ),
@@ -5671,8 +5802,8 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER15_ARREADY   (  ),
         .MASTER0_RLAST      ( AXI4mmaster0_RLAST ),
         .MASTER0_RVALID     ( AXI4mmaster0_RVALID ),
-        .MASTER1_RLAST      (  ),
-        .MASTER1_RVALID     (  ),
+        .MASTER1_RLAST      ( AXI4mmaster1_RLAST ),
+        .MASTER1_RVALID     ( AXI4mmaster1_RVALID ),
         .MASTER2_RLAST      (  ),
         .MASTER2_RVALID     (  ),
         .MASTER3_RLAST      (  ),
@@ -5928,9 +6059,9 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER0_BID        ( AXI4mmaster0_BID ),
         .MASTER0_BRESP      ( AXI4mmaster0_BRESP ),
         .MASTER0_BUSER      ( AXI4mmaster0_BUSER ),
-        .MASTER1_BID        (  ),
-        .MASTER1_BRESP      (  ),
-        .MASTER1_BUSER      (  ),
+        .MASTER1_BID        ( AXI4mmaster1_BID ),
+        .MASTER1_BRESP      ( AXI4mmaster1_BRESP ),
+        .MASTER1_BUSER      ( AXI4mmaster1_BUSER ),
         .MASTER2_BID        (  ),
         .MASTER2_BRESP      (  ),
         .MASTER2_BUSER      (  ),
@@ -5977,10 +6108,10 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER0_RDATA      ( AXI4mmaster0_RDATA ),
         .MASTER0_RRESP      ( AXI4mmaster0_RRESP ),
         .MASTER0_RUSER      ( AXI4mmaster0_RUSER ),
-        .MASTER1_RID        (  ),
-        .MASTER1_RDATA      (  ),
-        .MASTER1_RRESP      (  ),
-        .MASTER1_RUSER      (  ),
+        .MASTER1_RID        ( AXI4mmaster1_RID ),
+        .MASTER1_RDATA      ( AXI4mmaster1_RDATA ),
+        .MASTER1_RRESP      ( AXI4mmaster1_RRESP ),
+        .MASTER1_RUSER      ( AXI4mmaster1_RUSER ),
         .MASTER2_RID        (  ),
         .MASTER2_RDATA      (  ),
         .MASTER2_RRESP      (  ),

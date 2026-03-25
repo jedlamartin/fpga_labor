@@ -13,6 +13,7 @@ wire intValidQueue3;
 
 // Interrupt 0 mapping
 assign intValidQueue0 =
+                        (strDscrptr == 1'b1) ? valid :
                         (intDscrptrNum == 5'd0) ? valid :
                         (intDscrptrNum == 5'd1) ? valid :
                         (intDscrptrNum == 5'd2) ? valid :
@@ -31,6 +32,7 @@ assign intValidQueue3 = 1'b0;
 // Map the FIFO full signals to the related descriptors to prevent further
 // operations of these descriptors taking place until there's space in the
 // interrupt queue
+assign waitStrDscrptr = fifoFullQueue0;
 assign waitDscrptr[0] = fifoFullQueue0;
 assign waitDscrptr[1] = fifoFullQueue0;
 assign waitDscrptr[2] = fifoFullQueue0;

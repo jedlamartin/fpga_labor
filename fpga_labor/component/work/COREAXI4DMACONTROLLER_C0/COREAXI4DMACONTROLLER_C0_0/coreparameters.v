@@ -1,10 +1,10 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Tue Mar  3 20:18:28 2026
+// Created by Microsemi SmartDesign Wed Mar 25 14:38:09 2026
 // Parameters for COREAXI4DMACONTROLLER
 //--------------------------------------------------------------------
 
 
-parameter AXI4_STREAM_IF = 0;
+parameter AXI4_STREAM_IF = 1;
 parameter AXI_DMA_DWIDTH = 32;
 parameter DSCRPTR_0_INT_ASSOC = 0;
 parameter DSCRPTR_0_PRI_LVL = 0;
@@ -73,12 +73,12 @@ parameter DSCRPTR_31_PRI_LVL = 0;
 parameter ECC = 0;
 parameter FAMILY = 27;
 parameter ID_WIDTH = 1;
-parameter INT_0_QUEUE_DEPTH = 2;
-parameter INT_1_QUEUE_DEPTH = 2;
+parameter INT_0_QUEUE_DEPTH = 1;
+parameter INT_1_QUEUE_DEPTH = 1;
 parameter INT_2_QUEUE_DEPTH = 1;
 parameter INT_3_QUEUE_DEPTH = 1;
 parameter NUM_INT_BDS = 4;
-parameter NUM_OF_INTS = 2;
+parameter NUM_OF_INTS = 1;
 parameter NUM_PRI_LVLS = 1;
 parameter PRI_0_NUM_OF_BEATS = 256;
 parameter PRI_1_NUM_OF_BEATS = 128;

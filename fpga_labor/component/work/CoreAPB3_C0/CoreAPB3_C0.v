@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Mar  3 17:13:26 2026
+// Created by SmartDesign Tue Mar 24 22:53:43 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -32,7 +32,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:CoreAPB3:4.2.100} -compon
 "APBSLOT14ENABLE:false"  \
 "APBSLOT15ENABLE:false"  \
 "IADDR_OPTION:0"  \
-"MADDR_BITS:32"  \
+"MADDR_BITS:28"  \
 "SC_0:false"  \
 "SC_1:false"  \
 "SC_2:false"  \
@@ -211,7 +211,7 @@ CoreAPB3 #(
         .APBSLOT15ENABLE ( 0 ),
         .FAMILY          ( 27 ),
         .IADDR_OPTION    ( 0 ),
-        .MADDR_BITS      ( 32 ),
+        .MADDR_BITS      ( 28 ),
         .SC_0            ( 0 ),
         .SC_1            ( 0 ),
         .SC_2            ( 0 ),
