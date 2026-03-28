@@ -4,7 +4,7 @@
       <design_name>MPFS_DISCOVERY_KIT_MSS</design_name>
       <mpfs_part_no>MPFS095T</mpfs_part_no>
       <mpfs_package>FCSG325</mpfs_package>
-      <creation_date_time>03-09-2026_18:52:23</creation_date_time>
+      <creation_date_time>03-28-2026_19:24:55</creation_date_time>
       <xml_format_version>0.6.8</xml_format_version>
     </design_information>
     <mss_memory_map>
@@ -1272,8 +1272,8 @@
             <field Type="RW" name="PAD16" offset="8" width="4">0xF</field>
             <field Type="RW" name="PAD17" offset="12" width="4">0xF</field>
             <field Type="RW" name="PAD18" offset="16" width="4">0xF</field>
-            <field Type="RW" name="PAD19" offset="20" width="4">0xF</field>
-            <field Type="RW" name="PAD20" offset="24" width="4">0xF</field>
+            <field Type="RW" name="PAD19" offset="20" width="4">0x5</field>
+            <field Type="RW" name="PAD20" offset="24" width="4">0x5</field>
             <field Type="RW" name="PAD21" offset="28" width="4">0xF</field>
           </register>
           <register address="0x00000210" description="Configures the IO Mux structure for each IO pad.  0  implies  SD/SDIO, 1 implies  EMMC, 2 implies QSPI, 3 implies SPI,4 implies USB,5 implies MMUART,6 implies I2C,7 implies CAN,8 implies MDIO,9 implies Miscellaneous,0xA implies Reserved (Equivalent to Tristate),0xB implies GPIO ,0xC implies Fabric-test,0xD implies Logic 0,0xE implies Logic 1, 0xF implies Tristate" name="IOMUX4_CR">
@@ -4309,7 +4309,7 @@
             <field Type="RW" name="SPI0" offset="6" width="1">0x0</field>
             <field Type="RW" name="SPI1" offset="7" width="1">0x0</field>
             <field Type="RW" name="MMUART0" offset="8" width="1">0x0</field>
-            <field Type="RW" name="MMUART1" offset="9" width="1">0x0</field>
+            <field Type="RW" name="MMUART1" offset="9" width="1">0x1</field>
             <field Type="RW" name="MMUART2" offset="10" width="1">0x0</field>
             <field Type="RW" name="MMUART3" offset="11" width="1">0x0</field>
             <field Type="RW" name="MMUART4" offset="12" width="1">0x0</field>
@@ -4319,7 +4319,7 @@
             <field Type="RW" name="CAN1" offset="16" width="1">0x0</field>
             <field Type="RW" name="GPIO0" offset="17" width="1">0x0</field>
             <field Type="RW" name="GPIO1" offset="18" width="1">0x0</field>
-            <field Type="RW" name="GPIO2" offset="19" width="1">0x1</field>
+            <field Type="RW" name="GPIO2" offset="19" width="1">0x0</field>
           </register>
         </registers>
       </mss_peripherals>

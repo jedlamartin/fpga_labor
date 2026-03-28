@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Tue Mar  3 16:39:28 2026
+// Created by Microsemi SmartDesign Sat Mar 28 21:30:34 2026
 // Parameters for CoreAXI4SInterconnect
 //--------------------------------------------------------------------
 
@@ -93,7 +93,7 @@ parameter ENABLE_TR6_FIFO = 0;
 parameter ENABLE_TR7_FIFO = 0;
 parameter ENABLE_TREADY = 1;
 parameter ENABLE_TSTRB = 0;
-parameter ENABLE_TUSER = 0;
+parameter ENABLE_TUSER = 1;
 parameter FAMILY = 27;
 parameter IR0_ASYNC_FIFO = 0;
 parameter IR0_ENABLE_ARB = 0;
@@ -181,12 +181,12 @@ parameter NUM_STAGES = 2;
 parameter NUM_TARGETS = 1;
 parameter NUM_TARGETS_WIDTH = 1;
 parameter TDATA_BYTES = 4;
-parameter TDEST_WIDTH = 1;
+parameter TDEST_WIDTH = 32;
 parameter testbench = "User";
 parameter TGIGEN_DISPLAY_SYMBOL = 1;
 parameter TID_WIDTH = 1;
 parameter TIMEOUT_CYCLES = 64;
-parameter TR0_ASYNC_FIFO = 0;
+parameter TR0_ASYNC_FIFO = 1;
 parameter TR0_FIFO_DEPTH = 512;
 parameter TR0_FIFO_ECC = 0;
 parameter TR0_IR0_LINK = 1;
@@ -198,7 +198,7 @@ parameter TR0_IR5_LINK = 1;
 parameter TR0_IR6_LINK = 1;
 parameter TR0_IR7_LINK = 1;
 parameter TR0_LCM_TDATA_BYTES = 4;
-parameter TR0_PACKET_MODE = 0;
+parameter TR0_PACKET_MODE = 1;
 parameter TR0_RAM_TYPE = 1;
 parameter TR0_TUSER_WIDTH = 4;
 parameter TR1_ASYNC_FIFO = 0;

@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Mar 24 21:17:20 2026
+// Created by SmartDesign Sat Mar 28 21:30:34 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -102,8 +102,8 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:CoreAXI4SInterconnect:2.0
 "ENABLE_TR6_FIFO:false"  \
 "ENABLE_TR7_FIFO:false"  \
 "ENABLE_TREADY:true"  \
-"ENABLE_TSTRB:true"  \
-"ENABLE_TUSER:false"  \
+"ENABLE_TSTRB:false"  \
+"ENABLE_TUSER:true"  \
 "IR0_ASYNC_FIFO:0"  \
 "IR0_ENABLE_ARB:0"  \
 "IR0_FIFO_DEPTH:16"  \
@@ -190,7 +190,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:CoreAXI4SInterconnect:2.0
 "NUM_TARGETS:1"  \
 "NUM_TARGETS_WIDTH:1"  \
 "TDATA_BYTES:4"  \
-"TDEST_WIDTH:2"  \
+"TDEST_WIDTH:32"  \
 "TID_WIDTH:1"  \
 "TIMEOUT_CYCLES:64"  \
 "TR0_ASYNC_FIFO:1"  \
@@ -351,7 +351,7 @@ input         AXI4S_I0CLK;
 input         AXI4S_I0RESETN;
 input         AXI4S_I0TREADY;
 input  [31:0] AXI4S_T0TDATA;
-input  [1:0]  AXI4S_T0TDEST;
+input  [31:0] AXI4S_T0TDEST;
 input  [0:0]  AXI4S_T0TID;
 input  [3:0]  AXI4S_T0TKEEP;
 input         AXI4S_T0TLAST;
@@ -362,7 +362,7 @@ input         AXI4S_T0TVALID;
 // Output
 //--------------------------------------------------------------------
 output [31:0] AXI4S_I0TDATA;
-output [1:0]  AXI4S_I0TDEST;
+output [31:0] AXI4S_I0TDEST;
 output [1:0]  AXI4S_I0TID;
 output [3:0]  AXI4S_I0TKEEP;
 output        AXI4S_I0TLAST;
@@ -376,7 +376,7 @@ output        AXI4S_T0TREADY;
 wire          AXI4S_I0CLK;
 wire          AXI4S_I0RESETN;
 wire   [31:0] AXI4S_INITIATOR0_TDATA;
-wire   [1:0]  AXI4S_INITIATOR0_TDEST;
+wire   [31:0] AXI4S_INITIATOR0_TDEST;
 wire   [1:0]  AXI4S_INITIATOR0_TID;
 wire   [3:0]  AXI4S_INITIATOR0_TKEEP;
 wire          AXI4S_INITIATOR0_TLAST;
@@ -385,7 +385,7 @@ wire   [3:0]  AXI4S_INITIATOR0_TSTRB;
 wire   [3:0]  AXI4S_INITIATOR0_TUSER;
 wire          AXI4S_INITIATOR0_TVALID;
 wire   [31:0] AXI4S_T0TDATA;
-wire   [1:0]  AXI4S_T0TDEST;
+wire   [31:0] AXI4S_T0TDEST;
 wire   [0:0]  AXI4S_T0TID;
 wire   [3:0]  AXI4S_T0TKEEP;
 wire          AXI4S_T0TLAST;
@@ -400,7 +400,7 @@ wire   [3:0]  AXI4S_INITIATOR0_TSTRB_net_0;
 wire   [3:0]  AXI4S_INITIATOR0_TKEEP_net_0;
 wire          AXI4S_INITIATOR0_TLAST_net_0;
 wire   [1:0]  AXI4S_INITIATOR0_TID_net_0;
-wire   [1:0]  AXI4S_INITIATOR0_TDEST_net_0;
+wire   [31:0] AXI4S_INITIATOR0_TDEST_net_0;
 wire   [3:0]  AXI4S_INITIATOR0_TUSER_net_0;
 //--------------------------------------------------------------------
 // TiedOff Nets
@@ -409,37 +409,37 @@ wire          GND_net;
 wire   [31:0] AXI4S_T1TDATA_const_net_0;
 wire   [3:0]  AXI4S_T1TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T1TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T1TDEST_const_net_0;
+wire   [31:0] AXI4S_T1TDEST_const_net_0;
 wire   [3:0]  AXI4S_T1TUSER_const_net_0;
 wire   [31:0] AXI4S_T2TDATA_const_net_0;
 wire   [3:0]  AXI4S_T2TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T2TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T2TDEST_const_net_0;
+wire   [31:0] AXI4S_T2TDEST_const_net_0;
 wire   [3:0]  AXI4S_T2TUSER_const_net_0;
 wire   [31:0] AXI4S_T3TDATA_const_net_0;
 wire   [3:0]  AXI4S_T3TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T3TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T3TDEST_const_net_0;
+wire   [31:0] AXI4S_T3TDEST_const_net_0;
 wire   [3:0]  AXI4S_T3TUSER_const_net_0;
 wire   [31:0] AXI4S_T4TDATA_const_net_0;
 wire   [3:0]  AXI4S_T4TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T4TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T4TDEST_const_net_0;
+wire   [31:0] AXI4S_T4TDEST_const_net_0;
 wire   [3:0]  AXI4S_T4TUSER_const_net_0;
 wire   [31:0] AXI4S_T5TDATA_const_net_0;
 wire   [3:0]  AXI4S_T5TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T5TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T5TDEST_const_net_0;
+wire   [31:0] AXI4S_T5TDEST_const_net_0;
 wire   [3:0]  AXI4S_T5TUSER_const_net_0;
 wire   [31:0] AXI4S_T6TDATA_const_net_0;
 wire   [3:0]  AXI4S_T6TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T6TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T6TDEST_const_net_0;
+wire   [31:0] AXI4S_T6TDEST_const_net_0;
 wire   [3:0]  AXI4S_T6TUSER_const_net_0;
 wire   [31:0] AXI4S_T7TDATA_const_net_0;
 wire   [3:0]  AXI4S_T7TSTRB_const_net_0;
 wire   [3:0]  AXI4S_T7TKEEP_const_net_0;
-wire   [1:0]  AXI4S_T7TDEST_const_net_0;
+wire   [31:0] AXI4S_T7TDEST_const_net_0;
 wire   [3:0]  AXI4S_T7TUSER_const_net_0;
 //--------------------------------------------------------------------
 // Constant assignments
@@ -448,37 +448,37 @@ assign GND_net                   = 1'b0;
 assign AXI4S_T1TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T1TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T1TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T1TDEST_const_net_0 = 2'h0;
+assign AXI4S_T1TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T1TUSER_const_net_0 = 4'h0;
 assign AXI4S_T2TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T2TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T2TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T2TDEST_const_net_0 = 2'h0;
+assign AXI4S_T2TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T2TUSER_const_net_0 = 4'h0;
 assign AXI4S_T3TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T3TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T3TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T3TDEST_const_net_0 = 2'h0;
+assign AXI4S_T3TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T3TUSER_const_net_0 = 4'h0;
 assign AXI4S_T4TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T4TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T4TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T4TDEST_const_net_0 = 2'h0;
+assign AXI4S_T4TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T4TUSER_const_net_0 = 4'h0;
 assign AXI4S_T5TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T5TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T5TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T5TDEST_const_net_0 = 2'h0;
+assign AXI4S_T5TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T5TUSER_const_net_0 = 4'h0;
 assign AXI4S_T6TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T6TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T6TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T6TDEST_const_net_0 = 2'h0;
+assign AXI4S_T6TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T6TUSER_const_net_0 = 4'h0;
 assign AXI4S_T7TDATA_const_net_0 = 32'h00000000;
 assign AXI4S_T7TSTRB_const_net_0 = 4'h0;
 assign AXI4S_T7TKEEP_const_net_0 = 4'h0;
-assign AXI4S_T7TDEST_const_net_0 = 2'h0;
+assign AXI4S_T7TDEST_const_net_0 = 32'h00000000;
 assign AXI4S_T7TUSER_const_net_0 = 4'h0;
 //--------------------------------------------------------------------
 // Top level output port assignments
@@ -498,7 +498,7 @@ assign AXI4S_I0TLAST                 = AXI4S_INITIATOR0_TLAST_net_0;
 assign AXI4S_INITIATOR0_TID_net_0    = AXI4S_INITIATOR0_TID;
 assign AXI4S_I0TID[1:0]              = AXI4S_INITIATOR0_TID_net_0;
 assign AXI4S_INITIATOR0_TDEST_net_0  = AXI4S_INITIATOR0_TDEST;
-assign AXI4S_I0TDEST[1:0]            = AXI4S_INITIATOR0_TDEST_net_0;
+assign AXI4S_I0TDEST[31:0]           = AXI4S_INITIATOR0_TDEST_net_0;
 assign AXI4S_INITIATOR0_TUSER_net_0  = AXI4S_INITIATOR0_TUSER;
 assign AXI4S_I0TUSER[3:0]            = AXI4S_INITIATOR0_TUSER_net_0;
 //--------------------------------------------------------------------
@@ -594,8 +594,8 @@ CoreAXI4SInterconnect #(
         .ENABLE_TR6_FIFO       ( 0 ),
         .ENABLE_TR7_FIFO       ( 0 ),
         .ENABLE_TREADY         ( 1 ),
-        .ENABLE_TSTRB          ( 1 ),
-        .ENABLE_TUSER          ( 0 ),
+        .ENABLE_TSTRB          ( 0 ),
+        .ENABLE_TUSER          ( 1 ),
         .FAMILY                ( 27 ),
         .IR0_ASYNC_FIFO        ( 0 ),
         .IR0_ENABLE_ARB        ( 0 ),
@@ -683,7 +683,7 @@ CoreAXI4SInterconnect #(
         .NUM_TARGETS           ( 1 ),
         .NUM_TARGETS_WIDTH     ( 1 ),
         .TDATA_BYTES           ( 4 ),
-        .TDEST_WIDTH           ( 2 ),
+        .TDEST_WIDTH           ( 32 ),
         .TGIGEN_DISPLAY_SYMBOL ( 1 ),
         .TID_WIDTH             ( 1 ),
         .TIMEOUT_CYCLES        ( 64 ),
@@ -879,43 +879,43 @@ CoreAXI4SInterconnect_C0_0(
         .AXI4S_T1TSTRB  ( AXI4S_T1TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T1TKEEP  ( AXI4S_T1TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T1TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T1TDEST  ( AXI4S_T1TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T1TDEST  ( AXI4S_T1TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T1TUSER  ( AXI4S_T1TUSER_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T2TDATA  ( AXI4S_T2TDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T2TSTRB  ( AXI4S_T2TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T2TKEEP  ( AXI4S_T2TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T2TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T2TDEST  ( AXI4S_T2TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T2TDEST  ( AXI4S_T2TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T2TUSER  ( AXI4S_T2TUSER_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T3TDATA  ( AXI4S_T3TDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T3TSTRB  ( AXI4S_T3TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T3TKEEP  ( AXI4S_T3TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T3TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T3TDEST  ( AXI4S_T3TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T3TDEST  ( AXI4S_T3TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T3TUSER  ( AXI4S_T3TUSER_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T4TDATA  ( AXI4S_T4TDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T4TSTRB  ( AXI4S_T4TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T4TKEEP  ( AXI4S_T4TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T4TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T4TDEST  ( AXI4S_T4TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T4TDEST  ( AXI4S_T4TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T4TUSER  ( AXI4S_T4TUSER_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T5TDATA  ( AXI4S_T5TDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T5TSTRB  ( AXI4S_T5TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T5TKEEP  ( AXI4S_T5TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T5TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T5TDEST  ( AXI4S_T5TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T5TDEST  ( AXI4S_T5TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T5TUSER  ( AXI4S_T5TUSER_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T6TDATA  ( AXI4S_T6TDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T6TSTRB  ( AXI4S_T6TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T6TKEEP  ( AXI4S_T6TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T6TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T6TDEST  ( AXI4S_T6TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T6TDEST  ( AXI4S_T6TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T6TUSER  ( AXI4S_T6TUSER_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T7TDATA  ( AXI4S_T7TDATA_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T7TSTRB  ( AXI4S_T7TSTRB_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T7TKEEP  ( AXI4S_T7TKEEP_const_net_0 ), // tied to 4'h0 from definition
         .AXI4S_T7TID    ( GND_net ), // tied to 1'b0 from definition
-        .AXI4S_T7TDEST  ( AXI4S_T7TDEST_const_net_0 ), // tied to 2'h0 from definition
+        .AXI4S_T7TDEST  ( AXI4S_T7TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .AXI4S_T7TUSER  ( AXI4S_T7TUSER_const_net_0 ), // tied to 4'h0 from definition
         // Outputs
         .AXI4S_T0TREADY ( AXI4S_TARGET0_TREADY ),
