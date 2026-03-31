@@ -1,7 +1,7 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.938073",
-   "Default View_TopLeft":"2509,-216",
+   "Default View_ScaleFactor":"0.938074",
+   "Default View_TopLeft":"1989,-197",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.8.0 2024-04-26 e1825d835c VDI=44 GEI=38 GUI=JA:21.0 TLS
 #  -string -flagsOSRD
@@ -36,21 +36,21 @@ preplace netloc axi_dma_0_s2mm_introut 1 3 1 1140 20n
 preplace netloc axi_gpio_0_gpio_io_o 1 7 2 2770 170 3080
 preplace netloc axi_iic_0_gpo 1 7 3 NJ 420 NJ 420 NJ
 preplace netloc c_counter_binary_0_Q 1 3 4 1170 470 NJ 470 NJ 470 2400
-preplace netloc clk_wiz_0_clk_out1 1 6 2 2450 0 NJ
-preplace netloc codec_bclk_0_1 1 0 9 0J 80 NJ 80 NJ 80 NJ 80 NJ 80 2090J 0 2440J 10 2710 200 N
+preplace netloc clk_wiz_0_clk_out1 1 6 2 2440 0 NJ
+preplace netloc codec_bclk_0_1 1 0 9 0J 80 NJ 80 NJ 80 NJ 80 NJ 80 2090J 0 2430J 10 2720 200 N
 preplace netloc codec_lrclk_0_1 1 0 9 NJ 60 NJ 60 NJ 60 1120J 100 NJ 100 2080J -20 NJ -20 2750 180 N
-preplace netloc codec_sdout_0_1 1 0 9 0J 110 NJ 110 NJ 110 NJ 110 NJ 110 2100J -10 NJ -10 2720 220 N
-preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 5 370J 240 NJ 240 1130 310 1450J 330 2120J
-preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 7 400 510 740 90 N 90 1450J 70 2110J 10 2430 20 N
+preplace netloc codec_sdout_0_1 1 0 9 0J 110 NJ 110 NJ 110 NJ 110 NJ 110 2100J -10 NJ -10 2730 220 N
+preplace netloc proc_sys_reset_0_interconnect_aresetn 1 1 5 380J 240 NJ 240 1130 300 1450J 340 2120J
+preplace netloc proc_sys_reset_0_peripheral_aresetn 1 1 7 400 510 740 90 N 90 1450J 70 2110J 10 2420 20 N
 preplace netloc xlconcat_0_dout 1 4 1 1460 10n
-preplace netloc zynq_ultra_ps_e_0_pl_clk0 1 0 9 30 590 390 410 750 250 1160 300 1480 340 2110 290 2450J 160 2760 160 3060
-preplace netloc zynq_ultra_ps_e_0_pl_resetn0 1 0 6 20 120 NJ 120 NJ 120 NJ 120 NJ 120 2080
+preplace netloc zynq_ultra_ps_e_0_pl_clk0 1 0 9 20 590 390 410 750 250 1160 310 1480 350 2110 290 2440J 160 2760 160 3060
+preplace netloc zynq_ultra_ps_e_0_pl_resetn0 1 0 6 10 120 NJ 120 NJ 120 NJ 120 NJ 120 2080
 preplace netloc axi_dma_0_M_AXIS_MM2S 1 1 3 410 260 NJ 260 1100
 preplace netloc axi_dma_0_M_AXI_MM2S 1 3 1 1120 180n
 preplace netloc axi_dma_0_M_AXI_S2MM 1 3 1 1150 200n
-preplace netloc axi_iic_0_IIC 1 3 7 1170 -70 NJ -70 NJ -70 NJ -70 2730 380 NJ 380 NJ
+preplace netloc axi_iic_0_IIC 1 3 7 1170 -70 NJ -70 NJ -70 NJ -70 2740 380 NJ 380 NJ
 preplace netloc fifo_generator_0_M_AXIS 1 2 1 760 350n
-preplace netloc smartconnect_0_M00_AXI 1 6 1 2440 190n
+preplace netloc smartconnect_0_M00_AXI 1 6 1 2430 190n
 preplace netloc smartconnect_0_M01_AXI 1 2 5 760 -60 NJ -60 NJ -60 NJ -60 2400
 preplace netloc smartconnect_0_M02_AXI 1 6 1 2410 230n
 preplace netloc smartconnect_1_M00_AXI 1 4 1 N 210

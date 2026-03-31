@@ -113,7 +113,7 @@ void codec_init() {
     i2c_write(I2C_DEV_ADDR, 0x03, 0x00); 
     
     // Set ADC control: Mode, data format, and operating speed
-    i2c_write(I2C_DEV_ADDR, 0x04, 0x40); 
+    i2c_write(I2C_DEV_ADDR, 0x04, 0x41); 
     
     // Set MCLK frequency: Configure MCLK input division
     i2c_write(I2C_DEV_ADDR, 0x05, 0x20); 

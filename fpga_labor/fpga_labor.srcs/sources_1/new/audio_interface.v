@@ -47,12 +47,12 @@ always @ (posedge clk) begin
         adc_data_shr <= {adc_data_shr[30:0], sdout_shr[1]};
     end
 end
-assign adc_data = adc_data_shr[31:8];
-
-
 
 assign adc_valid_l = lrclk_fall & en;
 assign adc_valid_r = lrclk_rise & en;
+
+assign adc_data = adc_data_shr[31:8];
+
 
 ODDRE1 #(
   .IS_C_INVERTED(1'b0),           // Optional inversion for C

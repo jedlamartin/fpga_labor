@@ -1,5 +1,5 @@
-set_property PACKAGE_PIN E12 [get_ports codec_sdout_0]
-set_property PACKAGE_PIN E10 [get_ports codec_sdin_0]
+set_property PACKAGE_PIN E10 [get_ports codec_sdout_0]
+set_property PACKAGE_PIN E12 [get_ports codec_sdin_0]
 set_property IOSTANDARD LVCMOS33 [get_ports codec_sdout_0]
 set_property IOSTANDARD LVCMOS33 [get_ports codec_sdin_0]
 set_property PACKAGE_PIN C11 [get_ports codec_mclk_0]
