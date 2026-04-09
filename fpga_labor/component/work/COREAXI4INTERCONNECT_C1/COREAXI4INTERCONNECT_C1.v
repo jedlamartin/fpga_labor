@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Fri Mar 27 19:28:17 2026
+// Created by SmartDesign Tue Apr  7 19:19:10 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -1150,10 +1150,10 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "SLAVE0_CLOCK_DOMAIN_CROSSING:false"  \
 "SLAVE0_DATA_WIDTH:64"  \
 "SLAVE0_DWC_DATA_FIFO_DEPTH:16"  \
-"SLAVE0_END_ADDR:0x7fffffff"  \
+"SLAVE0_END_ADDR:0xdfffffff"  \
 "SLAVE0_END_ADDR_UPPER:0x0"  \
 "SLAVE0_READ_INTERLEAVE:false"  \
-"SLAVE0_START_ADDR:0x60000000"  \
+"SLAVE0_START_ADDR:0x80000000"  \
 "SLAVE0_START_ADDR_UPPER:0x0"  \
 "SLAVE0_TYPE:0"  \
 "SLAVE1_CHAN_RS:true"  \
@@ -4275,10 +4275,10 @@ COREAXI4INTERCONNECT #(
         .SLAVE0_CLOCK_DOMAIN_CROSSING   ( 0 ),
         .SLAVE0_DATA_WIDTH              ( 64 ),
         .SLAVE0_DWC_DATA_FIFO_DEPTH     ( 16 ),
-        .SLAVE0_END_ADDR                ( 'h7fffffff ),
+        .SLAVE0_END_ADDR                ( 'hdfffffff ),
         .SLAVE0_END_ADDR_UPPER          ( 'h0 ),
         .SLAVE0_READ_INTERLEAVE         ( 0 ),
-        .SLAVE0_START_ADDR              ( 'h60000000 ),
+        .SLAVE0_START_ADDR              ( 'h80000000 ),
         .SLAVE0_START_ADDR_UPPER        ( 'h0 ),
         .SLAVE0_TYPE                    ( 0 ),
         .SLAVE1_CHAN_RS                 ( 1 ),

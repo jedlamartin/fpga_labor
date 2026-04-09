@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Sat Mar 28 21:30:34 2026
+// Created by SmartDesign Tue Apr  7 20:49:21 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -205,7 +205,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:CoreAXI4SInterconnect:2.0
 "TR0_IR6_LINK:true"  \
 "TR0_IR7_LINK:true"  \
 "TR0_LCM_TDATA_BYTES:4"  \
-"TR0_PACKET_MODE:true"  \
+"TR0_PACKET_MODE:false"  \
 "TR0_RAM_TYPE:1"  \
 "TR0_TUSER_WIDTH:4"  \
 "TR1_ASYNC_FIFO:0"  \
@@ -699,7 +699,7 @@ CoreAXI4SInterconnect #(
         .TR0_IR6_LINK          ( 1 ),
         .TR0_IR7_LINK          ( 1 ),
         .TR0_LCM_TDATA_BYTES   ( 4 ),
-        .TR0_PACKET_MODE       ( 1 ),
+        .TR0_PACKET_MODE       ( 0 ),
         .TR0_RAM_TYPE          ( 1 ),
         .TR0_TUSER_WIDTH       ( 4 ),
         .TR1_ASYNC_FIFO        ( 0 ),

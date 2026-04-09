@@ -331,5 +331,14 @@ SECTIONS
         . = ALIGN(64);
         __ddr_cached_32bit_end = .;
     } > ddr_cached_32bit
+    
+    .ddr_non_cached_32bit (NOLOAD) : ALIGN(64)
+    {
+        __ddr_non_cached_32bit_start = .;
+        *(.ddr_non_cached_32bit)
+        *(.ddr_non_cached_32bit.*)
+        . = ALIGN(64);
+        __ddr_non_cached_32bit_end = .;
+    } > ddr_non_cached_32bit
 }
 

@@ -48,20 +48,6 @@
     <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
-    <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB[3:0]</detail>
-    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB</crossprobe>
-  </drc>
-  <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
-    <StatusMessage>Warning</StatusMessage>
-    <message>Floating Driver</message>
-    <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F[15:0]</detail>
-    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F</crossprobe>
-  </drc>
-  <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
-    <StatusMessage>Warning</StatusMessage>
-    <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F</crossprobe>
   </drc>
@@ -71,6 +57,20 @@
     <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB[3:0]</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message>Floating Driver</message>
+    <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F[15:0]</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F</crossprobe>
   </drc>
   <drc>
     <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>

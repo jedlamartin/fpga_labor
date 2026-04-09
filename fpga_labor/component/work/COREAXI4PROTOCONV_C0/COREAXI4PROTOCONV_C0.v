@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Mar 24 22:48:53 2026
+// Created by SmartDesign Wed Apr  8 20:32:10 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -18,7 +18,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4PROTOCONV:3.0.125
 "MM2S_CMDSTS_FIFO_DEPTH:16"  \
 "MM2S_CMDSTS_FIFO_ENABLE:true"  \
 "MM2S_CMDSTS_RAM_TYPE:3"  \
-"MM2S_DATA_FIFO_DEPTH:64"  \
+"MM2S_DATA_FIFO_DEPTH:512"  \
 "MM2S_DATA_FIFO_ENABLE:true"  \
 "MM2S_DATA_RAM_TYPE:2"  \
 "MM2S_DATA_WIDTH:32"  \
@@ -33,7 +33,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4PROTOCONV:3.0.125
 "S2MM_CMDSTS_FIFO_DEPTH:16"  \
 "S2MM_CMDSTS_FIFO_ENABLE:true"  \
 "S2MM_CMDSTS_RAM_TYPE:3"  \
-"S2MM_DATA_FIFO_DEPTH:64"  \
+"S2MM_DATA_FIFO_DEPTH:512"  \
 "S2MM_DATA_FIFO_ENABLE:true"  \
 "S2MM_DATA_RAM_TYPE:2"  \
 "S2MM_DATA_WIDTH:32"  \
@@ -42,7 +42,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4PROTOCONV:3.0.125
 "S2MM_PKT_DROP_ERR:false"  \
 "S2MM_PKT_DROP_OVF:false"  \
 "S2MM_PKT_FIFO_ENABLE:0"  \
-"S2MM_UNDEF_BSTLEN:true"  \
+"S2MM_UNDEF_BSTLEN:false"  \
 "S2MM_USER_ENABLE:false"  \
 "S2MM_USER_WIDTH:1"   }
 # Exporting Component Description of COREAXI4PROTOCONV_C0 to TCL done
@@ -279,39 +279,39 @@ wire          MM2S_INT_net_1;
 wire          MM2S_ERR_INT_net_1;
 wire          AXI4L_TRGT_AWREADY_net_0;
 wire          AXI4L_TRGT_WREADY_net_0;
+wire   [1:0]  AXI4L_TRGT_BRESP_net_0;
 wire          AXI4L_TRGT_BVALID_net_0;
 wire          AXI4L_TRGT_ARREADY_net_0;
+wire   [31:0] AXI4L_TRGT_RDATA_net_0;
+wire   [1:0]  AXI4L_TRGT_RRESP_net_0;
 wire          AXI4L_TRGT_RVALID_net_0;
 wire          S2MM_AXI4S_TRGT_TREADY_net_0;
 wire          S2MM_AXI4MM_INITR_AWID_net_0;
-wire          S2MM_AXI4MM_INITR_AWVALID_net_0;
-wire          S2MM_AXI4MM_INITR_WVALID_net_0;
-wire          S2MM_AXI4MM_INITR_WLAST_net_0;
-wire          S2MM_AXI4MM_INITR_BREADY_net_0;
-wire          MM2S_AXI4S_INITR_TVALID_net_0;
-wire          MM2S_AXI4S_INITR_TID_net_0;
-wire          MM2S_AXI4S_INITR_TLAST_net_0;
-wire          MM2S_AXI4MM_INITR_ARID_net_0;
-wire          MM2S_AXI4MM_INITR_ARVALID_net_0;
-wire          MM2S_AXI4MM_INITR_RREADY_net_0;
-wire   [1:0]  AXI4L_TRGT_BRESP_net_0;
-wire   [31:0] AXI4L_TRGT_RDATA_net_0;
-wire   [1:0]  AXI4L_TRGT_RRESP_net_0;
 wire   [31:0] S2MM_AXI4MM_INITR_AWADDR_net_0;
+wire          S2MM_AXI4MM_INITR_AWVALID_net_0;
 wire   [7:0]  S2MM_AXI4MM_INITR_AWLEN_net_0;
 wire   [2:0]  S2MM_AXI4MM_INITR_AWSIZE_net_0;
 wire   [1:0]  S2MM_AXI4MM_INITR_AWBURST_net_0;
+wire          S2MM_AXI4MM_INITR_WVALID_net_0;
 wire   [31:0] S2MM_AXI4MM_INITR_WDATA_net_0;
 wire   [3:0]  S2MM_AXI4MM_INITR_WSTRB_net_0;
+wire          S2MM_AXI4MM_INITR_WLAST_net_0;
 wire   [0:0]  S2MM_AXI4MM_INITR_WUSER_net_0;
+wire          S2MM_AXI4MM_INITR_BREADY_net_0;
+wire          MM2S_AXI4S_INITR_TVALID_net_0;
+wire          MM2S_AXI4S_INITR_TID_net_0;
 wire   [31:0] MM2S_AXI4S_INITR_TDEST_net_0;
 wire   [31:0] MM2S_AXI4S_INITR_TDATA_net_0;
 wire   [3:0]  MM2S_AXI4S_INITR_TKEEP_net_0;
+wire          MM2S_AXI4S_INITR_TLAST_net_0;
 wire   [0:0]  MM2S_AXI4S_INITR_TUSER_net_0;
+wire          MM2S_AXI4MM_INITR_ARID_net_0;
+wire          MM2S_AXI4MM_INITR_ARVALID_net_0;
 wire   [31:0] MM2S_AXI4MM_INITR_ARADDR_net_0;
 wire   [7:0]  MM2S_AXI4MM_INITR_ARLEN_net_0;
 wire   [2:0]  MM2S_AXI4MM_INITR_ARSIZE_net_0;
 wire   [1:0]  MM2S_AXI4MM_INITR_ARBURST_net_0;
+wire          MM2S_AXI4MM_INITR_RREADY_net_0;
 //--------------------------------------------------------------------
 // TiedOff Nets
 //--------------------------------------------------------------------
@@ -335,64 +335,62 @@ assign AXI4L_TRGT_AWREADY_net_0         = AXI4L_TRGT_AWREADY;
 assign T_AXI4L_AWREADY                  = AXI4L_TRGT_AWREADY_net_0;
 assign AXI4L_TRGT_WREADY_net_0          = AXI4L_TRGT_WREADY;
 assign T_AXI4L_WREADY                   = AXI4L_TRGT_WREADY_net_0;
+assign AXI4L_TRGT_BRESP_net_0           = AXI4L_TRGT_BRESP;
+assign T_AXI4L_BRESP[1:0]               = AXI4L_TRGT_BRESP_net_0;
 assign AXI4L_TRGT_BVALID_net_0          = AXI4L_TRGT_BVALID;
 assign T_AXI4L_BVALID                   = AXI4L_TRGT_BVALID_net_0;
 assign AXI4L_TRGT_ARREADY_net_0         = AXI4L_TRGT_ARREADY;
 assign T_AXI4L_ARREADY                  = AXI4L_TRGT_ARREADY_net_0;
+assign AXI4L_TRGT_RDATA_net_0           = AXI4L_TRGT_RDATA;
+assign T_AXI4L_RDATA[31:0]              = AXI4L_TRGT_RDATA_net_0;
+assign AXI4L_TRGT_RRESP_net_0           = AXI4L_TRGT_RRESP;
+assign T_AXI4L_RRESP[1:0]               = AXI4L_TRGT_RRESP_net_0;
 assign AXI4L_TRGT_RVALID_net_0          = AXI4L_TRGT_RVALID;
 assign T_AXI4L_RVALID                   = AXI4L_TRGT_RVALID_net_0;
 assign S2MM_AXI4S_TRGT_TREADY_net_0     = S2MM_AXI4S_TRGT_TREADY;
 assign T_AXI4S_TREADY                   = S2MM_AXI4S_TRGT_TREADY_net_0;
 assign S2MM_AXI4MM_INITR_AWID_net_0     = S2MM_AXI4MM_INITR_AWID;
 assign I_S2MMAXI4_AWID                  = S2MM_AXI4MM_INITR_AWID_net_0;
-assign S2MM_AXI4MM_INITR_AWVALID_net_0  = S2MM_AXI4MM_INITR_AWVALID;
-assign I_S2MMAXI4_AWVALID               = S2MM_AXI4MM_INITR_AWVALID_net_0;
-assign S2MM_AXI4MM_INITR_WVALID_net_0   = S2MM_AXI4MM_INITR_WVALID;
-assign I_S2MMAXI4_WVALID                = S2MM_AXI4MM_INITR_WVALID_net_0;
-assign S2MM_AXI4MM_INITR_WLAST_net_0    = S2MM_AXI4MM_INITR_WLAST;
-assign I_S2MMAXI4_WLAST                 = S2MM_AXI4MM_INITR_WLAST_net_0;
-assign S2MM_AXI4MM_INITR_BREADY_net_0   = S2MM_AXI4MM_INITR_BREADY;
-assign I_S2MMAXI4_BREADY                = S2MM_AXI4MM_INITR_BREADY_net_0;
-assign MM2S_AXI4S_INITR_TVALID_net_0    = MM2S_AXI4S_INITR_TVALID;
-assign I_AXI4S_TVALID                   = MM2S_AXI4S_INITR_TVALID_net_0;
-assign MM2S_AXI4S_INITR_TID_net_0       = MM2S_AXI4S_INITR_TID;
-assign I_AXI4S_TID                      = MM2S_AXI4S_INITR_TID_net_0;
-assign MM2S_AXI4S_INITR_TLAST_net_0     = MM2S_AXI4S_INITR_TLAST;
-assign I_AXI4S_TLAST                    = MM2S_AXI4S_INITR_TLAST_net_0;
-assign MM2S_AXI4MM_INITR_ARID_net_0     = MM2S_AXI4MM_INITR_ARID;
-assign I_MM2SAXI4_ARID                  = MM2S_AXI4MM_INITR_ARID_net_0;
-assign MM2S_AXI4MM_INITR_ARVALID_net_0  = MM2S_AXI4MM_INITR_ARVALID;
-assign I_MM2SAXI4_ARVALID               = MM2S_AXI4MM_INITR_ARVALID_net_0;
-assign MM2S_AXI4MM_INITR_RREADY_net_0   = MM2S_AXI4MM_INITR_RREADY;
-assign I_MM2SAXI4_RREADY                = MM2S_AXI4MM_INITR_RREADY_net_0;
-assign AXI4L_TRGT_BRESP_net_0           = AXI4L_TRGT_BRESP;
-assign T_AXI4L_BRESP[1:0]               = AXI4L_TRGT_BRESP_net_0;
-assign AXI4L_TRGT_RDATA_net_0           = AXI4L_TRGT_RDATA;
-assign T_AXI4L_RDATA[31:0]              = AXI4L_TRGT_RDATA_net_0;
-assign AXI4L_TRGT_RRESP_net_0           = AXI4L_TRGT_RRESP;
-assign T_AXI4L_RRESP[1:0]               = AXI4L_TRGT_RRESP_net_0;
 assign S2MM_AXI4MM_INITR_AWADDR_net_0   = S2MM_AXI4MM_INITR_AWADDR;
 assign I_S2MMAXI4_AWADDR[31:0]          = S2MM_AXI4MM_INITR_AWADDR_net_0;
+assign S2MM_AXI4MM_INITR_AWVALID_net_0  = S2MM_AXI4MM_INITR_AWVALID;
+assign I_S2MMAXI4_AWVALID               = S2MM_AXI4MM_INITR_AWVALID_net_0;
 assign S2MM_AXI4MM_INITR_AWLEN_net_0    = S2MM_AXI4MM_INITR_AWLEN;
 assign I_S2MMAXI4_AWLEN[7:0]            = S2MM_AXI4MM_INITR_AWLEN_net_0;
 assign S2MM_AXI4MM_INITR_AWSIZE_net_0   = S2MM_AXI4MM_INITR_AWSIZE;
 assign I_S2MMAXI4_AWSIZE[2:0]           = S2MM_AXI4MM_INITR_AWSIZE_net_0;
 assign S2MM_AXI4MM_INITR_AWBURST_net_0  = S2MM_AXI4MM_INITR_AWBURST;
 assign I_S2MMAXI4_AWBURST[1:0]          = S2MM_AXI4MM_INITR_AWBURST_net_0;
+assign S2MM_AXI4MM_INITR_WVALID_net_0   = S2MM_AXI4MM_INITR_WVALID;
+assign I_S2MMAXI4_WVALID                = S2MM_AXI4MM_INITR_WVALID_net_0;
 assign S2MM_AXI4MM_INITR_WDATA_net_0    = S2MM_AXI4MM_INITR_WDATA;
 assign I_S2MMAXI4_WDATA[31:0]           = S2MM_AXI4MM_INITR_WDATA_net_0;
 assign S2MM_AXI4MM_INITR_WSTRB_net_0    = S2MM_AXI4MM_INITR_WSTRB;
 assign I_S2MMAXI4_WSTRB[3:0]            = S2MM_AXI4MM_INITR_WSTRB_net_0;
+assign S2MM_AXI4MM_INITR_WLAST_net_0    = S2MM_AXI4MM_INITR_WLAST;
+assign I_S2MMAXI4_WLAST                 = S2MM_AXI4MM_INITR_WLAST_net_0;
 assign S2MM_AXI4MM_INITR_WUSER_net_0[0] = S2MM_AXI4MM_INITR_WUSER[0];
 assign I_S2MMAXI4_WUSER[0:0]            = S2MM_AXI4MM_INITR_WUSER_net_0[0];
+assign S2MM_AXI4MM_INITR_BREADY_net_0   = S2MM_AXI4MM_INITR_BREADY;
+assign I_S2MMAXI4_BREADY                = S2MM_AXI4MM_INITR_BREADY_net_0;
+assign MM2S_AXI4S_INITR_TVALID_net_0    = MM2S_AXI4S_INITR_TVALID;
+assign I_AXI4S_TVALID                   = MM2S_AXI4S_INITR_TVALID_net_0;
+assign MM2S_AXI4S_INITR_TID_net_0       = MM2S_AXI4S_INITR_TID;
+assign I_AXI4S_TID                      = MM2S_AXI4S_INITR_TID_net_0;
 assign MM2S_AXI4S_INITR_TDEST_net_0     = MM2S_AXI4S_INITR_TDEST;
 assign I_AXI4S_TDEST[31:0]              = MM2S_AXI4S_INITR_TDEST_net_0;
 assign MM2S_AXI4S_INITR_TDATA_net_0     = MM2S_AXI4S_INITR_TDATA;
 assign I_AXI4S_TDATA[31:0]              = MM2S_AXI4S_INITR_TDATA_net_0;
 assign MM2S_AXI4S_INITR_TKEEP_net_0     = MM2S_AXI4S_INITR_TKEEP;
 assign I_AXI4S_TKEEP[3:0]               = MM2S_AXI4S_INITR_TKEEP_net_0;
+assign MM2S_AXI4S_INITR_TLAST_net_0     = MM2S_AXI4S_INITR_TLAST;
+assign I_AXI4S_TLAST                    = MM2S_AXI4S_INITR_TLAST_net_0;
 assign MM2S_AXI4S_INITR_TUSER_net_0[0]  = MM2S_AXI4S_INITR_TUSER[0];
 assign I_AXI4S_TUSER[0:0]               = MM2S_AXI4S_INITR_TUSER_net_0[0];
+assign MM2S_AXI4MM_INITR_ARID_net_0     = MM2S_AXI4MM_INITR_ARID;
+assign I_MM2SAXI4_ARID                  = MM2S_AXI4MM_INITR_ARID_net_0;
+assign MM2S_AXI4MM_INITR_ARVALID_net_0  = MM2S_AXI4MM_INITR_ARVALID;
+assign I_MM2SAXI4_ARVALID               = MM2S_AXI4MM_INITR_ARVALID_net_0;
 assign MM2S_AXI4MM_INITR_ARADDR_net_0   = MM2S_AXI4MM_INITR_ARADDR;
 assign I_MM2SAXI4_ARADDR[31:0]          = MM2S_AXI4MM_INITR_ARADDR_net_0;
 assign MM2S_AXI4MM_INITR_ARLEN_net_0    = MM2S_AXI4MM_INITR_ARLEN;
@@ -401,6 +399,8 @@ assign MM2S_AXI4MM_INITR_ARSIZE_net_0   = MM2S_AXI4MM_INITR_ARSIZE;
 assign I_MM2SAXI4_ARSIZE[2:0]           = MM2S_AXI4MM_INITR_ARSIZE_net_0;
 assign MM2S_AXI4MM_INITR_ARBURST_net_0  = MM2S_AXI4MM_INITR_ARBURST;
 assign I_MM2SAXI4_ARBURST[1:0]          = MM2S_AXI4MM_INITR_ARBURST_net_0;
+assign MM2S_AXI4MM_INITR_RREADY_net_0   = MM2S_AXI4MM_INITR_RREADY;
+assign I_MM2SAXI4_RREADY                = MM2S_AXI4MM_INITR_RREADY_net_0;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
@@ -411,7 +411,7 @@ COREAXI4PROTOCONV #(
         .MM2S_CMDSTS_FIFO_DEPTH  ( 16 ),
         .MM2S_CMDSTS_FIFO_ENABLE ( 1 ),
         .MM2S_CMDSTS_RAM_TYPE    ( 3 ),
-        .MM2S_DATA_FIFO_DEPTH    ( 64 ),
+        .MM2S_DATA_FIFO_DEPTH    ( 512 ),
         .MM2S_DATA_FIFO_ENABLE   ( 1 ),
         .MM2S_DATA_RAM_TYPE      ( 2 ),
         .MM2S_DATA_WIDTH         ( 32 ),
@@ -426,7 +426,7 @@ COREAXI4PROTOCONV #(
         .S2MM_CMDSTS_FIFO_DEPTH  ( 16 ),
         .S2MM_CMDSTS_FIFO_ENABLE ( 1 ),
         .S2MM_CMDSTS_RAM_TYPE    ( 3 ),
-        .S2MM_DATA_FIFO_DEPTH    ( 64 ),
+        .S2MM_DATA_FIFO_DEPTH    ( 512 ),
         .S2MM_DATA_FIFO_ENABLE   ( 1 ),
         .S2MM_DATA_RAM_TYPE      ( 2 ),
         .S2MM_DATA_WIDTH         ( 32 ),
@@ -435,7 +435,7 @@ COREAXI4PROTOCONV #(
         .S2MM_PKT_DROP_ERR       ( 0 ),
         .S2MM_PKT_DROP_OVF       ( 0 ),
         .S2MM_PKT_FIFO_ENABLE    ( 0 ),
-        .S2MM_UNDEF_BSTLEN       ( 1 ),
+        .S2MM_UNDEF_BSTLEN       ( 0 ),
         .S2MM_USER_ENABLE        ( 0 ),
         .S2MM_USER_WIDTH         ( 1 ),
         .TGIGEN_DISPLAY_SYMBOL   ( 1 ) )

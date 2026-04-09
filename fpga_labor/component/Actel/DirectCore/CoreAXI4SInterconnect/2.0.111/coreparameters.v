@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Sat Mar 28 21:30:34 2026
+// Created by Microsemi SmartDesign Tue Apr  7 20:49:21 2026
 // Parameters for CoreAXI4SInterconnect
 //--------------------------------------------------------------------
 
@@ -198,7 +198,7 @@ parameter TR0_IR5_LINK = 1;
 parameter TR0_IR6_LINK = 1;
 parameter TR0_IR7_LINK = 1;
 parameter TR0_LCM_TDATA_BYTES = 4;
-parameter TR0_PACKET_MODE = 1;
+parameter TR0_PACKET_MODE = 0;
 parameter TR0_RAM_TYPE = 1;
 parameter TR0_TUSER_WIDTH = 4;
 parameter TR1_ASYNC_FIFO = 0;

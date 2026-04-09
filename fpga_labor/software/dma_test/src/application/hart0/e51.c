@@ -160,6 +160,18 @@ void e51(void)
     (void)mss_config_clk_rst(MSS_PERIPH_CFM, (uint8_t) MPFS_HAL_FIRST_HART,
             PERIPHERAL_ON);
 
+    SYSREG->SOFT_RESET_CR &= ~(SOFT_RESET_CR_FIC0_MASK | SOFT_RESET_CR_FIC1_MASK);
+
+    MSS_MPU_configure(
+            MSS_MPU_FIC0,
+            MSS_MPU_PMP_REGION15,
+            0x080000000ULL,
+            0x080000000ULL, // 2GB size covers physical and alias ranges
+            MPU_MODE_READ_ACCESS | MPU_MODE_WRITE_ACCESS,
+            MSS_MPU_AM_NAPOT,
+            0
+        );
+
     HLS_DATA* hls = (HLS_DATA*)(uintptr_t)get_tp_reg();
 
     /* This mutex is used to serialize accesses to UART0 when all harts want to

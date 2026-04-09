@@ -358,7 +358,7 @@ IS_INCLUDED="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\COREAXI4INTERCONNECT.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774636097"
+TIME="1775582350"
 SIZE="10980"
 PARENT="<project>\component\work\COREAXI4INTERCONNECT_C0\COREAXI4INTERCONNECT_C0.cxf"
 PARENT="<project>\component\work\COREAXI4INTERCONNECT_C1\COREAXI4INTERCONNECT_C1.cxf"
@@ -950,216 +950,216 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774618879"
+TIME="1775673130"
 SIZE="5614"
 PARENT="<project>\component\work\COREAXI4PROTOCONV_C0\COREAXI4PROTOCONV_C0.cxf"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_axi4l_decoder.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="14706"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_axi4l_trgt_register.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="28266"
+TIME="1775672913"
+SIZE="27559"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_cmdsts_fifo.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="11573"
+TIME="1775672913"
+SIZE="11333"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_axi4s_if.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="12308"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_axi4s_initiator_if.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="22773"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_axi4s_target_if.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="11760"
+TIME="1775672913"
+SIZE="11466"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_dncnv.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="3123"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_dncnv_lsram.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2469"
+TIME="1775672913"
+SIZE="2370"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_dncnv_reg.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2472"
+TIME="1775672913"
+SIZE="2373"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_dncnv_usram.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2469"
+TIME="1775672913"
+SIZE="2370"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_upcnv.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="3125"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_upcnv_lsram.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2676"
+TIME="1775672913"
+SIZE="2575"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_upcnv_reg.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2678"
+TIME="1775672913"
+SIZE="2577"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_upcnv_usram.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2675"
+TIME="1775672913"
+SIZE="2574"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_coreaxi4s_fifo.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="12588"
+TIME="1775672913"
+SIZE="12298"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="66366"
+TIME="1775672913"
+SIZE="64969"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_async.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="45297"
+TIME="1775672913"
+SIZE="44068"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_errhndl_blk.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="7023"
+TIME="1775672913"
+SIZE="6863"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_fwft.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="13158"
+TIME="1775672913"
+SIZE="12783"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_grayToBinConv.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="2592"
+TIME="1775672913"
+SIZE="2514"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_NstagesSync.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="2130"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_sync.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="33321"
+TIME="1775672913"
+SIZE="32454"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_sync_scntr.v,hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="24179"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="5834"
+TIME="1775672913"
+SIZE="5640"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_mm2s_data_fifo.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="16515"
+TIME="1775672913"
+SIZE="16221"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_read_engine.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="19198"
+TIME="1775672913"
+SIZE="18687"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_s2mm_data_fifo.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="16364"
+TIME="1775672913"
+SIZE="16046"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_write_engine.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="38192"
+TIME="1775672913"
+SIZE="37129"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\CoreAXI4ProtoConv.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="68784"
+TIME="1775672913"
+SIZE="67815"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\axi4mm_trgt_model.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="6594"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1168,7 +1168,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\axi4s_initr_model.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="2232"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1177,7 +1177,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\axi4s_trgt_model.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="787"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1186,7 +1186,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\buffer_mem.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="424"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1195,7 +1195,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\mm2s_chkr.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="17435"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1204,7 +1204,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\s2mm_chkr.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="19997"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1213,7 +1213,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\test\user\testbench.v,tb_hdl"
 STATE="utd"
-TIME="1774618879"
+TIME="1775672913"
 SIZE="57741"
 PARENT="<project>\component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\COREAXI4PROTOCONV.cxf"
 MODULE_UNDER_TEST="testbench"
@@ -1222,7 +1222,7 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\CoreAXI4SInterconnect.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774729834"
+TIME="1775587761"
 SIZE="4610"
 PARENT="<project>\component\work\CoreAXI4SInterconnect_C0\CoreAXI4SInterconnect_C0.cxf"
 ENDFILE
@@ -1467,37 +1467,37 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\COREAXI4INTERCONNECT_C1\COREAXI4INTERCONNECT_C1.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774636099"
+TIME="1775582352"
 SIZE="143703"
 ENDFILE
 VALUE "<project>\component\work\COREAXI4INTERCONNECT_C1\COREAXI4INTERCONNECT_C1.v,hdl"
 STATE="utd"
-TIME="1774636097"
+TIME="1775582350"
 SIZE="329033"
 PARENT="<project>\component\work\COREAXI4INTERCONNECT_C1\COREAXI4INTERCONNECT_C1.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\COREAXI4PROTOCONV_C0\COREAXI4PROTOCONV_C0.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774618879"
-SIZE="24138"
+TIME="1775673133"
+SIZE="24079"
 ENDFILE
 VALUE "<project>\component\work\COREAXI4PROTOCONV_C0\COREAXI4PROTOCONV_C0.v,hdl"
 STATE="utd"
-TIME="1774618879"
-SIZE="21552"
+TIME="1775673130"
+SIZE="21557"
 PARENT="<project>\component\work\COREAXI4PROTOCONV_C0\COREAXI4PROTOCONV_C0.cxf"
 IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\CoreAXI4SInterconnect_C0\CoreAXI4SInterconnect_C0.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774729835"
-SIZE="26587"
+TIME="1775587763"
+SIZE="26588"
 ENDFILE
 VALUE "<project>\component\work\CoreAXI4SInterconnect_C0\CoreAXI4SInterconnect_C0.v,hdl"
 STATE="utd"
-TIME="1774729834"
-SIZE="38426"
+TIME="1775587761"
+SIZE="38427"
 PARENT="<project>\component\work\CoreAXI4SInterconnect_C0\CoreAXI4SInterconnect_C0.cxf"
 IS_READONLY="TRUE"
 ENDFILE
@@ -1663,13 +1663,13 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.cxf,actgen_cxf"
 STATE="utd"
-TIME="1774722430"
-SIZE="13475"
+TIME="1775673138"
+SIZE="13375"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.v,hdl"
 STATE="utd"
-TIME="1774722430"
-SIZE="71823"
+TIME="1775673137"
+SIZE="68120"
 PARENT="<project>\component\work\cpu_system\cpu_system.cxf"
 IS_READONLY="TRUE"
 ENDFILE
@@ -1827,37 +1827,37 @@ SIZE="1083633"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system.so,so"
 STATE="utd"
-TIME="1774722562"
+TIME="1774729965"
 SIZE="241"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system.vm,syn_vm"
-STATE="utd"
-TIME="1774722561"
-SIZE="4143584"
+STATE="ood"
+TIME="1774729963"
+SIZE="4143586"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_syn.prj,prj"
 STATE="utd"
-TIME="1774722563"
-SIZE="27909"
+TIME="1775586937"
+SIZE="30431"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1774722561"
+TIME="1774729963"
 SIZE="1555"
 ENDFILE
 VALUE "<project>\synthesis\identify_debug\cpu_system.so,so"
 STATE="utd"
-TIME="1774733061"
+TIME="1775586937"
 SIZE="256"
 ENDFILE
 VALUE "<project>\synthesis\identify_debug\cpu_system.vm,syn_vm"
 STATE="utd"
-TIME="1774733059"
-SIZE="4491521"
+TIME="1775586935"
+SIZE="4503380"
 ENDFILE
 VALUE "<project>\synthesis\identify_debug\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1774733059"
+TIME="1775586936"
 SIZE="3024"
 ENDFILE
 ENDLIST
@@ -1952,7 +1952,6 @@ VALUE "<project>\constraint\io\user.pdc,io_pdc"
 ENDLIST
 LIST ProjectState5.1
 LIST Impl1
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\identify_debug\cpu_system.vm,syn_vm)=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
@@ -1963,7 +1962,6 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\identify_debug\cpu_system.vm,syn_vm)=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
@@ -1988,10 +1986,6 @@ VALUE "<project>\synthesis\identify_debug\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 ENDLIST
-LIST synthesis_implementations
-VALUE "synthesis"
-VALUE "identify_debug"
-ENDLIST
 ENDLIST
 LIST "MPFS_DISCOVERY_KIT_MSS::work"
 FILE "<project>\component\work\MPFS_DISCOVERY_KIT_MSS\MPFS_DISCOVERY_KIT_MSS.v,hdl"
@@ -2008,6 +2002,9 @@ ENDLIST
 LIST "CoreAXI4SInterconnect::CoreAXI4SInterconnect_LIB"
 FILE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\rtl\vlog\core\CoreAXI4SInterconnect.v,hdl"
 LIST Other_Association
+VALUE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\rtl\vlog\test\user\testbench.v,tb_hdl"
+ENDLIST
+LIST AssociatedStimulus
 VALUE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\rtl\vlog\test\user\testbench.v,tb_hdl"
 ENDLIST
 ENDLIST
@@ -2035,6 +2032,9 @@ VALUE "<project>\component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlo
 VALUE "<project>\component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\test\user\AXI4Models\AxiMaster.v,tb_hdl"
 VALUE "<project>\component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\test\user\testbench.v,tb_hdl"
 VALUE "<project>\component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\test\user\AXI4Models\DualPort_Ram_SyncWr_ASyncRd.v,tb_hdl"
+ENDLIST
+LIST CoreAXI4SInterconnect
+VALUE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\rtl\vlog\test\user\testbench.v,tb_hdl"
 ENDLIST
 ENDLIST
 LIST Other_Association
@@ -2071,9 +2071,6 @@ VALUE "<project>\component\Actel\DirectCore\CoreAPB3\4.2.100\rtl\vlog\amba_bfm\b
 VALUE "<project>\component\Actel\DirectCore\CoreAPB3\4.2.100\rtl\vlog\test\user\testbench.v,tb_hdl"
 VALUE "<project>\component\Actel\DirectCore\CoreAPB3\4.2.100\mti\scripts\wave_user.do,do"
 ENDLIST
-LIST CoreAXI4SInterconnect
-VALUE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\rtl\vlog\test\user\testbench.v,tb_hdl"
-ENDLIST
 LIST CoreGPIO_C0_CoreGPIO_C0_0_CoreGPIO
 VALUE "<project>\simulation\coregpio_usertb_apb_master.bfm,sim"
 VALUE "<project>\simulation\coregpio_usertb_include.bfm,sim"
@@ -2100,6 +2097,9 @@ VALUE "<project>\simulation\MPFS_DISCOVERY_KIT_MSS_PFSOC_MSS_FIC1_compile_bfm.tc
 VALUE "<project>\simulation\MPFS_DISCOVERY_KIT_MSS_PFSOC_MSS_FIC1_user.bfm,sim"
 VALUE "<project>\simulation\MPFS_DISCOVERY_KIT_MSS_PFSOC_MSS_FIC3_compile_bfm.tcl,sim"
 VALUE "<project>\simulation\MPFS_DISCOVERY_KIT_MSS_PFSOC_MSS_FIC3_user.bfm,sim"
+ENDLIST
+LIST CoreAXI4SInterconnect
+VALUE "<project>\component\Actel\DirectCore\CoreAXI4SInterconnect\2.0.111\rtl\vlog\test\user\testbench.v,tb_hdl"
 ENDLIST
 ENDLIST
 LIST SimulationOptions
@@ -2173,8 +2173,8 @@ NAME="Synplify Pro ME"
 FUNCTION="Synthesis"
 TOOL="Synplify Pro ME"
 LOCATION="C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Synplify_Pro\bin\synplify_pro.exe"
-PARAM=""
-BATCH=0
+PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
+BATCH=1
 LICENSE=""
 IS32BIT="1"
 EndProfile
@@ -2222,7 +2222,6 @@ ENDLIST
 ENDLIST
 LIST "cpu_system::work"
 LIST Impl1
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\identify_debug\cpu_system.vm,syn_vm)=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
@@ -2233,7 +2232,6 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\identify_debug\cpu_system.vm,syn_vm)=StateSuccess
 LIST FlowOptions
 UsePhySynth=FALSE
@@ -2275,7 +2273,7 @@ Reports;Reports;0
 ReportsCurrentItem;Run Programming Action:cpu_system_PROGRAM.log
 StartPage;StartPage;0
 SmartDesign;cpu_system;0
-ACTIVEVIEW;Reports
+ACTIVEVIEW;cpu_system
 ENDLIST
 LIST ModuleSubBlockList
 LIST "caxi4interconnect_AddressController::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4CrossBar\AddressController.v","FALSE","FALSE"
@@ -2599,7 +2597,6 @@ SUBBLOCK "COREAXI4INTERCONNECT_C1::work","component\work\COREAXI4INTERCONNECT_C1
 SUBBLOCK "COREAXI4PROTOCONV_C0::work","component\work\COREAXI4PROTOCONV_C0\COREAXI4PROTOCONV_C0.v","TRUE","FALSE"
 SUBBLOCK "CORERESET_PF_C0::work","component\work\CORERESET_PF_C0\CORERESET_PF_C0.v","TRUE","FALSE"
 SUBBLOCK "CoreAPB3_C0::work","component\work\CoreAPB3_C0\CoreAPB3_C0.v","TRUE","FALSE"
-SUBBLOCK "CoreAXI4SInterconnect_C0::work","component\work\CoreAXI4SInterconnect_C0\CoreAXI4SInterconnect_C0.v","TRUE","FALSE"
 SUBBLOCK "CoreGPIO_C0::work","component\work\CoreGPIO_C0\CoreGPIO_C0.v","TRUE","FALSE"
 SUBBLOCK "MPFS_DISCOVERY_KIT_MSS::work","component\work\MPFS_DISCOVERY_KIT_MSS\MPFS_DISCOVERY_KIT_MSS.v","TRUE","FALSE"
 SUBBLOCK "PFSOC_INIT_MONITOR_C0::work","component\work\PFSOC_INIT_MONITOR_C0\PFSOC_INIT_MONITOR_C0.v","TRUE","FALSE"
@@ -2895,7 +2892,6 @@ ENDLIST
 LIST "caxi4pc_mm2s_data_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_mm2s_data_fifo.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_coreaxi4s_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_coreaxi4s_fifo.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4pc_read_engine::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_read_engine.v","FALSE","FALSE"
 ENDLIST
@@ -2973,8 +2969,6 @@ ENDLIST
 LIST "caxi4pc_cmdsts_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\caxi4pc_cmdsts_fifo.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_buff_dncnv::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_dncnv.v","FALSE","FALSE"
@@ -3037,7 +3031,6 @@ SUBBLOCK "caxi4pc_corefifo_errhndl_blk::work","component\Actel\DirectCore\COREAX
 SUBBLOCK "caxi4pc_corefifo_fwft::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_fwft.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_corefifo_sync::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_sync.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_FIFO::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO.v","FALSE","FALSE"
 SUBBLOCK "caxi4interconnect_RAM_BLOCK::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RAM_BLOCK.v","FALSE","FALSE"
@@ -3050,15 +3043,6 @@ ENDLIST
 LIST "caxi4interconnect_RAM_BLOCK::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RAM_BLOCK.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_RegSliceFull::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RegSliceFull.v","FALSE","FALSE"
-ENDLIST
-LIST "caxi4pc_corefifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_buff_dncnv::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_dncnv.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_buff_upcnv::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_buff_upcnv.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo_async::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_async.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo_errhndl_blk::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_errhndl_blk.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo_fwft::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_fwft.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_corefifo_sync::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_sync.v","FALSE","FALSE"
-SUBBLOCK "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_RAM_BLOCK::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RAM_BLOCK.v","FALSE","FALSE"
 ENDLIST
