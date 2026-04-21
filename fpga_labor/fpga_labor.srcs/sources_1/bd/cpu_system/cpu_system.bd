@@ -3802,7 +3802,7 @@
       },
       "fir_hw_0": {
         "vlnv": "xilinx.com:hls:fir_hw:1.0",
-        "ip_revision": "2114544991",
+        "ip_revision": "2114575165",
         "xci_name": "cpu_system_fir_hw_0_0",
         "xci_path": "ip/cpu_system_fir_hw_0_0/cpu_system_fir_hw_0_0.xci",
         "inst_hier_path": "fir_hw_0",
@@ -4174,10 +4174,10 @@
           "system_ila_0/clk",
           "system_ila_1/clk",
           "fifo_generator_0/s_aclk",
-          "fir_hw_0/ap_clk",
           "smartconnect_0/aclk",
           "zynq_ultra_ps_e_0/maxihpm0_fpd_aclk",
-          "zynq_ultra_ps_e_0/saxihpc0_fpd_aclk"
+          "zynq_ultra_ps_e_0/saxihpc0_fpd_aclk",
+          "fir_hw_0/ap_clk"
         ]
       },
       "zynq_ultra_ps_e_0_pl_resetn0": {

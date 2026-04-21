@@ -4,7 +4,7 @@
     "xci_name": "cpu_system_fir_hw_0_0",
     "cell_name": "fir_hw_0",
     "component_reference": "xilinx.com:hls:fir_hw:1.0",
-    "ip_revision": "2114544991",
+    "ip_revision": "2114575165",
     "gen_directory": "../../../../../../fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_fir_hw_0_0",
     "parameters": {
       "component_parameters": {
@@ -12,11 +12,11 @@
         "clk_period": [ { "value": "10", "enabled": false, "usage": "all" } ],
         "machine": [ { "value": "64", "enabled": false, "usage": "all" } ],
         "combinational": [ { "value": "0", "enabled": false, "usage": "all" } ],
-        "latency": [ { "value": "2", "enabled": false, "usage": "all" } ],
-        "II": [ { "value": "3", "enabled": false, "usage": "all" } ]
+        "latency": [ { "value": "1", "enabled": false, "usage": "all" } ],
+        "II": [ { "value": "2 ~ 1032", "enabled": false, "usage": "all" } ]
       },
       "model_parameters": {
-        "C_S_AXI_CONTROL_ADDR_WIDTH": [ { "value": "5", "resolve_type": "generated", "format": "long", "usage": "all" } ],
+        "C_S_AXI_CONTROL_ADDR_WIDTH": [ { "value": "12", "resolve_type": "generated", "format": "long", "usage": "all" } ],
         "C_S_AXI_CONTROL_DATA_WIDTH": [ { "value": "32", "format": "long", "usage": "all" } ]
       },
       "project_parameters": {
@@ -34,7 +34,7 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Integrator" } ],
-        "IPREVISION": [ { "value": "2114544991" } ],
+        "IPREVISION": [ { "value": "2114575165" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "../../../../../../fpga_labor.gen/sources_1/bd/cpu_system/ip/cpu_system_fir_hw_0_0" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
@@ -49,10 +49,10 @@
         "input_l_ap_ack": [ { "direction": "out" } ],
         "input_r_ap_vld": [ { "direction": "in" } ],
         "input_r_ap_ack": [ { "direction": "out" } ],
-        "s_axi_control_ARADDR": [ { "direction": "in", "size_left": "4", "size_right": "0" } ],
+        "s_axi_control_ARADDR": [ { "direction": "in", "size_left": "11", "size_right": "0" } ],
         "s_axi_control_ARREADY": [ { "direction": "out" } ],
         "s_axi_control_ARVALID": [ { "direction": "in" } ],
-        "s_axi_control_AWADDR": [ { "direction": "in", "size_left": "4", "size_right": "0" } ],
+        "s_axi_control_AWADDR": [ { "direction": "in", "size_left": "11", "size_right": "0" } ],
         "s_axi_control_AWREADY": [ { "direction": "out" } ],
         "s_axi_control_AWVALID": [ { "direction": "in" } ],
         "s_axi_control_BREADY": [ { "direction": "in" } ],
@@ -84,7 +84,7 @@
           "mode": "slave",
           "memory_map_ref": "s_axi_control",
           "parameters": {
-            "ADDR_WIDTH": [ { "value": "5", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
+            "ADDR_WIDTH": [ { "value": "12", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
             "DATA_WIDTH": [ { "value": "32", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
             "PROTOCOL": [ { "value": "AXI4LITE", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
             "READ_WRITE_MODE": [ { "value": "READ_WRITE", "value_src": "constant", "value_permission": "bd_and_user", "usage": "all" } ],
@@ -251,6 +251,58 @@
                       "access": "read-only"
                     }
                   }
+                },
+                "smpl_rd_num": {
+                  "address_offset": "24",
+                  "size": 32,
+                  "display_name": "smpl_rd_num",
+                  "description": "Data signal of smpl_rd_num",
+                  "access": "write-only",
+                  "reset_value": "0",
+                  "fields": {
+                    "smpl_rd_num": {
+                      "bit_offset": 0,
+                      "bit_width": 3,
+                      "description": "Bit 2 to 0 of smpl_rd_num",
+                      "access": "write-only"
+                    },
+                    "RESERVED": {
+                      "bit_offset": 3,
+                      "bit_width": 29,
+                      "description": "Reserved.  0s on read.",
+                      "access": "read-only"
+                    }
+                  }
+                },
+                "tap_num_m1": {
+                  "address_offset": "32",
+                  "size": 32,
+                  "display_name": "tap_num_m1",
+                  "description": "Data signal of tap_num_m1",
+                  "access": "write-only",
+                  "reset_value": "0",
+                  "fields": {
+                    "tap_num_m1": {
+                      "bit_offset": 0,
+                      "bit_width": 9,
+                      "description": "Bit 8 to 0 of tap_num_m1",
+                      "access": "write-only"
+                    },
+                    "RESERVED": {
+                      "bit_offset": 9,
+                      "bit_width": 23,
+                      "description": "Reserved.  0s on read.",
+                      "access": "read-only"
+                    }
+                  }
+                },
+                "Memory_coeff_hw": {
+                  "address_offset": "2048",
+                  "size": 2048,
+                  "display_name": "Memory_coeff_hw",
+                  "description": "Memory coeff_hw",
+                  "access": "read-write",
+                  "reset_value": "0"
                 }
               }
             }
@@ -259,5 +311,5 @@
       }
     }
   },
-  "checksum": "86838a94"
+  "checksum": "846dd014"
 }
