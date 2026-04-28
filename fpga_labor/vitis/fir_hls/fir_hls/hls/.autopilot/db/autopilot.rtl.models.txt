@@ -1,0 +1,10 @@
+fir_hw_mul_47s_32s_79_1_1
+fir_hw_flow_control_loop_pipe_sequential_init
+fir_hw_buffer_left_RAM_AUTO_1R1W
+fir_hw_control_s_axi
+fir_hw_regslice_both
+fir_hw_regslice_both
+fir_hw_regslice_both
+fir_hw_regslice_both
+fir_hw_Pipeline_VITIS_LOOP_32_1
+fir_hw

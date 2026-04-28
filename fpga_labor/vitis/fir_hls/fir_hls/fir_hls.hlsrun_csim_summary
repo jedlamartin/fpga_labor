@@ -1,0 +1,157 @@
+<ENTRY>
+{
+ "thisFile": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/fir_hls.hlsrun_csim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "Tue Apr 21 10:21:19 2026",
+ "timestampMillis": "1776759679860",
+ "buildStep": {
+  "cmdId": "7c89bbda-92ab-44b1-bcc9-fc97995d256f",
+  "name": "vitis-run",
+  "logFile": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/logs/fir_hls.steps.log",
+  "commandLine": "/xilinx/2025.2/Vitis/bin/unwrapped/lnx64.o/vitis-run  --mode hls --csim --config /mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/hls_config.cfg --work_dir fir_hls ",
+  "args": [
+   "--mode",
+   "hls",
+   "--csim",
+   "--config",
+   "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/hls_config.cfg",
+   "--work_dir",
+   "fir_hls"
+  ],
+  "iniFiles": [],
+  "cwd": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 21 10:21:19 2026",
+ "timestampMillis": "1776759679860",
+ "status": {
+  "cmdId": "7c89bbda-92ab-44b1-bcc9-fc97995d256f",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_FlowMetaData",
+ "dateTimestamp": "Tue Apr 21 10:21:23 2026",
+ "timestampMillis": "1776759683609",
+ "buildSummary": {
+  "hardwarePlatform": "",
+  "hardwareDsa": "",
+  "platformDirectory": "",
+  "runtime": "",
+  "systemConfig": "",
+  "flow": "BF_RUN",
+  "target": "TT_HLS_C_SIM",
+  "kernels": [
+   {
+    "base": {
+     "type": "KERNEL",
+     "name": "fir_hw",
+     "file": "",
+     "reports": [],
+     "uuid": ""
+    },
+    "sources": [
+     "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hw.cpp",
+     "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/types.h"
+    ],
+    "psSources": [],
+    "cuNames": [],
+    "type": "HLS",
+    "frequency": 0,
+    "freqUnits": ""
+   }
+  ],
+  "toolVersion": "2025.2"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_SubCmdStep",
+ "dateTimestamp": "Tue Apr 21 10:21:23 2026",
+ "timestampMillis": "1776759683610",
+ "buildStep": {
+  "cmdId": "84b9b5bb-61ac-4a35-b881-3399f3031bec",
+  "name": "",
+  "logFile": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/hls.log",
+  "commandLine": "",
+  "args": [],
+  "iniFiles": [],
+  "cwd": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 21 10:21:23 2026",
+ "timestampMillis": "1776759683610",
+ "status": {
+  "cmdId": "84b9b5bb-61ac-4a35-b881-3399f3031bec",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 21 10:21:27 2026",
+ "timestampMillis": "1776759687268",
+ "status": {
+  "cmdId": "84b9b5bb-61ac-4a35-b881-3399f3031bec",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "Tue Apr 21 10:21:27 2026",
+ "timestampMillis": "1776759687370",
+ "status": {
+  "cmdId": "7c89bbda-92ab-44b1-bcc9-fc97995d256f",
+  "state": "CS_PASSED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 21 10:21:27 2026",
+ "timestampMillis": "1776759687371",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "Tue Apr 21 10:21:27 2026",
+ "timestampMillis": "1776759687371",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>

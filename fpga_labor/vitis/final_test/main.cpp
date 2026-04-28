@@ -8,11 +8,13 @@
 #include <fstream>
 #include <string>
 #include <array>
+#include <sstream>
 #include "xil_cache.h"
 #include "xaxidma_hw.h"
 #include "xfir_hw.h"
 #include "xfir_hw_hw.h"
 #include "types.h"
+#include "filter_coeffs.h"
 
 #define MEM32(addr) (*(volatile uint32_t *)(addr))
 
@@ -63,79 +65,56 @@ void i2c_write(uint8_t slv_addr, uint8_t reg_addr, uint8_t data);
 uint8_t i2c_read(uint8_t slv_addr, uint8_t reg_addr);
 void codec_init();
 
-constexpr unsigned int smpl_rd_num = 1;
+constexpr unsigned int smpl_rd_num = 3;
 constexpr unsigned int coeff_size = (1 << (smpl_rd_num - 1)) * 128;
 
-XFir_hw fir_hw;
+XFir_hw fir_ip;
 
 int main() {
-    std::string coeff_file_name = "./coefficients/filter_" + std::to_string(coeff_size) + ".fcf";
-    std::ifstream coeff_file(coeff_file_name);
-    if (!coeff_file.is_open()) {
-        xil_printf("ERROR: Could not open %s\n", coeff_file_name.c_str());
-        return -1;
-    }
-
-    std::array<uint32_t, 512> raw_coeffs{0};
-    std::string line;
-    int count = 0;
-
-    while(std::getline(coeff_file, line)){
-        std::stringstream ss(line);
-        double temp_val;
-        if (ss >> temp_val) {
-            if (count < 512) {
-                // Convert double to the fixed-point bit representation
-                coeff_t fixed_val = (coeff_t)temp_val;
-                raw_coeffs[count] = fixed_val.range().to_uint();
-                count++;
-            }
-        }
-    }
-
-
-    // 1. Initialize Control Interfaces
     i2c_init();
     sleep(1);
-    
-    // 2. Setup Codec & Enable I2S Logic
-    codec_init();
-    
-    // 3. Initialize DMA Channels
-    dma_init();
 
-    // 4. Setup FIR HLS IP
-    if(XFir_hw_Initialize(&fir_hw, FIR_BASE_ADDR) != XST_SUCCESS) {
+    if(XFir_hw_Initialize(&fir_ip, FIR_BASE_ADDR) != XST_SUCCESS) {
         xil_printf("FIR Init Failed\r\n");
         return -1;
     }
 
-    // Write the actual number of coefficients parsed (e.g., 128 or 512)
-    XFir_hw_Write_coeff_hw_Words(&fir_hw, 0, raw_coeffs.data(), 512);
+    const coeff_t* source_ptr;
+    if constexpr (coeff_size == 128) {
+        source_ptr = filter_128_data;
+    } else if constexpr (coeff_size == 256) {
+        source_ptr = filter_256_data;
+    } else {
+        source_ptr = filter_512_data;
+    }
+
+
+    word_type raw_coeffs[512];
+    for (int i = 0; i < 512; i++) {
+        // Extract the exact 32-bit integer representation of the fixed-point number
+        raw_coeffs[i] = (word_type)source_ptr[i].range(31, 0).to_uint(); 
+    }
+
+    //word_type raw_coeffs[512] = {0};
+    //raw_coeffs[0] = 0x7FFFFFFF;
     
-    // Set Tap Number (Must be count - 1)
-    XFir_hw_Set_tap_num_m1(&fir_hw, count - 1);
-    
-    // Set Sample Read Number (Decimation factor)
-    XFir_hw_Set_smpl_rd_num(&fir_hw, smpl_rd_num);
-    
-    // Set TLAST behavior (DMA packet boundary)
-    XFir_hw_Set_tlast_dnum(&fir_hw, BLOCK_SIZE);
+    XFir_hw_Write_coeff_hw_Words(&fir_ip, 0, raw_coeffs, 512);    
+    XFir_hw_Set_tap_num_m1(&fir_ip, coeff_size - 1);
+    XFir_hw_Set_smpl_rd_num(&fir_ip, smpl_rd_num);
+    XFir_hw_Set_tlast_dnum(&fir_ip, BLOCK_SIZE);
+
+    xil_printf("Loaded 512 coeffs (Length: %d). System Ready.\r\n", coeff_size);
+
+    codec_init();
+    dma_init();
 
     int offs = 0;
     xil_printf("System Ready. Monitoring incoming audio blocks...\r\n");
-    
     while(1) {
-        // Prepare the DMA to receive data into the buffer at the current offset
         dma_rcv(dma_rx_buf + offs, BLOCK_SIZE * DATA_LENGTH);
-
-        // This loop will block until the FIR sends exactly BLOCK_SIZE samples
-        // and asserts the TLAST wire to the DMA S2MM port.
         dma_rcv_wait();
+        Xil_DCacheInvalidateRange((INTPTR)(dma_rx_buf + offs), BLOCK_SIZE * DATA_LENGTH);
 
-        // Data is now in DDR. We can process it.
-        //xil_printf("Block Received at offset %d. Sample[0]: 0x%08x\r\n", offs, dma_rx_buf[offs]);
-        
         offs += BLOCK_SIZE;
         if (offs + BLOCK_SIZE >= DMA_BUFFER_SIZE) {
             offs = 0;

@@ -1,0 +1,22 @@
+{
+  "0": {
+    "basicblocks": 9,
+    "calls": "",
+    "control_depth": 0,
+    "def_use_depth": 6,
+    "file": "fir_hw.cpp",
+    "fileloc": 3,
+    "instructions": 148,
+    "loads": {
+      "G": 5,
+      "T": 3
+    },
+    "memory_accesses": 3,
+    "name": "fir_hw",
+    "stores": {
+      "G": 9,
+      "L": 8
+    },
+    "total_instructions": 165
+  }
+}

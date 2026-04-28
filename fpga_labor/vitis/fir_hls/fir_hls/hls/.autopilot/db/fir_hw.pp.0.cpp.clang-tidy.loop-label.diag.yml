@@ -1,0 +1,64 @@
+---
+MainSourceFile:  '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/.autopilot/db/fir_hw.pp.0.cpp'
+Diagnostics:
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_676_1:  '
+      FilePath:        '/xilinx/2025.2/Vitis/common/technology/autopilot/etc/ap_int_ref.h'
+      FileOffset:      676
+      Replacements:
+        - FilePath:        '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/.autopilot/db/fir_hw.pp.0.cpp'
+          Offset:          279429
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_676_1: '
+    Level:           Remark
+    BuildDirectory:  '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_690_1:  '
+      FilePath:        '/xilinx/2025.2/Vitis/common/technology/autopilot/etc/ap_int_ref.h'
+      FileOffset:      690
+      Replacements:
+        - FilePath:        '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/.autopilot/db/fir_hw.pp.0.cpp'
+          Offset:          279900
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_690_1: '
+    Level:           Remark
+    BuildDirectory:  '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_704_1:  '
+      FilePath:        '/xilinx/2025.2/Vitis/common/technology/autopilot/etc/ap_int_ref.h'
+      FileOffset:      704
+      Replacements:
+        - FilePath:        '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/.autopilot/db/fir_hw.pp.0.cpp'
+          Offset:          280372
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_704_1: '
+    Level:           Remark
+    BuildDirectory:  '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_1251_1:  '
+      FilePath:        '/xilinx/2025.2/Vitis/common/technology/autopilot/etc/ap_fixed_base.h'
+      FileOffset:      1251
+      Replacements:
+        - FilePath:        '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/.autopilot/db/fir_hw.pp.0.cpp'
+          Offset:          627021
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_1251_1: '
+    Level:           Remark
+    BuildDirectory:  '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_32_1:  '
+      FilePath:        fir_hw.cpp
+      FileOffset:      32
+      Replacements:
+        - FilePath:        '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hls/hls/.autopilot/db/fir_hw.pp.0.cpp'
+          Offset:          2347722
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_32_1: '
+    Level:           Remark
+    BuildDirectory:  '/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls'
+...

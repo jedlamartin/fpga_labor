@@ -1,0 +1,166 @@
+
+
+================================================================
+== Synthesis Summary Report of 'fir_hw'
+================================================================
++ General Information: 
+    * Date:           Tue Apr 21 10:24:27 2026
+    * Version:        2025.2 (Build 6295257 on Nov 14 2025)
+    * Project:        fir_hls
+    * Solution:       hls (Vivado IP Flow Target)
+    * Product family: zynquplus
+    * Target device:  xck26-sfvc784-2LV-c
+    
+
+* Performance & Resource Estimates: 
++------------------------------------+------+---------------+----------+---------+------+----------+---------+-----------+------+--------+---------+-----------+-----------+-----+
+|               Modules              | Issue|               | Iteration|         | Trip |          |       Latency       |      |        |         |           |           |     |
+|               & Loops              | Type | Violation Type|  Latency | Interval| Count| Pipelined| (cycles)|    (ns)   | Slack|  BRAM  |   DSP   |     FF    |    LUT    | URAM|
++------------------------------------+------+---------------+----------+---------+------+----------+---------+-----------+------+--------+---------+-----------+-----------+-----+
+|+ fir_hw                            |     -|              -|         -|     1032|     -|        no|     1031|  1.031e+04|  0.54|  4 (1%)|  6 (~0%)|  495 (~0%)|  867 (~0%)|    -|
+| + fir_hw_Pipeline_VITIS_LOOP_32_1  |     -|              -|         -|        -|     -|       yes|     1026|  1.026e+04|  0.54|       -|  6 (~0%)|  279 (~0%)|  374 (~0%)|    -|
+|  o VITIS_LOOP_32_1                 |     -|              -|         3|        2|   512|       yes|     1024|  1.024e+04|  7.30|       -|        -|          -|          -|    -|
++------------------------------------+------+---------------+----------+---------+------+----------+---------+-----------+------+--------+---------+-----------+-----------+-----+
+    Name Prefix: '+' for module, 'o' for loop, '*' for dataflow
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++---------------+------------+---------------+--------+----------+-------------------+
+| Interface     | Data Width | Address Width | Offset | Register | Resource Estimate |
++---------------+------------+---------------+--------+----------+-------------------+
+| s_axi_control | 32         | 12            | 16     | 0        | BRAM=2            |
++---------------+------------+---------------+--------+----------+-------------------+
+
+* S_AXILITE Registers
++---------------+-------------+--------+-------+--------+----------------------------+
+| Interface     | Register    | Offset | Width | Access | Description                |
++---------------+-------------+--------+-------+--------+----------------------------+
+| s_axi_control | tlast_dnum  | 0x10   | 32    | W      | Data signal of tlast_dnum  |
+| s_axi_control | smpl_rd_num | 0x18   | 32    | W      | Data signal of smpl_rd_num |
+| s_axi_control | tap_num_m1  | 0x20   | 32    | W      | Data signal of tap_num_m1  |
++---------------+-------------+--------+-------+--------+----------------------------+
+
+* AXIS
++-----------+-----------+---------------+-------+-------+-------+--------+-------+--------+
+| Interface | Direction | Register Mode | TDATA | TKEEP | TLAST | TREADY | TSTRB | TVALID |
++-----------+-----------+---------------+-------+-------+-------+--------+-------+--------+
+| res       | out       | both          | 32    | 4     | 1     | 1      | 4     | 1      |
++-----------+-----------+---------------+-------+-------+-------+--------+-------+--------+
+
+* Other Ports
++---------+-------+-----------+----------+
+| Port    | Mode  | Direction | Bitwidth |
++---------+-------+-----------+----------+
+| input_l | ap_hs | in        | 24       |
+| input_r | ap_hs | in        | 24       |
++---------+-------+-----------+----------+
+
+* TOP LEVEL CONTROL
++-----------+--------------+----------+
+| Interface | Type         | Ports    |
++-----------+--------------+----------+
+| ap_clk    | clock        | ap_clk   |
+| ap_rst_n  | reset        | ap_rst_n |
+| ap_ctrl   | ap_ctrl_none |          |
++-----------+--------------+----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++-------------+-----------+-----------------------------------------------------------------------------------------------------------------+
+| Argument    | Direction | Datatype                                                                                                        |
++-------------+-----------+-----------------------------------------------------------------------------------------------------------------+
+| tlast_dnum  | in        | ap_uint<16>                                                                                                     |
+| smpl_rd_num | in        | ap_uint<3>                                                                                                      |
+| tap_num_m1  | in        | ap_uint<9>                                                                                                      |
+| coeff_hw    | in        | ap_fixed<32, 1, (ap_q_mode)5, (ap_o_mode)3, 0>*                                                                 |
+| input_l     | in        | ap_fixed<24, 1, (ap_q_mode)5, (ap_o_mode)3, 0>*                                                                 |
+| input_r     | in        | ap_fixed<24, 1, (ap_q_mode)5, (ap_o_mode)3, 0>*                                                                 |
+| res         | out       | stream<hls::axis<ap_fixed<32, 1, (ap_q_mode)5, (ap_o_mode)3, 0>, 0UL, 0UL, 0UL, (unsigned char)'8', false>, 0>& |
++-------------+-----------+-----------------------------------------------------------------------------------------------------------------+
+
+* SW-to-HW Mapping
++-------------+----------------+-----------+---------------------------------------+
+| Argument    | HW Interface   | HW Type   | HW Info                               |
++-------------+----------------+-----------+---------------------------------------+
+| tlast_dnum  | s_axi_control  | register  | name=tlast_dnum offset=0x10 range=32  |
+| smpl_rd_num | s_axi_control  | register  | name=smpl_rd_num offset=0x18 range=32 |
+| tap_num_m1  | s_axi_control  | register  | name=tap_num_m1 offset=0x20 range=32  |
+| coeff_hw    | s_axi_control  | memory    | name=coeff_hw offset=2048 range=2048  |
+| input_l     | input_l        | port      |                                       |
+| input_l     | input_l_ap_vld | port      |                                       |
+| input_l     | input_l_ap_ack | port      |                                       |
+| input_r     | input_r        | port      |                                       |
+| input_r     | input_r_ap_vld | port      |                                       |
+| input_r     | input_r_ap_ack | port      |                                       |
+| res         | res            | interface |                                       |
++-------------+----------------+-----------+---------------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++------------------------------------+-----+--------+-----------------+--------+----------+---------+
+| Name                               | DSP | Pragma | Variable        | Op     | Impl     | Latency |
++------------------------------------+-----+--------+-----------------+--------+----------+---------+
+| + fir_hw                           | 6   |        |                 |        |          |         |
+|   add_ln25_fu_238_p2               |     |        | add_ln25        | add    | fabric   | 0       |
+|   icmp_ln26_fu_244_p2              |     |        | icmp_ln26       | setlt  | auto     | 0       |
+|   add_ln32_fu_303_p2               |     |        | add_ln32        | add    | fabric   | 0       |
+|   add_ln43_fu_254_p2               |     |        | add_ln43        | add    | fabric   | 0       |
+|   out_data_last_fu_260_p2          |     |        | out_data_last   | seteq  | auto     | 0       |
+|   add_ln54_fu_266_p2               |     |        | add_ln54        | add    | fabric   | 0       |
+|   select_ln54_fu_272_p3            |     |        | select_ln54     | select | auto_sel | 0       |
+|   out_data_last_1_fu_280_p2        |     |        | out_data_last_1 | seteq  | auto     | 0       |
+|   select_ln60_fu_286_p3            |     |        | select_ln60     | select | auto_sel | 0       |
+|   add_ln65_fu_318_p2               |     |        | add_ln65        | add    | fabric   | 0       |
+|  + fir_hw_Pipeline_VITIS_LOOP_32_1 | 6   |        |                 |        |          |         |
+|    icmp_ln32_fu_203_p2             |     |        | icmp_ln32       | seteq  | auto     | 0       |
+|    i_2_fu_209_p2                   |     |        | i_2             | add    | fabric   | 0       |
+|    read_idx_fu_224_p2              |     |        | read_idx        | sub    | fabric   | 0       |
+|    mul_47s_32s_79_1_1_U1           | 6   |        | mul_ln38        | mul    | auto     | 0       |
+|    add_ln38_fu_270_p2              |     |        | add_ln38        | add    | fabric   | 0       |
+|    mul_47s_32s_79_1_1_U1           | 6   |        | mul_ln39        | mul    | auto     | 0       |
+|    add_ln39_fu_329_p2              |     |        | add_ln39        | add    | fabric   | 0       |
++------------------------------------+-----+--------+-----------------+--------+----------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++-------------------+-----------+-----------+------+------+--------+--------------+------+---------+------------------+
+| Name              | Usage     | Type      | BRAM | URAM | Pragma | Variable     | Impl | Latency | Bitwidth, Depth, |
+|                   |           |           |      |      |        |              |      |         | Banks            |
++-------------------+-----------+-----------+------+------+--------+--------------+------+---------+------------------+
+| + fir_hw          |           |           | 4    | 0    |        |              |      |         |                  |
+|   control_s_axi_U | interface | s_axilite | 2    |      |        |              |      |         |                  |
+|   buffer_left_U   | ram_1p    |           | 1    |      |        | buffer_left  | auto | 1       | 24, 512, 1       |
+|   buffer_right_U  | ram_1p    |           | 1    |      |        | buffer_right | auto | 1       | 24, 512, 1       |
++-------------------+-----------+-----------+------+------+--------+--------------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++----------------+---------------------------------+---------------------------+
+| Type           | Options                         | Location                  |
++----------------+---------------------------------+---------------------------+
+| INTERFACE      | mode=s_axilite port=coeff_hw    | in fir_hw (fir_hw.cpp:5)  |
+| INTERFACE      | mode=s_axilite port=tap_num_m1  | in fir_hw (fir_hw.cpp:6)  |
+| INTERFACE      | mode=s_axilite port=smpl_rd_num | in fir_hw (fir_hw.cpp:7)  |
+| INTERFACE      | mode=s_axilite port=tlast_dnum  | in fir_hw (fir_hw.cpp:8)  |
+| INTERFACE      | mode=ap_hs port=input_l         | in fir_hw (fir_hw.cpp:9)  |
+| INTERFACE      | mode=ap_hs port=input_r         | in fir_hw (fir_hw.cpp:10) |
+| INTERFACE      | mode=axis port=res              | in fir_hw (fir_hw.cpp:11) |
+| INTERFACE      | mode=ap_ctrl_none port=return   | in fir_hw (fir_hw.cpp:12) |
+| PIPELINE       | ii=2                            | in fir_hw (fir_hw.cpp:33) |
+| LOOP_TRIPCOUNT | max=512 min=128                 | in fir_hw (fir_hw.cpp:34) |
++----------------+---------------------------------+---------------------------+
+
+

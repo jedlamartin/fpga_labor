@@ -1,0 +1,44 @@
+{
+    "0": {
+        "name": "fir_hw",
+        "file": "fir_hw.cpp",
+        "fileloc": "3",
+        "instructions": "63",
+        "total_instructions": "123",
+        "calls": "1",
+        "basicblocks": "3",
+        "memory_accesses": "0",
+        "control_depth": "0",
+        "def_use_depth": "6",
+        "loads": {
+            "G": "3",
+            "L": "2"
+        },
+        "stores": {
+            "G": "5"
+        }
+    },
+    "1": {
+        "name": "fir_hw_Pipeline_VITIS_LOOP_32_1",
+        "file": "fir_hw.cpp",
+        "fileloc": "29",
+        "instructions": "60",
+        "total_instructions": "60",
+        "calls": "",
+        "basicblocks": "4",
+        "memory_accesses": "11",
+        "control_depth": "1",
+        "def_use_depth": "1",
+        "loads": {
+            "G": "2",
+            "L": "5",
+            "T": "1"
+        },
+        "stores": {
+            "L": "10"
+        },
+        "loops": {
+            "L": "1"
+        }
+    }
+}
