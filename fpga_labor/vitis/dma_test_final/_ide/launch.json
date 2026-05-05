@@ -35,13 +35,13 @@
 					"isFsbl": true,
 					"usingFSBL": {
 						"initWithFSBL": true,
-						"fsblFile": "${workspaceFolder}\\kv260_platform\\export\\kv260_platform\\sw\\boot\\fsbl.elf",
+						"fsblFile": "${workspaceFolder}/kv260_platform/export/kv260_platform/sw/boot/fsbl.elf",
 						"fsblExitSymbol": "XFsbl_Exit"
 					},
 					"usingPsuInit": {
 						"runPsuInit": true,
 						"plPowerup": true,
-						"psuInitTclFile": "${workspaceFolder}\\dma_test_final\\_ide\\psinit\\psu_init.tcl"
+						"psuInitTclFile": "${workspaceFolder}/dma_test_final/_ide/psinit/psu_init.tcl"
 					}
 				},
 				"zuTraceOptions": {
@@ -54,7 +54,7 @@
 					{
 						"core": "psu_cortexa53_0",
 						"resetProcessor": true,
-						"elfFile": "${workspaceFolder}\\dma_test_final\\build\\dma_test_final.elf",
+						"elfFile": "${workspaceFolder}/dma_test_final/build/dma_test_final.elf",
 						"stopAtEntry": false,
 						"isSelfRelocatingApp": false,
 						"relativeAddress": ""

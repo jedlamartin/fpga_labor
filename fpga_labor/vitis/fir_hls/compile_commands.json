@@ -1,0 +1,27 @@
+[
+  {
+    "directory": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls",
+    "arguments": [
+      "/xilinx/2025.2/Vitis/lnx64/tools/vcxx/libexec/clang++",
+      "--gcc-toolchain=/xilinx/2025.2/Vitis/tps/lnx64/gcc-8.3.0",
+      "-fhls",
+      "-hls-syn-headers-dir=/xilinx/2025.2/Vitis/common/technology/autopilot",
+      "-fhlstoplevel=fir_hw",
+      "-c",
+      "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hw.cpp"
+    ],
+    "file": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hw.cpp"
+  },
+  {
+    "directory": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls",
+    "arguments": [
+      "/xilinx/2025.2/Vitis/lnx64/tools/vcxx/libexec/clang++",
+      "--gcc-toolchain=/xilinx/2025.2/Vitis/tps/lnx64/gcc-8.3.0",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=/xilinx/2025.2/Vitis/include",
+      "-c",
+      "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hw_tb.cpp"
+    ],
+    "file": "/mnt/work/fpga_labor/fpga_labor/vitis/fir_hls/fir_hw_tb.cpp"
+  }
+]
