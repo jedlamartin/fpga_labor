@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Wed May 13 17:59:47 2026
+// Created by SmartDesign Thu May 14 23:29:54 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -659,19 +659,6 @@ audio_interface audio_interface_0(
         .adc_valid_l (  ),
         .adc_valid_r (  ),
         .adc_data    (  ) 
-        );
-
-//--------binary_counter
-binary_counter #( 
-        .MAX_COUNT ( 63 ),
-        .WIDTH     ( 6 ) )
-binary_counter_0(
-        // Inputs
-        .clk       ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
-        .rst_n     ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
-        // Outputs
-        .sample_en (  ),
-        .count     (  ) 
         );
 
 //--------CoreAPB3_C0

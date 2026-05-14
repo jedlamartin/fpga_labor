@@ -1525,13 +1525,13 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.cxf,actgen_cxf"
 STATE="utd"
-TIME="1778687989"
-SIZE="14851"
+TIME="1778794195"
+SIZE="14659"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.v,hdl"
 STATE="utd"
-TIME="1778687988"
-SIZE="72209"
+TIME="1778794194"
+SIZE="71872"
 PARENT="<project>\component\work\cpu_system\cpu_system.cxf"
 IS_READONLY="TRUE"
 ENDFILE
@@ -1709,17 +1709,17 @@ SIZE="1316"
 ENDFILE
 VALUE "<project>\synthesis\audio_interface_debug\cpu_system.so,so"
 STATE="utd"
-TIME="1778702814"
+TIME="1778768686"
 SIZE="261"
 ENDFILE
 VALUE "<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm"
 STATE="utd"
-TIME="1778702811"
+TIME="1778768683"
 SIZE="5079985"
 ENDFILE
 VALUE "<project>\synthesis\audio_interface_debug\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1778702811"
+TIME="1778768684"
 SIZE="3024"
 ENDFILE
 VALUE "<project>\synthesis\audio_interface_debug\synwork\layer0.so,so"
@@ -1739,7 +1739,7 @@ SIZE="4570251"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_syn.prj,prj"
 STATE="utd"
-TIME="1778702814"
+TIME="1778768687"
 SIZE="25849"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_vm.sdc,syn_sdc"
@@ -1952,6 +1952,10 @@ VALUE "<project>\synthesis\audio_interface_debug\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 ENDLIST
+LIST synthesis_implementations
+VALUE "synthesis"
+VALUE "audio_interface_debug"
+ENDLIST
 ENDLIST
 LIST "MPFS_DISCOVERY_KIT_MSS::work"
 FILE "<project>\component\work\MPFS_DISCOVERY_KIT_MSS\MPFS_DISCOVERY_KIT_MSS.v,hdl"
@@ -2134,8 +2138,8 @@ NAME="Synplify Pro ME"
 FUNCTION="Synthesis"
 TOOL="Synplify Pro ME"
 LOCATION="C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Synplify_Pro\bin\synplify_pro.exe"
-PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
-BATCH=1
+PARAM=""
+BATCH=0
 LICENSE=""
 IS32BIT="1"
 EndProfile
@@ -2294,10 +2298,10 @@ ORIENTATION;HORIZONTAL
 Reports;Reports;0
 ReportsCurrentItem;Run Programming Action:cpu_system_PROGRAM.log
 Constraint Manager;Constraint Manager;0
-StartPage;StartPage;0
 HDL;hdl\corei2c_wrapper.v;0
+StartPage;StartPage;0
 SmartDesign;cpu_system;0
-ACTIVEVIEW;hdl\corei2c_wrapper.v
+ACTIVEVIEW;Reports
 ENDLIST
 LIST ModuleSubBlockList
 LIST "audio_interface::work","hdl\audio_interface.v","FALSE","FALSE"
@@ -2634,7 +2638,6 @@ SUBBLOCK "MPFS_DISCOVERY_KIT_MSS::work","component\work\MPFS_DISCOVERY_KIT_MSS\M
 SUBBLOCK "PFSOC_INIT_MONITOR_C0::work","component\work\PFSOC_INIT_MONITOR_C0\PFSOC_INIT_MONITOR_C0.v","TRUE","FALSE"
 SUBBLOCK "PF_CCC_C0::work","component\work\PF_CCC_C0\PF_CCC_C0.v","TRUE","FALSE"
 SUBBLOCK "audio_interface::work","hdl\audio_interface.v","FALSE","FALSE"
-SUBBLOCK "binary_counter::work","hdl\binary_counter.v","FALSE","FALSE"
 SUBBLOCK "corei2c_wrapper::work","hdl\corei2c_wrapper.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_AddressController::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4CrossBar\AddressController.v","FALSE","FALSE"

@@ -51,12 +51,26 @@ void e51(void)
     spinunlock(&hart_share->mutex_uart1);
 
     SysTick_Config();
-
     sprintf(info_string,"MPFS HAL Version Major %d, Minor %d patch %d\r\n",
              MPFS_HAL_VERSION_MAJOR,MPFS_HAL_VERSION_MINOR,
              MPFS_HAL_VERSION_PATCH);
     MSS_UART_polled_tx(g_uart, (const uint8_t*)info_string,(uint32_t)
                        strlen(info_string));
+
+    /* ---------------------------------- */
+    uint8_t rx_char;
+    size_t rx_size = 0;
+
+    sprintf(info_string, "Press any key to start the transaction...\r\n");
+    MSS_UART_polled_tx(g_uart, (const uint8_t*)info_string, (uint32_t)strlen(info_string));
+
+    while (rx_size == 0) {
+        rx_size = MSS_UART_get_rx(g_uart, &rx_char, 1);
+    }
+
+    sprintf(info_string, "Key '%c' received. Waking up Hart 1...\r\n", rx_char);
+    MSS_UART_polled_tx(g_uart, (const uint8_t*)info_string, (uint32_t)strlen(info_string));
+    /* ---------------------------------- */
 
 #if (IMAGE_LOADED_BY_BOOTLOADER == 0)
 
