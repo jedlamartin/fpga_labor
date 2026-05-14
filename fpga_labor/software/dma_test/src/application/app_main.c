@@ -56,15 +56,15 @@ void dma_test(void){
     uint32_t gpio_val;
     char msg[64];
 
-    gpio_val = MEM32(MY_FABRIC_GPIO_BASE + GPIO_IN_REG);
-    sprintf(msg, "DEBUG: GPIO Initial Value = 0x%08X\r\n", gpio_val);
-    MSS_UART_polled_tx_string(&g_mss_uart1_lo, (uint8_t*)msg);
+    //gpio_val = MEM32(MY_FABRIC_GPIO_BASE + GPIO_IN_REG);
+    //sprintf(msg, "DEBUG: GPIO Initial Value = 0x%08X\r\n", gpio_val);
+    //MSS_UART_polled_tx_string(&g_mss_uart1_lo, (uint8_t*)msg);
 
-    MSS_UART_polled_tx_string(&g_mss_uart1_lo, (uint8_t*)"GATE: Press and HOLD Button 0 to continue...\r\n");
+    //MSS_UART_polled_tx_string(&g_mss_uart1_lo, (uint8_t*)"GATE: Press and HOLD Button 0 to continue...\r\n");
 
-    while( MEM32(MY_FABRIC_GPIO_BASE + GPIO_IN_REG) == gpio_val ) {}
+    //while( MEM32(MY_FABRIC_GPIO_BASE + GPIO_IN_REG) == gpio_val ) {}
 
-    MSS_UART_polled_tx_string(&g_mss_uart1_lo, (uint8_t*)"GATE RELEASED!\r\n");
+    MSS_UART_polled_tx_string(&g_mss_uart1_lo, (uint8_t*)"Started DMA test!\r\n");
 
 
     uint8_t* p_tx = (uint8_t *)TX_BUF_PHYS_ADDR;

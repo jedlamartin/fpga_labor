@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Fri Mar 27 19:12:13 2026
+// Created by SmartDesign Sun May 10 18:16:14 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -88,8 +88,8 @@ create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_na
 "GL1_0_FABCLK_GATED_USED:false"  \
 "GL1_0_FABCLK_USED:true"  \
 "GL1_0_FREQ_SEL:false"  \
-"GL1_0_IS_USED:false"  \
-"GL1_0_OUT_FREQ:100"  \
+"GL1_0_IS_USED:true"  \
+"GL1_0_OUT_FREQ:18.432"  \
 "GL1_0_PHASE_INDEX:0"  \
 "GL1_0_PHASE_SEL:false"  \
 "GL1_0_PLL_PHASE:0"  \
@@ -267,6 +267,7 @@ module PF_CCC_C0(
     REF_CLK_0,
     // Outputs
     OUT0_FABCLK_0,
+    OUT1_FABCLK_0,
     PLL_LOCK_0
 );
 
@@ -279,15 +280,18 @@ input  REF_CLK_0;
 // Output
 //--------------------------------------------------------------------
 output OUT0_FABCLK_0;
+output OUT1_FABCLK_0;
 output PLL_LOCK_0;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
 wire   OUT0_FABCLK_0_net_0;
+wire   OUT1_FABCLK_0_net_0;
 wire   PLL_LOCK_0_net_0;
 wire   PLL_POWERDOWN_N_0;
 wire   REF_CLK_0;
 wire   OUT0_FABCLK_0_net_1;
+wire   OUT1_FABCLK_0_net_1;
 wire   PLL_LOCK_0_net_1;
 //--------------------------------------------------------------------
 // TiedOff Nets
@@ -314,6 +318,8 @@ assign DLL_DRI_WDATA_const_net_0 = 33'h000000000;
 //--------------------------------------------------------------------
 assign OUT0_FABCLK_0_net_1 = OUT0_FABCLK_0_net_0;
 assign OUT0_FABCLK_0       = OUT0_FABCLK_0_net_1;
+assign OUT1_FABCLK_0_net_1 = OUT1_FABCLK_0_net_0;
+assign OUT1_FABCLK_0       = OUT1_FABCLK_0_net_1;
 assign PLL_LOCK_0_net_1    = PLL_LOCK_0_net_0;
 assign PLL_LOCK_0          = PLL_LOCK_0_net_1;
 //--------------------------------------------------------------------
@@ -326,6 +332,7 @@ PF_CCC_C0_PF_CCC_C0_0_PF_CCC PF_CCC_C0_0(
         .PLL_POWERDOWN_N_0 ( PLL_POWERDOWN_N_0 ),
         // Outputs
         .OUT0_FABCLK_0     ( OUT0_FABCLK_0_net_0 ),
+        .OUT1_FABCLK_0     ( OUT1_FABCLK_0_net_0 ),
         .PLL_LOCK_0        ( PLL_LOCK_0_net_0 ) 
         );
 

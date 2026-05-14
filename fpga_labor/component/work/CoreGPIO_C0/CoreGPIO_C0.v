@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Wed Mar 25 18:24:16 2026
+// Created by SmartDesign Thu May 14 16:20:55 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -80,9 +80,9 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:CoreGPIO:3.2.102} -compon
 "IO_INT_TYPE_29:7"  \
 "IO_INT_TYPE_30:7"  \
 "IO_INT_TYPE_31:7"  \
-"IO_NUM:8"  \
-"IO_TYPE_0:0"  \
-"IO_TYPE_1:0"  \
+"IO_NUM:2"  \
+"IO_TYPE_0:1"  \
+"IO_TYPE_1:1"  \
 "IO_TYPE_2:0"  \
 "IO_TYPE_3:0"  \
 "IO_TYPE_4:1"  \
@@ -113,7 +113,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:CoreGPIO:3.2.102} -compon
 "IO_TYPE_29:0"  \
 "IO_TYPE_30:0"  \
 "IO_TYPE_31:0"  \
-"IO_VAL_0:0"  \
+"IO_VAL_0:1"  \
 "IO_VAL_1:0"  \
 "IO_VAL_2:0"  \
 "IO_VAL_3:0"  \
@@ -172,7 +172,7 @@ module CoreGPIO_C0(
 //--------------------------------------------------------------------
 // Input
 //--------------------------------------------------------------------
-input  [7:0]  GPIO_IN;
+input  [1:0]  GPIO_IN;
 input  [7:0]  PADDR;
 input         PCLK;
 input         PENABLE;
@@ -183,9 +183,9 @@ input         PWRITE;
 //--------------------------------------------------------------------
 // Output
 //--------------------------------------------------------------------
-output [7:0]  GPIO_OE;
-output [7:0]  GPIO_OUT;
-output [7:0]  INT;
+output [1:0]  GPIO_OE;
+output [1:0]  GPIO_OUT;
+output [1:0]  INT;
 output [31:0] PRDATA;
 output        PREADY;
 output        PSLVERR;
@@ -200,15 +200,15 @@ wire          PSEL;
 wire          APB_bif_PSLVERR;
 wire   [31:0] PWDATA;
 wire          PWRITE;
-wire   [7:0]  GPIO_IN;
-wire   [7:0]  GPIO_OE_net_0;
-wire   [7:0]  GPIO_OUT_net_0;
-wire   [7:0]  INT_net_0;
+wire   [1:0]  GPIO_IN;
+wire   [1:0]  GPIO_OE_net_0;
+wire   [1:0]  GPIO_OUT_net_0;
+wire   [1:0]  INT_net_0;
 wire          PCLK;
 wire          PRESETN;
-wire   [7:0]  INT_net_1;
-wire   [7:0]  GPIO_OUT_net_1;
-wire   [7:0]  GPIO_OE_net_1;
+wire   [1:0]  INT_net_1;
+wire   [1:0]  GPIO_OUT_net_1;
+wire   [1:0]  GPIO_OE_net_1;
 wire   [31:0] APB_bif_PRDATA_net_0;
 wire          APB_bif_PREADY_net_0;
 wire          APB_bif_PSLVERR_net_0;
@@ -216,11 +216,11 @@ wire          APB_bif_PSLVERR_net_0;
 // Top level output port assignments
 //--------------------------------------------------------------------
 assign INT_net_1             = INT_net_0;
-assign INT[7:0]              = INT_net_1;
+assign INT[1:0]              = INT_net_1;
 assign GPIO_OUT_net_1        = GPIO_OUT_net_0;
-assign GPIO_OUT[7:0]         = GPIO_OUT_net_1;
+assign GPIO_OUT[1:0]         = GPIO_OUT_net_1;
 assign GPIO_OE_net_1         = GPIO_OE_net_0;
-assign GPIO_OE[7:0]          = GPIO_OE_net_1;
+assign GPIO_OE[1:0]          = GPIO_OE_net_1;
 assign APB_bif_PRDATA_net_0  = APB_bif_PRDATA;
 assign PRDATA[31:0]          = APB_bif_PRDATA_net_0;
 assign APB_bif_PREADY_net_0  = APB_bif_PREADY;
@@ -298,9 +298,9 @@ CoreGPIO_C0_CoreGPIO_C0_0_CoreGPIO #(
         .IO_INT_TYPE_29  ( 7 ),
         .IO_INT_TYPE_30  ( 7 ),
         .IO_INT_TYPE_31  ( 7 ),
-        .IO_NUM          ( 8 ),
-        .IO_TYPE_0       ( 0 ),
-        .IO_TYPE_1       ( 0 ),
+        .IO_NUM          ( 2 ),
+        .IO_TYPE_0       ( 1 ),
+        .IO_TYPE_1       ( 1 ),
         .IO_TYPE_2       ( 0 ),
         .IO_TYPE_3       ( 0 ),
         .IO_TYPE_4       ( 1 ),
@@ -331,7 +331,7 @@ CoreGPIO_C0_CoreGPIO_C0_0_CoreGPIO #(
         .IO_TYPE_29      ( 0 ),
         .IO_TYPE_30      ( 0 ),
         .IO_TYPE_31      ( 0 ),
-        .IO_VAL_0        ( 0 ),
+        .IO_VAL_0        ( 1 ),
         .IO_VAL_1        ( 0 ),
         .IO_VAL_2        ( 0 ),
         .IO_VAL_3        ( 0 ),

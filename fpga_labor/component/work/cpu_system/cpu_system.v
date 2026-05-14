@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Wed Apr  8 20:32:17 2026
+// Created by SmartDesign Wed May 13 17:59:47 2026
 // Version: 2025.1 2025.1.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -13,7 +13,9 @@ module cpu_system(
     REFCLK_N,
     REF_CLK_0,
     SD_CD,
-    btn,
+    codec_bclk,
+    codec_lrclk,
+    codec_sdout,
     // Outputs
     A,
     ACT_N,
@@ -36,7 +38,9 @@ module cpu_system(
     SD_VOLT_EN,
     SD_VOLT_SEL,
     WE_N,
-    led,
+    codec_mclk,
+    codec_resetn,
+    codec_sdin,
     // Inouts
     DQ,
     DQS,
@@ -45,7 +49,9 @@ module cpu_system(
     SD_DATA0,
     SD_DATA1,
     SD_DATA2,
-    SD_DATA3
+    SD_DATA3,
+    scl,
+    sda
 );
 
 //--------------------------------------------------------------------
@@ -56,7 +62,9 @@ input         REFCLK;
 input         REFCLK_N;
 input         REF_CLK_0;
 input         SD_CD;
-input  [3:0]  btn;
+input         codec_bclk;
+input         codec_lrclk;
+input         codec_sdout;
 //--------------------------------------------------------------------
 // Output
 //--------------------------------------------------------------------
@@ -81,7 +89,9 @@ output        SD_VOLT_DIR_1_3;
 output        SD_VOLT_EN;
 output        SD_VOLT_SEL;
 output        WE_N;
-output [3:0]  led;
+output        codec_mclk;
+output        codec_resetn;
+output        codec_sdin;
 //--------------------------------------------------------------------
 // Inout
 //--------------------------------------------------------------------
@@ -93,6 +103,8 @@ inout         SD_DATA0;
 inout         SD_DATA1;
 inout         SD_DATA2;
 inout         SD_DATA3;
+inout         scl;
+inout         sda;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
@@ -104,13 +116,19 @@ wire          CAS_N_net_0;
 wire          CK0_net_0;
 wire          CK0_N_net_0;
 wire          CKE0_net_0;
+wire          codec_bclk;
+wire          codec_lrclk;
+wire          codec_mclk_net_0;
+wire   [0:0]  codec_resetn_net_0;
+wire          codec_sdin_net_0;
+wire          codec_sdout;
 wire          CoreAPB3_C0_0_APBmslave0_PENABLE;
 wire   [31:0] CoreAPB3_C0_0_APBmslave0_PRDATA;
 wire          CoreAPB3_C0_0_APBmslave0_PREADY;
 wire          CoreAPB3_C0_0_APBmslave0_PSELx;
 wire          CoreAPB3_C0_0_APBmslave0_PSLVERR;
-wire   [31:0] CoreAPB3_C0_0_APBmslave0_PWDATA;
 wire          CoreAPB3_C0_0_APBmslave0_PWRITE;
+wire          CoreAPB3_C0_0_APBmslave1_PSELx;
 wire   [1:0]  COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARBURST;
 wire   [3:0]  COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARCACHE;
 wire   [8:0]  COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARID;
@@ -236,14 +254,13 @@ wire   [0:0]  COREAXI4PROTOCONV_C0_0_S2MM_AXI4MM_INITR_WUSER;
 wire          COREAXI4PROTOCONV_C0_0_S2MM_AXI4MM_INITR_WVALID;
 wire          COREAXI4PROTOCONV_C0_0_S2MM_INT;
 wire          COREAXI4PROTOCONV_C1_0_MM2S_INT;
+wire   [1:1]  CoreGPIO_C0_0_GPIO_OUT1to1;
 wire          CORERESET_PF_C0_0_FABRIC_RESET_N;
 wire          CS0_N_net_0;
 wire   [1:0]  DM_net_0;
 wire   [15:0] DQ;
 wire   [1:0]  DQS;
 wire   [1:0]  DQS_N;
-wire   [3:0]  btn;
-wire   [4:7]  led_net_0;
 wire          MMUART_1_RXD;
 wire          MMUART_1_TXD_net_0;
 wire   [1:0]  MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_ARBURST;
@@ -291,7 +308,8 @@ wire   [31:0] MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWDATA;
 wire          MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWRITE;
 wire          MPFS_DISCOVERY_KIT_MSS_0_MSS_RESET_N_M2F;
 wire          ODT0_net_0;
-wire          PF_CCC_C0_0_OUT0_FABCLK_0_0;
+wire          PF_CCC_C0_0_OUT0_FABCLK_0_1;
+wire          PF_CCC_C0_0_OUT1_FABCLK_0;
 wire          PF_CCC_C0_0_PLL_LOCK_0;
 wire          PFSOC_INIT_MONITOR_C0_0_DEVICE_INIT_DONE;
 wire          PFSOC_INIT_MONITOR_C0_0_FABRIC_POR_N;
@@ -300,6 +318,7 @@ wire          REF_CLK_0;
 wire          REFCLK;
 wire          REFCLK_N;
 wire          RESET_N_net_0;
+wire          scl;
 wire          SD_CD;
 wire          SD_CLK_net_0;
 wire          SD_CMD;
@@ -312,6 +331,7 @@ wire          SD_VOLT_DIR_0_net_0;
 wire          SD_VOLT_DIR_1_3_net_0;
 wire          SD_VOLT_EN_net_0;
 wire          SD_VOLT_SEL_net_0;
+wire          sda;
 wire          WE_N_net_0;
 wire          RESET_N_net_1;
 wire          CKE0_net_1;
@@ -331,18 +351,18 @@ wire          SD_VOLT_CMD_DIR_net_1;
 wire          SD_VOLT_DIR_0_net_1;
 wire          SD_VOLT_DIR_1_3_net_1;
 wire          MMUART_1_TXD_net_1;
+wire          codec_resetn_net_1;
+wire          codec_mclk_net_1;
+wire          codec_sdin_net_1;
 wire   [1:0]  BA_net_1;
 wire   [1:0]  DM_net_1;
 wire   [13:0] A_net_1;
-wire   [3:0]  led_net_1;
-wire   [0:3]  GPIO_OUT_slice_0;
-wire   [7:0]  GPIO_IN_net_0;
-wire   [7:0]  GPIO_OUT_net_0;
+wire   [1:0]  GPIO_OUT_net_0;
 wire   [63:0] MSS_INT_F2M_net_0;
 //--------------------------------------------------------------------
 // TiedOff Nets
 //--------------------------------------------------------------------
-wire   [4:7]  GPIO_IN_const_net_0;
+wire   [1:0]  GPIO_IN_const_net_0;
 wire          VCC_net;
 wire          GND_net;
 wire   [2:63] MSS_INT_F2M_const_net_0;
@@ -386,6 +406,15 @@ wire   [3:0]  MASTER1_ARREGION_const_net_0;
 wire   [31:0] CoreAPB3_C0_0_APBmslave0_PADDR;
 wire   [7:0]  CoreAPB3_C0_0_APBmslave0_PADDR_0;
 wire   [7:0]  CoreAPB3_C0_0_APBmslave0_PADDR_0_7to0;
+wire   [8:0]  CoreAPB3_C0_0_APBmslave0_PADDR_1;
+wire   [8:0]  CoreAPB3_C0_0_APBmslave0_PADDR_1_8to0;
+wire   [31:0] CoreAPB3_C0_0_APBmslave0_PWDATA;
+wire   [7:0]  CoreAPB3_C0_0_APBmslave0_PWDATA_0;
+wire   [7:0]  CoreAPB3_C0_0_APBmslave0_PWDATA_0_7to0;
+wire   [7:0]  CoreAPB3_C0_0_APBmslave1_PRDATA;
+wire   [31:0] CoreAPB3_C0_0_APBmslave1_PRDATA_0;
+wire   [31:8] CoreAPB3_C0_0_APBmslave1_PRDATA_0_31to8;
+wire   [7:0]  CoreAPB3_C0_0_APBmslave1_PRDATA_0_7to0;
 wire   [31:0] COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR;
 wire   [10:0] COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR_0;
 wire   [10:0] COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR_0_10to0;
@@ -443,7 +472,7 @@ wire   [1:1]  MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_AWLOCK_0_1to1;
 //--------------------------------------------------------------------
 // Constant assignments
 //--------------------------------------------------------------------
-assign GPIO_IN_const_net_0          = 4'h0;
+assign GPIO_IN_const_net_0          = 2'h0;
 assign VCC_net                      = 1'b1;
 assign GND_net                      = 1'b0;
 assign MSS_INT_F2M_const_net_0      = 62'h0000000000000000;
@@ -520,30 +549,42 @@ assign SD_VOLT_DIR_1_3_net_1 = SD_VOLT_DIR_1_3_net_0;
 assign SD_VOLT_DIR_1_3       = SD_VOLT_DIR_1_3_net_1;
 assign MMUART_1_TXD_net_1    = MMUART_1_TXD_net_0;
 assign MMUART_1_TXD          = MMUART_1_TXD_net_1;
+assign codec_resetn_net_1    = codec_resetn_net_0[0];
+assign codec_resetn          = codec_resetn_net_1;
+assign codec_mclk_net_1      = codec_mclk_net_0;
+assign codec_mclk            = codec_mclk_net_1;
+assign codec_sdin_net_1      = codec_sdin_net_0;
+assign codec_sdin            = codec_sdin_net_1;
 assign BA_net_1              = BA_net_0;
 assign BA[1:0]               = BA_net_1;
 assign DM_net_1              = DM_net_0;
 assign DM[1:0]               = DM_net_1;
 assign A_net_1               = A_net_0;
 assign A[13:0]               = A_net_1;
-assign led_net_1             = led_net_0;
-assign led[3:0]              = led_net_1;
 //--------------------------------------------------------------------
 // Slices assignments
 //--------------------------------------------------------------------
+assign codec_resetn_net_0[0]                    = GPIO_OUT_net_0[0:0];
 assign COREAXI4PROTOCONV_C0_0_I_AXI4S_TDEST0to1 = { COREAXI4PROTOCONV_C0_0_MM2S_AXI4S_INITR_0_TDEST[0] , COREAXI4PROTOCONV_C0_0_MM2S_AXI4S_INITR_0_TDEST[1] };
-assign led_net_0                                = { GPIO_OUT_net_0[4] , GPIO_OUT_net_0[5] , GPIO_OUT_net_0[6] , GPIO_OUT_net_0[7] };
-assign GPIO_OUT_slice_0                         = { GPIO_OUT_net_0[0] , GPIO_OUT_net_0[1] , GPIO_OUT_net_0[2] , GPIO_OUT_net_0[3] };
+assign CoreGPIO_C0_0_GPIO_OUT1to1[1]            = GPIO_OUT_net_0[1:1];
 //--------------------------------------------------------------------
 // Concatenation assignments
 //--------------------------------------------------------------------
-assign GPIO_IN_net_0     = { 4'h0 , { btn[0] , btn[1] , btn[2] , btn[3] } };
 assign MSS_INT_F2M_net_0 = { 62'h0000000000000000 , COREAXI4PROTOCONV_C0_0_S2MM_INT , COREAXI4PROTOCONV_C1_0_MM2S_INT };
 //--------------------------------------------------------------------
 // Bus Interface Nets Assignments - Unequal Pin Widths
 //--------------------------------------------------------------------
 assign CoreAPB3_C0_0_APBmslave0_PADDR_0 = { CoreAPB3_C0_0_APBmslave0_PADDR_0_7to0 };
 assign CoreAPB3_C0_0_APBmslave0_PADDR_0_7to0 = CoreAPB3_C0_0_APBmslave0_PADDR[7:0];
+assign CoreAPB3_C0_0_APBmslave0_PADDR_1 = { CoreAPB3_C0_0_APBmslave0_PADDR_1_8to0 };
+assign CoreAPB3_C0_0_APBmslave0_PADDR_1_8to0 = CoreAPB3_C0_0_APBmslave0_PADDR[8:0];
+
+assign CoreAPB3_C0_0_APBmslave0_PWDATA_0 = { CoreAPB3_C0_0_APBmslave0_PWDATA_0_7to0 };
+assign CoreAPB3_C0_0_APBmslave0_PWDATA_0_7to0 = CoreAPB3_C0_0_APBmslave0_PWDATA[7:0];
+
+assign CoreAPB3_C0_0_APBmslave1_PRDATA_0 = { CoreAPB3_C0_0_APBmslave1_PRDATA_0_31to8, CoreAPB3_C0_0_APBmslave1_PRDATA_0_7to0 };
+assign CoreAPB3_C0_0_APBmslave1_PRDATA_0_31to8 = 24'h0;
+assign CoreAPB3_C0_0_APBmslave1_PRDATA_0_7to0 = CoreAPB3_C0_0_APBmslave1_PRDATA[7:0];
 
 assign COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR_0 = { COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR_0_10to0 };
 assign COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR_0_10to0 = COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR[10:0];
@@ -602,6 +643,37 @@ assign MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_AWLOCK_0_1to1 = 1'b0;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
+//--------audio_interface
+audio_interface audio_interface_0(
+        // Inputs
+        .clk         ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
+        .mclk_in     ( PF_CCC_C0_0_OUT1_FABCLK_0 ),
+        .rst_n       ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
+        .en          ( CoreGPIO_C0_0_GPIO_OUT1to1 ),
+        .codec_lrclk ( codec_lrclk ),
+        .codec_bclk  ( codec_bclk ),
+        .codec_sdout ( codec_sdout ),
+        // Outputs
+        .codec_mclk  ( codec_mclk_net_0 ),
+        .codec_sdin  ( codec_sdin_net_0 ),
+        .adc_valid_l (  ),
+        .adc_valid_r (  ),
+        .adc_data    (  ) 
+        );
+
+//--------binary_counter
+binary_counter #( 
+        .MAX_COUNT ( 63 ),
+        .WIDTH     ( 6 ) )
+binary_counter_0(
+        // Inputs
+        .clk       ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
+        .rst_n     ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
+        // Outputs
+        .sample_en (  ),
+        .count     (  ) 
+        );
+
 //--------CoreAPB3_C0
 CoreAPB3_C0 CoreAPB3_C0_0(
         // Inputs
@@ -610,15 +682,19 @@ CoreAPB3_C0 CoreAPB3_C0_0(
         .PWRITE    ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWRITE ),
         .PREADYS0  ( CoreAPB3_C0_0_APBmslave0_PREADY ),
         .PSLVERRS0 ( CoreAPB3_C0_0_APBmslave0_PSLVERR ),
+        .PREADYS1  ( VCC_net ), // tied to 1'b1 from definition
+        .PSLVERRS1 ( GND_net ), // tied to 1'b0 from definition
         .PADDR     ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PADDR ),
         .PWDATA    ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWDATA ),
         .PRDATAS0  ( CoreAPB3_C0_0_APBmslave0_PRDATA ),
+        .PRDATAS1  ( CoreAPB3_C0_0_APBmslave1_PRDATA_0 ),
         // Outputs
         .PREADY    ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PREADY ),
         .PSLVERR   ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PSLVERR ),
         .PSELS0    ( CoreAPB3_C0_0_APBmslave0_PSELx ),
         .PENABLES  ( CoreAPB3_C0_0_APBmslave0_PENABLE ),
         .PWRITES   ( CoreAPB3_C0_0_APBmslave0_PWRITE ),
+        .PSELS1    ( CoreAPB3_C0_0_APBmslave1_PSELx ),
         .PRDATA    ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PRDATA ),
         .PADDRS    ( CoreAPB3_C0_0_APBmslave0_PADDR ),
         .PWDATAS   ( CoreAPB3_C0_0_APBmslave0_PWDATA ) 
@@ -627,7 +703,7 @@ CoreAPB3_C0 CoreAPB3_C0_0(
 //--------COREAXI4INTERCONNECT_C0
 COREAXI4INTERCONNECT_C0 COREAXI4INTERCONNECT_C0_0(
         // Inputs
-        .ACLK             ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .ACLK             ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .ARESETN          ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
         .SLAVE0_AWREADY   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave0_AWREADY ),
         .SLAVE0_WREADY    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave0_WREADY ),
@@ -723,7 +799,7 @@ COREAXI4INTERCONNECT_C0 COREAXI4INTERCONNECT_C0_0(
 //--------COREAXI4INTERCONNECT_C1
 COREAXI4INTERCONNECT_C1 COREAXI4INTERCONNECT_C1_0(
         // Inputs
-        .ACLK             ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .ACLK             ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .ARESETN          ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
         .SLAVE0_AWREADY   ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_AWREADY ),
         .SLAVE0_WREADY    ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_WREADY ),
@@ -863,7 +939,7 @@ COREAXI4INTERCONNECT_C1 COREAXI4INTERCONNECT_C1_0(
 //--------COREAXI4PROTOCONV_C0
 COREAXI4PROTOCONV_C0 COREAXI4PROTOCONV_C0_0(
         // Inputs
-        .ACLK               ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .ACLK               ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .RESETN             ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
         .T_AXI4L_AWVALID    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave0_AWVALID ),
         .T_AXI4L_WVALID     ( COREAXI4INTERCONNECT_C0_0_AXI4mslave0_WVALID ),
@@ -940,11 +1016,11 @@ COREAXI4PROTOCONV_C0 COREAXI4PROTOCONV_C0_0(
 CoreGPIO_C0 CoreGPIO_C0_0(
         // Inputs
         .PRESETN  ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
-        .PCLK     ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .PCLK     ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .PSEL     ( CoreAPB3_C0_0_APBmslave0_PSELx ),
         .PENABLE  ( CoreAPB3_C0_0_APBmslave0_PENABLE ),
         .PWRITE   ( CoreAPB3_C0_0_APBmslave0_PWRITE ),
-        .GPIO_IN  ( GPIO_IN_net_0 ),
+        .GPIO_IN  ( GPIO_IN_const_net_0 ),
         .PADDR    ( CoreAPB3_C0_0_APBmslave0_PADDR_0 ),
         .PWDATA   ( CoreAPB3_C0_0_APBmslave0_PWDATA ),
         // Outputs
@@ -956,10 +1032,41 @@ CoreGPIO_C0 CoreGPIO_C0_0(
         .PRDATA   ( CoreAPB3_C0_0_APBmslave0_PRDATA ) 
         );
 
+//--------corei2c_wrapper
+corei2c_wrapper #( 
+        .BAUD_RATE_FIXED         ( 0 ),
+        .BAUD_RATE_VALUE         ( 0 ),
+        .BCLK_ENABLED            ( 0 ),
+        .FIXED_SLAVE0_ADDR_EN    ( 0 ),
+        .FIXED_SLAVE0_ADDR_VALUE ( 0 ),
+        .FREQUENCY               ( 100 ),
+        .GLITCHREG_NUM           ( 3 ),
+        .I2C_NUM                 ( 1 ),
+        .IPMI_EN                 ( 0 ),
+        .OPERATING_MODE          ( 0 ),
+        .SMB_EN                  ( 0 ) )
+corei2c_wrapper_0(
+        // Inputs
+        .presetn ( CORERESET_PF_C0_0_FABRIC_RESET_N ),
+        .pclk    ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
+        .bclk    ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
+        .psel    ( CoreAPB3_C0_0_APBmslave1_PSELx ),
+        .penable ( CoreAPB3_C0_0_APBmslave0_PENABLE ),
+        .pwrite  ( CoreAPB3_C0_0_APBmslave0_PWRITE ),
+        .paddr   ( CoreAPB3_C0_0_APBmslave0_PADDR_1 ),
+        .pwdata  ( CoreAPB3_C0_0_APBmslave0_PWDATA_0 ),
+        // Outputs
+        .int_out (  ),
+        .prdata  ( CoreAPB3_C0_0_APBmslave1_PRDATA ),
+        // Inouts
+        .scl     ( scl ),
+        .sda     ( sda ) 
+        );
+
 //--------CORERESET_PF_C0
 CORERESET_PF_C0 CORERESET_PF_C0_0(
         // Inputs
-        .CLK                ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .CLK                ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .EXT_RST_N          ( MPFS_DISCOVERY_KIT_MSS_0_MSS_RESET_N_M2F ),
         .BANK_x_VDDI_STATUS ( VCC_net ),
         .BANK_y_VDDI_STATUS ( VCC_net ),
@@ -976,7 +1083,7 @@ CORERESET_PF_C0 CORERESET_PF_C0_0(
 //--------MPFS_DISCOVERY_KIT_MSS
 MPFS_DISCOVERY_KIT_MSS MPFS_DISCOVERY_KIT_MSS_0(
         // Inputs
-        .FIC_0_ACLK           ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .FIC_0_ACLK           ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .FIC_0_AXI4_S_AWLOCK  ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_AWLOCK_0 ),
         .FIC_0_AXI4_S_AWVALID ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_AWVALID ),
         .FIC_0_AXI4_S_WLAST   ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_WLAST ),
@@ -985,14 +1092,14 @@ MPFS_DISCOVERY_KIT_MSS MPFS_DISCOVERY_KIT_MSS_0(
         .FIC_0_AXI4_S_ARLOCK  ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_ARLOCK_0 ),
         .FIC_0_AXI4_S_ARVALID ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_ARVALID ),
         .FIC_0_AXI4_S_RREADY  ( COREAXI4INTERCONNECT_C1_0_AXI4mslave0_RREADY ),
-        .FIC_1_ACLK           ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .FIC_1_ACLK           ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .FIC_1_AXI4_M_AWREADY ( MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_AWREADY ),
         .FIC_1_AXI4_M_WREADY  ( MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_WREADY ),
         .FIC_1_AXI4_M_BVALID  ( MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_BVALID ),
         .FIC_1_AXI4_M_ARREADY ( MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_ARREADY ),
         .FIC_1_AXI4_M_RLAST   ( MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_RLAST ),
         .FIC_1_AXI4_M_RVALID  ( MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_RVALID ),
-        .FIC_3_PCLK           ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .FIC_3_PCLK           ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .FIC_3_APB_M_PREADY   ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PREADY ),
         .FIC_3_APB_M_PSLVERR  ( MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PSLVERR ),
         .MSS_RESET_N_F2M      ( VCC_net ),
@@ -1114,7 +1221,8 @@ PF_CCC_C0 PF_CCC_C0_0(
         .REF_CLK_0         ( REF_CLK_0 ),
         .PLL_POWERDOWN_N_0 ( VCC_net ),
         // Outputs
-        .OUT0_FABCLK_0     ( PF_CCC_C0_0_OUT0_FABCLK_0_0 ),
+        .OUT0_FABCLK_0     ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
+        .OUT1_FABCLK_0     ( PF_CCC_C0_0_OUT1_FABCLK_0 ),
         .PLL_LOCK_0        ( PF_CCC_C0_0_PLL_LOCK_0 ) 
         );
 

@@ -5,6 +5,13 @@
   <drc>
     <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
+    <message> bus interface data width mismatch</message>
+    <detail> There is a data width mismatch between CoreAPB3_C0_0:APBmslave1:PWDATAS[0-31] and corei2c_wrapper_0:APBslave:pwdata[0-7] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/CoreAPB3_C0_0:APBmslave1</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
     <message> bus interface ID width mismatch</message>
     <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C0_0:AXI4mslave0:SLAVE0_AWID[0-8] and COREAXI4PROTOCONV_C0_0:AXI4L_TRGT:[0--1] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C0_0:AXI4mslave0</crossprobe>

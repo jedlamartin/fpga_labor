@@ -1,0 +1,8 @@
+DESIGN=cpu_system
+DESDIR=C:\Users\Martin\Libero\fpga_labor\fpga_labor\designer\cpu_system
+TARGET_DIR=C:\Users\Martin\Libero\fpga_labor\fpga_labor\designer\cpu_system
+FAM=PolarFireSoC
+DIE=PA5SOC095T
+PACKAGE=fcsg325
+SPEED=-1
+PDC_FILE=C:\Users\Martin\Libero\fpga_labor\fpga_labor\constraint\io\user.pdc,,

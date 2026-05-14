@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Wed Mar 25 18:24:16 2026
+// Created by Microsemi SmartDesign Thu May 14 16:20:55 2026
 // Parameters for CoreGPIO
 //--------------------------------------------------------------------
 
@@ -70,9 +70,9 @@ parameter IO_INT_TYPE_28 = 7;
 parameter IO_INT_TYPE_29 = 7;
 parameter IO_INT_TYPE_30 = 7;
 parameter IO_INT_TYPE_31 = 7;
-parameter IO_NUM = 8;
-parameter IO_TYPE_0 = 0;
-parameter IO_TYPE_1 = 0;
+parameter IO_NUM = 2;
+parameter IO_TYPE_0 = 1;
+parameter IO_TYPE_1 = 1;
 parameter IO_TYPE_2 = 0;
 parameter IO_TYPE_3 = 0;
 parameter IO_TYPE_4 = 1;
@@ -103,7 +103,7 @@ parameter IO_TYPE_28 = 0;
 parameter IO_TYPE_29 = 0;
 parameter IO_TYPE_30 = 0;
 parameter IO_TYPE_31 = 0;
-parameter IO_VAL_0 = 0;
+parameter IO_VAL_0 = 1;
 parameter IO_VAL_1 = 0;
 parameter IO_VAL_2 = 0;
 parameter IO_VAL_3 = 0;

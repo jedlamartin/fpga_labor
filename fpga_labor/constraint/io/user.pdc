@@ -6,7 +6,7 @@
 
 # Family: PolarFireSoC , Die: MPFS095T , Package: FCSG325
 
-# Date generated: Mon Mar  9 19:42:55 2026 
+# Date generated: Wed May 13 23:00:52 2026 
 
 
 # 
@@ -32,60 +32,57 @@ set_io -port_name REF_CLK_0  \
     -DIRECTION INPUT
 
 
-set_io -port_name {btn[0]}  \
-    -pin_name U17           \
-    -fixed true             \
-    -io_std LVCMOS18        \
+set_io -port_name codec_bclk  \
+    -pin_name F19             \
+    -fixed true               \
+    -RES_PULL None            \
     -DIRECTION INPUT
 
 
-set_io -port_name {btn[1]}  \
-    -pin_name Y16           \
-    -fixed true             \
-    -io_std LVCMOS18        \
+set_io -port_name codec_lrclk  \
+    -pin_name D18              \
+    -fixed true                \
+    -RES_PULL None             \
     -DIRECTION INPUT
 
 
-set_io -port_name {btn[2]}  \
-    -pin_name R17           \
-    -fixed true             \
-    -io_std LVCMOS18        \
+set_io -port_name codec_mclk  \
+    -pin_name D17             \
+    -fixed true               \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name codec_resetn  \
+    -pin_name E21               \
+    -fixed true                 \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name codec_sdin  \
+    -pin_name A19             \
+    -fixed true               \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name codec_sdout  \
+    -pin_name A15              \
+    -fixed true                \
+    -RES_PULL None             \
     -DIRECTION INPUT
 
 
-set_io -port_name {btn[3]}  \
-    -pin_name AA15          \
-    -fixed true             \
-    -io_std LVCMOS18        \
-    -DIRECTION INPUT
+set_io -port_name scl  \
+    -pin_name B19      \
+    -fixed true        \
+    -RES_PULL None     \
+    -DIRECTION INOUT
 
 
-set_io -port_name {led[0]}  \
-    -pin_name T18           \
-    -fixed true             \
-    -io_std LVCMOS18        \
-    -DIRECTION OUTPUT
-
-
-set_io -port_name {led[1]}  \
-    -pin_name V17           \
-    -fixed true             \
-    -io_std LVCMOS18        \
-    -DIRECTION OUTPUT
-
-
-set_io -port_name {led[2]}  \
-    -pin_name U20           \
-    -fixed true             \
-    -io_std LVCMOS18        \
-    -DIRECTION OUTPUT
-
-
-set_io -port_name {led[3]}  \
-    -pin_name U21           \
-    -fixed true             \
-    -io_std LVCMOS18        \
-    -DIRECTION OUTPUT
+set_io -port_name sda  \
+    -pin_name B20      \
+    -fixed true        \
+    -RES_PULL None     \
+    -DIRECTION INOUT
 
 
 
@@ -105,3 +102,29 @@ set_io -port_name {led[3]}  \
 #Ports using Dedicated Pins
 
 #
+
+set_io -port_name atck  \
+    -pin_name A8        \
+    -DIRECTION INPUT
+
+
+set_io -port_name atdi  \
+    -pin_name A9        \
+    -DIRECTION INPUT
+
+
+set_io -port_name atdo  \
+    -pin_name A7        \
+    -DIRECTION OUTPUT
+
+
+set_io -port_name atms  \
+    -pin_name B7        \
+    -DIRECTION INPUT
+
+
+set_io -port_name atrstb  \
+    -pin_name B9          \
+    -DIRECTION INPUT
+
+
