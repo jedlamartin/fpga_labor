@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Mon May 11 12:58:02 2026
+// Created by Microsemi SmartDesign Fri May 29 18:37:49 2026
 // Parameters for COREI2C
 //--------------------------------------------------------------------
 
@@ -7,7 +7,7 @@
 parameter ADD_SLAVE1_ADDRESS_EN = 0;
 parameter BAUD_RATE_FIXED = 0;
 parameter BAUD_RATE_VALUE = 0;
-parameter BCLK_ENABLED = 1;
+parameter BCLK_ENABLED = 0;
 parameter FIXED_SLAVE0_ADDR_EN = 0;
 parameter FIXED_SLAVE0_ADDR_VALUE = 'h0;
 parameter FIXED_SLAVE1_ADDR_EN = 0;

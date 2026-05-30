@@ -1,0 +1,8 @@
+Custom_FPGA_device=true
+FPGA_device=MPFS095T-FCSG325E
+FPGA_family=PolarFireSoC
+Hybrid_system=hw_only
+constraints=set_synthesis_top_module; ;FIRFilterStreaming_top\nCLOCK_PERIOD; ;10\nset_custom_test_bench_module;;streaming_tb\nset_custom_test_bench_file;;streaming_tb.v\n
+eclipse.preferences.version=1
+test_bench_file=streaming_tb.v 
+test_bench_module=streaming_tb

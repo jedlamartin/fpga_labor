@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Mon May 11 12:58:02 2026
-// Version: 2025.1 2025.1.0.14
+// Created by SmartDesign Fri May 29 18:37:49 2026
+// Version: 2025.2 2025.2.0.14
 //////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 100ps
@@ -17,7 +17,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREI2C:7.2.101} -compone
 "ADD_SLAVE1_ADDRESS_EN:false"  \
 "BAUD_RATE_FIXED:false"  \
 "BAUD_RATE_VALUE:0"  \
-"BCLK_ENABLED:true"  \
+"BCLK_ENABLED:false"  \
 "FIXED_SLAVE0_ADDR_EN:false"  \
 "FIXED_SLAVE0_ADDR_VALUE:0x0"  \
 "FIXED_SLAVE1_ADDR_EN:false"  \
@@ -34,7 +34,6 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREI2C:7.2.101} -compone
 // COREI2C_C0
 module COREI2C_C0(
     // Inputs
-    BCLK,
     PADDR,
     PCLK,
     PENABLE,
@@ -54,7 +53,6 @@ module COREI2C_C0(
 //--------------------------------------------------------------------
 // Input
 //--------------------------------------------------------------------
-input        BCLK;
 input  [8:0] PADDR;
 input        PCLK;
 input        PENABLE;
@@ -80,7 +78,6 @@ wire   [7:0] APBslave_PRDATA;
 wire         PSEL;
 wire   [7:0] PWDATA;
 wire         PWRITE;
-wire         BCLK;
 wire   [0:0] INT_net_0;
 wire         PCLK;
 wire         PRESETN;
@@ -119,7 +116,7 @@ COREI2C_C0_COREI2C_C0_0_COREI2C #(
         .ADD_SLAVE1_ADDRESS_EN   ( 0 ),
         .BAUD_RATE_FIXED         ( 0 ),
         .BAUD_RATE_VALUE         ( 0 ),
-        .BCLK_ENABLED            ( 1 ),
+        .BCLK_ENABLED            ( 0 ),
         .FIXED_SLAVE0_ADDR_EN    ( 0 ),
         .FIXED_SLAVE0_ADDR_VALUE ( 'h0 ),
         .FIXED_SLAVE1_ADDR_EN    ( 0 ),
@@ -132,14 +129,14 @@ COREI2C_C0_COREI2C_C0_0_COREI2C #(
         .SMB_EN                  ( 0 ) )
 COREI2C_C0_0(
         // Inputs
-        .BCLK        ( BCLK ),
-        .PADDR       ( PADDR ),
+        .BCLK        ( GND_net ), // tied to 1'b0 from definition
         .PCLK        ( PCLK ),
         .PENABLE     ( PENABLE ),
         .PRESETN     ( PRESETN ),
         .PSEL        ( PSEL ),
-        .PWDATA      ( PWDATA ),
         .PWRITE      ( PWRITE ),
+        .PADDR       ( PADDR ),
+        .PWDATA      ( PWDATA ),
         .SCLI        ( SCLI ),
         .SDAI        ( SDAI ),
         .SMBALERT_NI ( GND_net ), // tied to 1'b0 from definition

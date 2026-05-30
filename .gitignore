@@ -1,10 +1,63 @@
+# ====================================================================
+# Libero SoC Project Files & Auto-Generated Folders
+# ====================================================================
 synthesis/
 designer/
 simulation/
 tooldata/
 phy_synthesis/
+smartgen/
+component/work/
+stimulus/
+viewdraw/
+
+# Core project recovery files that should NOT be ignored:
+!*.prjx
+!*.cxz
+
+# ====================================================================
+# Generic Tool Logs, Diagnostics, and Tcl Journals
+# ====================================================================
 *.log
 *.txt
 *.jou
 *.core
+*.err
+*.xml
+*.lock
+*.tcl.rc
+
+# Keep documentation PDFs if they are inside a docs folder
+!docs/*.pdf
+
+# ====================================================================
+# Synopsys Synplify & Identify Debugger Artifacts
+# ====================================================================
 *_syn.prj
+*.cdc
+*.impl
+*.srr
+*.srs
+*.srm
+*.swi
+*.fdb
+*.snd
+*.hdb
+identify.db
+
+# ====================================================================
+# HLS Workspace & Eclipse IDE Junk (Skipping metadata/plugin histories)
+# ====================================================================
+.metadata/
+.recommenders/
+**/hls_output/.hls/
+**/hls_output/reports/
+**/*.bc
+**/*.sw_binary
+
+# Retain the critical Eclipse configuration structures to share project layouts
+!.project
+!.cproject
+!.settings/
+!**/src/
+!**/config.tcl

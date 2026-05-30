@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Sun May 10 18:16:14 2026
-// Version: 2025.1 2025.1.0.14
+// Created by SmartDesign Tue May 19 13:50:08 2026
+// Version: 2025.2 2025.2.0.14
 //////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 100ps
@@ -13,7 +13,7 @@
 # Family: PolarFireSoC
 # Part Number: MPFS095T-1FCSG325E
 # Create and Configure the core component PF_CCC_C0
-create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.220} -component_name {PF_CCC_C0} -params {\
+create_and_configure_core -core_vlnv {Actel:SgCore:PF_CCC:2.2.222} -component_name {PF_CCC_C0} -params {\
 "DLL_CLK_0_BANKCLK_EN:false"  \
 "DLL_CLK_0_DEDICATED_EN:false"  \
 "DLL_CLK_0_FABCLK_EN:false"  \
@@ -325,7 +325,7 @@ assign PLL_LOCK_0          = PLL_LOCK_0_net_1;
 //--------------------------------------------------------------------
 // Component instances
 //--------------------------------------------------------------------
-//--------PF_CCC_C0_PF_CCC_C0_0_PF_CCC   -   Actel:SgCore:PF_CCC:2.2.220
+//--------PF_CCC_C0_PF_CCC_C0_0_PF_CCC   -   Actel:SgCore:PF_CCC:2.2.222
 PF_CCC_C0_PF_CCC_C0_0_PF_CCC PF_CCC_C0_0(
         // Inputs
         .REF_CLK_0         ( REF_CLK_0 ),

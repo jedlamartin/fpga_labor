@@ -1,0 +1,40 @@
+{
+    "INTERFACES": [
+        {
+            "MODULE": "bypass_hw_top",
+            "NAME": "axi4target",
+            "OPTIONS": {
+                "address base": "0x0",
+                "address span": "0x4",
+                "address width": 2,
+                "data width": 64,
+                "needs soft dma": false
+            },
+            "TYPE": "AXI4T"
+        },
+        {
+            "MODULE": "bypass_hw_top",
+            "NAME": "input_l_axi4stream",
+            "OPTIONS": {
+                "data width": 24
+            },
+            "TYPE": "AXIStream"
+        },
+        {
+            "MODULE": "bypass_hw_top",
+            "NAME": "input_r_axi4stream",
+            "OPTIONS": {
+                "data width": 24
+            },
+            "TYPE": "AXIStream"
+        },
+        {
+            "MODULE": "bypass_hw_top",
+            "NAME": "res_axi4stream",
+            "OPTIONS": {
+                "data width": 40
+            },
+            "TYPE": "AXIStream"
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+// ----------------------------------------------------------------------------
+// Smart High-Level Synthesis Tool Version 2025.2
+// Copyright (c) 2015-2025 Microchip Technology Inc. All Rights Reserved.
+// For support, please visit https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=techsupport&redirect=true&version=latest.
+// Date: Fri May 29 17:57:38 2026
+// ----------------------------------------------------------------------------
+Found Function: bypass_hw
+Label: bypass_hw
+ID: _Z9bypass_hwN3hls7ap_uintILj16EEERNS_4FIFOINS_8ap_fixptILj24ELi1ELNS_19AP_FIXPT_QUANT_MODEE0ELNS_18AP_FIXPT_OVER_MODEE0EEELb0EEES8_RNS2_I11axis_packetLb0EEE
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Scheduled.
+MII = 2
+II = 2
+Final Pipeline Schedule:
+Total pipeline stages: 2
+Stage: 0
+Time: 0 Stage: 0 instr:   %load = load i16, i16* @_ZZ9bypass_hwN3hls7ap_uintILj16EEERNS_4FIFOINS_8ap_fixptILj24ELi1ELNS_19AP_FIXPT_QUANT_MODEE0ELNS_18AP_FIXPT_OVER_MODEE0EEELb0EEES8_RNS2_I11axis_packetLb0EEEE3cnt, align 2, !MSB !6114, !LSB !6115, !ExtendFrom !6114
+Time: 0 Stage: 0 instr:   %add = add i16 %load, 1, !dbg !6116, !MSB !6114, !LSB !6115, !ExtendFrom !6114
+Time: 0 Stage: 0 instr:   %fifoVal = tail call i24 @__legup_fifo_read.i24(i24* nonnull %input_l) #2, !dbg !6130
+Time: 0 Stage: 0 instr:   %bit_concat2 = call i32 @hls_bit_concat_24_8(i24 %fifoVal, i64 24, i8 0, i64 8), !dbg !6137, !MSB !6183, !LSB !6184, !ExtendFrom !6183
+Time: 0 Stage: 0 instr:   %icmp = icmp eq i16 %add, %tlast_dnum, !dbg !6185, !MSB !6115, !LSB !6115, !ExtendFrom !6115
+Time: 0 Stage: 0 instr:   %bit_concat3 = call i8 @hls_bit_concat_7_1(i7 0, i64 7, i1 %icmp, i64 1), !dbg !6200, !MSB !6115, !LSB !6115, !ExtendFrom !6115
+Time: 0 Stage: 0 instr:   tail call void @__legup_fifo_group.i32.i8(i32* nonnull %res.data, i8* nonnull %res.last) #2, !dbg !6201
+Time: 0 Stage: 0 instr:   %add4 = add i16 %load, 2, !dbg !6208, !MSB !6114, !LSB !6115, !ExtendFrom !6114
+Time: 0 Stage: 0 instr:   %select = select i1 %icmp, i16 1, i16 %add4, !dbg !6208, !MSB !6114, !LSB !6115, !ExtendFrom !6114
+Time: 0 Stage: 0 instr:   %fifoVal5 = tail call i24 @__legup_fifo_read.i24(i24* nonnull %input_r) #2, !dbg !6211
+Time: 0 Stage: 0 instr:   %bit_concat6 = call i32 @hls_bit_concat_24_8(i24 %fifoVal5, i64 24, i8 0, i64 8), !dbg !6213, !MSB !6183, !LSB !6184, !ExtendFrom !6183
+Time: 0 Stage: 0 instr:   %icmp7 = icmp eq i16 %select, %tlast_dnum, !dbg !6217, !MSB !6115, !LSB !6115, !ExtendFrom !6115
+Time: 0 Stage: 0 instr:   %bit_concat = call i8 @hls_bit_concat_7_1(i7 0, i64 7, i1 %icmp7, i64 1), !dbg !6219, !MSB !6115, !LSB !6115, !ExtendFrom !6115
+Time: 0 Stage: 0 instr:   tail call void @__legup_fifo_group.i32.i8(i32* nonnull %res.data, i8* nonnull %res.last) #2, !dbg !6220
+Time: 0 Stage: 0 instr:   %select8 = select i1 %icmp7, i16 0, i16 %select, !dbg !6222, !MSB !6114, !LSB !6115, !ExtendFrom !6114
+Time: 0 Stage: 0 instr:   store i16 %select8, i16* @_ZZ9bypass_hwN3hls7ap_uintILj16EEERNS_4FIFOINS_8ap_fixptILj24ELi1ELNS_19AP_FIXPT_QUANT_MODEE0ELNS_18AP_FIXPT_OVER_MODEE0EEELb0EEES8_RNS2_I11axis_packetLb0EEEE3cnt, align 2, !MSB !6223, !LSB !6115, !ExtendFrom !6223
+Time: 0 Stage: 0 instr:   ret void, !dbg !6224, !MSB !6223, !LSB !6115, !ExtendFrom !6223
+Time: 1 Stage: 0 instr:   tail call void @__legup_fifo_write.i32.i32(i32* nonnull %res.data, i32 %bit_concat2) #2, !dbg !6201
+Time: 1 Stage: 0 instr:   tail call void @__legup_fifo_write.i8.i8(i8* nonnull %res.last, i8 %bit_concat3) #2, !dbg !6201
+Stage: 1
+Time: 2 Stage: 1 instr:   tail call void @__legup_fifo_write.i32.i32(i32* nonnull %res.data, i32 %bit_concat6) #2, !dbg !6220
+Time: 2 Stage: 1 instr:   tail call void @__legup_fifo_write.i8.i8(i8* nonnull %res.last, i8 %bit_concat) #2, !dbg !6220
+
+
+Pipeline Table:
+Total pipeline stages: 2
+Stage:               0                             1
+   II:        0              1     |        0              1
+ Time:        0              1     |        2              3
+          %load              -          %load              -
+           %add              -           %add              -
+       %fifoVal              -       %fifoVal              -
+   %bit_concat2              -   %bit_concat2              -
+          %icmp              -          %icmp              -
+   %bit_concat3              -   %bit_concat3              -
+              -       <badref>              -       <badref>
+              -       <badref>              -       <badref>
+       <badref>              -       <badref>              -
+          %add4              -          %add4              -
+        %select              -        %select              -
+      %fifoVal5              -      %fifoVal5              -
+   %bit_concat6              -   %bit_concat6              -
+         %icmp7              -         %icmp7              -
+    %bit_concat              -    %bit_concat              -
+              -              -       <badref>              -
+              -              -       <badref>              -
+       <badref>              -       <badref>              -
+       %select8              -       %select8              -
+       <badref>              -       <badref>              -
+       <badref>              -       <badref>              -
+

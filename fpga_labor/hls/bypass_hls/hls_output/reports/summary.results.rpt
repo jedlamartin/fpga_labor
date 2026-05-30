@@ -1,0 +1,46 @@
+==================================================================
+=====  Summary Report for RTL Simulation and FPGA Synthesis  =====
+==================================================================
+
+Project name: bypass_hls
+FPGA Vendor: MICROCHIP
+Device Family: PolarFireSoC
+Device: MPFS095T-FCSG325E
+
+Table of Contents
+  1. Simulation Result
+  2. Timing Result of HLS-generated IP Core
+  3. Resource Usage of HLS-generated IP Core
+
+
+====== 1. Simulation Result ======
+
+N/A. Please run 'simulation' to obtain the cycle latency.
+
+====== 2. Timing Result of HLS-generated IP Core (top-level module: bypass_hw_top) ======
+
++--------------+---------------+-------------+-------------+----------+-------------+
+| Clock Domain | Target Period | Target Fmax | Worst Slack | Period   | Fmax        |
++--------------+---------------+-------------+-------------+----------+-------------+
+| clk          | 5.000 ns      | 200.000 MHz | 1.419 ns    | 3.581 ns | 279.252 MHz |
++--------------+---------------+-------------+-------------+----------+-------------+
+
+The reported Fmax is for the HLS core in isolation (from Libero's post-place-and-route timing analysis).
+When the HLS core is integrated into a larger system, the system Fmax may be lower depending on the critical path of the system.
+
+====== 3. Resource Usage of HLS-generated IP Core (top-level module: bypass_hw_top) ======
+
++--------------------------+------------------+-------+------------+
+| Resource Type            | Used             | Total | Percentage |
++--------------------------+------------------+-------+------------+
+| Fabric + Interface 4LUT* | 1041 + 72 = 1113 | 93516 | 1.19       |
+| Fabric + Interface DFF*  | 518 + 72 = 590   | 93516 | 0.63       |
+| User I/O                 | 0                | 80    | 0.00       |
+| uSRAM                    | 6                | 876   | 0.68       |
+| LSRAM                    | 0                | 308   | 0.00       |
+| Math                     | 0                | 292   | 0.00       |
++--------------------------+------------------+-------+------------+
+
+* Interface 4LUTs and DFFs are occupied due to the uses of LSRAM, Math, and uSRAM.
+  Number of interface 4LUTs/DFFs = (36 * #.LSRAM) + (36 * #.Math) + (12 * #.uSRAM) = (36 * 0) + (36 * 0) + (12 * 6) = 72.
+

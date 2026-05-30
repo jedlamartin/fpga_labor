@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Fri Mar 27 19:18:07 2026
-// Version: 2025.1 2025.1.0.14
+// Created by SmartDesign Fri May 29 16:54:24 2026
+// Version: 2025.2 2025.2.0.14
 //////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 100ps
@@ -1141,7 +1141,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "MASTER15_WRITE_SLAVE31:true"  \
 "NUM_MASTERS:1"  \
 "NUM_MASTERS_WIDTH:1"  \
-"NUM_SLAVES:1"  \
+"NUM_SLAVES:2"  \
 "NUM_THREADS:1"  \
 "OPEN_TRANS_MAX:2"  \
 "OPTIMIZATION:3"  \
@@ -1521,6 +1521,19 @@ module COREAXI4INTERCONNECT_C0(
     SLAVE0_RUSER,
     SLAVE0_RVALID,
     SLAVE0_WREADY,
+    SLAVE1_ARREADY,
+    SLAVE1_AWREADY,
+    SLAVE1_BID,
+    SLAVE1_BRESP,
+    SLAVE1_BUSER,
+    SLAVE1_BVALID,
+    SLAVE1_RDATA,
+    SLAVE1_RID,
+    SLAVE1_RLAST,
+    SLAVE1_RRESP,
+    SLAVE1_RUSER,
+    SLAVE1_RVALID,
+    SLAVE1_WREADY,
     // Outputs
     MASTER0_ARREADY,
     MASTER0_AWREADY,
@@ -1565,7 +1578,38 @@ module COREAXI4INTERCONNECT_C0(
     SLAVE0_WLAST,
     SLAVE0_WSTRB,
     SLAVE0_WUSER,
-    SLAVE0_WVALID
+    SLAVE0_WVALID,
+    SLAVE1_ARADDR,
+    SLAVE1_ARBURST,
+    SLAVE1_ARCACHE,
+    SLAVE1_ARID,
+    SLAVE1_ARLEN,
+    SLAVE1_ARLOCK,
+    SLAVE1_ARPROT,
+    SLAVE1_ARQOS,
+    SLAVE1_ARREGION,
+    SLAVE1_ARSIZE,
+    SLAVE1_ARUSER,
+    SLAVE1_ARVALID,
+    SLAVE1_AWADDR,
+    SLAVE1_AWBURST,
+    SLAVE1_AWCACHE,
+    SLAVE1_AWID,
+    SLAVE1_AWLEN,
+    SLAVE1_AWLOCK,
+    SLAVE1_AWPROT,
+    SLAVE1_AWQOS,
+    SLAVE1_AWREGION,
+    SLAVE1_AWSIZE,
+    SLAVE1_AWUSER,
+    SLAVE1_AWVALID,
+    SLAVE1_BREADY,
+    SLAVE1_RREADY,
+    SLAVE1_WDATA,
+    SLAVE1_WLAST,
+    SLAVE1_WSTRB,
+    SLAVE1_WUSER,
+    SLAVE1_WVALID
 );
 
 //--------------------------------------------------------------------
@@ -1617,6 +1661,19 @@ input  [1:0]  SLAVE0_RRESP;
 input  [0:0]  SLAVE0_RUSER;
 input         SLAVE0_RVALID;
 input         SLAVE0_WREADY;
+input         SLAVE1_ARREADY;
+input         SLAVE1_AWREADY;
+input  [8:0]  SLAVE1_BID;
+input  [1:0]  SLAVE1_BRESP;
+input  [0:0]  SLAVE1_BUSER;
+input         SLAVE1_BVALID;
+input  [31:0] SLAVE1_RDATA;
+input  [8:0]  SLAVE1_RID;
+input         SLAVE1_RLAST;
+input  [1:0]  SLAVE1_RRESP;
+input  [0:0]  SLAVE1_RUSER;
+input         SLAVE1_RVALID;
+input         SLAVE1_WREADY;
 //--------------------------------------------------------------------
 // Output
 //--------------------------------------------------------------------
@@ -1664,6 +1721,37 @@ output        SLAVE0_WLAST;
 output [3:0]  SLAVE0_WSTRB;
 output [0:0]  SLAVE0_WUSER;
 output        SLAVE0_WVALID;
+output [31:0] SLAVE1_ARADDR;
+output [1:0]  SLAVE1_ARBURST;
+output [3:0]  SLAVE1_ARCACHE;
+output [8:0]  SLAVE1_ARID;
+output [7:0]  SLAVE1_ARLEN;
+output [1:0]  SLAVE1_ARLOCK;
+output [2:0]  SLAVE1_ARPROT;
+output [3:0]  SLAVE1_ARQOS;
+output [3:0]  SLAVE1_ARREGION;
+output [2:0]  SLAVE1_ARSIZE;
+output [0:0]  SLAVE1_ARUSER;
+output        SLAVE1_ARVALID;
+output [31:0] SLAVE1_AWADDR;
+output [1:0]  SLAVE1_AWBURST;
+output [3:0]  SLAVE1_AWCACHE;
+output [8:0]  SLAVE1_AWID;
+output [7:0]  SLAVE1_AWLEN;
+output [1:0]  SLAVE1_AWLOCK;
+output [2:0]  SLAVE1_AWPROT;
+output [3:0]  SLAVE1_AWQOS;
+output [3:0]  SLAVE1_AWREGION;
+output [2:0]  SLAVE1_AWSIZE;
+output [0:0]  SLAVE1_AWUSER;
+output        SLAVE1_AWVALID;
+output        SLAVE1_BREADY;
+output        SLAVE1_RREADY;
+output [31:0] SLAVE1_WDATA;
+output        SLAVE1_WLAST;
+output [3:0]  SLAVE1_WSTRB;
+output [0:0]  SLAVE1_WUSER;
+output        SLAVE1_WVALID;
 //--------------------------------------------------------------------
 // Nets
 //--------------------------------------------------------------------
@@ -1757,6 +1845,50 @@ wire          SLAVE0_WREADY;
 wire   [3:0]  AXI4mslave0_WSTRB;
 wire   [0:0]  AXI4mslave0_WUSER;
 wire          AXI4mslave0_WVALID;
+wire   [31:0] AXI4mslave1_ARADDR;
+wire   [1:0]  AXI4mslave1_ARBURST;
+wire   [3:0]  AXI4mslave1_ARCACHE;
+wire   [8:0]  AXI4mslave1_ARID;
+wire   [7:0]  AXI4mslave1_ARLEN;
+wire   [1:0]  AXI4mslave1_ARLOCK;
+wire   [2:0]  AXI4mslave1_ARPROT;
+wire   [3:0]  AXI4mslave1_ARQOS;
+wire          SLAVE1_ARREADY;
+wire   [3:0]  AXI4mslave1_ARREGION;
+wire   [2:0]  AXI4mslave1_ARSIZE;
+wire   [0:0]  AXI4mslave1_ARUSER;
+wire          AXI4mslave1_ARVALID;
+wire   [31:0] AXI4mslave1_AWADDR;
+wire   [1:0]  AXI4mslave1_AWBURST;
+wire   [3:0]  AXI4mslave1_AWCACHE;
+wire   [8:0]  AXI4mslave1_AWID;
+wire   [7:0]  AXI4mslave1_AWLEN;
+wire   [1:0]  AXI4mslave1_AWLOCK;
+wire   [2:0]  AXI4mslave1_AWPROT;
+wire   [3:0]  AXI4mslave1_AWQOS;
+wire          SLAVE1_AWREADY;
+wire   [3:0]  AXI4mslave1_AWREGION;
+wire   [2:0]  AXI4mslave1_AWSIZE;
+wire   [0:0]  AXI4mslave1_AWUSER;
+wire          AXI4mslave1_AWVALID;
+wire   [8:0]  SLAVE1_BID;
+wire          AXI4mslave1_BREADY;
+wire   [1:0]  SLAVE1_BRESP;
+wire   [0:0]  SLAVE1_BUSER;
+wire          SLAVE1_BVALID;
+wire   [31:0] SLAVE1_RDATA;
+wire   [8:0]  SLAVE1_RID;
+wire          SLAVE1_RLAST;
+wire          AXI4mslave1_RREADY;
+wire   [1:0]  SLAVE1_RRESP;
+wire   [0:0]  SLAVE1_RUSER;
+wire          SLAVE1_RVALID;
+wire   [31:0] AXI4mslave1_WDATA;
+wire          AXI4mslave1_WLAST;
+wire          SLAVE1_WREADY;
+wire   [3:0]  AXI4mslave1_WSTRB;
+wire   [0:0]  AXI4mslave1_WUSER;
+wire          AXI4mslave1_WVALID;
 wire   [8:0]  AXI4mslave0_AWID_net_0;
 wire   [31:0] AXI4mslave0_AWADDR_net_0;
 wire   [7:0]  AXI4mslave0_AWLEN_net_0;
@@ -1788,6 +1920,37 @@ wire          AXI4mslave0_RREADY_net_0;
 wire   [0:0]  AXI4mslave0_AWUSER_net_0;
 wire   [0:0]  AXI4mslave0_WUSER_net_0;
 wire   [0:0]  AXI4mslave0_ARUSER_net_0;
+wire   [8:0]  AXI4mslave1_AWID_net_0;
+wire   [31:0] AXI4mslave1_AWADDR_net_0;
+wire   [7:0]  AXI4mslave1_AWLEN_net_0;
+wire   [2:0]  AXI4mslave1_AWSIZE_net_0;
+wire   [1:0]  AXI4mslave1_AWBURST_net_0;
+wire   [1:0]  AXI4mslave1_AWLOCK_net_0;
+wire   [3:0]  AXI4mslave1_AWCACHE_net_0;
+wire   [2:0]  AXI4mslave1_AWPROT_net_0;
+wire   [3:0]  AXI4mslave1_AWQOS_net_0;
+wire   [3:0]  AXI4mslave1_AWREGION_net_0;
+wire          AXI4mslave1_AWVALID_net_0;
+wire   [31:0] AXI4mslave1_WDATA_net_0;
+wire   [3:0]  AXI4mslave1_WSTRB_net_0;
+wire          AXI4mslave1_WLAST_net_0;
+wire          AXI4mslave1_WVALID_net_0;
+wire          AXI4mslave1_BREADY_net_0;
+wire   [8:0]  AXI4mslave1_ARID_net_0;
+wire   [31:0] AXI4mslave1_ARADDR_net_0;
+wire   [7:0]  AXI4mslave1_ARLEN_net_0;
+wire   [2:0]  AXI4mslave1_ARSIZE_net_0;
+wire   [1:0]  AXI4mslave1_ARBURST_net_0;
+wire   [1:0]  AXI4mslave1_ARLOCK_net_0;
+wire   [3:0]  AXI4mslave1_ARCACHE_net_0;
+wire   [2:0]  AXI4mslave1_ARPROT_net_0;
+wire   [3:0]  AXI4mslave1_ARQOS_net_0;
+wire   [3:0]  AXI4mslave1_ARREGION_net_0;
+wire          AXI4mslave1_ARVALID_net_0;
+wire          AXI4mslave1_RREADY_net_0;
+wire   [0:0]  AXI4mslave1_AWUSER_net_0;
+wire   [0:0]  AXI4mslave1_WUSER_net_0;
+wire   [0:0]  AXI4mslave1_ARUSER_net_0;
 wire          AXI4mmaster0_AWREADY_net_0;
 wire          AXI4mmaster0_WREADY_net_0;
 wire   [7:0]  AXI4mmaster0_BID_net_0;
@@ -1918,11 +2081,6 @@ wire   [6:0]  MASTER15_HPROT_const_net_0;
 wire   [2:0]  MASTER15_HSIZE_const_net_0;
 wire   [1:0]  MASTER15_HTRANS_const_net_0;
 wire   [63:0] MASTER15_HWDATA_const_net_0;
-wire   [8:0]  SLAVE1_BID_const_net_0;
-wire   [1:0]  SLAVE1_BRESP_const_net_0;
-wire   [8:0]  SLAVE1_RID_const_net_0;
-wire   [31:0] SLAVE1_RDATA_const_net_0;
-wire   [1:0]  SLAVE1_RRESP_const_net_0;
 wire   [8:0]  SLAVE2_BID_const_net_0;
 wire   [1:0]  SLAVE2_BRESP_const_net_0;
 wire   [8:0]  SLAVE2_RID_const_net_0;
@@ -2519,11 +2677,6 @@ assign MASTER15_HPROT_const_net_0    = 7'h00;
 assign MASTER15_HSIZE_const_net_0    = 3'h0;
 assign MASTER15_HTRANS_const_net_0   = 2'h0;
 assign MASTER15_HWDATA_const_net_0   = 64'h0000000000000000;
-assign SLAVE1_BID_const_net_0        = 9'h000;
-assign SLAVE1_BRESP_const_net_0      = 2'h0;
-assign SLAVE1_RID_const_net_0        = 9'h000;
-assign SLAVE1_RDATA_const_net_0      = 32'h00000000;
-assign SLAVE1_RRESP_const_net_0      = 2'h0;
 assign SLAVE2_BID_const_net_0        = 9'h000;
 assign SLAVE2_BRESP_const_net_0      = 2'h0;
 assign SLAVE2_RID_const_net_0        = 9'h000;
@@ -3068,6 +3221,68 @@ assign AXI4mslave0_WUSER_net_0[0]  = AXI4mslave0_WUSER[0];
 assign SLAVE0_WUSER[0:0]           = AXI4mslave0_WUSER_net_0[0];
 assign AXI4mslave0_ARUSER_net_0[0] = AXI4mslave0_ARUSER[0];
 assign SLAVE0_ARUSER[0:0]          = AXI4mslave0_ARUSER_net_0[0];
+assign AXI4mslave1_AWID_net_0      = AXI4mslave1_AWID;
+assign SLAVE1_AWID[8:0]            = AXI4mslave1_AWID_net_0;
+assign AXI4mslave1_AWADDR_net_0    = AXI4mslave1_AWADDR;
+assign SLAVE1_AWADDR[31:0]         = AXI4mslave1_AWADDR_net_0;
+assign AXI4mslave1_AWLEN_net_0     = AXI4mslave1_AWLEN;
+assign SLAVE1_AWLEN[7:0]           = AXI4mslave1_AWLEN_net_0;
+assign AXI4mslave1_AWSIZE_net_0    = AXI4mslave1_AWSIZE;
+assign SLAVE1_AWSIZE[2:0]          = AXI4mslave1_AWSIZE_net_0;
+assign AXI4mslave1_AWBURST_net_0   = AXI4mslave1_AWBURST;
+assign SLAVE1_AWBURST[1:0]         = AXI4mslave1_AWBURST_net_0;
+assign AXI4mslave1_AWLOCK_net_0    = AXI4mslave1_AWLOCK;
+assign SLAVE1_AWLOCK[1:0]          = AXI4mslave1_AWLOCK_net_0;
+assign AXI4mslave1_AWCACHE_net_0   = AXI4mslave1_AWCACHE;
+assign SLAVE1_AWCACHE[3:0]         = AXI4mslave1_AWCACHE_net_0;
+assign AXI4mslave1_AWPROT_net_0    = AXI4mslave1_AWPROT;
+assign SLAVE1_AWPROT[2:0]          = AXI4mslave1_AWPROT_net_0;
+assign AXI4mslave1_AWQOS_net_0     = AXI4mslave1_AWQOS;
+assign SLAVE1_AWQOS[3:0]           = AXI4mslave1_AWQOS_net_0;
+assign AXI4mslave1_AWREGION_net_0  = AXI4mslave1_AWREGION;
+assign SLAVE1_AWREGION[3:0]        = AXI4mslave1_AWREGION_net_0;
+assign AXI4mslave1_AWVALID_net_0   = AXI4mslave1_AWVALID;
+assign SLAVE1_AWVALID              = AXI4mslave1_AWVALID_net_0;
+assign AXI4mslave1_WDATA_net_0     = AXI4mslave1_WDATA;
+assign SLAVE1_WDATA[31:0]          = AXI4mslave1_WDATA_net_0;
+assign AXI4mslave1_WSTRB_net_0     = AXI4mslave1_WSTRB;
+assign SLAVE1_WSTRB[3:0]           = AXI4mslave1_WSTRB_net_0;
+assign AXI4mslave1_WLAST_net_0     = AXI4mslave1_WLAST;
+assign SLAVE1_WLAST                = AXI4mslave1_WLAST_net_0;
+assign AXI4mslave1_WVALID_net_0    = AXI4mslave1_WVALID;
+assign SLAVE1_WVALID               = AXI4mslave1_WVALID_net_0;
+assign AXI4mslave1_BREADY_net_0    = AXI4mslave1_BREADY;
+assign SLAVE1_BREADY               = AXI4mslave1_BREADY_net_0;
+assign AXI4mslave1_ARID_net_0      = AXI4mslave1_ARID;
+assign SLAVE1_ARID[8:0]            = AXI4mslave1_ARID_net_0;
+assign AXI4mslave1_ARADDR_net_0    = AXI4mslave1_ARADDR;
+assign SLAVE1_ARADDR[31:0]         = AXI4mslave1_ARADDR_net_0;
+assign AXI4mslave1_ARLEN_net_0     = AXI4mslave1_ARLEN;
+assign SLAVE1_ARLEN[7:0]           = AXI4mslave1_ARLEN_net_0;
+assign AXI4mslave1_ARSIZE_net_0    = AXI4mslave1_ARSIZE;
+assign SLAVE1_ARSIZE[2:0]          = AXI4mslave1_ARSIZE_net_0;
+assign AXI4mslave1_ARBURST_net_0   = AXI4mslave1_ARBURST;
+assign SLAVE1_ARBURST[1:0]         = AXI4mslave1_ARBURST_net_0;
+assign AXI4mslave1_ARLOCK_net_0    = AXI4mslave1_ARLOCK;
+assign SLAVE1_ARLOCK[1:0]          = AXI4mslave1_ARLOCK_net_0;
+assign AXI4mslave1_ARCACHE_net_0   = AXI4mslave1_ARCACHE;
+assign SLAVE1_ARCACHE[3:0]         = AXI4mslave1_ARCACHE_net_0;
+assign AXI4mslave1_ARPROT_net_0    = AXI4mslave1_ARPROT;
+assign SLAVE1_ARPROT[2:0]          = AXI4mslave1_ARPROT_net_0;
+assign AXI4mslave1_ARQOS_net_0     = AXI4mslave1_ARQOS;
+assign SLAVE1_ARQOS[3:0]           = AXI4mslave1_ARQOS_net_0;
+assign AXI4mslave1_ARREGION_net_0  = AXI4mslave1_ARREGION;
+assign SLAVE1_ARREGION[3:0]        = AXI4mslave1_ARREGION_net_0;
+assign AXI4mslave1_ARVALID_net_0   = AXI4mslave1_ARVALID;
+assign SLAVE1_ARVALID              = AXI4mslave1_ARVALID_net_0;
+assign AXI4mslave1_RREADY_net_0    = AXI4mslave1_RREADY;
+assign SLAVE1_RREADY               = AXI4mslave1_RREADY_net_0;
+assign AXI4mslave1_AWUSER_net_0[0] = AXI4mslave1_AWUSER[0];
+assign SLAVE1_AWUSER[0:0]          = AXI4mslave1_AWUSER_net_0[0];
+assign AXI4mslave1_WUSER_net_0[0]  = AXI4mslave1_WUSER[0];
+assign SLAVE1_WUSER[0:0]           = AXI4mslave1_WUSER_net_0[0];
+assign AXI4mslave1_ARUSER_net_0[0] = AXI4mslave1_ARUSER[0];
+assign SLAVE1_ARUSER[0:0]          = AXI4mslave1_ARUSER_net_0[0];
 assign AXI4mmaster0_AWREADY_net_0  = AXI4mmaster0_AWREADY;
 assign MASTER0_AWREADY             = AXI4mmaster0_AWREADY_net_0;
 assign AXI4mmaster0_WREADY_net_0   = AXI4mmaster0_WREADY;
@@ -4227,7 +4442,7 @@ COREAXI4INTERCONNECT #(
         .MASTER15_WRITE_SLAVE31         ( 1 ),
         .NUM_MASTERS                    ( 1 ),
         .NUM_MASTERS_WIDTH              ( 1 ),
-        .NUM_SLAVES                     ( 1 ),
+        .NUM_SLAVES                     ( 2 ),
         .NUM_THREADS                    ( 1 ),
         .OPEN_TRANS_MAX                 ( 2 ),
         .OPTIMIZATION                   ( 3 ),
@@ -4657,7 +4872,7 @@ COREAXI4INTERCONNECT_C0_0(
         .MASTER14_RREADY    ( GND_net ), // tied to 1'b0 from definition
         .MASTER15_RREADY    ( GND_net ), // tied to 1'b0 from definition
         .SLAVE0_AWREADY     ( SLAVE0_AWREADY ),
-        .SLAVE1_AWREADY     ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_AWREADY     ( SLAVE1_AWREADY ),
         .SLAVE2_AWREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE3_AWREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE4_AWREADY     ( GND_net ), // tied to 1'b0 from definition
@@ -4665,7 +4880,7 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE6_AWREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE7_AWREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE0_WREADY      ( SLAVE0_WREADY ),
-        .SLAVE1_WREADY      ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_WREADY      ( SLAVE1_WREADY ),
         .SLAVE2_WREADY      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE3_WREADY      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE4_WREADY      ( GND_net ), // tied to 1'b0 from definition
@@ -4673,7 +4888,7 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE6_WREADY      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE7_WREADY      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE0_BVALID      ( SLAVE0_BVALID ),
-        .SLAVE1_BVALID      ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_BVALID      ( SLAVE1_BVALID ),
         .SLAVE2_BVALID      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE3_BVALID      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE4_BVALID      ( GND_net ), // tied to 1'b0 from definition
@@ -4681,7 +4896,7 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE6_BVALID      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE7_BVALID      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE0_ARREADY     ( SLAVE0_ARREADY ),
-        .SLAVE1_ARREADY     ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_ARREADY     ( SLAVE1_ARREADY ),
         .SLAVE2_ARREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE3_ARREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE4_ARREADY     ( GND_net ), // tied to 1'b0 from definition
@@ -4690,8 +4905,8 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE7_ARREADY     ( GND_net ), // tied to 1'b0 from definition
         .SLAVE0_RLAST       ( SLAVE0_RLAST ),
         .SLAVE0_RVALID      ( SLAVE0_RVALID ),
-        .SLAVE1_RLAST       ( GND_net ), // tied to 1'b0 from definition
-        .SLAVE1_RVALID      ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_RLAST       ( SLAVE1_RLAST ),
+        .SLAVE1_RVALID      ( SLAVE1_RVALID ),
         .SLAVE2_RLAST       ( GND_net ), // tied to 1'b0 from definition
         .SLAVE2_RVALID      ( GND_net ), // tied to 1'b0 from definition
         .SLAVE3_RLAST       ( GND_net ), // tied to 1'b0 from definition
@@ -5379,9 +5594,9 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE0_BID         ( SLAVE0_BID ),
         .SLAVE0_BRESP       ( SLAVE0_BRESP ),
         .SLAVE0_BUSER       ( SLAVE0_BUSER ),
-        .SLAVE1_BID         ( SLAVE1_BID_const_net_0 ), // tied to 9'h000 from definition
-        .SLAVE1_BRESP       ( SLAVE1_BRESP_const_net_0 ), // tied to 2'h0 from definition
-        .SLAVE1_BUSER       ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_BID         ( SLAVE1_BID ),
+        .SLAVE1_BRESP       ( SLAVE1_BRESP ),
+        .SLAVE1_BUSER       ( SLAVE1_BUSER ),
         .SLAVE2_BID         ( SLAVE2_BID_const_net_0 ), // tied to 9'h000 from definition
         .SLAVE2_BRESP       ( SLAVE2_BRESP_const_net_0 ), // tied to 2'h0 from definition
         .SLAVE2_BUSER       ( GND_net ), // tied to 1'b0 from definition
@@ -5404,10 +5619,10 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE0_RDATA       ( SLAVE0_RDATA ),
         .SLAVE0_RRESP       ( SLAVE0_RRESP ),
         .SLAVE0_RUSER       ( SLAVE0_RUSER ),
-        .SLAVE1_RID         ( SLAVE1_RID_const_net_0 ), // tied to 9'h000 from definition
-        .SLAVE1_RDATA       ( SLAVE1_RDATA_const_net_0 ), // tied to 32'h00000000 from definition
-        .SLAVE1_RRESP       ( SLAVE1_RRESP_const_net_0 ), // tied to 2'h0 from definition
-        .SLAVE1_RUSER       ( GND_net ), // tied to 1'b0 from definition
+        .SLAVE1_RID         ( SLAVE1_RID ),
+        .SLAVE1_RDATA       ( SLAVE1_RDATA ),
+        .SLAVE1_RRESP       ( SLAVE1_RRESP ),
+        .SLAVE1_RUSER       ( SLAVE1_RUSER ),
         .SLAVE2_RID         ( SLAVE2_RID_const_net_0 ), // tied to 9'h000 from definition
         .SLAVE2_RDATA       ( SLAVE2_RDATA_const_net_0 ), // tied to 64'h0000000000000000 from definition
         .SLAVE2_RRESP       ( SLAVE2_RRESP_const_net_0 ), // tied to 2'h0 from definition
@@ -5794,7 +6009,7 @@ COREAXI4INTERCONNECT_C0_0(
         .MASTER15_RLAST     (  ),
         .MASTER15_RVALID    (  ),
         .SLAVE0_AWVALID     ( AXI4mslave0_AWVALID ),
-        .SLAVE1_AWVALID     (  ),
+        .SLAVE1_AWVALID     ( AXI4mslave1_AWVALID ),
         .SLAVE2_AWVALID     (  ),
         .SLAVE3_AWVALID     (  ),
         .SLAVE4_AWVALID     (  ),
@@ -5803,8 +6018,8 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE7_AWVALID     (  ),
         .SLAVE0_WLAST       ( AXI4mslave0_WLAST ),
         .SLAVE0_WVALID      ( AXI4mslave0_WVALID ),
-        .SLAVE1_WLAST       (  ),
-        .SLAVE1_WVALID      (  ),
+        .SLAVE1_WLAST       ( AXI4mslave1_WLAST ),
+        .SLAVE1_WVALID      ( AXI4mslave1_WVALID ),
         .SLAVE2_WLAST       (  ),
         .SLAVE2_WVALID      (  ),
         .SLAVE3_WLAST       (  ),
@@ -5818,7 +6033,7 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE7_WLAST       (  ),
         .SLAVE7_WVALID      (  ),
         .SLAVE0_BREADY      ( AXI4mslave0_BREADY ),
-        .SLAVE1_BREADY      (  ),
+        .SLAVE1_BREADY      ( AXI4mslave1_BREADY ),
         .SLAVE2_BREADY      (  ),
         .SLAVE3_BREADY      (  ),
         .SLAVE4_BREADY      (  ),
@@ -5826,7 +6041,7 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE6_BREADY      (  ),
         .SLAVE7_BREADY      (  ),
         .SLAVE0_ARVALID     ( AXI4mslave0_ARVALID ),
-        .SLAVE1_ARVALID     (  ),
+        .SLAVE1_ARVALID     ( AXI4mslave1_ARVALID ),
         .SLAVE2_ARVALID     (  ),
         .SLAVE3_ARVALID     (  ),
         .SLAVE4_ARVALID     (  ),
@@ -5834,7 +6049,7 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE6_ARVALID     (  ),
         .SLAVE7_ARVALID     (  ),
         .SLAVE0_RREADY      ( AXI4mslave0_RREADY ),
-        .SLAVE1_RREADY      (  ),
+        .SLAVE1_RREADY      ( AXI4mslave1_RREADY ),
         .SLAVE2_RREADY      (  ),
         .SLAVE3_RREADY      (  ),
         .SLAVE4_RREADY      (  ),
@@ -6140,17 +6355,17 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE0_AWREGION    ( AXI4mslave0_AWREGION ),
         .SLAVE0_AWQOS       ( AXI4mslave0_AWQOS ),
         .SLAVE0_AWUSER      ( AXI4mslave0_AWUSER ),
-        .SLAVE1_AWID        (  ),
-        .SLAVE1_AWADDR      (  ),
-        .SLAVE1_AWLEN       (  ),
-        .SLAVE1_AWSIZE      (  ),
-        .SLAVE1_AWBURST     (  ),
-        .SLAVE1_AWLOCK      (  ),
-        .SLAVE1_AWCACHE     (  ),
-        .SLAVE1_AWPROT      (  ),
-        .SLAVE1_AWREGION    (  ),
-        .SLAVE1_AWQOS       (  ),
-        .SLAVE1_AWUSER      (  ),
+        .SLAVE1_AWID        ( AXI4mslave1_AWID ),
+        .SLAVE1_AWADDR      ( AXI4mslave1_AWADDR ),
+        .SLAVE1_AWLEN       ( AXI4mslave1_AWLEN ),
+        .SLAVE1_AWSIZE      ( AXI4mslave1_AWSIZE ),
+        .SLAVE1_AWBURST     ( AXI4mslave1_AWBURST ),
+        .SLAVE1_AWLOCK      ( AXI4mslave1_AWLOCK ),
+        .SLAVE1_AWCACHE     ( AXI4mslave1_AWCACHE ),
+        .SLAVE1_AWPROT      ( AXI4mslave1_AWPROT ),
+        .SLAVE1_AWREGION    ( AXI4mslave1_AWREGION ),
+        .SLAVE1_AWQOS       ( AXI4mslave1_AWQOS ),
+        .SLAVE1_AWUSER      ( AXI4mslave1_AWUSER ),
         .SLAVE2_AWID        (  ),
         .SLAVE2_AWADDR      (  ),
         .SLAVE2_AWLEN       (  ),
@@ -6222,9 +6437,9 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE0_WSTRB       ( AXI4mslave0_WSTRB ),
         .SLAVE0_WUSER       ( AXI4mslave0_WUSER ),
         .SLAVE1_WID         (  ),
-        .SLAVE1_WDATA       (  ),
-        .SLAVE1_WSTRB       (  ),
-        .SLAVE1_WUSER       (  ),
+        .SLAVE1_WDATA       ( AXI4mslave1_WDATA ),
+        .SLAVE1_WSTRB       ( AXI4mslave1_WSTRB ),
+        .SLAVE1_WUSER       ( AXI4mslave1_WUSER ),
         .SLAVE2_WID         (  ),
         .SLAVE2_WDATA       (  ),
         .SLAVE2_WSTRB       (  ),
@@ -6260,17 +6475,17 @@ COREAXI4INTERCONNECT_C0_0(
         .SLAVE0_ARREGION    ( AXI4mslave0_ARREGION ),
         .SLAVE0_ARQOS       ( AXI4mslave0_ARQOS ),
         .SLAVE0_ARUSER      ( AXI4mslave0_ARUSER ),
-        .SLAVE1_ARID        (  ),
-        .SLAVE1_ARADDR      (  ),
-        .SLAVE1_ARLEN       (  ),
-        .SLAVE1_ARSIZE      (  ),
-        .SLAVE1_ARBURST     (  ),
-        .SLAVE1_ARLOCK      (  ),
-        .SLAVE1_ARCACHE     (  ),
-        .SLAVE1_ARPROT      (  ),
-        .SLAVE1_ARREGION    (  ),
-        .SLAVE1_ARQOS       (  ),
-        .SLAVE1_ARUSER      (  ),
+        .SLAVE1_ARID        ( AXI4mslave1_ARID ),
+        .SLAVE1_ARADDR      ( AXI4mslave1_ARADDR ),
+        .SLAVE1_ARLEN       ( AXI4mslave1_ARLEN ),
+        .SLAVE1_ARSIZE      ( AXI4mslave1_ARSIZE ),
+        .SLAVE1_ARBURST     ( AXI4mslave1_ARBURST ),
+        .SLAVE1_ARLOCK      ( AXI4mslave1_ARLOCK ),
+        .SLAVE1_ARCACHE     ( AXI4mslave1_ARCACHE ),
+        .SLAVE1_ARPROT      ( AXI4mslave1_ARPROT ),
+        .SLAVE1_ARREGION    ( AXI4mslave1_ARREGION ),
+        .SLAVE1_ARQOS       ( AXI4mslave1_ARQOS ),
+        .SLAVE1_ARUSER      ( AXI4mslave1_ARUSER ),
         .SLAVE2_ARID        (  ),
         .SLAVE2_ARADDR      (  ),
         .SLAVE2_ARLEN       (  ),

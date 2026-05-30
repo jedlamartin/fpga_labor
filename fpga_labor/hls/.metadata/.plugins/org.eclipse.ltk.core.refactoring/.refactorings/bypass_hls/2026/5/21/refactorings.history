@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;bypass_hls/bypass_hw&apos; to &apos;bypass_hw.cpp&apos;" description="Rename resource &apos;bypass_hw&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="bypass_hw" name="bypass_hw.cpp" stamp="1779305764807" updateReferences="true"/>
+</session>

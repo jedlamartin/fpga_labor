@@ -39,10 +39,6 @@
         <spirit:direction>in</spirit:direction>
       </spirit:signal>
       <spirit:signal>
-        <spirit:name>bclk</spirit:name>
-        <spirit:direction>in</spirit:direction>
-      </spirit:signal>
-      <spirit:signal>
         <spirit:name>scl</spirit:name>
         <spirit:direction>inout</spirit:direction>
       </spirit:signal>
@@ -86,17 +82,6 @@
       </spirit:signal>
     </spirit:signals>
     <spirit:hwParameters>
-      <spirit:hwParameter spirit:id="OPERATING_MODE" spirit:name="OPERATING_MODE" spirit:prompt="OPERATING_MODE:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="BAUD_RATE_FIXED" spirit:name="BAUD_RATE_FIXED" spirit:prompt="BAUD_RATE_FIXED:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="BAUD_RATE_VALUE" spirit:name="BAUD_RATE_VALUE" spirit:prompt="BAUD_RATE_VALUE:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="BCLK_ENABLED" spirit:name="BCLK_ENABLED" spirit:prompt="BCLK_ENABLED:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="GLITCHREG_NUM" spirit:name="GLITCHREG_NUM" spirit:prompt="GLITCHREG_NUM:" spirit:dataType="int" spirit:resolve="user">3</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="SMB_EN" spirit:name="SMB_EN" spirit:prompt="SMB_EN:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="IPMI_EN" spirit:name="IPMI_EN" spirit:prompt="IPMI_EN:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="FREQUENCY" spirit:name="FREQUENCY" spirit:prompt="FREQUENCY:" spirit:dataType="int" spirit:resolve="user">100</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="FIXED_SLAVE0_ADDR_EN" spirit:name="FIXED_SLAVE0_ADDR_EN" spirit:prompt="FIXED_SLAVE0_ADDR_EN:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="FIXED_SLAVE0_ADDR_VALUE" spirit:name="FIXED_SLAVE0_ADDR_VALUE" spirit:prompt="FIXED_SLAVE0_ADDR_VALUE:" spirit:dataType="int" spirit:resolve="user">0</spirit:hwParameter>
-      <spirit:hwParameter spirit:id="I2C_NUM" spirit:name="I2C_NUM" spirit:prompt="I2C_NUM:" spirit:dataType="int" spirit:resolve="user">1</spirit:hwParameter>
     </spirit:hwParameters>
     <spirit:deletedhwParameters>
     </spirit:deletedhwParameters>

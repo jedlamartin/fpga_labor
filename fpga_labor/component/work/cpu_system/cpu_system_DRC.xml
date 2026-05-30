@@ -3,84 +3,98 @@
 <drcreport>
   <header>cpu_system</header>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message> bus interface data width mismatch</message>
+    <detail> There is a data width mismatch between bypass_hw_top_0:tlast_dnum_AXI4_slave:axi4target_rdata[0-63] and COREAXI4INTERCONNECT_C0_0:AXI4mslave1:SLAVE1_RDATA[0-31] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/bypass_hw_top_0:tlast_dnum_AXI4_slave</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface data width mismatch</message>
     <detail> There is a data width mismatch between CoreAPB3_C0_0:APBmslave1:PWDATAS[0-31] and corei2c_wrapper_0:APBslave:pwdata[0-7] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/CoreAPB3_C0_0:APBmslave1</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface ID width mismatch</message>
     <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C0_0:AXI4mslave0:SLAVE0_AWID[0-8] and COREAXI4PROTOCONV_C0_0:AXI4L_TRGT:[0--1] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C0_0:AXI4mslave0</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message> bus interface ID width mismatch</message>
+    <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C0_0:AXI4mslave1:SLAVE1_AWID[0-8] and bypass_hw_top_0:tlast_dnum_AXI4_slave:axi4target_awid[0-0] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C0_0:AXI4mslave1</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface data width mismatch</message>
     <detail> There is a data width mismatch between COREAXI4INTERCONNECT_C1_0:AXI4mmaster0:MASTER0_RDATA[0-31] and COREAXI4PROTOCONV_C0_0:S2MM_AXI4MM_INITR:[0--1] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C1_0:AXI4mmaster0</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface ID width mismatch</message>
     <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C1_0:AXI4mmaster1:MASTER1_BID[0-0] and COREAXI4PROTOCONV_C0_0:MM2S_AXI4MM_INITR:[0--1] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C1_0:AXI4mmaster1</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:FIC_0_DLL_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_0_DLL_LOCK_M2F</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:FIC_1_DLL_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_1_DLL_LOCK_M2F</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:FIC_3_DLL_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_3_DLL_LOCK_M2F</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:PLL_CPU_LOCK_M2F</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output pin MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:PLL_DDR_LOCK_M2F</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB[3:0]</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:FIC_3_APB_M_PSTRB</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message>Floating Driver</message>
     <detail>Floating output bus pin MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F[15:0]</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/MPFS_DISCOVERY_KIT_MSS_0:MSS_INT_M2F</crossprobe>
   </drc>
   <drc>
-    <status>C:\Microchip\Libero_SoC_2025.1\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface ID width mismatch</message>
     <detail> There is an ID width mismatch between MPFS_DISCOVERY_KIT_MSS_0:FIC_0_AXI4_TARGET:FIC_0_AXI4_S_RID[0-3] and COREAXI4INTERCONNECT_C1_0:AXI4mslave0:SLAVE0_RID[0-1] which may result in a loss of data.</detail>
