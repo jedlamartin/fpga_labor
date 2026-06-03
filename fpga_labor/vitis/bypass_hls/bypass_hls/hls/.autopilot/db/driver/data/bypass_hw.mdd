@@ -1,4 +1,3 @@
-#!/bin/bash
 # ==============================================================
 # Vitis HLS - High-Level Synthesis from C, C++ and OpenCL v2025.2 (64-bit)
 # Tool Version Limit: 2025.11
@@ -6,4 +5,15 @@
 # Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 # 
 # ==============================================================
-    exec /xilinx/2025.2/Vitis/bin/vitis-run --mode hls --tcl run_sim.tcl
+OPTION psf_version = 2.1;
+
+BEGIN driver bypass_hw
+
+ OPTION supported_peripherals = (bypass_hw_v1_0 );
+ OPTION driver_state = ACTIVE;
+ OPTION copyfiles = all;
+ OPTION name = bypass_hw;
+ OPTION version = 1.0;
+
+END driver
+

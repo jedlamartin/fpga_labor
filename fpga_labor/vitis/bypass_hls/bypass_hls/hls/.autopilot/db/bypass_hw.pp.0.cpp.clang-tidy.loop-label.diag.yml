@@ -1,0 +1,52 @@
+---
+MainSourceFile:  'C:/Users/Martin/Xilinx/fpga_labor/fpga_labor/vitis/bypass_hls/bypass_hls/hls/.autopilot/db/bypass_hw.pp.0.cpp'
+Diagnostics:
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_676_1:  '
+      FilePath:        'C:\AMDDesignTools\2025.2\Vitis\common\technology\autopilot\etc\ap_int_ref.h'
+      FileOffset:      676
+      Replacements:
+        - FilePath:        'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls\bypass_hls\hls\.autopilot\db\bypass_hw.pp.0.cpp'
+          Offset:          280099
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_676_1: '
+    Level:           Remark
+    BuildDirectory:  'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_690_1:  '
+      FilePath:        'C:\AMDDesignTools\2025.2\Vitis\common\technology\autopilot\etc\ap_int_ref.h'
+      FileOffset:      690
+      Replacements:
+        - FilePath:        'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls\bypass_hls\hls\.autopilot\db\bypass_hw.pp.0.cpp'
+          Offset:          280570
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_690_1: '
+    Level:           Remark
+    BuildDirectory:  'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_704_1:  '
+      FilePath:        'C:\AMDDesignTools\2025.2\Vitis\common\technology\autopilot\etc\ap_int_ref.h'
+      FileOffset:      704
+      Replacements:
+        - FilePath:        'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls\bypass_hls\hls\.autopilot\db\bypass_hw.pp.0.cpp'
+          Offset:          281042
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_704_1: '
+    Level:           Remark
+    BuildDirectory:  'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls'
+  - DiagnosticName:  xilinx-label-all-loops
+    DiagnosticMessage:
+      Message:         'Added loop label VITIS_LOOP_1251_1:  '
+      FilePath:        'C:\AMDDesignTools\2025.2\Vitis\common\technology\autopilot\etc\ap_fixed_base.h'
+      FileOffset:      1251
+      Replacements:
+        - FilePath:        'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls\bypass_hls\hls\.autopilot\db\bypass_hw.pp.0.cpp'
+          Offset:          626445
+          Length:          0
+          ReplacementText: 'VITIS_LOOP_1251_1: '
+    Level:           Remark
+    BuildDirectory:  'C:\Users\Martin\Xilinx\fpga_labor\fpga_labor\vitis\bypass_hls'
+...

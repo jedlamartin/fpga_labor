@@ -27,18 +27,17 @@ HLS_SOURCES = ../../../../fir_hw_tb.cpp ../../../../fir_hw.cpp
 
 override TARGET := csim.exe
 
-AUTOPILOT_ROOT := /xilinx/2025.2/Vitis
-AUTOPILOT_MACH := lnx64
+AUTOPILOT_ROOT := C:/AMDDesignTools/2025.2/Vitis
+AUTOPILOT_MACH := win64
 ifdef AP_GCC_M32
   AUTOPILOT_MACH := Linux_x86
   IFLAG += -m32
 endif
-IFLAG += -fPIC
 ifndef AP_GCC_PATH
-  AP_GCC_PATH := /xilinx/2025.2/Vitis/tps/lnx64/gcc-8.3.0/bin
+  AP_GCC_PATH := C:/AMDDesignTools/2025.2/Vitis/tps/mingw/10.0.0/win64.o/nt/bin
 endif
 AUTOPILOT_TOOL := ${AUTOPILOT_ROOT}/${AUTOPILOT_MACH}/tools
-AP_CLANG_PATH := ${AUTOPILOT_ROOT}/lnx64/tools/clang-16/bin
+AP_CLANG_PATH := ${AUTOPILOT_ROOT}/win64/tools/clang-16/bin
 AUTOPILOT_TECH := ${AUTOPILOT_ROOT}/common/technology
 
 
@@ -48,7 +47,6 @@ IFLAG += -I "${AUTOPILOT_TECH}/generic/SystemC"
 IFLAG += -I "${AUTOPILOT_TECH}/generic/SystemC/AESL_FP_comp"
 IFLAG += -I "${AUTOPILOT_TECH}/generic/SystemC/AESL_comp"
 IFLAG += -I "${AUTOPILOT_TOOL}/auto_cc/include"
-IFLAG += -I "/usr/include/x86_64-linux-gnu"
 IFLAG += -D__HLS_COSIM__
 
 IFLAG += -D__HLS_CSIM__
@@ -64,17 +62,21 @@ IFLAG += -D__SIM_FIR__
 IFLAG += -D__SIM_DDS__
 
 IFLAG += -D__DSP48E2__
+LFLAG += -Wl,--stack,0x40000000
 IFLAG += -g
+IFLAG += -DNT
+LFLAG += -Wl,--enable-auto-import 
 DFLAG += -D__xilinx_ip_top= -DAESL_TB
 CCFLAG += -Werror=return-type
 CCFLAG += -Wno-abi
 CCFLAG += -fdebug-default-version=4
-CCFLAG += --gcc-toolchain=/xilinx/2025.2/Vitis/tps/lnx64/gcc-8.3.0
+CCFLAG += --sysroot=C:/AMDDesignTools/2025.2/Vitis/tps/mingw/10.0.0/win64.o/nt
 CCFLAG += -Werror=uninitialized
 CCFLAG += -Wno-c++11-narrowing
 CCFLAG += -Wno-error=sometimes-uninitialized
-LFLAG += --gcc-toolchain=/xilinx/2025.2/Vitis/tps/lnx64/gcc-8.3.0
-LFLAG += -lstdc++fs
+LFLAG += --sysroot=C:/AMDDesignTools/2025.2/Vitis/tps/mingw/10.0.0/win64.o/nt
+CCFLAG += --target=x86_64-w64-windows-gnu
+LFLAG += --target=x86_64-w64-windows-gnu
 
 
 

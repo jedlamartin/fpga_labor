@@ -8,7 +8,7 @@ typedef ap_fixed<32, 1, AP_TRN, AP_WRAP> dout_t;
 typedef hls::axis<dout_t, 0, 0, 0> axis_type;
 typedef hls::stream<axis_type> stream_type;
 
-void fir_hw(ap_uint<16> tlast_dnum, din_t* input_l, din_t* input_r, stream_type& res){
+void bypass_hw(ap_uint<16> tlast_dnum, din_t* input_l, din_t* input_r, stream_type& res){
 #pragma HLS INTERFACE mode=s_axilite port=tlast_dnum
 #pragma HLS INTERFACE mode=ap_hs port=input_l
 #pragma HLS INTERFACE mode=ap_hs port=input_r

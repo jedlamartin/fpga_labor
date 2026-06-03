@@ -27,17 +27,17 @@ extern "C" {
 
         if (!(IrqStatus & XAXIDMA_IRQ_IOC_MASK)) return;
 
-        // 2. Hand-off filled segment to the Ethernet task[cite: 17]
+        // 2. Hand-off filled segment to the Ethernet task
         dma_ptr_eth = dma_ptr_axi;
         dma_data_available = 1;
 
-        // 3. Move AXI pointer to the next block in the circular buffer[cite: 17]
+        // 3. Move AXI pointer to the next block in the circular buffer
         dma_ptr_axi += g_transfer_size;
         if (dma_ptr_axi >= (g_buff + g_buff_size)) {
             dma_ptr_axi = g_buff; // Wrap around to start
         }
 
-        // 4. Trigger next transfer immediately to prevent data loss[cite: 17]
+        // 4. Trigger next transfer immediately to prevent data loss
         XAxiDma_SimpleTransfer(AxiDmaInst, (UINTPTR)dma_ptr_axi, g_transfer_size, XAXIDMA_DEVICE_TO_DMA);
     }
 
@@ -63,7 +63,7 @@ extern "C" {
 
         XAxiDma_IntrEnable(&AxiDma, XAXIDMA_IRQ_IOC_MASK, XAXIDMA_DEVICE_TO_DMA);
         
-        // Start the very first transfer[cite: 17]
+        // Start the very first transfer
         return XAxiDma_SimpleTransfer(&AxiDma, (UINTPTR)dma_ptr_axi, g_transfer_size, XAXIDMA_DEVICE_TO_DMA);
     }
 }
