@@ -6,13 +6,6 @@
     <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface data width mismatch</message>
-    <detail> There is a data width mismatch between bypass_hw_top_0:tlast_dnum_AXI4_slave:axi4target_rdata[0-63] and COREAXI4INTERCONNECT_C0_0:AXI4mslave1:SLAVE1_RDATA[0-31] which may result in a loss of data.</detail>
-    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/bypass_hw_top_0:tlast_dnum_AXI4_slave</crossprobe>
-  </drc>
-  <drc>
-    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
-    <StatusMessage>Warning</StatusMessage>
-    <message> bus interface data width mismatch</message>
     <detail> There is a data width mismatch between CoreAPB3_C0_0:APBmslave1:PWDATAS[0-31] and corei2c_wrapper_0:APBslave:pwdata[0-7] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/CoreAPB3_C0_0:APBmslave1</crossprobe>
   </drc>
@@ -27,7 +20,7 @@
     <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
     <StatusMessage>Warning</StatusMessage>
     <message> bus interface ID width mismatch</message>
-    <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C0_0:AXI4mslave1:SLAVE1_AWID[0-8] and bypass_hw_top_0:tlast_dnum_AXI4_slave:axi4target_awid[0-0] which may result in a loss of data.</detail>
+    <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C0_0:AXI4mslave1:SLAVE1_AWID[0-8] and fir_hw_top_0:AXI4_slave:axi4target_awid[0-0] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C0_0:AXI4mslave1</crossprobe>
   </drc>
   <drc>
@@ -43,6 +36,13 @@
     <message> bus interface ID width mismatch</message>
     <detail> There is an ID width mismatch between COREAXI4INTERCONNECT_C1_0:AXI4mmaster1:MASTER1_BID[0-0] and COREAXI4PROTOCONV_C0_0:MM2S_AXI4MM_INITR:[0--1] which may result in a loss of data.</detail>
     <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/COREAXI4INTERCONNECT_C1_0:AXI4mmaster1</crossprobe>
+  </drc>
+  <drc>
+    <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>
+    <StatusMessage>Warning</StatusMessage>
+    <message> bus interface data width mismatch</message>
+    <detail> There is a data width mismatch between fir_hw_top_0:AXI4_slave:axi4target_rdata[0-63] and COREAXI4INTERCONNECT_C0_0:AXI4mslave1:SLAVE1_RDATA[0-31] which may result in a loss of data.</detail>
+    <crossprobe>liberoaction://cross_probe/smartdesign/cpu_system/pins/fir_hw_top_0:AXI4_slave</crossprobe>
   </drc>
   <drc>
     <status>C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Designer/data/drcreport\warn.png</status>

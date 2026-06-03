@@ -1841,13 +1841,13 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.cxf,actgen_cxf"
 STATE="utd"
-TIME="1780072788"
-SIZE="15029"
+TIME="1780425645"
+SIZE="15017"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.v,hdl"
 STATE="utd"
-TIME="1780072787"
-SIZE="88749"
+TIME="1780425644"
+SIZE="88676"
 PARENT="<project>\component\work\cpu_system\cpu_system.cxf"
 IS_READONLY="TRUE"
 ENDFILE
@@ -1937,6 +1937,11 @@ STATE="utd"
 TIME="1780065299"
 SIZE="108707"
 ENDFILE
+VALUE "<project>\constraint\io\fir_hw_axi4slv.pdc,io_pdc"
+STATE="utd"
+TIME="1780425023"
+SIZE="108707"
+ENDFILE
 VALUE "<project>\constraint\io\user.pdc,io_pdc"
 STATE="utd"
 TIME="1778706052"
@@ -1957,6 +1962,11 @@ VALUE "<project>\hdl\corei2c_wrapper.v,hdl"
 STATE="utd"
 TIME="1780072726"
 SIZE="1211"
+ENDFILE
+VALUE "<project>\hdl\fir_hls_fir_hw.v,hdl"
+STATE="utd"
+TIME="1780424869"
+SIZE="212745"
 ENDFILE
 VALUE "<project>\simulation\bfmtovec_compile.tcl,sim"
 STATE="utd"
@@ -2048,25 +2058,15 @@ STATE="utd"
 TIME="1779204635"
 SIZE="159"
 ENDFILE
-VALUE "<project>\synthesis\audio_interface_debug\cpu_system.so,so"
+VALUE "<project>\synthesis\bypass_hw\cpu_system.so,so"
 STATE="utd"
-TIME="1780073030"
-SIZE="261"
+TIME="1780147775"
+SIZE="246"
 ENDFILE
-VALUE "<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm"
+VALUE "<project>\synthesis\bypass_hw\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1780073026"
-SIZE="7222198"
-ENDFILE
-VALUE "<project>\synthesis\audio_interface_debug\cpu_system_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1780073027"
+TIME="1780147772"
 SIZE="3027"
-ENDFILE
-VALUE "<project>\synthesis\audio_interface_debug\synwork\layer0.so,so"
-STATE="utd"
-TIME="1779204635"
-SIZE="159"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system.so,so"
 STATE="utd"
@@ -2080,8 +2080,8 @@ SIZE="4570251"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_syn.prj,prj"
 STATE="utd"
-TIME="1780094972"
-SIZE="30678"
+TIME="1780147500"
+SIZE="30676"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
@@ -2095,8 +2095,8 @@ SIZE="246"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\cpu_system.vm,syn_vm"
 STATE="utd"
-TIME="1780147771"
-SIZE="7551990"
+TIME="1780426387"
+SIZE="3883212"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
@@ -2105,23 +2105,8 @@ SIZE="3027"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\synwork\layer0.so,so"
 STATE="utd"
-TIME="1779204635"
+TIME="1778431706"
 SIZE="159"
-ENDFILE
-VALUE "<project>\synthesis\fir_hw_debug\cpu_system.so,so"
-STATE="utd"
-TIME="1780094971"
-SIZE="252"
-ENDFILE
-VALUE "<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm"
-STATE="utd"
-TIME="1780142237"
-SIZE="7781545"
-ENDFILE
-VALUE "<project>\synthesis\fir_hw_debug\cpu_system_vm.sdc,syn_sdc"
-STATE="utd"
-TIME="1780094968"
-SIZE="3027"
 ENDFILE
 VALUE "<project>\synthesis\synwork\layer0.so,so"
 STATE="utd"
@@ -2272,10 +2257,10 @@ VALUE "<project>\constraint\io\user.pdc,io_pdc"
 ENDLIST
 LIST ProjectState5.1
 LIST Impl1
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
+ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
+ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2285,10 +2270,10 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
+ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
+ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2312,10 +2297,10 @@ VALUE "<project>\synthesis\identify_debug\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 LIST Impl3
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
+ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
+ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2337,6 +2322,7 @@ ENDLIST
 LIST synthesis_implementations
 VALUE "synthesis"
 VALUE "audio_interface"
+VALUE "bypass_hw"
 VALUE "fir_hw"
 ENDLIST
 ENDLIST
@@ -2603,10 +2589,10 @@ ENDLIST
 ENDLIST
 LIST "cpu_system::work"
 LIST Impl1
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
+ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
+ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2616,10 +2602,10 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
+ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
+ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2643,10 +2629,10 @@ VALUE "<project>\synthesis\identify_debug\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 LIST Impl3
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\fir_hw_debug\cpu_system.vm,syn_vm)=StateSuccess
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
+ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
+ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -3052,8 +3038,8 @@ SUBBLOCK "MPFS_DISCOVERY_KIT_MSS::work","component\work\MPFS_DISCOVERY_KIT_MSS\M
 SUBBLOCK "PFSOC_INIT_MONITOR_C0::work","component\work\PFSOC_INIT_MONITOR_C0\PFSOC_INIT_MONITOR_C0.v","TRUE","FALSE"
 SUBBLOCK "PF_CCC_C0::work","component\work\PF_CCC_C0\PF_CCC_C0.v","TRUE","FALSE"
 SUBBLOCK "audio_interface::work","hdl\audio_interface.v","FALSE","FALSE"
-SUBBLOCK "bypass_hw_top::work","hdl\bypass_hls_bypass_hw.v","FALSE","FALSE"
 SUBBLOCK "corei2c_wrapper::work","hdl\corei2c_wrapper.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_top::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 ENDLIST
 LIST "bypass_hw_axi4slv::work","hdl\bypass_hls_bypass_hw.v","FALSE","FALSE"
 SUBBLOCK "bypass_hw_axi4slv_ram_dual_port_drwp::work","hdl\bypass_hls_bypass_hw.v","FALSE","FALSE"
@@ -3393,6 +3379,52 @@ SUBBLOCK "COREFIFO_C1_COREFIFO_C1_0_LSRAM_top::work","component\work\COREFIFO_C1
 ENDLIST
 LIST "COREI2C_COREI2CREAL::work","component\Actel\DirectCore\COREI2C\7.2.101\rtl\vlog\core\corei2creal.v","FALSE","FALSE"
 ENDLIST
+LIST "fir_hw_axi4slv::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_axi4slv_accel_ctrl::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_axi4slv_ram_dual_port_drwp::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_axi4slv_read_controller::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_axi4slv_write_controller::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_axi4slv_register::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_axi4slv_accel_ctrl::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_axi4slv_ram_dual_port_drwp::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_ram_dual_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_axi4slv_read_controller::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_fwft_fifo::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_first_word::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_axi4slv_write_controller::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_fwft_fifo::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_fwft_fifo_lutram::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_fwft_fifo_bram::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_fwft_fifo_lutram::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_lutram_dual_port_fifo::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_core::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_lutram_dual_port_fifo::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_ram_dual_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_ram_dual_port_byte_enabled::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_ram_dual_port_regular::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_ram_dual_port_byte_enabled::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
 LIST "MSS::work","component\work\MPFS_DISCOVERY_KIT_MSS\MSS_NOBYP_NOBYP_BYP_NOBYP_BYP_syn_comps.v","FALSE","FALSE"
 ENDLIST
 LIST "bypass_hw_shift_reg::work","hdl\bypass_hls_bypass_hw.v","FALSE","FALSE"
@@ -3510,6 +3542,16 @@ SUBBLOCK "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOC
 ENDLIST
 LIST "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v","FALSE","FALSE"
 ENDLIST
+LIST "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_core::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
 LIST "caxi4interconnect_DualPort_RAM_SyncWr_SyncRd::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4CrossBar\DualPort_Ram_SyncWr_SyncRd.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_FIFO::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO.v","FALSE","FALSE"
@@ -3539,6 +3581,14 @@ SUBBLOCK "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOC
 ENDLIST
 LIST "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v","FALSE","FALSE"
 ENDLIST
+LIST "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_core::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
 LIST "caxi4interconnect_FIFO::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO.v","FALSE","FALSE"
 SUBBLOCK "caxi4interconnect_FIFO_CTRL::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO_CTRL.v","FALSE","FALSE"
 SUBBLOCK "caxi4interconnect_RAM_BLOCK::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RAM_BLOCK.v","FALSE","FALSE"
@@ -3564,6 +3614,12 @@ SUBBLOCK "caxi4pc_corefifo_fwft::work","component\Actel\DirectCore\COREAXI4PROTO
 SUBBLOCK "caxi4pc_corefifo_sync::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_corefifo_sync.v","FALSE","FALSE"
 SUBBLOCK "caxi4pc_dualclk_fifo::work","component\Actel\DirectCore\COREAXI4PROTOCONV\3.0.125\rtl\vlog\core\Caxi4pc_CoreFIFO\caxi4pc_dualclk_fifo.v","FALSE","FALSE"
 ENDLIST
+LIST "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult_core::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
 LIST "caxi4interconnect_FIFO::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO.v","FALSE","FALSE"
 SUBBLOCK "caxi4interconnect_RAM_BLOCK::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RAM_BLOCK.v","FALSE","FALSE"
 SUBBLOCK "caxi4interconnect_FIFO_CTRL::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO_CTRL.v","FALSE","FALSE"
@@ -3587,6 +3643,37 @@ ENDLIST
 LIST "caxi4interconnect_RAM_BLOCK::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RAM_BLOCK.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_RegSliceFull::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\RegSliceFull.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_axi4slv_register::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_fir_hw::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_first_word::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_fwft_fifo_bram::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_simple_ram_dual_port_fifo::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_hw_top::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_fir_hw::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_legup_mult_core::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_ram_dual_port_regular::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_simple_ram_dual_port_fifo::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
+LIST "fir_hw_top::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_axi4slv::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_hw_top::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 ENDLIST
 LIST "MPFS_DISCOVERY_KIT_MSS::work","component\work\MPFS_DISCOVERY_KIT_MSS\MPFS_DISCOVERY_KIT_MSS.v","TRUE","FALSE"
 SUBBLOCK "MSS::work","component\work\MPFS_DISCOVERY_KIT_MSS\MSS_NOBYP_NOBYP_BYP_NOBYP_BYP_syn_comps.v","FALSE","FALSE"
@@ -4453,61 +4540,6 @@ LIST "testbench::work","component\work\CoreGPIO_C0\CoreGPIO_C0_0\rtl\vlog\test\u
 SUBBLOCK "CoreGPIO_C0_CoreGPIO_C0_0_CoreGPIO::work","component\work\CoreGPIO_C0\CoreGPIO_C0_0\rtl\vlog\core\coregpio.v","FALSE","FALSE"
 SUBBLOCK "CoreGPIO_C0_CoreGPIO_C0_0_BFM_APB::work","component\work\CoreGPIO_C0\CoreGPIO_C0_0\rtl\vlog\amba_bfm\bfm_apb.v","FALSE","TRUE"
 ENDLIST
-LIST "AXI4_Initiator::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_initiator.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4_Master::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_master.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4SlaveRAM::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_slave_ram.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4StreamInitiator::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_stream_initiator.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4StreamMaster::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_stream_master.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4TargetRAM::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_target_ram.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4ToAXI4LiteBridge::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_to_axi4_lite_bridge.v","FALSE","TRUE"
-ENDLIST
-LIST "AXI4ToAXI4LiteBridge::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_to_axi4_lite_bridge.v","FALSE","TRUE"
-ENDLIST
-LIST "axi_interconnect::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_interconnect.v","FALSE","TRUE"
-ENDLIST
-LIST "axi_interconnect::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect.v","FALSE","TRUE"
-SUBBLOCK "interconnect_readAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_readAddressChannel.v","FALSE","TRUE"
-SUBBLOCK "interconnect_readDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_readDataChannel.v","FALSE","TRUE"
-SUBBLOCK "interconnect_writeAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeAddressChannel.v","FALSE","TRUE"
-SUBBLOCK "interconnect_writeDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeDataChannel.v","FALSE","TRUE"
-SUBBLOCK "interconnect_writeResponseChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeResponseChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_readAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_readAddressChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_readDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_readDataChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeAddressChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeDataChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeResponseChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeResponseChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_readAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_interconnect_readAddressChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_readAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_readAddressChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_readDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_interconnect_readDataChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_readDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_readDataChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_interconnect_writeAddressChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeAddressChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeAddressChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_interconnect_writeDataChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeDataChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeDataChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeResponseChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.1.102\rtl\vlog\test\axi4_interconnect_writeResponseChannel.v","FALSE","TRUE"
-ENDLIST
-LIST "interconnect_writeResponseChannel::COREAXI4DMACONTROLLER_LIB","component\Actel\DirectCore\COREAXI4DMACONTROLLER\2.2.107\rtl\vlog\test\axi4_interconnect_writeResponseChannel.v","FALSE","TRUE"
-ENDLIST
 LIST "CoreAPB3::COREAPB3_LIB","component\Actel\DirectCore\CoreAPB3\4.2.100\rtl\vlog\core\coreapb3.v","FALSE","FALSE"
 SUBBLOCK "COREAPB3_MUXPTOB3::COREAPB3_LIB","component\Actel\DirectCore\CoreAPB3\4.2.100\rtl\vlog\core\coreapb3_muxptob3.v","FALSE","FALSE"
 SUBBLOCK "coreapb3_iaddr_reg::COREAPB3_LIB","component\Actel\DirectCore\CoreAPB3\4.2.100\rtl\vlog\core\coreapb3_iaddr_reg.v","FALSE","FALSE"
@@ -4540,6 +4572,7 @@ ENDLIST
 LIST IOTabList
 VALUE "constraint\io\user.pdc"
 VALUE "constraint\io\bypass_hw_axi4slv.pdc"
+VALUE "constraint\io\fir_hw_axi4slv.pdc"
 ENDLIST
 LIST FPTabList
 ENDLIST

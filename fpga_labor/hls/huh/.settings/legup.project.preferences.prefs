@@ -1,6 +1,0 @@
-Custom_FPGA_device=true
-FPGA_device=MPFS095T-FCSG325E
-FPGA_family=PolarFireSoC
-Hybrid_system=hw_only
-constraints=set_synthesis_top_module; ;canny_top\nCLOCK_PERIOD; ;10\n
-eclipse.preferences.version=1
