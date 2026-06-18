@@ -69,8 +69,6 @@ constexpr uint32_t PROTOCONV_START_BIT = 0x00000001;
 constexpr uint32_t PROTOCONV_INCR_BURST = 0x00000002;
 constexpr uint32_t PROTOCONV_DONE_BIT = 0x00000001;
 
-constexpr uint32_t BYPASS_HLS_BASE_ADDR = 0xE0010000UL;
-
 //constexpr uint32_t BLOCK_SIZE = 256;
 //constexpr uint32_t DATA_LENGTH = 4; //bytes
 
@@ -79,7 +77,7 @@ void cache_flush(uintptr_t addr, uint32_t length);
 
 void init(){
     i2c_init();
-    sleep_ms(10000000);
+    sleep_ms(1000);
 
     codec_init();
     volatile uint8_t read_val = i2c_read(I2C_DEV_ADDR, 0x04);

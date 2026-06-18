@@ -107,6 +107,7 @@ hdl_core_assign_bif_signal -hdl_core_name {fir_hw_top} -bif_name {input_r_axi4st
 # Add bus interface for Output AXI4 Stream 'res'.
 hdl_core_add_bif -hdl_core_name {fir_hw_top} -bif_definition {AXI4Stream:AMBA:AMBA4:master} -bif_name {res_axi4stream} -signal_map {}
 hdl_core_assign_bif_signal -hdl_core_name {fir_hw_top} -bif_name {res_axi4stream} -bif_signal_name {TDATA} -core_signal_name {res_data}
+hdl_core_assign_bif_signal -hdl_core_name {fir_hw_top} -bif_name {res_axi4stream} -bif_signal_name {TKEEP} -core_signal_name {res_keep}
 hdl_core_assign_bif_signal -hdl_core_name {fir_hw_top} -bif_name {res_axi4stream} -bif_signal_name {TLAST} -core_signal_name {res_last}
 hdl_core_assign_bif_signal -hdl_core_name {fir_hw_top} -bif_name {res_axi4stream} -bif_signal_name {TREADY} -core_signal_name {res_ready}
 hdl_core_assign_bif_signal -hdl_core_name {fir_hw_top} -bif_name {res_axi4stream} -bif_signal_name {TVALID} -core_signal_name {res_valid}

@@ -2,7 +2,7 @@
 -- Smart High-Level Synthesis Tool Version 2025.2
 -- Copyright (c) 2015-2025 Microchip Technology Inc. All Rights Reserved.
 -- For support, please visit https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=techsupport&redirect=true&version=latest.
--- Date: Tue Jun  2 20:21:47 2026
+-- Date: Thu Jun 11 22:28:55 2026
 -- ----------------------------------------------------------------------------
 
 library ieee;
@@ -72,7 +72,8 @@ port (
 	res_data	:	out	std_logic_vector(31 downto 0);
 	res_ready	:	in	std_logic;
 	res_valid	:	out	std_logic;
-	res_last	:	out	std_logic_vector(7 downto 0)
+	res_last	:	out	std_logic_vector(7 downto 0);
+	res_keep	:	out	std_logic_vector(3 downto 0)
 );
 
 -- Put your code here ...
@@ -141,7 +142,8 @@ port (
 	res_data	:	out	std_logic_vector(31 downto 0);
 	res_ready	:	in	std_logic;
 	res_valid	:	out	std_logic;
-	res_last	:	out	std_logic_vector(7 downto 0)
+	res_last	:	out	std_logic_vector(7 downto 0);
+	res_keep	:	out	std_logic_vector(3 downto 0)
 );
 end component;
 
@@ -205,6 +207,7 @@ port map (
 	input_r_valid	=>	input_r_valid,
 	ready	=>	ready,
 	res_data	=>	res_data,
+	res_keep	=>	res_keep,
 	res_last	=>	res_last,
 	res_ready	=>	res_ready,
 	res_valid	=>	res_valid,

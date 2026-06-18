@@ -45,6 +45,7 @@ coeff_t coeff_hw[512], hls::FIFO<din_t>& input_l, hls::FIFO<din_t>& input_r, str
         cnt++;
         out_data.data = acc_l;
         out_data.last = (cnt == tlast_dnum);
+        out_data.keep = -1;
         res.write(out_data);
 
         if(cnt == tlast_dnum){
@@ -55,6 +56,7 @@ coeff_t coeff_hw[512], hls::FIFO<din_t>& input_l, hls::FIFO<din_t>& input_r, str
         cnt++;
         out_data.data = acc_r;
         out_data.last = (cnt == tlast_dnum);
+        out_data.keep = -1;
         res.write(out_data);
 
         if(cnt == tlast_dnum){

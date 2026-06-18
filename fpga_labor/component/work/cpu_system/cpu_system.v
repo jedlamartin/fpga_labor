@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Jun  2 20:40:44 2026
+// Created by SmartDesign Sat Jun 13 13:49:36 2026
 // Version: 2025.2 2025.2.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -116,6 +116,7 @@ wire          audio_interface_0_adc_valid_r;
 wire   [1:0]  BA_net_0;
 wire          BG0_net_0;
 wire   [31:0] bypass_hw_top_0_AXI4S_master_TDATA;
+wire   [3:0]  bypass_hw_top_0_AXI4S_master_TKEEP;
 wire          bypass_hw_top_0_AXI4S_master_TREADY;
 wire          bypass_hw_top_0_AXI4S_master_TVALID;
 wire          bypass_hw_top_0_input_l_ready;
@@ -305,6 +306,8 @@ wire   [1:0]  DM_net_0;
 wire   [15:0] DQ;
 wire   [1:0]  DQS;
 wire   [1:0]  DQS_N;
+wire          fir_hw_top_0_finish;
+wire          fir_hw_top_0_ready;
 wire          MMUART_1_RXD;
 wire          MMUART_1_TXD_net_0;
 wire   [1:0]  MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_ARBURST;
@@ -352,6 +355,7 @@ wire   [31:0] MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWDATA;
 wire          MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWRITE;
 wire          MPFS_DISCOVERY_KIT_MSS_0_MSS_RESET_N_M2F;
 wire          ODT0_net_0;
+wire          OR2_0_Y;
 wire          PF_CCC_C0_0_OUT0_FABCLK_0_1;
 wire          PF_CCC_C0_0_OUT1_FABCLK_0;
 wire          PF_CCC_C0_0_PLL_LOCK_0;
@@ -445,7 +449,6 @@ wire   [3:0]  MASTER1_ARCACHE_const_net_0;
 wire   [2:0]  MASTER1_ARPROT_const_net_0;
 wire   [3:0]  MASTER1_ARQOS_const_net_0;
 wire   [3:0]  MASTER1_ARREGION_const_net_0;
-wire   [3:0]  T_AXI4S_TKEEP_const_net_0;
 wire   [31:0] T_AXI4S_TDEST_const_net_0;
 //--------------------------------------------------------------------
 // Inverted Nets
@@ -597,7 +600,6 @@ assign MASTER1_ARCACHE_const_net_0  = 4'h0;
 assign MASTER1_ARPROT_const_net_0   = 3'h0;
 assign MASTER1_ARQOS_const_net_0    = 4'h0;
 assign MASTER1_ARREGION_const_net_0 = 4'h0;
-assign T_AXI4S_TKEEP_const_net_0    = 4'hF;
 assign T_AXI4S_TDEST_const_net_0    = 32'h00000000;
 //--------------------------------------------------------------------
 // Inversions
@@ -1124,7 +1126,7 @@ COREAXI4PROTOCONV_C0 COREAXI4PROTOCONV_C0_0(
         .T_AXI4L_ARADDR     ( COREAXI4INTERCONNECT_C0_0_AXI4mslave0_ARADDR_0 ),
         .T_AXI4S_TDEST      ( T_AXI4S_TDEST_const_net_0 ), // tied to 32'h00000000 from definition
         .T_AXI4S_TDATA      ( bypass_hw_top_0_AXI4S_master_TDATA ),
-        .T_AXI4S_TKEEP      ( T_AXI4S_TKEEP_const_net_0 ), // tied to 4'hF from definition
+        .T_AXI4S_TKEEP      ( bypass_hw_top_0_AXI4S_master_TKEEP ),
         .T_AXI4S_TUSER      ( GND_net ), // tied to 1'b0 from definition
         .I_S2MMAXI4_BRESP   ( COREAXI4PROTOCONV_C0_0_S2MM_AXI4MM_INITR_BRESP ),
         .I_MM2SAXI4_RDATA   ( COREAXI4PROTOCONV_C0_0_MM2S_AXI4MM_INITR_RDATA ),
@@ -1261,6 +1263,15 @@ fir_hw_top fir_hw_top_0(
         .clk                 ( PF_CCC_C0_0_OUT0_FABCLK_0_1 ),
         .reset               ( reset_IN_POST_INV0_0 ),
         .axi4target_arvalid  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARVALID ),
+        .axi4target_rready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RREADY ),
+        .axi4target_awvalid  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWVALID ),
+        .axi4target_wvalid   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WVALID ),
+        .axi4target_wlast    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WLAST ),
+        .axi4target_bready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BREADY ),
+        .start               ( OR2_0_Y ),
+        .input_l_valid       ( input_l_valid_IN_POST_INV1_0 ),
+        .input_r_valid       ( input_r_valid_IN_POST_INV2_0 ),
+        .res_ready           ( bypass_hw_top_0_AXI4S_master_TREADY ),
         .axi4target_araddr   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARADDR_0 ),
         .axi4target_arid     ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARID_0 ),
         .axi4target_arburst  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARBURST ),
@@ -1272,8 +1283,6 @@ fir_hw_top fir_hw_top_0(
         .axi4target_arqos    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARQOS ),
         .axi4target_arregion ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARREGION ),
         .axi4target_aruser   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARUSER ),
-        .axi4target_rready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RREADY ),
-        .axi4target_awvalid  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWVALID ),
         .axi4target_awaddr   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWADDR_0 ),
         .axi4target_awid     ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWID_0 ),
         .axi4target_awburst  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWBURST ),
@@ -1285,39 +1294,33 @@ fir_hw_top fir_hw_top_0(
         .axi4target_awqos    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWQOS ),
         .axi4target_awregion ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWREGION ),
         .axi4target_awuser   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWUSER ),
-        .axi4target_wvalid   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WVALID ),
         .axi4target_wdata    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WDATA_0 ),
-        .axi4target_wlast    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WLAST ),
         .axi4target_wstrb    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WSTRB_0 ),
         .axi4target_wuser    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WUSER ),
-        .axi4target_bready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BREADY ),
-        .start               ( VCC_net ),
         .input_l             ( COREFIFO_C0_0_Q ),
-        .input_l_valid       ( input_l_valid_IN_POST_INV1_0 ),
         .input_r             ( COREFIFO_C1_0_Q ),
-        .input_r_valid       ( input_r_valid_IN_POST_INV2_0 ),
-        .res_ready           ( bypass_hw_top_0_AXI4S_master_TREADY ),
         // Outputs
         .axi4target_arready  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_ARREADY ),
         .axi4target_rvalid   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RVALID ),
-        .axi4target_rdata    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RDATA ),
-        .axi4target_rid      ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RID ),
         .axi4target_rlast    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RLAST ),
-        .axi4target_rresp    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RRESP ),
-        .axi4target_ruser    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RUSER ),
         .axi4target_awready  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWREADY ),
         .axi4target_wready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WREADY ),
         .axi4target_bvalid   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BVALID ),
+        .ready               ( fir_hw_top_0_ready ),
+        .finish              ( fir_hw_top_0_finish ),
+        .input_l_ready       ( bypass_hw_top_0_input_l_ready ),
+        .input_r_ready       ( bypass_hw_top_0_input_r_ready ),
+        .res_valid           ( bypass_hw_top_0_AXI4S_master_TVALID ),
+        .axi4target_rdata    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RDATA ),
+        .axi4target_rid      ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RID ),
+        .axi4target_rresp    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RRESP ),
+        .axi4target_ruser    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_RUSER ),
         .axi4target_bid      ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BID ),
         .axi4target_bresp    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BRESP ),
         .axi4target_buser    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BUSER ),
-        .ready               (  ),
-        .finish              (  ),
-        .input_l_ready       ( bypass_hw_top_0_input_l_ready ),
-        .input_r_ready       ( bypass_hw_top_0_input_r_ready ),
         .res_data            ( bypass_hw_top_0_AXI4S_master_TDATA ),
-        .res_valid           ( bypass_hw_top_0_AXI4S_master_TVALID ),
-        .res_last            ( bypass_hw_top_0_AXI4S_master_TLAST ) 
+        .res_last            ( bypass_hw_top_0_AXI4S_master_TLAST ),
+        .res_keep            ( bypass_hw_top_0_AXI4S_master_TKEEP ) 
         );
 
 //--------MPFS_DISCOVERY_KIT_MSS
@@ -1453,6 +1456,15 @@ MPFS_DISCOVERY_KIT_MSS MPFS_DISCOVERY_KIT_MSS_0(
         .DQ                   ( DQ ),
         .DQS                  ( DQS ),
         .DQS_N                ( DQS_N ) 
+        );
+
+//--------OR2
+OR2 OR2_0(
+        // Inputs
+        .A ( fir_hw_top_0_ready ),
+        .B ( fir_hw_top_0_finish ),
+        // Outputs
+        .Y ( OR2_0_Y ) 
         );
 
 //--------PF_CCC_C0

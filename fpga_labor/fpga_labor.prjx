@@ -1841,13 +1841,13 @@ IS_READONLY="TRUE"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.cxf,actgen_cxf"
 STATE="utd"
-TIME="1780425645"
+TIME="1781351377"
 SIZE="15017"
 ENDFILE
 VALUE "<project>\component\work\cpu_system\cpu_system.v,hdl"
 STATE="utd"
-TIME="1780425644"
-SIZE="88676"
+TIME="1781351376"
+SIZE="88997"
 PARENT="<project>\component\work\cpu_system\cpu_system.cxf"
 IS_READONLY="TRUE"
 ENDFILE
@@ -1965,8 +1965,8 @@ SIZE="1211"
 ENDFILE
 VALUE "<project>\hdl\fir_hls_fir_hw.v,hdl"
 STATE="utd"
-TIME="1780424869"
-SIZE="212745"
+TIME="1781181115"
+SIZE="225960"
 ENDFILE
 VALUE "<project>\simulation\bfmtovec_compile.tcl,sim"
 STATE="utd"
@@ -2044,7 +2044,7 @@ TIME="1780073030"
 SIZE="261"
 ENDFILE
 VALUE "<project>\synthesis\audio_interface\cpu_system.vm,syn_vm"
-STATE="utd"
+STATE="ood"
 TIME="1780073026"
 SIZE="7222198"
 ENDFILE
@@ -2080,8 +2080,8 @@ SIZE="4570251"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_syn.prj,prj"
 STATE="utd"
-TIME="1780147500"
-SIZE="30676"
+TIME="1781181382"
+SIZE="33114"
 ENDFILE
 VALUE "<project>\synthesis\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
@@ -2090,17 +2090,17 @@ SIZE="1555"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\cpu_system.so,so"
 STATE="utd"
-TIME="1780147775"
+TIME="1781181382"
 SIZE="246"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\cpu_system.vm,syn_vm"
 STATE="utd"
-TIME="1780426387"
-SIZE="3883212"
+TIME="1781181378"
+SIZE="8234929"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\cpu_system_vm.sdc,syn_sdc"
 STATE="utd"
-TIME="1780147772"
+TIME="1781181379"
 SIZE="3027"
 ENDFILE
 VALUE "<project>\synthesis\fir_hw\synwork\layer0.so,so"
@@ -2257,10 +2257,7 @@ VALUE "<project>\constraint\io\user.pdc,io_pdc"
 ENDLIST
 LIST ProjectState5.1
 LIST Impl1
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
-ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2270,10 +2267,7 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
-ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2297,10 +2291,7 @@ VALUE "<project>\synthesis\identify_debug\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 LIST Impl3
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
-ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2318,12 +2309,6 @@ VALUE "<project>\synthesis\fir_hw\cpu_system_sdc.sdc,syn_sdc"
 VALUE "<project>\synthesis\fir_hw\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
-ENDLIST
-LIST synthesis_implementations
-VALUE "synthesis"
-VALUE "audio_interface"
-VALUE "bypass_hw"
-VALUE "fir_hw"
 ENDLIST
 ENDLIST
 LIST "MPFS_DISCOVERY_KIT_MSS::work"
@@ -2530,8 +2515,8 @@ NAME="Synplify Pro ME"
 FUNCTION="Synthesis"
 TOOL="Synplify Pro ME"
 LOCATION="C:\Microchip\Libero_SoC_2025.2\Libero_SoC\Synplify_Pro\bin\synplify_pro.exe"
-PARAM=""
-BATCH=0
+PARAM="-licensetype synplifypro_actel -batch -log synplify.log"
+BATCH=1
 LICENSE=""
 IS32BIT="1"
 EndProfile
@@ -2589,10 +2574,7 @@ ENDLIST
 ENDLIST
 LIST "cpu_system::work"
 LIST Impl1
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
-ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2602,10 +2584,7 @@ Used_File_List
 ENDUsed_File_List
 ENDLIST
 LIST Impl2
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
-ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2629,10 +2608,7 @@ VALUE "<project>\synthesis\identify_debug\cpu_system.v,syn_hdl"
 ENDUsed_File_List
 ENDLIST
 LIST Impl3
-ideSYNTHESIS(<project>\synthesis\cpu_system.vm,syn_vm)=StateFailure
 ideSYNTHESIS(<project>\synthesis\fir_hw\cpu_system.vm,syn_vm)=StateSuccess
-ideSYNTHESIS(<project>\synthesis\audio_interface\cpu_system.vm,syn_vm)=StateFailure
-ideSYNTHESIS(<project>\synthesis\audio_interface_debug\cpu_system.vm,syn_vm)=StateFailure
 LIST FlowOptions
 UsePhySynth=FALSE
 UseSynth=TRUE
@@ -2666,6 +2642,8 @@ LIST OpenedFileList
 ORIENTATION;HORIZONTAL
 Reports;Reports;0
 ReportsCurrentItem;Run Programming Action:cpu_system_PROGRAM.log
+Constraint Manager;Constraint Manager;0
+HDL;constraint\io\user.pdc;0
 StartPage;StartPage;0
 SmartDesign;cpu_system;0
 ACTIVEVIEW;Reports
@@ -3587,6 +3565,8 @@ SUBBLOCK "fir_hw_legup_mult_core::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 ENDLIST
 LIST "fir_hw_legup_mult_pipelined::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 ENDLIST
+LIST "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+ENDLIST
 LIST "fir_hw_shift_reg::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 ENDLIST
 LIST "caxi4interconnect_FIFO::work","component\Actel\DirectCore\COREAXI4INTERCONNECT\2.9.100\rtl\vlog\core\Axi4Convertors\FIFO.v","FALSE","FALSE"
@@ -3653,6 +3633,7 @@ SUBBLOCK "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 SUBBLOCK "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
+SUBBLOCK "fir_hw_ram_single_port::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 SUBBLOCK "fir_hw_legup_mult::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"
 ENDLIST
 LIST "fir_hw_first_word::work","hdl\fir_hls_fir_hw.v","FALSE","FALSE"

@@ -2,7 +2,7 @@
 // Smart High-Level Synthesis Tool Version 2025.2
 // Copyright (c) 2015-2025 Microchip Technology Inc. All Rights Reserved.
 // For support, please visit https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=techsupport&redirect=true&version=latest.
-// Date: Tue Jun  2 20:21:47 2026
+// Date: Thu Jun 11 22:28:55 2026
 // ----------------------------------------------------------------------------
 `define MEMORY_CONTROLLER_ADDR_SIZE 32
 //
@@ -84,7 +84,8 @@ module fir_hw_top
   output reg [31:0] res_data,
   input  res_ready,
   output reg  res_valid,
-  output reg [7:0] res_last
+  output reg [7:0] res_last,
+  output reg [3:0] res_keep
 );
 
 
@@ -244,7 +245,8 @@ fir_hw_hw_top fir_hw_inst (
   .res_data (res_data),
   .res_ready (res_ready),
   .res_valid (res_valid),
-  .res_last (res_last)
+  .res_last (res_last),
+  .res_keep (res_keep)
 );
 
 endmodule
@@ -271,6 +273,7 @@ module fir_hw_hw_top
 	res_ready,
 	res_valid,
 	res_last,
+	res_keep,
 	coeff_hw_clken,
 	coeff_hw_read_en_a,
 	coeff_hw_address_a,
@@ -298,6 +301,7 @@ output reg [31:0] res_data;
 input  res_ready;
 output reg  res_valid;
 output reg [7:0] res_last;
+output reg [3:0] res_keep;
 output reg  coeff_hw_clken;
 output reg  coeff_hw_read_en_a;
 output reg [8:0] coeff_hw_address_a;
@@ -323,6 +327,7 @@ wire [31:0] fir_hw_inst_res_data;
 reg  fir_hw_inst_res_ready;
 wire  fir_hw_inst_res_valid;
 wire [7:0] fir_hw_inst_res_last;
+wire [3:0] fir_hw_inst_res_keep;
 wire  fir_hw_inst_coeff_hw_clken;
 wire  fir_hw_inst_coeff_hw_read_en_a;
 wire [8:0] fir_hw_inst_coeff_hw_address_a;
@@ -352,6 +357,7 @@ fir_hw_fir_hw fir_hw_inst (
 	.res_ready (fir_hw_inst_res_ready),
 	.res_valid (fir_hw_inst_res_valid),
 	.res_last (fir_hw_inst_res_last),
+	.res_keep (fir_hw_inst_res_keep),
 	.coeff_hw_clken (fir_hw_inst_coeff_hw_clken),
 	.coeff_hw_read_en_a (fir_hw_inst_coeff_hw_read_en_a),
 	.coeff_hw_address_a (fir_hw_inst_coeff_hw_address_a),
@@ -432,6 +438,9 @@ always @(*) begin
 	res_last = fir_hw_inst_res_last;
 end
 always @(*) begin
+	res_keep = fir_hw_inst_res_keep;
+end
+always @(*) begin
 	coeff_hw_clken = fir_hw_inst_coeff_hw_clken;
 end
 always @(*) begin
@@ -470,6 +479,7 @@ module fir_hw_fir_hw
 	res_ready,
 	res_valid,
 	res_last,
+	res_keep,
 	coeff_hw_clken,
 	coeff_hw_read_en_a,
 	coeff_hw_address_a,
@@ -510,6 +520,7 @@ output reg [31:0] res_data;
 input  res_ready;
 output reg  res_valid;
 output reg [7:0] res_last;
+output reg [3:0] res_keep;
 output reg  coeff_hw_clken;
 output reg  coeff_hw_read_en_a;
 output reg [8:0] coeff_hw_address_a;
@@ -702,6 +713,9 @@ reg  res_data_SHLS_F_fir_hw_BB_2_5_enable_cond_a;
 reg  res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a;
 reg  res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg;
 reg  res_last_SHLS_F_fir_hw_BB_2_5_enable_cond_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg;
+reg  res_keep_SHLS_F_fir_hw_BB_2_5_enable_cond_a;
 wire [6:0] fir_hw_BB_2_bit_concat13_bit_select_operand_0;
 reg  res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a;
 reg  res_data_SHLS_F_fir_hw_BB_2_6_stalln_reg;
@@ -709,6 +723,9 @@ reg  res_data_SHLS_F_fir_hw_BB_2_6_enable_cond_a;
 reg  res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a;
 reg  res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg;
 reg  res_last_SHLS_F_fir_hw_BB_2_6_enable_cond_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg;
+reg  res_keep_SHLS_F_fir_hw_BB_2_6_enable_cond_a;
 wire [22:0] fir_hw_BB_3_bit_concat18_bit_select_operand_0;
 reg [23:0] fir_hw_buffer_left_read_data_wire_a;
 reg  fir_hw_buffer_left_clken_pipeline_cond;
@@ -833,7 +850,7 @@ reg [50:0] fir_hw_BB_3_bit_select86_width_extended;
 wire [16:0] fir_hw_BB_3_bit_concat87_bit_select_operand_2;
 wire [33:0] fir_hw_BB_3_bit_concat90_bit_select_operand_2;
 
-/*   %mul = mul nuw i34 %bit_concat32, %bit_concat35, !dbg !11321, !MSB !11325, !LSB !11324, !ExtendFrom !11325, !legup.pipeline.avail_time !10858, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul = mul nuw i34 %bit_concat32, %bit_concat35, !dbg !11626, !MSB !11630, !LSB !11629, !ExtendFrom !11630, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_17_1_0 (
 	.clock (legup_mult_unsigned_17_17_1_0_clock),
 	.aclr (legup_mult_unsigned_17_17_1_0_aclr),
@@ -850,7 +867,7 @@ defparam
 	legup_mult_unsigned_17_17_1_0.pipeline = 1,
 	legup_mult_unsigned_17_17_1_0.representation = "UNSIGNED";
 
-/*   %mul38 = mul nsw i33 %bit_concat37, %sext, !dbg !11321, !MSB !11327, !LSB !11324, !ExtendFrom !10988, !legup.pipeline.avail_time !11328, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul38 = mul nsw i33 %bit_concat37, %sext, !dbg !11626, !MSB !11632, !LSB !11629, !ExtendFrom !11293, !legup.pipeline.avail_time !11633, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_27_2_1 (
 	.clock (legup_mult_unsigned_17_27_2_1_clock),
 	.aclr (legup_mult_unsigned_17_27_2_1_aclr),
@@ -867,7 +884,7 @@ defparam
 	legup_mult_unsigned_17_27_2_1.pipeline = 2,
 	legup_mult_unsigned_17_27_2_1.representation = "UNSIGNED";
 
-/*   %mul41 = mul nsw i32 %bit_concat40, %sext39, !dbg !11321, !MSB !10988, !LSB !10808, !ExtendFrom !11329, !legup.pipeline.avail_time !10858, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul41 = mul nsw i32 %bit_concat40, %sext39, !dbg !11626, !MSB !11293, !LSB !11113, !ExtendFrom !11634, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_18_13_1_2 (
 	.clock (legup_mult_signed_18_13_1_2_clock),
 	.aclr (legup_mult_signed_18_13_1_2_aclr),
@@ -884,7 +901,7 @@ defparam
 	legup_mult_signed_18_13_1_2.pipeline = 1,
 	legup_mult_signed_18_13_1_2.representation = "SIGNED";
 
-/*   %mul44 = mul nsw i29 %sext42, %sext43, !dbg !11321, !MSB !11330, !LSB !10808, !ExtendFrom !11331, !legup.pipeline.avail_time !10858, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul44 = mul nsw i29 %sext42, %sext43, !dbg !11626, !MSB !11635, !LSB !11113, !ExtendFrom !11636, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_13_15_1_3 (
 	.clock (legup_mult_signed_13_15_1_3_clock),
 	.aclr (legup_mult_signed_13_15_1_3_aclr),
@@ -901,7 +918,7 @@ defparam
 	legup_mult_signed_13_15_1_3.pipeline = 1,
 	legup_mult_signed_13_15_1_3.representation = "SIGNED";
 
-/*   %mul68 = mul nuw i34 %bit_concat67, %bit_concat35, !dbg !11373, !MSB !11325, !LSB !11324, !ExtendFrom !11325, !legup.pipeline.avail_time !10858, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul68 = mul nuw i34 %bit_concat67, %bit_concat35, !dbg !11678, !MSB !11630, !LSB !11629, !ExtendFrom !11630, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_17_1_4 (
 	.clock (legup_mult_unsigned_17_17_1_4_clock),
 	.aclr (legup_mult_unsigned_17_17_1_4_aclr),
@@ -918,7 +935,7 @@ defparam
 	legup_mult_unsigned_17_17_1_4.pipeline = 1,
 	legup_mult_unsigned_17_17_1_4.representation = "UNSIGNED";
 
-/*   %mul70 = mul nsw i33 %bit_concat69, %sext, !dbg !11373, !MSB !11327, !LSB !11324, !ExtendFrom !10988, !legup.pipeline.avail_time !11328, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul70 = mul nsw i33 %bit_concat69, %sext, !dbg !11678, !MSB !11632, !LSB !11629, !ExtendFrom !11293, !legup.pipeline.avail_time !11633, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_27_2_5 (
 	.clock (legup_mult_unsigned_17_27_2_5_clock),
 	.aclr (legup_mult_unsigned_17_27_2_5_aclr),
@@ -935,7 +952,7 @@ defparam
 	legup_mult_unsigned_17_27_2_5.pipeline = 2,
 	legup_mult_unsigned_17_27_2_5.representation = "UNSIGNED";
 
-/*   %mul72 = mul nsw i32 %bit_concat40, %sext71, !dbg !11373, !MSB !10988, !LSB !10808, !ExtendFrom !11329, !legup.pipeline.avail_time !10858, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul72 = mul nsw i32 %bit_concat40, %sext71, !dbg !11678, !MSB !11293, !LSB !11113, !ExtendFrom !11634, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_18_13_1_6 (
 	.clock (legup_mult_signed_18_13_1_6_clock),
 	.aclr (legup_mult_signed_18_13_1_6_aclr),
@@ -952,7 +969,7 @@ defparam
 	legup_mult_signed_18_13_1_6.pipeline = 1,
 	legup_mult_signed_18_13_1_6.representation = "SIGNED";
 
-/*   %mul74 = mul nsw i29 %sext73, %sext43, !dbg !11373, !MSB !11330, !LSB !10808, !ExtendFrom !11331, !legup.pipeline.avail_time !10858, !legup.pipeline.start_time !10986, !legup.pipeline.stage !10808*/
+/*   %mul74 = mul nsw i29 %sext73, %sext43, !dbg !11678, !MSB !11635, !LSB !11113, !ExtendFrom !11636, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_13_15_1_7 (
 	.clock (legup_mult_signed_13_15_1_7_clock),
 	.aclr (legup_mult_signed_13_15_1_7_aclr),
@@ -1085,10 +1102,16 @@ always @(*) begin
 	if ((((cur_state == SHLS_F_fir_hw_BB_2_5) & ~(res_ready)) & (res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_5) & ~(res_ready)) & (res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg))) begin
+		fsm_stall = 1'd1;
+	end
 	if ((((cur_state == SHLS_F_fir_hw_BB_2_6) & ~(res_ready)) & (res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_2_6_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
 	if ((((cur_state == SHLS_F_fir_hw_BB_2_6) & ~(res_ready)) & (res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg))) begin
+		fsm_stall = 1'd1;
+	end
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_6) & ~(res_ready)) & (res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
 end
@@ -1822,6 +1845,15 @@ end
 always @(*) begin
 	res_last_SHLS_F_fir_hw_BB_2_5_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_5) & (res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg));
 end
+always @(posedge clk) begin
+	res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+end
+always @(posedge clk) begin
+	res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg <= ~(fsm_stall);
+end
+always @(*) begin
+	res_keep_SHLS_F_fir_hw_BB_2_5_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_5) & (res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg));
+end
 assign fir_hw_BB_2_bit_concat13_bit_select_operand_0 = 7'd0;
 always @(posedge clk) begin
 	res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
@@ -1840,6 +1872,15 @@ always @(posedge clk) begin
 end
 always @(*) begin
 	res_last_SHLS_F_fir_hw_BB_2_6_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_6) & (res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg));
+end
+always @(posedge clk) begin
+	res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+end
+always @(posedge clk) begin
+	res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg <= ~(fsm_stall);
+end
+always @(*) begin
+	res_keep_SHLS_F_fir_hw_BB_2_6_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_6) & (res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg));
 end
 assign fir_hw_BB_3_bit_concat18_bit_select_operand_0 = 23'd0;
 always @(*) begin
@@ -2170,10 +2211,16 @@ always @(*) begin
 	if (res_last_SHLS_F_fir_hw_BB_2_5_enable_cond_a) begin
 		res_valid = 1'd1;
 	end
+	if (res_keep_SHLS_F_fir_hw_BB_2_5_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
 	if (res_data_SHLS_F_fir_hw_BB_2_6_enable_cond_a) begin
 		res_valid = 1'd1;
 	end
 	if (res_last_SHLS_F_fir_hw_BB_2_6_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+	if (res_keep_SHLS_F_fir_hw_BB_2_6_enable_cond_a) begin
 		res_valid = 1'd1;
 	end
 end
@@ -2184,6 +2231,15 @@ always @(*) begin
 	end
 	if ((cur_state == SHLS_F_fir_hw_BB_2_6)) begin
 		res_last = fir_hw_BB_2_bit_concat13_reg;
+	end
+end
+always @(*) begin
+	res_keep = 4'd0;
+	if ((cur_state == SHLS_F_fir_hw_BB_2_5)) begin
+		res_keep = -4'd1;
+	end
+	if ((cur_state == SHLS_F_fir_hw_BB_2_6)) begin
+		res_keep = -4'd1;
 	end
 end
 always @(*) begin

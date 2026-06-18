@@ -13,6 +13,7 @@ typedef hls::ap_fixpt<48, 2, hls::AP_TRN, hls::AP_WRAP> acc_t;
 struct axis_packet {
     dout_t data;
     bool last;
+    hls::ap_uint<4> keep;
 };
 typedef hls::FIFO<axis_packet> stream_type;
 

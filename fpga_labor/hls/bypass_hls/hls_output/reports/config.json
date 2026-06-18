@@ -40,7 +40,7 @@
     "LEGUP_DEFAULT_FIFO_DEPTH": "2",
     "LEGUP_INTERNAL_DEV": false,
     "LEGUP_VERBOSE": false,
-    "LIBERO_TOOL_PATH": "C:\\Microchip\\Libero_SoC_2025.2\\SmartHLS\\..\\Libero_SoC\\Designer\\bin",
+    "LIBERO_TOOL_PATH": ".",
     "LINK_FLAG_RISCV": [],
     "LINK_ICICLE_LIBS": [
         "-LC:/Microchip/Libero_SoC_2025.2/SmartHLS/SmartHLS/smarthls-library/hls",
@@ -157,7 +157,7 @@
     "QOR_BUILD": "",
     "QOR_BUILD_NAME": "",
     "QOR_TEST_NAME": "bypass_hls",
-    "QUESTASIM_TOOL_PATH": ".",
+    "QUESTASIM_TOOL_PATH": "C:\\Microchip\\Libero_SoC_2025.2\\SmartHLS\\..\\Libero_SoC\\ModelSim_Pro\\win32acoem",
     "REPLICATE_RAMS": "",
     "RISCV_BINARY_NAME": "",
     "RISCV_SRCS": [
