@@ -22,16 +22,20 @@ constexpr uint8_t CTRL_AA    = (1 << 2); // Assert Acknowledge
 constexpr uint8_t CTRL_CR1   = (1 << 1); // Clock Rate 1
 constexpr uint8_t CTRL_CR0   = (1 << 0); // Clock Rate 0
 
+
+constexpr uint8_t CTRL_BASE = CTRL_ENS1 | CTRL_CR2;
+
+
 // Common Status Codes (STAT)
-constexpr uint8_t STAT_START_SENT    = 0x08;
+constexpr uint8_t STAT_START_SENT     = 0x08;
 constexpr uint8_t STAT_REP_START_SENT = 0x10;
-constexpr uint8_t STAT_SLAW_ACK      = 0x18; // Slave Address Write Acked
+constexpr uint8_t STAT_SLAW_ACK       = 0x18; // Slave Address Write Acked
 constexpr uint8_t STAT_SLAW_NACK      = 0x20; // Slave Address Write NAcked
-constexpr uint8_t STAT_DATAW_ACK     = 0x28; // Data Write Acked
-constexpr uint8_t STAT_SLAR_ACK      = 0x40; // Slave Address Read Acked
-constexpr uint8_t STAT_DATAR_ACK     = 0x50; // Data Read Acked
-constexpr uint8_t STAT_DATAR_NACK    = 0x58; // Data Read NACK (End of read)
-constexpr uint8_t STAT_IDLE          = 0xF8;
+constexpr uint8_t STAT_DATAW_ACK      = 0x28; // Data Write Acked
+constexpr uint8_t STAT_SLAR_ACK       = 0x40; // Slave Address Read Acked
+constexpr uint8_t STAT_DATAR_ACK      = 0x50; // Data Read Acked
+constexpr uint8_t STAT_DATAR_NACK     = 0x58; // Data Read NACK (End of read)
+constexpr uint8_t STAT_IDLE           = 0xF8;
 
 constexpr uint32_t GPIO_BASE_ADDR = 0x40000000;
 constexpr uint32_t GPO_CFG_OFFSET = 0x00;
@@ -83,6 +87,7 @@ void cache_flush(uintptr_t addr, uint32_t length);
 void init(){
     i2c_init();
     sleep_ms(1000);
+
     const double* source_ptr = filter_512_data;
 
     if constexpr (coeff_size == 128) {
@@ -93,7 +98,7 @@ void init(){
         source_ptr = filter_512_data;
     }
 
-    const int FRACTIONAL_BITS = 30;
+    const int FRACTIONAL_BITS = 31;
     const double SCALING_FACTOR = (double)(1ULL << FRACTIONAL_BITS);
 
     int32_t raw_coeffs[512];
@@ -118,7 +123,6 @@ void i2c_init() {
     MEM8(I2C_BASE_ADDR + I2C_CTRL_OFFSET) = CTRL_ENS1 | CTRL_CR2;
 }
 
-constexpr uint8_t CTRL_BASE = CTRL_ENS1 | CTRL_CR2;
 void i2c_write(uint8_t slv_addr, uint8_t reg_addr, uint8_t data) {
     // 1. Send START
     MEM8(I2C_BASE_ADDR + I2C_CTRL_OFFSET) = CTRL_BASE | CTRL_STA;
@@ -142,7 +146,7 @@ void i2c_write(uint8_t slv_addr, uint8_t reg_addr, uint8_t data) {
         sleep_cycles(100000);
         return;
     }
-
+    sleep_cycles(1000);
     // 3. Send Register Address
     MEM8(I2C_BASE_ADDR + I2C_DATA_OFFSET) = reg_addr;
     MEM8(I2C_BASE_ADDR + I2C_CTRL_OFFSET) = CTRL_BASE;

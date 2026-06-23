@@ -2,7 +2,7 @@
 // Smart High-Level Synthesis Tool Version 2025.2
 // Copyright (c) 2015-2025 Microchip Technology Inc. All Rights Reserved.
 // For support, please visit https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=techsupport&redirect=true&version=latest.
-// Date: Thu Jun 11 14:27:23 2026
+// Date: Tue Jun 23 12:30:44 2026
 // ----------------------------------------------------------------------------
 `define MEMORY_CONTROLLER_ADDR_SIZE 32
 //
@@ -263,13 +263,6 @@ module fir_hw_hw_top
 	tlast_dnum,
 	smpl_rd_num,
 	tap_num_m1,
-	coeff_hw_clken,
-	coeff_hw_read_en_a,
-	coeff_hw_address_a,
-	coeff_hw_read_data_a,
-	coeff_hw_read_en_b,
-	coeff_hw_address_b,
-	coeff_hw_read_data_b,
 	input_l,
 	input_l_ready,
 	input_l_valid,
@@ -280,7 +273,14 @@ module fir_hw_hw_top
 	res_ready,
 	res_valid,
 	res_last,
-	res_keep
+	res_keep,
+	coeff_hw_clken,
+	coeff_hw_read_en_a,
+	coeff_hw_address_a,
+	coeff_hw_read_data_a,
+	coeff_hw_read_en_b,
+	coeff_hw_address_b,
+	coeff_hw_read_data_b
 );
 
 input  clk;
@@ -291,13 +291,6 @@ output reg  finish;
 input [15:0] tlast_dnum;
 input [7:0] smpl_rd_num;
 input [15:0] tap_num_m1;
-output reg  coeff_hw_clken;
-output reg  coeff_hw_read_en_a;
-output reg [8:0] coeff_hw_address_a;
-input [31:0] coeff_hw_read_data_a;
-output reg  coeff_hw_read_en_b;
-output reg [8:0] coeff_hw_address_b;
-input [31:0] coeff_hw_read_data_b;
 input [23:0] input_l;
 output reg  input_l_ready;
 input  input_l_valid;
@@ -309,6 +302,13 @@ input  res_ready;
 output reg  res_valid;
 output reg [7:0] res_last;
 output reg [3:0] res_keep;
+output reg  coeff_hw_clken;
+output reg  coeff_hw_read_en_a;
+output reg [8:0] coeff_hw_address_a;
+input [31:0] coeff_hw_read_data_a;
+output reg  coeff_hw_read_en_b;
+output reg [8:0] coeff_hw_address_b;
+input [31:0] coeff_hw_read_data_b;
 reg  fir_hw_inst_clk;
 reg  fir_hw_inst_reset;
 reg  fir_hw_inst_start;
@@ -317,13 +317,6 @@ wire  fir_hw_inst_finish;
 reg [15:0] fir_hw_inst_tlast_dnum;
 reg [7:0] fir_hw_inst_smpl_rd_num;
 reg [15:0] fir_hw_inst_tap_num_m1;
-wire  fir_hw_inst_coeff_hw_clken;
-wire  fir_hw_inst_coeff_hw_read_en_a;
-wire [8:0] fir_hw_inst_coeff_hw_address_a;
-reg [31:0] fir_hw_inst_coeff_hw_read_data_a;
-wire  fir_hw_inst_coeff_hw_read_en_b;
-wire [8:0] fir_hw_inst_coeff_hw_address_b;
-reg [31:0] fir_hw_inst_coeff_hw_read_data_b;
 reg [23:0] fir_hw_inst_input_l;
 wire  fir_hw_inst_input_l_ready;
 reg  fir_hw_inst_input_l_valid;
@@ -335,6 +328,13 @@ reg  fir_hw_inst_res_ready;
 wire  fir_hw_inst_res_valid;
 wire [7:0] fir_hw_inst_res_last;
 wire [3:0] fir_hw_inst_res_keep;
+wire  fir_hw_inst_coeff_hw_clken;
+wire  fir_hw_inst_coeff_hw_read_en_a;
+wire [8:0] fir_hw_inst_coeff_hw_address_a;
+reg [31:0] fir_hw_inst_coeff_hw_read_data_a;
+wire  fir_hw_inst_coeff_hw_read_en_b;
+wire [8:0] fir_hw_inst_coeff_hw_address_b;
+reg [31:0] fir_hw_inst_coeff_hw_read_data_b;
 reg  fir_hw_inst_finish_reg;
 
 
@@ -347,13 +347,6 @@ fir_hw_fir_hw fir_hw_inst (
 	.tlast_dnum (fir_hw_inst_tlast_dnum),
 	.smpl_rd_num (fir_hw_inst_smpl_rd_num),
 	.tap_num_m1 (fir_hw_inst_tap_num_m1),
-	.coeff_hw_clken (fir_hw_inst_coeff_hw_clken),
-	.coeff_hw_read_en_a (fir_hw_inst_coeff_hw_read_en_a),
-	.coeff_hw_address_a (fir_hw_inst_coeff_hw_address_a),
-	.coeff_hw_read_data_a (fir_hw_inst_coeff_hw_read_data_a),
-	.coeff_hw_read_en_b (fir_hw_inst_coeff_hw_read_en_b),
-	.coeff_hw_address_b (fir_hw_inst_coeff_hw_address_b),
-	.coeff_hw_read_data_b (fir_hw_inst_coeff_hw_read_data_b),
 	.input_l (fir_hw_inst_input_l),
 	.input_l_ready (fir_hw_inst_input_l_ready),
 	.input_l_valid (fir_hw_inst_input_l_valid),
@@ -364,7 +357,14 @@ fir_hw_fir_hw fir_hw_inst (
 	.res_ready (fir_hw_inst_res_ready),
 	.res_valid (fir_hw_inst_res_valid),
 	.res_last (fir_hw_inst_res_last),
-	.res_keep (fir_hw_inst_res_keep)
+	.res_keep (fir_hw_inst_res_keep),
+	.coeff_hw_clken (fir_hw_inst_coeff_hw_clken),
+	.coeff_hw_read_en_a (fir_hw_inst_coeff_hw_read_en_a),
+	.coeff_hw_address_a (fir_hw_inst_coeff_hw_address_a),
+	.coeff_hw_read_data_a (fir_hw_inst_coeff_hw_read_data_a),
+	.coeff_hw_read_en_b (fir_hw_inst_coeff_hw_read_en_b),
+	.coeff_hw_address_b (fir_hw_inst_coeff_hw_address_b),
+	.coeff_hw_read_data_b (fir_hw_inst_coeff_hw_read_data_b)
 );
 
 
@@ -388,12 +388,6 @@ always @(*) begin
 	fir_hw_inst_tap_num_m1 = tap_num_m1;
 end
 always @(*) begin
-	fir_hw_inst_coeff_hw_read_data_a = coeff_hw_read_data_a;
-end
-always @(*) begin
-	fir_hw_inst_coeff_hw_read_data_b = coeff_hw_read_data_b;
-end
-always @(*) begin
 	fir_hw_inst_input_l = input_l;
 end
 always @(*) begin
@@ -408,6 +402,12 @@ end
 always @(*) begin
 	fir_hw_inst_res_ready = res_ready;
 end
+always @(*) begin
+	fir_hw_inst_coeff_hw_read_data_a = coeff_hw_read_data_a;
+end
+always @(*) begin
+	fir_hw_inst_coeff_hw_read_data_b = coeff_hw_read_data_b;
+end
 always @(posedge clk) begin
 	if ((reset | fir_hw_inst_start)) begin
 		fir_hw_inst_finish_reg <= 1'd0;
@@ -421,21 +421,6 @@ always @(*) begin
 end
 always @(*) begin
 	finish = fir_hw_inst_finish;
-end
-always @(*) begin
-	coeff_hw_clken = fir_hw_inst_coeff_hw_clken;
-end
-always @(*) begin
-	coeff_hw_read_en_a = fir_hw_inst_coeff_hw_read_en_a;
-end
-always @(*) begin
-	coeff_hw_address_a = fir_hw_inst_coeff_hw_address_a;
-end
-always @(*) begin
-	coeff_hw_read_en_b = fir_hw_inst_coeff_hw_read_en_b;
-end
-always @(*) begin
-	coeff_hw_address_b = fir_hw_inst_coeff_hw_address_b;
 end
 always @(*) begin
 	input_l_ready = fir_hw_inst_input_l_ready;
@@ -455,6 +440,21 @@ end
 always @(*) begin
 	res_keep = fir_hw_inst_res_keep;
 end
+always @(*) begin
+	coeff_hw_clken = fir_hw_inst_coeff_hw_clken;
+end
+always @(*) begin
+	coeff_hw_read_en_a = fir_hw_inst_coeff_hw_read_en_a;
+end
+always @(*) begin
+	coeff_hw_address_a = fir_hw_inst_coeff_hw_address_a;
+end
+always @(*) begin
+	coeff_hw_read_en_b = fir_hw_inst_coeff_hw_read_en_b;
+end
+always @(*) begin
+	coeff_hw_address_b = fir_hw_inst_coeff_hw_address_b;
+end
 
 endmodule
 
@@ -469,13 +469,6 @@ module fir_hw_fir_hw
 	tlast_dnum,
 	smpl_rd_num,
 	tap_num_m1,
-	coeff_hw_clken,
-	coeff_hw_read_en_a,
-	coeff_hw_address_a,
-	coeff_hw_read_data_a,
-	coeff_hw_read_en_b,
-	coeff_hw_address_b,
-	coeff_hw_read_data_b,
 	input_l,
 	input_l_ready,
 	input_l_valid,
@@ -486,26 +479,28 @@ module fir_hw_fir_hw
 	res_ready,
 	res_valid,
 	res_last,
-	res_keep
+	res_keep,
+	coeff_hw_clken,
+	coeff_hw_read_en_a,
+	coeff_hw_address_a,
+	coeff_hw_read_data_a,
+	coeff_hw_read_en_b,
+	coeff_hw_address_b,
+	coeff_hw_read_data_b
 );
 
-parameter [4:0] SHLS_0 = 5'd0;
-parameter [4:0] SHLS_F_fir_hw_BB_0_1 = 5'd1;
-parameter [4:0] SHLS_F_fir_hw_BB_1_2 = 5'd2;
-parameter [4:0] SHLS_F_fir_hw_BB_2_3 = 5'd3;
-parameter [4:0] SHLS_F_fir_hw_BB_2_4 = 5'd4;
-parameter [4:0] SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_27_6_5 = 5'd5;
-parameter [4:0] SHLS_F_fir_hw_BB_4_6 = 5'd6;
-parameter [4:0] SHLS_F_fir_hw_BB_4_7 = 5'd7;
-parameter [4:0] SHLS_F_fir_hw_BB_5_8 = 5'd8;
-parameter [4:0] SHLS_F_fir_hw_BB_5_9 = 5'd9;
-parameter [4:0] SHLS_F_fir_hw_BB_6_10 = 5'd10;
-parameter [4:0] SHLS_F_fir_hw_BB_6_11 = 5'd11;
-parameter [4:0] SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12 = 5'd12;
-parameter [4:0] SHLS_F_fir_hw_BB_8_13 = 5'd13;
-parameter [4:0] SHLS_F_fir_hw_BB_8_14 = 5'd14;
-parameter [4:0] SHLS_F_fir_hw_BB_9_15 = 5'd15;
-parameter [4:0] SHLS_F_fir_hw_BB_9_16 = 5'd16;
+parameter [3:0] SHLS_0 = 4'd0;
+parameter [3:0] SHLS_F_fir_hw_BB_0_1 = 4'd1;
+parameter [3:0] SHLS_F_fir_hw_BB_0_2 = 4'd2;
+parameter [3:0] SHLS_F_fir_hw_BB_1_3 = 4'd3;
+parameter [3:0] SHLS_F_fir_hw_BB_1_4 = 4'd4;
+parameter [3:0] SHLS_F_fir_hw_BB_2_5 = 4'd5;
+parameter [3:0] SHLS_F_fir_hw_BB_2_6 = 4'd6;
+parameter [3:0] SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7 = 4'd7;
+parameter [3:0] SHLS_F_fir_hw_BB_4_8 = 4'd8;
+parameter [3:0] SHLS_F_fir_hw_BB_4_9 = 4'd9;
+parameter [3:0] SHLS_F_fir_hw_BB_5_10 = 4'd10;
+parameter [3:0] SHLS_F_fir_hw_BB_5_11 = 4'd11;
 
 input  clk;
 input  reset;
@@ -515,13 +510,6 @@ output reg  finish;
 input [15:0] tlast_dnum;
 input [7:0] smpl_rd_num;
 input [15:0] tap_num_m1;
-output reg  coeff_hw_clken;
-output reg  coeff_hw_read_en_a;
-output reg [8:0] coeff_hw_address_a;
-input [31:0] coeff_hw_read_data_a;
-output  coeff_hw_read_en_b;
-output [8:0] coeff_hw_address_b;
-input [31:0] coeff_hw_read_data_b;
 input [23:0] input_l;
 output  input_l_ready;
 input  input_l_valid;
@@ -533,132 +521,128 @@ input  res_ready;
 output reg  res_valid;
 output reg [7:0] res_last;
 output reg [3:0] res_keep;
-reg [4:0] cur_state/* synthesis syn_encoding="onehot" */;
-reg [4:0] next_state;
+output reg  coeff_hw_clken;
+output reg  coeff_hw_read_en_a;
+output reg [8:0] coeff_hw_address_a;
+input [31:0] coeff_hw_read_data_a;
+output  coeff_hw_read_en_b;
+output [8:0] coeff_hw_address_b;
+input [31:0] coeff_hw_read_data_b;
+reg [3:0] cur_state/* synthesis syn_encoding="onehot" */;
+reg [3:0] next_state;
 reg [15:0] tlast_dnum_reg;
 reg [7:0] smpl_rd_num_reg;
 reg [15:0] tap_num_m1_reg;
 reg  fsm_stall;
-reg  fir_hw_BB_0_load;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_3_addr;
-reg [31:0] fir_hw_BB_3_load1;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_3_addr2;
-reg [23:0] fir_hw_BB_4_fifoVal;
-reg [8:0] fir_hw_BB_4_load3;
-reg [8:0] fir_hw_BB_4_load3_reg;
-reg [8:0] fir_hw_BB_4_bit_concat;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_4_addr4;
-reg [23:0] fir_hw_BB_4_fifoVal5;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_4_addr6;
-reg [2:0] fir_hw_BB_4_load7;
-reg [2:0] fir_hw_BB_4_add8;
-reg [2:0] fir_hw_BB_4_bit_concat10;
-reg  fir_hw_BB_4_icmp11;
-reg  fir_hw_BB_4_icmp11_reg;
-reg [15:0] fir_hw_BB_5_bit_concat12;
-reg [15:0] fir_hw_BB_5_bit_concat12_reg;
-reg [15:0] fir_hw_BB_6_load13;
-reg [15:0] fir_hw_BB_6_add14;
-reg  fir_hw_BB_6_icmp15;
-reg  fir_hw_BB_6_bit_concat16;
-reg [15:0] fir_hw_BB_6_add17;
-reg [15:0] fir_hw_BB_6_select;
-reg  fir_hw_BB_6_icmp18;
-reg  fir_hw_BB_6_icmp18_reg;
-reg  fir_hw_BB_6_bit_concat19;
-reg  fir_hw_BB_6_bit_concat19_reg;
-reg [47:0] fir_hw_BB_7_phi20;
-reg [47:0] fir_hw_BB_7_phi20_reg;
-reg [47:0] fir_hw_BB_7_phi21;
-reg [47:0] fir_hw_BB_7_phi21_reg;
-reg [8:0] fir_hw_BB_7_bit_select24;
-reg [8:0] fir_hw_BB_7_sub;
-reg [8:0] fir_hw_BB_7_bit_concat25;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_7_addr26;
-reg [23:0] fir_hw_BB_7_load27;
-reg [10:0] fir_hw_BB_7_bit_select28;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_7_addr29;
-reg [23:0] fir_hw_BB_7_load30;
-reg [10:0] fir_hw_BB_7_bit_select31;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_7_addr32;
-reg [31:0] fir_hw_BB_7_load33;
-reg [14:0] fir_hw_BB_7_bit_select34;
-reg [16:0] fir_hw_BB_7_bit_select36;
-reg [12:0] fir_hw_BB_7_ashr;
-reg [12:0] fir_hw_BB_7_bit_select38;
-reg [16:0] fir_hw_BB_7_bit_concat39;
-reg [16:0] fir_hw_BB_7_bit_concat40;
-reg [33:0] fir_hw_BB_7_mul;
-reg [16:0] fir_hw_BB_7_bit_concat42;
-reg [26:0] fir_hw_BB_7_sext;
-reg [31:0] fir_hw_BB_7_mul43;
-reg [12:0] fir_hw_BB_7_sext44;
-reg [16:0] fir_hw_BB_7_bit_concat45;
-reg [29:0] fir_hw_BB_7_mul46;
-reg [12:0] fir_hw_BB_7_sext47;
-reg [14:0] fir_hw_BB_7_sext48;
-reg [27:0] fir_hw_BB_7_mul49;
-reg [29:0] fir_hw_BB_7_sext50;
-reg [29:0] fir_hw_BB_7_bit_select51;
-reg [46:0] fir_hw_BB_7_bit_concat52;
-reg [31:0] fir_hw_BB_7_sext53;
-reg [27:0] fir_hw_BB_7_sext54;
-reg [27:0] fir_hw_BB_7_bit_select56;
-reg [44:0] fir_hw_BB_7_bit_concat57;
-reg [45:0] fir_hw_BB_7_add58;
-reg [45:0] fir_hw_BB_7_bit_select59;
-reg [50:0] fir_hw_BB_7_bit_concat60;
-reg [46:0] fir_hw_BB_7_sext61;
-reg [46:0] fir_hw_BB_7_bit_select62;
-reg [63:0] fir_hw_BB_7_bit_concat63;
-reg [64:0] fir_hw_BB_7_add64;
-reg [64:0] fir_hw_BB_7_sext65;
-reg [79:0] fir_hw_BB_7_bit_concat66;
-reg [79:0] fir_hw_BB_7_add67;
-reg [47:0] fir_hw_BB_7_bit_select68;
-reg [47:0] fir_hw_BB_7_add69;
-reg [31:0] fir_hw_BB_7_bit_select70;
-reg [31:0] fir_hw_BB_7_bit_select70_reg;
-reg [12:0] fir_hw_BB_7_ashr71;
-reg [12:0] fir_hw_BB_7_bit_select72;
-reg [16:0] fir_hw_BB_7_bit_concat73;
-reg [33:0] fir_hw_BB_7_mul74;
-reg [16:0] fir_hw_BB_7_bit_concat75;
-reg [31:0] fir_hw_BB_7_mul76;
-reg [12:0] fir_hw_BB_7_sext77;
-reg [29:0] fir_hw_BB_7_mul78;
-reg [12:0] fir_hw_BB_7_sext79;
-reg [27:0] fir_hw_BB_7_mul80;
-reg [29:0] fir_hw_BB_7_sext81;
-reg [29:0] fir_hw_BB_7_bit_select82;
-reg [46:0] fir_hw_BB_7_bit_concat83;
-reg [31:0] fir_hw_BB_7_sext84;
-reg [27:0] fir_hw_BB_7_sext85;
-reg [27:0] fir_hw_BB_7_bit_select86;
-reg [44:0] fir_hw_BB_7_bit_concat87;
-reg [45:0] fir_hw_BB_7_add88;
-reg [45:0] fir_hw_BB_7_bit_select89;
-reg [50:0] fir_hw_BB_7_bit_concat90;
-reg [46:0] fir_hw_BB_7_sext91;
-reg [46:0] fir_hw_BB_7_bit_select92;
-reg [63:0] fir_hw_BB_7_bit_concat93;
-reg [64:0] fir_hw_BB_7_add94;
-reg [64:0] fir_hw_BB_7_sext95;
-reg [79:0] fir_hw_BB_7_bit_concat96;
-reg [79:0] fir_hw_BB_7_add97;
-reg [47:0] fir_hw_BB_7_bit_select;
-reg [47:0] fir_hw_BB_7_add98;
-reg [31:0] fir_hw_BB_7_bit_select99;
-reg [31:0] fir_hw_BB_7_bit_select99_reg;
-reg  fir_hw_BB_7_icmp101;
-reg [8:0] fir_hw_BB_9_add102;
-reg  fir_hw_local_coeff_clken;
-reg [8:0] fir_hw_local_coeff_address_a;
-reg  fir_hw_local_coeff_write_en_a;
-reg [31:0] fir_hw_local_coeff_write_data_a;
-wire [31:0] fir_hw_local_coeff_read_data_a;
-reg  fir_hw_local_coeff_read_en_a;
-reg  fir_hw_coeffs_loaded_inferred_reg;
+reg [23:0] fir_hw_BB_0_fifoVal;
+reg [8:0] fir_hw_BB_0_load;
+reg [8:0] fir_hw_BB_0_load_reg;
+reg [8:0] fir_hw_BB_0_bit_concat;
+reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_0_addr;
+reg [23:0] fir_hw_BB_0_fifoVal1;
+reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_0_addr2;
+reg [2:0] fir_hw_BB_0_load3;
+reg [2:0] fir_hw_BB_0_add;
+reg [2:0] fir_hw_BB_0_bit_concat4;
+reg  fir_hw_BB_0_icmp;
+reg  fir_hw_BB_0_icmp_reg;
+reg [15:0] fir_hw_BB_1_bit_concat5;
+reg [15:0] fir_hw_BB_1_bit_concat5_reg;
+reg [15:0] fir_hw_BB_2_load6;
+reg [15:0] fir_hw_BB_2_add7;
+reg  fir_hw_BB_2_icmp8;
+reg  fir_hw_BB_2_bit_concat10;
+reg [15:0] fir_hw_BB_2_add11;
+reg [15:0] fir_hw_BB_2_select;
+reg  fir_hw_BB_2_icmp12;
+reg  fir_hw_BB_2_icmp12_reg;
+reg  fir_hw_BB_2_bit_concat13;
+reg  fir_hw_BB_2_bit_concat13_reg;
+reg [47:0] fir_hw_BB_3_phi;
+reg [47:0] fir_hw_BB_3_phi_reg;
+reg [47:0] fir_hw_BB_3_phi14;
+reg [47:0] fir_hw_BB_3_phi14_reg;
+reg [8:0] fir_hw_BB_3_bit_select17;
+reg [8:0] fir_hw_BB_3_sub;
+reg [8:0] fir_hw_BB_3_bit_concat18;
+reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_3_addr19;
+reg [23:0] fir_hw_BB_3_load20;
+reg [10:0] fir_hw_BB_3_bit_select22;
+reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_3_addr23;
+reg [23:0] fir_hw_BB_3_load24;
+reg [10:0] fir_hw_BB_3_bit_select25;
+reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_3_addr26;
+reg [31:0] fir_hw_BB_3_load27;
+reg [14:0] fir_hw_BB_3_bit_select28;
+reg [16:0] fir_hw_BB_3_bit_select30;
+reg [12:0] fir_hw_BB_3_ashr;
+reg [12:0] fir_hw_BB_3_bit_select31;
+reg [16:0] fir_hw_BB_3_bit_concat32;
+reg [16:0] fir_hw_BB_3_bit_concat35;
+reg [33:0] fir_hw_BB_3_mul;
+reg [16:0] fir_hw_BB_3_bit_concat37;
+reg [26:0] fir_hw_BB_3_sext;
+reg [31:0] fir_hw_BB_3_mul38;
+reg [12:0] fir_hw_BB_3_sext39;
+reg [16:0] fir_hw_BB_3_bit_concat40;
+reg [29:0] fir_hw_BB_3_mul41;
+reg [12:0] fir_hw_BB_3_sext42;
+reg [14:0] fir_hw_BB_3_sext43;
+reg [27:0] fir_hw_BB_3_mul44;
+reg [29:0] fir_hw_BB_3_sext45;
+reg [29:0] fir_hw_BB_3_bit_select46;
+reg [46:0] fir_hw_BB_3_bit_concat47;
+reg [31:0] fir_hw_BB_3_sext48;
+reg [27:0] fir_hw_BB_3_sext49;
+reg [27:0] fir_hw_BB_3_bit_select50;
+reg [44:0] fir_hw_BB_3_bit_concat51;
+reg [45:0] fir_hw_BB_3_add52;
+reg [45:0] fir_hw_BB_3_bit_select53;
+reg [50:0] fir_hw_BB_3_bit_concat54;
+reg [46:0] fir_hw_BB_3_sext55;
+reg [46:0] fir_hw_BB_3_bit_select56;
+reg [63:0] fir_hw_BB_3_bit_concat57;
+reg [64:0] fir_hw_BB_3_add58;
+reg [64:0] fir_hw_BB_3_sext59;
+reg [79:0] fir_hw_BB_3_bit_concat60;
+reg [79:0] fir_hw_BB_3_add61;
+reg [47:0] fir_hw_BB_3_bit_select62;
+reg [47:0] fir_hw_BB_3_add63;
+reg [31:0] fir_hw_BB_3_bit_select64;
+reg [31:0] fir_hw_BB_3_bit_select64_reg;
+reg [12:0] fir_hw_BB_3_ashr65;
+reg [12:0] fir_hw_BB_3_bit_select66;
+reg [16:0] fir_hw_BB_3_bit_concat67;
+reg [33:0] fir_hw_BB_3_mul68;
+reg [16:0] fir_hw_BB_3_bit_concat69;
+reg [31:0] fir_hw_BB_3_mul70;
+reg [12:0] fir_hw_BB_3_sext71;
+reg [29:0] fir_hw_BB_3_mul72;
+reg [12:0] fir_hw_BB_3_sext73;
+reg [27:0] fir_hw_BB_3_mul74;
+reg [29:0] fir_hw_BB_3_sext75;
+reg [29:0] fir_hw_BB_3_bit_select76;
+reg [46:0] fir_hw_BB_3_bit_concat77;
+reg [31:0] fir_hw_BB_3_sext78;
+reg [27:0] fir_hw_BB_3_sext79;
+reg [27:0] fir_hw_BB_3_bit_select80;
+reg [44:0] fir_hw_BB_3_bit_concat81;
+reg [45:0] fir_hw_BB_3_add82;
+reg [45:0] fir_hw_BB_3_bit_select83;
+reg [50:0] fir_hw_BB_3_bit_concat84;
+reg [46:0] fir_hw_BB_3_sext85;
+reg [46:0] fir_hw_BB_3_bit_select86;
+reg [63:0] fir_hw_BB_3_bit_concat87;
+reg [64:0] fir_hw_BB_3_add88;
+reg [64:0] fir_hw_BB_3_sext89;
+reg [79:0] fir_hw_BB_3_bit_concat90;
+reg [79:0] fir_hw_BB_3_add91;
+reg [47:0] fir_hw_BB_3_bit_select;
+reg [47:0] fir_hw_BB_3_add92;
+reg [31:0] fir_hw_BB_3_bit_select93;
+reg [31:0] fir_hw_BB_3_bit_select93_reg;
+reg  fir_hw_BB_3_icmp95;
+reg [8:0] fir_hw_BB_5_add96;
 reg  fir_hw_buffer_left_clken;
 reg [8:0] fir_hw_buffer_left_address_a;
 reg  fir_hw_buffer_left_write_en_a;
@@ -674,72 +658,45 @@ reg  fir_hw_buffer_right_read_en_a;
 reg [8:0] fir_hw_write_idx_inferred_reg;
 reg [15:0] fir_hw_cnt_inferred_reg;
 reg [2:0] fir_hw_dec_cnt_inferred_reg;
-reg  for_loop_src_fir_hw_cpp_27_6_valid_bit_0;
-wire  for_loop_src_fir_hw_cpp_27_6_state_stall_0;
-reg  for_loop_src_fir_hw_cpp_27_6_state_enable_0;
-reg  for_loop_src_fir_hw_cpp_27_6_valid_bit_1;
-wire  for_loop_src_fir_hw_cpp_27_6_state_stall_1;
-reg  for_loop_src_fir_hw_cpp_27_6_state_enable_1;
-reg  for_loop_src_fir_hw_cpp_27_6_valid_bit_2;
-wire  for_loop_src_fir_hw_cpp_27_6_state_stall_2;
-reg  for_loop_src_fir_hw_cpp_27_6_state_enable_2;
-reg  for_loop_src_fir_hw_cpp_27_6_II_counter;
-reg  for_loop_src_fir_hw_cpp_27_6_start;
-reg  for_loop_src_fir_hw_cpp_27_6_activate_pipeline;
-reg [`MEMORY_CONTROLLER_ADDR_SIZE-1:0] fir_hw_BB_3_addr2_reg_stage1;
-reg [9:0] for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0;
-reg  for_loop_src_fir_hw_cpp_27_6_pipeline_exit_cond;
-reg  for_loop_src_fir_hw_cpp_27_6_active;
-reg  for_loop_src_fir_hw_cpp_27_6_begin_pipeline;
-reg  for_loop_src_fir_hw_cpp_27_6_epilogue;
-reg  for_loop_src_fir_hw_cpp_27_6_pipeline_finish;
-reg  for_loop_src_fir_hw_cpp_27_6_pipeline_finishing;
-reg  for_loop_src_fir_hw_cpp_27_6_only_last_stage_enabled;
-reg [1:0] for_loop_src_fir_hw_cpp_27_6_num_active_iterations;
-reg  for_loop_src_fir_hw_cpp_27_6_inserting_new_iteration;
-reg  for_loop_src_fir_hw_cpp_27_6_pipeline_finish_reg;
-reg  for_loop_src_fir_hw_cpp_46_9_valid_bit_0;
-wire  for_loop_src_fir_hw_cpp_46_9_state_stall_0;
-reg  for_loop_src_fir_hw_cpp_46_9_state_enable_0;
-reg  for_loop_src_fir_hw_cpp_46_9_valid_bit_1;
-wire  for_loop_src_fir_hw_cpp_46_9_state_stall_1;
-reg  for_loop_src_fir_hw_cpp_46_9_state_enable_1;
-reg  for_loop_src_fir_hw_cpp_46_9_valid_bit_2;
-wire  for_loop_src_fir_hw_cpp_46_9_state_stall_2;
-reg  for_loop_src_fir_hw_cpp_46_9_state_enable_2;
-reg  for_loop_src_fir_hw_cpp_46_9_valid_bit_3;
-wire  for_loop_src_fir_hw_cpp_46_9_state_stall_3;
-reg  for_loop_src_fir_hw_cpp_46_9_state_enable_3;
-reg [1:0] for_loop_src_fir_hw_cpp_46_9_II_counter;
-reg  for_loop_src_fir_hw_cpp_46_9_start;
-reg  for_loop_src_fir_hw_cpp_46_9_activate_pipeline;
-reg [47:0] fir_hw_BB_7_phi20_reg_stage1;
-reg [47:0] fir_hw_BB_7_phi21_reg_stage1;
-reg [44:0] fir_hw_BB_7_bit_concat57_reg_stage1;
-reg [64:0] fir_hw_BB_7_sext65_reg_stage1;
-reg [47:0] fir_hw_BB_7_add69_reg_stage2;
-reg [44:0] fir_hw_BB_7_bit_concat87_reg_stage1;
-reg [64:0] fir_hw_BB_7_sext95_reg_stage1;
-reg [47:0] fir_hw_BB_7_add98_reg_stage2;
-reg [31:0] for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0;
-reg  for_loop_src_fir_hw_cpp_46_9_pipeline_exit_cond;
-reg  for_loop_src_fir_hw_cpp_46_9_active;
-reg  for_loop_src_fir_hw_cpp_46_9_begin_pipeline;
-reg  for_loop_src_fir_hw_cpp_46_9_epilogue;
-reg  for_loop_src_fir_hw_cpp_46_9_pipeline_finish;
-reg  for_loop_src_fir_hw_cpp_46_9_pipeline_finishing;
-reg  for_loop_src_fir_hw_cpp_46_9_only_last_stage_enabled;
-reg [2:0] for_loop_src_fir_hw_cpp_46_9_num_active_iterations;
-reg  for_loop_src_fir_hw_cpp_46_9_inserting_new_iteration;
-reg  for_loop_src_fir_hw_cpp_46_9_pipeline_finish_reg;
-reg  for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0;
-reg [31:0] coeff_hw_read_data_wire_a;
-reg  coeff_hw_clken_pipeline_cond;
-reg  fir_hw_local_coeff_clken_pipeline_cond;
+reg  for_loop_src_fir_hw_cpp_35_9_valid_bit_0;
+wire  for_loop_src_fir_hw_cpp_35_9_state_stall_0;
+reg  for_loop_src_fir_hw_cpp_35_9_state_enable_0;
+reg  for_loop_src_fir_hw_cpp_35_9_valid_bit_1;
+wire  for_loop_src_fir_hw_cpp_35_9_state_stall_1;
+reg  for_loop_src_fir_hw_cpp_35_9_state_enable_1;
+reg  for_loop_src_fir_hw_cpp_35_9_valid_bit_2;
+wire  for_loop_src_fir_hw_cpp_35_9_state_stall_2;
+reg  for_loop_src_fir_hw_cpp_35_9_state_enable_2;
+reg  for_loop_src_fir_hw_cpp_35_9_valid_bit_3;
+wire  for_loop_src_fir_hw_cpp_35_9_state_stall_3;
+reg  for_loop_src_fir_hw_cpp_35_9_state_enable_3;
+reg [1:0] for_loop_src_fir_hw_cpp_35_9_II_counter;
+reg  for_loop_src_fir_hw_cpp_35_9_start;
+reg  for_loop_src_fir_hw_cpp_35_9_activate_pipeline;
+reg [47:0] fir_hw_BB_3_phi_reg_stage1;
+reg [47:0] fir_hw_BB_3_phi14_reg_stage1;
+reg [44:0] fir_hw_BB_3_bit_concat51_reg_stage1;
+reg [64:0] fir_hw_BB_3_sext59_reg_stage1;
+reg [47:0] fir_hw_BB_3_add63_reg_stage2;
+reg [44:0] fir_hw_BB_3_bit_concat81_reg_stage1;
+reg [64:0] fir_hw_BB_3_sext89_reg_stage1;
+reg [47:0] fir_hw_BB_3_add92_reg_stage2;
+reg [31:0] for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0;
+reg  for_loop_src_fir_hw_cpp_35_9_pipeline_exit_cond;
+reg  for_loop_src_fir_hw_cpp_35_9_active;
+reg  for_loop_src_fir_hw_cpp_35_9_begin_pipeline;
+reg  for_loop_src_fir_hw_cpp_35_9_epilogue;
+reg  for_loop_src_fir_hw_cpp_35_9_pipeline_finish;
+reg  for_loop_src_fir_hw_cpp_35_9_pipeline_finishing;
+reg  for_loop_src_fir_hw_cpp_35_9_only_last_stage_enabled;
+reg [2:0] for_loop_src_fir_hw_cpp_35_9_num_active_iterations;
+reg  for_loop_src_fir_hw_cpp_35_9_inserting_new_iteration;
+reg  for_loop_src_fir_hw_cpp_35_9_pipeline_finish_reg;
+reg  for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0;
 reg  input_l_consumed_valid;
 reg [23:0] input_l_consumed_data;
 reg  input_l_consumed_taken;
-wire [22:0] fir_hw_BB_4_bit_concat_bit_select_operand_0;
+wire [22:0] fir_hw_BB_0_bit_concat_bit_select_operand_0;
 reg  fir_hw_buffer_left_clken_not_in_pipeline;
 reg  fir_hw_buffer_left_clken_sequential_cond;
 reg  input_r_consumed_valid;
@@ -747,152 +704,153 @@ reg [23:0] input_r_consumed_data;
 reg  input_r_consumed_taken;
 reg  fir_hw_buffer_right_clken_not_in_pipeline;
 reg  fir_hw_buffer_right_clken_sequential_cond;
-wire [4:0] fir_hw_BB_4_bit_concat10_bit_select_operand_0;
-wire [15:0] fir_hw_BB_5_bit_concat12_bit_select_operand_0;
-wire [6:0] fir_hw_BB_6_bit_concat16_bit_select_operand_0;
-reg  res_data_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a;
-reg  res_data_SHLS_F_fir_hw_BB_6_10_stalln_reg;
-reg  res_data_SHLS_F_fir_hw_BB_6_10_enable_cond_a;
-reg  res_last_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a;
-reg  res_last_SHLS_F_fir_hw_BB_6_10_stalln_reg;
-reg  res_last_SHLS_F_fir_hw_BB_6_10_enable_cond_a;
-reg  res_keep_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a;
-reg  res_keep_SHLS_F_fir_hw_BB_6_10_stalln_reg;
-reg  res_keep_SHLS_F_fir_hw_BB_6_10_enable_cond_a;
-wire [6:0] fir_hw_BB_6_bit_concat19_bit_select_operand_0;
-reg  res_data_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a;
-reg  res_data_SHLS_F_fir_hw_BB_6_11_stalln_reg;
-reg  res_data_SHLS_F_fir_hw_BB_6_11_enable_cond_a;
-reg  res_last_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a;
-reg  res_last_SHLS_F_fir_hw_BB_6_11_stalln_reg;
-reg  res_last_SHLS_F_fir_hw_BB_6_11_enable_cond_a;
-reg  res_keep_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a;
-reg  res_keep_SHLS_F_fir_hw_BB_6_11_stalln_reg;
-reg  res_keep_SHLS_F_fir_hw_BB_6_11_enable_cond_a;
-wire [22:0] fir_hw_BB_7_bit_concat25_bit_select_operand_0;
+wire [4:0] fir_hw_BB_0_bit_concat4_bit_select_operand_0;
+wire [15:0] fir_hw_BB_1_bit_concat5_bit_select_operand_0;
+wire [6:0] fir_hw_BB_2_bit_concat10_bit_select_operand_0;
+reg  res_data_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a;
+reg  res_data_SHLS_F_fir_hw_BB_2_5_stalln_reg;
+reg  res_data_SHLS_F_fir_hw_BB_2_5_enable_cond_a;
+reg  res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a;
+reg  res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg;
+reg  res_last_SHLS_F_fir_hw_BB_2_5_enable_cond_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg;
+reg  res_keep_SHLS_F_fir_hw_BB_2_5_enable_cond_a;
+wire [6:0] fir_hw_BB_2_bit_concat13_bit_select_operand_0;
+reg  res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a;
+reg  res_data_SHLS_F_fir_hw_BB_2_6_stalln_reg;
+reg  res_data_SHLS_F_fir_hw_BB_2_6_enable_cond_a;
+reg  res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a;
+reg  res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg;
+reg  res_last_SHLS_F_fir_hw_BB_2_6_enable_cond_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a;
+reg  res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg;
+reg  res_keep_SHLS_F_fir_hw_BB_2_6_enable_cond_a;
+wire [22:0] fir_hw_BB_3_bit_concat18_bit_select_operand_0;
 reg [23:0] fir_hw_buffer_left_read_data_wire_a;
 reg  fir_hw_buffer_left_clken_pipeline_cond;
 reg [23:0] fir_hw_buffer_right_read_data_wire_a;
 reg  fir_hw_buffer_right_clken_pipeline_cond;
-reg [31:0] fir_hw_local_coeff_read_data_wire_a;
-reg [13:0] fir_hw_BB_7_ashr_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat39_bit_select_operand_0;
-wire [5:0] fir_hw_BB_7_bit_concat39_bit_select_operand_4;
-wire [16:0] fir_hw_BB_7_bit_concat40_bit_select_operand_0;
+reg [31:0] coeff_hw_read_data_wire_a;
+reg  coeff_hw_clken_pipeline_cond;
+reg [13:0] fir_hw_BB_3_ashr_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat32_bit_select_operand_0;
+wire [5:0] fir_hw_BB_3_bit_concat32_bit_select_operand_4;
+wire [16:0] fir_hw_BB_3_bit_concat35_bit_select_operand_0;
 reg  legup_mult_unsigned_17_17_1_0_clock;
 reg  legup_mult_unsigned_17_17_1_0_aclr;
 reg  legup_mult_unsigned_17_17_1_0_clken;
 reg [16:0] legup_mult_unsigned_17_17_1_0_dataa;
 reg [16:0] legup_mult_unsigned_17_17_1_0_datab;
 wire [33:0] legup_mult_unsigned_17_17_1_0_result;
-reg [33:0] legup_mult_fir_hw_BB_7_mul_out_actual;
-reg [33:0] legup_mult_fir_hw_BB_7_mul_out;
-reg  legup_mult_fir_hw_BB_7_mul_en;
-reg  legup_mult_fir_hw_BB_7_mul_en_pipeline_cond;
-wire [15:0] fir_hw_BB_7_bit_concat42_bit_select_operand_0;
-wire [5:0] fir_hw_BB_7_bit_concat42_bit_select_operand_4;
+reg [33:0] legup_mult_fir_hw_BB_3_mul_out_actual;
+reg [33:0] legup_mult_fir_hw_BB_3_mul_out;
+reg  legup_mult_fir_hw_BB_3_mul_en;
+reg  legup_mult_fir_hw_BB_3_mul_en_pipeline_cond;
+wire [15:0] fir_hw_BB_3_bit_concat37_bit_select_operand_0;
+wire [5:0] fir_hw_BB_3_bit_concat37_bit_select_operand_4;
 reg  legup_mult_unsigned_17_27_2_1_clock;
 reg  legup_mult_unsigned_17_27_2_1_aclr;
 reg  legup_mult_unsigned_17_27_2_1_clken;
 reg [16:0] legup_mult_unsigned_17_27_2_1_dataa;
 reg [26:0] legup_mult_unsigned_17_27_2_1_datab;
 wire [43:0] legup_mult_unsigned_17_27_2_1_result;
-reg [43:0] legup_mult_fir_hw_BB_7_mul43_out_actual;
-reg [31:0] legup_mult_fir_hw_BB_7_mul43_out;
-reg  legup_mult_fir_hw_BB_7_mul43_en;
-reg  legup_mult_fir_hw_BB_7_mul43_en_pipeline_cond;
-wire [14:0] fir_hw_BB_7_bit_concat45_bit_select_operand_0;
+reg [43:0] legup_mult_fir_hw_BB_3_mul38_out_actual;
+reg [31:0] legup_mult_fir_hw_BB_3_mul38_out;
+reg  legup_mult_fir_hw_BB_3_mul38_en;
+reg  legup_mult_fir_hw_BB_3_mul38_en_pipeline_cond;
+wire [14:0] fir_hw_BB_3_bit_concat40_bit_select_operand_0;
 reg  legup_mult_signed_18_13_1_2_clock;
 reg  legup_mult_signed_18_13_1_2_aclr;
 reg  legup_mult_signed_18_13_1_2_clken;
 reg [17:0] legup_mult_signed_18_13_1_2_dataa;
 reg [12:0] legup_mult_signed_18_13_1_2_datab;
 wire [30:0] legup_mult_signed_18_13_1_2_result;
-reg [30:0] legup_mult_fir_hw_BB_7_mul46_out_actual;
-reg [29:0] legup_mult_fir_hw_BB_7_mul46_out;
-reg  legup_mult_fir_hw_BB_7_mul46_en;
-reg  legup_mult_fir_hw_BB_7_mul46_en_pipeline_cond;
+reg [30:0] legup_mult_fir_hw_BB_3_mul41_out_actual;
+reg [29:0] legup_mult_fir_hw_BB_3_mul41_out;
+reg  legup_mult_fir_hw_BB_3_mul41_en;
+reg  legup_mult_fir_hw_BB_3_mul41_en_pipeline_cond;
 reg  legup_mult_signed_13_15_1_3_clock;
 reg  legup_mult_signed_13_15_1_3_aclr;
 reg  legup_mult_signed_13_15_1_3_clken;
 reg [12:0] legup_mult_signed_13_15_1_3_dataa;
 reg [14:0] legup_mult_signed_13_15_1_3_datab;
 wire [27:0] legup_mult_signed_13_15_1_3_result;
-reg [27:0] legup_mult_fir_hw_BB_7_mul49_out_actual;
-reg [27:0] legup_mult_fir_hw_BB_7_mul49_out;
-reg  legup_mult_fir_hw_BB_7_mul49_en;
-reg  legup_mult_fir_hw_BB_7_mul49_en_pipeline_cond;
-reg [32:0] fir_hw_BB_7_sext50_width_extended;
-reg [32:0] fir_hw_BB_7_bit_select51_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat52_bit_select_operand_2;
-reg [29:0] fir_hw_BB_7_sext54_width_extended;
-reg [29:0] fir_hw_BB_7_bit_select56_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat57_bit_select_operand_2;
-wire [16:0] fir_hw_BB_7_bit_concat60_bit_select_operand_0;
-wire [16:0] fir_hw_BB_7_bit_concat60_bit_select_operand_4;
-reg [50:0] fir_hw_BB_7_sext61_width_extended;
-reg [50:0] fir_hw_BB_7_bit_select62_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat63_bit_select_operand_2;
-wire [33:0] fir_hw_BB_7_bit_concat66_bit_select_operand_2;
-reg [13:0] fir_hw_BB_7_ashr71_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat73_bit_select_operand_0;
-wire [5:0] fir_hw_BB_7_bit_concat73_bit_select_operand_4;
+reg [27:0] legup_mult_fir_hw_BB_3_mul44_out_actual;
+reg [27:0] legup_mult_fir_hw_BB_3_mul44_out;
+reg  legup_mult_fir_hw_BB_3_mul44_en;
+reg  legup_mult_fir_hw_BB_3_mul44_en_pipeline_cond;
+reg [32:0] fir_hw_BB_3_sext45_width_extended;
+reg [32:0] fir_hw_BB_3_bit_select46_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat47_bit_select_operand_2;
+reg [29:0] fir_hw_BB_3_sext49_width_extended;
+reg [29:0] fir_hw_BB_3_bit_select50_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat51_bit_select_operand_2;
+wire [16:0] fir_hw_BB_3_bit_concat54_bit_select_operand_0;
+wire [16:0] fir_hw_BB_3_bit_concat54_bit_select_operand_4;
+reg [50:0] fir_hw_BB_3_sext55_width_extended;
+reg [50:0] fir_hw_BB_3_bit_select56_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat57_bit_select_operand_2;
+wire [33:0] fir_hw_BB_3_bit_concat60_bit_select_operand_2;
+reg [13:0] fir_hw_BB_3_ashr65_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat67_bit_select_operand_0;
+wire [5:0] fir_hw_BB_3_bit_concat67_bit_select_operand_4;
 reg  legup_mult_unsigned_17_17_1_4_clock;
 reg  legup_mult_unsigned_17_17_1_4_aclr;
 reg  legup_mult_unsigned_17_17_1_4_clken;
 reg [16:0] legup_mult_unsigned_17_17_1_4_dataa;
 reg [16:0] legup_mult_unsigned_17_17_1_4_datab;
 wire [33:0] legup_mult_unsigned_17_17_1_4_result;
-reg [33:0] legup_mult_fir_hw_BB_7_mul74_out_actual;
-reg [33:0] legup_mult_fir_hw_BB_7_mul74_out;
-reg  legup_mult_fir_hw_BB_7_mul74_en;
-reg  legup_mult_fir_hw_BB_7_mul74_en_pipeline_cond;
-wire [15:0] fir_hw_BB_7_bit_concat75_bit_select_operand_0;
-wire [5:0] fir_hw_BB_7_bit_concat75_bit_select_operand_4;
+reg [33:0] legup_mult_fir_hw_BB_3_mul68_out_actual;
+reg [33:0] legup_mult_fir_hw_BB_3_mul68_out;
+reg  legup_mult_fir_hw_BB_3_mul68_en;
+reg  legup_mult_fir_hw_BB_3_mul68_en_pipeline_cond;
+wire [15:0] fir_hw_BB_3_bit_concat69_bit_select_operand_0;
+wire [5:0] fir_hw_BB_3_bit_concat69_bit_select_operand_4;
 reg  legup_mult_unsigned_17_27_2_5_clock;
 reg  legup_mult_unsigned_17_27_2_5_aclr;
 reg  legup_mult_unsigned_17_27_2_5_clken;
 reg [16:0] legup_mult_unsigned_17_27_2_5_dataa;
 reg [26:0] legup_mult_unsigned_17_27_2_5_datab;
 wire [43:0] legup_mult_unsigned_17_27_2_5_result;
-reg [43:0] legup_mult_fir_hw_BB_7_mul76_out_actual;
-reg [31:0] legup_mult_fir_hw_BB_7_mul76_out;
-reg  legup_mult_fir_hw_BB_7_mul76_en;
-reg  legup_mult_fir_hw_BB_7_mul76_en_pipeline_cond;
+reg [43:0] legup_mult_fir_hw_BB_3_mul70_out_actual;
+reg [31:0] legup_mult_fir_hw_BB_3_mul70_out;
+reg  legup_mult_fir_hw_BB_3_mul70_en;
+reg  legup_mult_fir_hw_BB_3_mul70_en_pipeline_cond;
 reg  legup_mult_signed_18_13_1_6_clock;
 reg  legup_mult_signed_18_13_1_6_aclr;
 reg  legup_mult_signed_18_13_1_6_clken;
 reg [17:0] legup_mult_signed_18_13_1_6_dataa;
 reg [12:0] legup_mult_signed_18_13_1_6_datab;
 wire [30:0] legup_mult_signed_18_13_1_6_result;
-reg [30:0] legup_mult_fir_hw_BB_7_mul78_out_actual;
-reg [29:0] legup_mult_fir_hw_BB_7_mul78_out;
-reg  legup_mult_fir_hw_BB_7_mul78_en;
-reg  legup_mult_fir_hw_BB_7_mul78_en_pipeline_cond;
+reg [30:0] legup_mult_fir_hw_BB_3_mul72_out_actual;
+reg [29:0] legup_mult_fir_hw_BB_3_mul72_out;
+reg  legup_mult_fir_hw_BB_3_mul72_en;
+reg  legup_mult_fir_hw_BB_3_mul72_en_pipeline_cond;
 reg  legup_mult_signed_13_15_1_7_clock;
 reg  legup_mult_signed_13_15_1_7_aclr;
 reg  legup_mult_signed_13_15_1_7_clken;
 reg [12:0] legup_mult_signed_13_15_1_7_dataa;
 reg [14:0] legup_mult_signed_13_15_1_7_datab;
 wire [27:0] legup_mult_signed_13_15_1_7_result;
-reg [27:0] legup_mult_fir_hw_BB_7_mul80_out_actual;
-reg [27:0] legup_mult_fir_hw_BB_7_mul80_out;
-reg  legup_mult_fir_hw_BB_7_mul80_en;
-reg  legup_mult_fir_hw_BB_7_mul80_en_pipeline_cond;
-reg [32:0] fir_hw_BB_7_sext81_width_extended;
-reg [32:0] fir_hw_BB_7_bit_select82_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat83_bit_select_operand_2;
-reg [29:0] fir_hw_BB_7_sext85_width_extended;
-reg [29:0] fir_hw_BB_7_bit_select86_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat87_bit_select_operand_2;
-wire [16:0] fir_hw_BB_7_bit_concat90_bit_select_operand_0;
-wire [16:0] fir_hw_BB_7_bit_concat90_bit_select_operand_4;
-reg [50:0] fir_hw_BB_7_sext91_width_extended;
-reg [50:0] fir_hw_BB_7_bit_select92_width_extended;
-wire [16:0] fir_hw_BB_7_bit_concat93_bit_select_operand_2;
-wire [33:0] fir_hw_BB_7_bit_concat96_bit_select_operand_2;
+reg [27:0] legup_mult_fir_hw_BB_3_mul74_out_actual;
+reg [27:0] legup_mult_fir_hw_BB_3_mul74_out;
+reg  legup_mult_fir_hw_BB_3_mul74_en;
+reg  legup_mult_fir_hw_BB_3_mul74_en_pipeline_cond;
+reg [32:0] fir_hw_BB_3_sext75_width_extended;
+reg [32:0] fir_hw_BB_3_bit_select76_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat77_bit_select_operand_2;
+reg [29:0] fir_hw_BB_3_sext79_width_extended;
+reg [29:0] fir_hw_BB_3_bit_select80_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat81_bit_select_operand_2;
+wire [16:0] fir_hw_BB_3_bit_concat84_bit_select_operand_0;
+wire [16:0] fir_hw_BB_3_bit_concat84_bit_select_operand_4;
+reg [50:0] fir_hw_BB_3_sext85_width_extended;
+reg [50:0] fir_hw_BB_3_bit_select86_width_extended;
+wire [16:0] fir_hw_BB_3_bit_concat87_bit_select_operand_2;
+wire [33:0] fir_hw_BB_3_bit_concat90_bit_select_operand_2;
 
-/*   %mul = mul nuw i34 %bit_concat39, %bit_concat40, !dbg !11679, !MSB !11683, !LSB !11682, !ExtendFrom !11683, !legup.pipeline.avail_time !11146, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul = mul nuw i34 %bit_concat32, %bit_concat35, !dbg !11626, !MSB !11630, !LSB !11629, !ExtendFrom !11630, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_17_1_0 (
 	.clock (legup_mult_unsigned_17_17_1_0_clock),
 	.aclr (legup_mult_unsigned_17_17_1_0_aclr),
@@ -909,7 +867,7 @@ defparam
 	legup_mult_unsigned_17_17_1_0.pipeline = 1,
 	legup_mult_unsigned_17_17_1_0.representation = "UNSIGNED";
 
-/*   %mul43 = mul nsw i33 %bit_concat42, %sext, !dbg !11679, !MSB !11685, !LSB !11682, !ExtendFrom !11145, !legup.pipeline.avail_time !11156, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul38 = mul nsw i33 %bit_concat37, %sext, !dbg !11626, !MSB !11632, !LSB !11629, !ExtendFrom !11293, !legup.pipeline.avail_time !11633, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_27_2_1 (
 	.clock (legup_mult_unsigned_17_27_2_1_clock),
 	.aclr (legup_mult_unsigned_17_27_2_1_aclr),
@@ -926,7 +884,7 @@ defparam
 	legup_mult_unsigned_17_27_2_1.pipeline = 2,
 	legup_mult_unsigned_17_27_2_1.representation = "UNSIGNED";
 
-/*   %mul46 = mul nsw i32 %bit_concat45, %sext44, !dbg !11679, !MSB !11145, !LSB !11113, !ExtendFrom !11686, !legup.pipeline.avail_time !11146, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul41 = mul nsw i32 %bit_concat40, %sext39, !dbg !11626, !MSB !11293, !LSB !11113, !ExtendFrom !11634, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_18_13_1_2 (
 	.clock (legup_mult_signed_18_13_1_2_clock),
 	.aclr (legup_mult_signed_18_13_1_2_aclr),
@@ -943,7 +901,7 @@ defparam
 	legup_mult_signed_18_13_1_2.pipeline = 1,
 	legup_mult_signed_18_13_1_2.representation = "SIGNED";
 
-/*   %mul49 = mul nsw i29 %sext47, %sext48, !dbg !11679, !MSB !11687, !LSB !11113, !ExtendFrom !11688, !legup.pipeline.avail_time !11146, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul44 = mul nsw i29 %sext42, %sext43, !dbg !11626, !MSB !11635, !LSB !11113, !ExtendFrom !11636, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_13_15_1_3 (
 	.clock (legup_mult_signed_13_15_1_3_clock),
 	.aclr (legup_mult_signed_13_15_1_3_aclr),
@@ -960,7 +918,7 @@ defparam
 	legup_mult_signed_13_15_1_3.pipeline = 1,
 	legup_mult_signed_13_15_1_3.representation = "SIGNED";
 
-/*   %mul74 = mul nuw i34 %bit_concat73, %bit_concat40, !dbg !11730, !MSB !11683, !LSB !11682, !ExtendFrom !11683, !legup.pipeline.avail_time !11146, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul68 = mul nuw i34 %bit_concat67, %bit_concat35, !dbg !11678, !MSB !11630, !LSB !11629, !ExtendFrom !11630, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_17_1_4 (
 	.clock (legup_mult_unsigned_17_17_1_4_clock),
 	.aclr (legup_mult_unsigned_17_17_1_4_aclr),
@@ -977,7 +935,7 @@ defparam
 	legup_mult_unsigned_17_17_1_4.pipeline = 1,
 	legup_mult_unsigned_17_17_1_4.representation = "UNSIGNED";
 
-/*   %mul76 = mul nsw i33 %bit_concat75, %sext, !dbg !11730, !MSB !11685, !LSB !11682, !ExtendFrom !11145, !legup.pipeline.avail_time !11156, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul70 = mul nsw i33 %bit_concat69, %sext, !dbg !11678, !MSB !11632, !LSB !11629, !ExtendFrom !11293, !legup.pipeline.avail_time !11633, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_unsigned_17_27_2_5 (
 	.clock (legup_mult_unsigned_17_27_2_5_clock),
 	.aclr (legup_mult_unsigned_17_27_2_5_aclr),
@@ -994,7 +952,7 @@ defparam
 	legup_mult_unsigned_17_27_2_5.pipeline = 2,
 	legup_mult_unsigned_17_27_2_5.representation = "UNSIGNED";
 
-/*   %mul78 = mul nsw i32 %bit_concat45, %sext77, !dbg !11730, !MSB !11145, !LSB !11113, !ExtendFrom !11686, !legup.pipeline.avail_time !11146, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul72 = mul nsw i32 %bit_concat40, %sext71, !dbg !11678, !MSB !11293, !LSB !11113, !ExtendFrom !11634, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_18_13_1_6 (
 	.clock (legup_mult_signed_18_13_1_6_clock),
 	.aclr (legup_mult_signed_18_13_1_6_aclr),
@@ -1011,7 +969,7 @@ defparam
 	legup_mult_signed_18_13_1_6.pipeline = 1,
 	legup_mult_signed_18_13_1_6.representation = "SIGNED";
 
-/*   %mul80 = mul nsw i29 %sext79, %sext48, !dbg !11730, !MSB !11687, !LSB !11113, !ExtendFrom !11688, !legup.pipeline.avail_time !11146, !legup.pipeline.start_time !11120, !legup.pipeline.stage !11113*/
+/*   %mul74 = mul nsw i29 %sext73, %sext43, !dbg !11678, !MSB !11635, !LSB !11113, !ExtendFrom !11636, !legup.pipeline.avail_time !11163, !legup.pipeline.start_time !11291, !legup.pipeline.stage !11113*/
 fir_hw_legup_mult legup_mult_signed_13_15_1_7 (
 	.clock (legup_mult_signed_13_15_1_7_clock),
 	.aclr (legup_mult_signed_13_15_1_7_aclr),
@@ -1027,25 +985,6 @@ defparam
 	legup_mult_signed_13_15_1_7.widthp = 28,
 	legup_mult_signed_13_15_1_7.pipeline = 1,
 	legup_mult_signed_13_15_1_7.representation = "SIGNED";
-
-
-
-// @_ZZ6fir_hwN3hls7ap_uintILj16EEENS0_ILj8EEES1_PNS_8ap_fixptILj32ELi1ELNS_19AP_FIXPT_QUANT_MODEE0ELNS_18AP_FIXPT_OVER_MODEE0EEERNS_4FIFOINS3_ILj24ELi1ELS4_0ELS5_0EEELb0EEESB_RNS8_I11axis_packetLb0EEEE1...
-fir_hw_ram_single_port fir_hw_local_coeff (
-	.clk( clk ),
-	.clken( fir_hw_local_coeff_clken ),
-	.address_a( fir_hw_local_coeff_address_a ),
-	.write_en_a( fir_hw_local_coeff_write_en_a ),
-	.write_data_a( fir_hw_local_coeff_write_data_a ),
-	.read_data_a( fir_hw_local_coeff_read_data_a )
-);
-defparam fir_hw_local_coeff.width_a = 32;
-defparam fir_hw_local_coeff.widthad_a = 9;
-defparam fir_hw_local_coeff.width_be_a = 4;
-defparam fir_hw_local_coeff.numwords_a = 512;
-defparam fir_hw_local_coeff.latency = 1;
-defparam fir_hw_local_coeff.fpga_device = "PolarFireSoC";
-defparam fir_hw_local_coeff.init_file = {`MEM_INIT_DIR, "fir_hw_local_coeff.mem"};
 
 
 
@@ -1101,50 +1040,36 @@ SHLS_0:
 	if ((start == 1'd1))
 		next_state = SHLS_F_fir_hw_BB_0_1;
 SHLS_F_fir_hw_BB_0_1:
-	if ((fir_hw_BB_0_load == 1'd1))
-		next_state = SHLS_F_fir_hw_BB_4_6;
+		next_state = SHLS_F_fir_hw_BB_0_2;
+SHLS_F_fir_hw_BB_0_2:
+	if ((fir_hw_BB_0_icmp_reg == 1'd1))
+		next_state = SHLS_F_fir_hw_BB_5_10;
 	else
-		next_state = SHLS_F_fir_hw_BB_1_2;
-SHLS_F_fir_hw_BB_1_2:
-		next_state = SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_27_6_5;
-SHLS_F_fir_hw_BB_2_3:
-		next_state = SHLS_F_fir_hw_BB_2_4;
-SHLS_F_fir_hw_BB_2_4:
-		next_state = SHLS_F_fir_hw_BB_4_6;
-SHLS_F_fir_hw_BB_4_6:
-		next_state = SHLS_F_fir_hw_BB_4_7;
-SHLS_F_fir_hw_BB_4_7:
-	if ((fir_hw_BB_4_icmp11_reg == 1'd1))
-		next_state = SHLS_F_fir_hw_BB_9_15;
+		next_state = SHLS_F_fir_hw_BB_1_3;
+SHLS_F_fir_hw_BB_1_3:
+		next_state = SHLS_F_fir_hw_BB_1_4;
+SHLS_F_fir_hw_BB_1_4:
+		next_state = SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7;
+SHLS_F_fir_hw_BB_2_5:
+		next_state = SHLS_F_fir_hw_BB_2_6;
+SHLS_F_fir_hw_BB_2_6:
+	if ((fir_hw_BB_2_icmp12_reg == 1'd1))
+		next_state = SHLS_F_fir_hw_BB_4_8;
 	else
-		next_state = SHLS_F_fir_hw_BB_5_8;
-SHLS_F_fir_hw_BB_5_8:
-		next_state = SHLS_F_fir_hw_BB_5_9;
-SHLS_F_fir_hw_BB_5_9:
-		next_state = SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12;
-SHLS_F_fir_hw_BB_6_10:
-		next_state = SHLS_F_fir_hw_BB_6_11;
-SHLS_F_fir_hw_BB_6_11:
-	if ((fir_hw_BB_6_icmp18_reg == 1'd1))
-		next_state = SHLS_F_fir_hw_BB_8_13;
-	else
-		next_state = SHLS_F_fir_hw_BB_9_15;
-SHLS_F_fir_hw_BB_8_13:
-		next_state = SHLS_F_fir_hw_BB_8_14;
-SHLS_F_fir_hw_BB_8_14:
-		next_state = SHLS_F_fir_hw_BB_9_15;
-SHLS_F_fir_hw_BB_9_15:
-		next_state = SHLS_F_fir_hw_BB_9_16;
-SHLS_F_fir_hw_BB_9_16:
+		next_state = SHLS_F_fir_hw_BB_5_10;
+SHLS_F_fir_hw_BB_4_8:
+		next_state = SHLS_F_fir_hw_BB_4_9;
+SHLS_F_fir_hw_BB_4_9:
+		next_state = SHLS_F_fir_hw_BB_5_10;
+SHLS_F_fir_hw_BB_5_10:
+		next_state = SHLS_F_fir_hw_BB_5_11;
+SHLS_F_fir_hw_BB_5_11:
 		next_state = SHLS_0;
-SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_27_6_5:
-	if ((for_loop_src_fir_hw_cpp_27_6_pipeline_finish == 1'd1))
-		next_state = SHLS_F_fir_hw_BB_2_3;
-SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12:
-	if ((for_loop_src_fir_hw_cpp_46_9_pipeline_finish == 1'd1))
-		next_state = SHLS_F_fir_hw_BB_6_10;
+SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7:
+	if ((for_loop_src_fir_hw_cpp_35_9_pipeline_finish == 1'd1))
+		next_state = SHLS_F_fir_hw_BB_2_5;
 default:
-	next_state = 5'bX;
+	next_state = 4'bX;
 endcase
 
 end
@@ -1165,480 +1090,431 @@ always @(posedge clk) begin
 end
 always @(*) begin
 	fsm_stall = 1'd0;
-	if (((cur_state == SHLS_F_fir_hw_BB_4_6) & ~(input_l_consumed_valid))) begin
+	if (((cur_state == SHLS_F_fir_hw_BB_0_1) & ~(input_l_consumed_valid))) begin
 		fsm_stall = 1'd1;
 	end
-	if (((cur_state == SHLS_F_fir_hw_BB_4_6) & ~(input_r_consumed_valid))) begin
+	if (((cur_state == SHLS_F_fir_hw_BB_0_1) & ~(input_r_consumed_valid))) begin
 		fsm_stall = 1'd1;
 	end
-	if ((((cur_state == SHLS_F_fir_hw_BB_6_10) & ~(res_ready)) & (res_data_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_6_10_stalln_reg))) begin
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_5) & ~(res_ready)) & (res_data_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_2_5_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
-	if ((((cur_state == SHLS_F_fir_hw_BB_6_10) & ~(res_ready)) & (res_last_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_6_10_stalln_reg))) begin
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_5) & ~(res_ready)) & (res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
-	if ((((cur_state == SHLS_F_fir_hw_BB_6_10) & ~(res_ready)) & (res_keep_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_6_10_stalln_reg))) begin
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_5) & ~(res_ready)) & (res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
-	if ((((cur_state == SHLS_F_fir_hw_BB_6_11) & ~(res_ready)) & (res_data_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_6_11_stalln_reg))) begin
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_6) & ~(res_ready)) & (res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_2_6_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
-	if ((((cur_state == SHLS_F_fir_hw_BB_6_11) & ~(res_ready)) & (res_last_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_6_11_stalln_reg))) begin
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_6) & ~(res_ready)) & (res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
-	if ((((cur_state == SHLS_F_fir_hw_BB_6_11) & ~(res_ready)) & (res_keep_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_6_11_stalln_reg))) begin
+	if ((((cur_state == SHLS_F_fir_hw_BB_2_6) & ~(res_ready)) & (res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg))) begin
 		fsm_stall = 1'd1;
 	end
 end
 always @(*) begin
-		fir_hw_BB_0_load = fir_hw_coeffs_loaded_inferred_reg;
+	fir_hw_BB_0_fifoVal = input_l_consumed_data;
 end
 always @(*) begin
-		fir_hw_BB_3_addr = (0 + (4 * {22'd0,for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0}));
-end
-always @(*) begin
-		fir_hw_BB_3_load1 = coeff_hw_read_data_wire_a;
-end
-always @(*) begin
-		fir_hw_BB_3_addr2 = (1'd0 + (4 * {22'd0,for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0}));
-end
-always @(*) begin
-	fir_hw_BB_4_fifoVal = input_l_consumed_data;
-end
-always @(*) begin
-		fir_hw_BB_4_load3 = fir_hw_write_idx_inferred_reg;
+		fir_hw_BB_0_load = fir_hw_write_idx_inferred_reg;
 end
 always @(posedge clk) begin
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
-		fir_hw_BB_4_load3_reg <= fir_hw_BB_4_load3;
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
+		fir_hw_BB_0_load_reg <= fir_hw_BB_0_load;
 	end
 end
 always @(*) begin
-		fir_hw_BB_4_bit_concat = {fir_hw_BB_4_bit_concat_bit_select_operand_0[22:0], fir_hw_BB_4_load3[8:0]};
+		fir_hw_BB_0_bit_concat = {fir_hw_BB_0_bit_concat_bit_select_operand_0[22:0], fir_hw_BB_0_load[8:0]};
 end
 always @(*) begin
-		fir_hw_BB_4_addr4 = (1'd0 + (4 * {23'd0,fir_hw_BB_4_bit_concat}));
+		fir_hw_BB_0_addr = (1'd0 + (4 * {23'd0,fir_hw_BB_0_bit_concat}));
 end
 always @(*) begin
-	fir_hw_BB_4_fifoVal5 = input_r_consumed_data;
+	fir_hw_BB_0_fifoVal1 = input_r_consumed_data;
 end
 always @(*) begin
-		fir_hw_BB_4_addr6 = (1'd0 + (4 * {23'd0,fir_hw_BB_4_bit_concat}));
+		fir_hw_BB_0_addr2 = (1'd0 + (4 * {23'd0,fir_hw_BB_0_bit_concat}));
 end
 always @(*) begin
-		fir_hw_BB_4_load7 = fir_hw_dec_cnt_inferred_reg;
+		fir_hw_BB_0_load3 = fir_hw_dec_cnt_inferred_reg;
 end
 always @(*) begin
-		fir_hw_BB_4_add8 = (fir_hw_BB_4_load7 + 3'd1);
+		fir_hw_BB_0_add = (fir_hw_BB_0_load3 + 3'd1);
 end
 always @(*) begin
-		fir_hw_BB_4_bit_concat10 = {fir_hw_BB_4_bit_concat10_bit_select_operand_0[4:0], fir_hw_BB_4_add8[2:0]};
+		fir_hw_BB_0_bit_concat4 = {fir_hw_BB_0_bit_concat4_bit_select_operand_0[4:0], fir_hw_BB_0_add[2:0]};
 end
 always @(*) begin
-		fir_hw_BB_4_icmp11 = ({5'd0,fir_hw_BB_4_bit_concat10} < smpl_rd_num_reg);
+		fir_hw_BB_0_icmp = ({5'd0,fir_hw_BB_0_bit_concat4} < smpl_rd_num_reg);
 end
 always @(posedge clk) begin
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
-		fir_hw_BB_4_icmp11_reg <= fir_hw_BB_4_icmp11;
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
+		fir_hw_BB_0_icmp_reg <= fir_hw_BB_0_icmp;
 	end
 end
 always @(*) begin
-		fir_hw_BB_5_bit_concat12 = {fir_hw_BB_5_bit_concat12_bit_select_operand_0[15:0], tap_num_m1_reg[15:0]};
+		fir_hw_BB_1_bit_concat5 = {fir_hw_BB_1_bit_concat5_bit_select_operand_0[15:0], tap_num_m1_reg[15:0]};
 end
 always @(posedge clk) begin
-	if ((cur_state == SHLS_F_fir_hw_BB_5_8)) begin
-		fir_hw_BB_5_bit_concat12_reg <= fir_hw_BB_5_bit_concat12;
+	if ((cur_state == SHLS_F_fir_hw_BB_1_3)) begin
+		fir_hw_BB_1_bit_concat5_reg <= fir_hw_BB_1_bit_concat5;
 	end
 end
 always @(*) begin
-		fir_hw_BB_6_load13 = fir_hw_cnt_inferred_reg;
+		fir_hw_BB_2_load6 = fir_hw_cnt_inferred_reg;
 end
 always @(*) begin
-		fir_hw_BB_6_add14 = (fir_hw_BB_6_load13 + 16'd1);
+		fir_hw_BB_2_add7 = (fir_hw_BB_2_load6 + 16'd1);
 end
 always @(*) begin
-		fir_hw_BB_6_icmp15 = (fir_hw_BB_6_add14 == tlast_dnum_reg);
+		fir_hw_BB_2_icmp8 = (fir_hw_BB_2_add7 == tlast_dnum_reg);
 end
 always @(*) begin
-		fir_hw_BB_6_bit_concat16 = {fir_hw_BB_6_bit_concat16_bit_select_operand_0[6:0], fir_hw_BB_6_icmp15};
+		fir_hw_BB_2_bit_concat10 = {fir_hw_BB_2_bit_concat10_bit_select_operand_0[6:0], fir_hw_BB_2_icmp8};
 end
 always @(*) begin
-		fir_hw_BB_6_add17 = (fir_hw_BB_6_load13 + 16'd2);
+		fir_hw_BB_2_add11 = (fir_hw_BB_2_load6 + 16'd2);
 end
 always @(*) begin
-		fir_hw_BB_6_select = (fir_hw_BB_6_icmp15 ? 16'd1 : fir_hw_BB_6_add17);
+		fir_hw_BB_2_select = (fir_hw_BB_2_icmp8 ? 16'd1 : fir_hw_BB_2_add11);
 end
 always @(*) begin
-		fir_hw_BB_6_icmp18 = (fir_hw_BB_6_select == tlast_dnum_reg);
+		fir_hw_BB_2_icmp12 = (fir_hw_BB_2_select == tlast_dnum_reg);
 end
 always @(posedge clk) begin
-	if ((cur_state == SHLS_F_fir_hw_BB_6_10)) begin
-		fir_hw_BB_6_icmp18_reg <= fir_hw_BB_6_icmp18;
+	if ((cur_state == SHLS_F_fir_hw_BB_2_5)) begin
+		fir_hw_BB_2_icmp12_reg <= fir_hw_BB_2_icmp12;
 	end
 end
 always @(*) begin
-		fir_hw_BB_6_bit_concat19 = {fir_hw_BB_6_bit_concat19_bit_select_operand_0[6:0], fir_hw_BB_6_icmp18};
+		fir_hw_BB_2_bit_concat13 = {fir_hw_BB_2_bit_concat13_bit_select_operand_0[6:0], fir_hw_BB_2_icmp12};
 end
 always @(posedge clk) begin
-	if ((cur_state == SHLS_F_fir_hw_BB_6_10)) begin
-		fir_hw_BB_6_bit_concat19_reg <= fir_hw_BB_6_bit_concat19;
+	if ((cur_state == SHLS_F_fir_hw_BB_2_5)) begin
+		fir_hw_BB_2_bit_concat13_reg <= fir_hw_BB_2_bit_concat13;
 	end
 end
 always @(*) begin
-	if ((for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0)) begin
-		fir_hw_BB_7_phi20 = fir_hw_BB_7_phi20_reg;
+	if ((for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0)) begin
+		fir_hw_BB_3_phi = fir_hw_BB_3_phi_reg;
 	end
-	else if (((for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0)) & for_loop_src_fir_hw_cpp_46_9_valid_bit_3)) begin
-		fir_hw_BB_7_phi20 = fir_hw_BB_7_add69;
+	else if (((for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0)) & for_loop_src_fir_hw_cpp_35_9_valid_bit_3)) begin
+		fir_hw_BB_3_phi = fir_hw_BB_3_add63;
 	end
-	else if (((for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0)) & ~(for_loop_src_fir_hw_cpp_46_9_valid_bit_3))) begin
-		fir_hw_BB_7_phi20 = fir_hw_BB_7_add69_reg_stage2;
+	else if (((for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0)) & ~(for_loop_src_fir_hw_cpp_35_9_valid_bit_3))) begin
+		fir_hw_BB_3_phi = fir_hw_BB_3_add63_reg_stage2;
 	end
-	else /* if (((cur_state == SHLS_F_fir_hw_BB_5_9) & (fsm_stall == 1'd0))) */  begin
-		fir_hw_BB_7_phi20 = 48'd0;
+	else /* if (((cur_state == SHLS_F_fir_hw_BB_1_4) & (fsm_stall == 1'd0))) */  begin
+		fir_hw_BB_3_phi = 48'd0;
 	end
 end
 always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_1) begin
-		fir_hw_BB_7_phi20_reg <= fir_hw_BB_7_phi20;
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_1) begin
+		fir_hw_BB_3_phi_reg <= fir_hw_BB_3_phi;
 	end
-	if (((cur_state == SHLS_F_fir_hw_BB_5_9) & (fsm_stall == 1'd0))) begin
-		fir_hw_BB_7_phi20_reg <= fir_hw_BB_7_phi20;
-	end
-end
-always @(*) begin
-	if ((for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0)) begin
-		fir_hw_BB_7_phi21 = fir_hw_BB_7_phi21_reg;
-	end
-	else if (((for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0)) & for_loop_src_fir_hw_cpp_46_9_valid_bit_3)) begin
-		fir_hw_BB_7_phi21 = fir_hw_BB_7_add98;
-	end
-	else if (((for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0)) & ~(for_loop_src_fir_hw_cpp_46_9_valid_bit_3))) begin
-		fir_hw_BB_7_phi21 = fir_hw_BB_7_add98_reg_stage2;
-	end
-	else /* if (((cur_state == SHLS_F_fir_hw_BB_5_9) & (fsm_stall == 1'd0))) */  begin
-		fir_hw_BB_7_phi21 = 48'd0;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_1) begin
-		fir_hw_BB_7_phi21_reg <= fir_hw_BB_7_phi21;
-	end
-	if (((cur_state == SHLS_F_fir_hw_BB_5_9) & (fsm_stall == 1'd0))) begin
-		fir_hw_BB_7_phi21_reg <= fir_hw_BB_7_phi21;
+	if (((cur_state == SHLS_F_fir_hw_BB_1_4) & (fsm_stall == 1'd0))) begin
+		fir_hw_BB_3_phi_reg <= fir_hw_BB_3_phi;
 	end
 end
 always @(*) begin
-		fir_hw_BB_7_bit_select24 = for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0[8:0];
-end
-always @(*) begin
-		fir_hw_BB_7_sub = (fir_hw_BB_4_load3_reg - fir_hw_BB_7_bit_select24);
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat25 = {fir_hw_BB_7_bit_concat25_bit_select_operand_0[22:0], fir_hw_BB_7_sub[8:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_addr26 = (1'd0 + (4 * {23'd0,fir_hw_BB_7_bit_concat25}));
-end
-always @(*) begin
-		fir_hw_BB_7_load27 = fir_hw_buffer_left_read_data_wire_a;
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select28 = fir_hw_BB_7_load27[10:0];
-end
-always @(*) begin
-		fir_hw_BB_7_addr29 = (1'd0 + (4 * {23'd0,fir_hw_BB_7_bit_concat25}));
-end
-always @(*) begin
-		fir_hw_BB_7_load30 = fir_hw_buffer_right_read_data_wire_a;
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select31 = fir_hw_BB_7_load30[10:0];
-end
-always @(*) begin
-		fir_hw_BB_7_addr32 = (1'd0 + (4 * for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0));
-end
-always @(*) begin
-		fir_hw_BB_7_load33 = fir_hw_local_coeff_read_data_wire_a;
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select34 = fir_hw_BB_7_load33[31:17];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select36 = fir_hw_BB_7_load33[16:0];
-end
-always @(*) begin
-		fir_hw_BB_7_ashr = ($signed(fir_hw_BB_7_load27) >>> 24'd11);
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select38 = fir_hw_BB_7_ashr_width_extended[13:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat39 = {{fir_hw_BB_7_bit_concat39_bit_select_operand_0[16:0], fir_hw_BB_7_bit_select28[10:0]}, fir_hw_BB_7_bit_concat39_bit_select_operand_4[5:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat40 = {fir_hw_BB_7_bit_concat40_bit_select_operand_0[16:0], fir_hw_BB_7_bit_select36[16:0]};
-end
-always @(*) begin
-	fir_hw_BB_7_mul = legup_mult_fir_hw_BB_7_mul_out;
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat42 = {{fir_hw_BB_7_bit_concat42_bit_select_operand_0[15:0], fir_hw_BB_7_bit_select28[10:0]}, fir_hw_BB_7_bit_concat42_bit_select_operand_4[5:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_sext = $signed(fir_hw_BB_7_bit_select34);
-end
-always @(*) begin
-	fir_hw_BB_7_mul43 = legup_mult_fir_hw_BB_7_mul43_out;
-end
-always @(*) begin
-		fir_hw_BB_7_sext44 = $signed({{1{fir_hw_BB_7_bit_select38[12]}},fir_hw_BB_7_bit_select38});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat45 = {fir_hw_BB_7_bit_concat45_bit_select_operand_0[14:0], fir_hw_BB_7_bit_select36[16:0]};
-end
-always @(*) begin
-	fir_hw_BB_7_mul46 = legup_mult_fir_hw_BB_7_mul46_out;
-end
-always @(*) begin
-		fir_hw_BB_7_sext47 = $signed({{1{fir_hw_BB_7_bit_select38[12]}},fir_hw_BB_7_bit_select38});
-end
-always @(*) begin
-		fir_hw_BB_7_sext48 = $signed(fir_hw_BB_7_bit_select34);
-end
-always @(*) begin
-	fir_hw_BB_7_mul49 = legup_mult_fir_hw_BB_7_mul49_out;
-end
-always @(*) begin
-		fir_hw_BB_7_sext50 = $signed({{2{fir_hw_BB_7_mul46[29]}},fir_hw_BB_7_mul46});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select51 = fir_hw_BB_7_sext50_width_extended[32:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat52 = {fir_hw_BB_7_bit_select51_width_extended[32:0], fir_hw_BB_7_bit_concat52_bit_select_operand_2[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_sext53 = $signed({{1{fir_hw_BB_7_mul43[31]}},fir_hw_BB_7_mul43});
-end
-always @(*) begin
-		fir_hw_BB_7_sext54 = $signed({{1{fir_hw_BB_7_mul49[27]}},fir_hw_BB_7_mul49});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select56 = fir_hw_BB_7_sext54_width_extended[29:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat57 = {fir_hw_BB_7_bit_select56_width_extended[29:0], fir_hw_BB_7_bit_concat57_bit_select_operand_2[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_add58 = ($signed({{1{fir_hw_BB_7_bit_concat57_reg_stage1[44]}},fir_hw_BB_7_bit_concat57_reg_stage1}) + $signed({{14{fir_hw_BB_7_sext53[31]}},fir_hw_BB_7_sext53}));
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select59 = fir_hw_BB_7_add58[45:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat60 = {{fir_hw_BB_7_bit_concat60_bit_select_operand_0[16:0], fir_hw_BB_7_mul[33:0]}, fir_hw_BB_7_bit_concat60_bit_select_operand_4[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_sext61 = $signed({{3{fir_hw_BB_7_bit_concat52[46]}},fir_hw_BB_7_bit_concat52});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select62 = fir_hw_BB_7_sext61_width_extended[50:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat63 = {fir_hw_BB_7_bit_select62_width_extended[50:0], fir_hw_BB_7_bit_concat63_bit_select_operand_2[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_add64 = ($signed({{1{fir_hw_BB_7_bit_concat63[63]}},fir_hw_BB_7_bit_concat63}) + {14'd0,fir_hw_BB_7_bit_concat60});
-end
-always @(*) begin
-		fir_hw_BB_7_sext65 = $signed({{3{fir_hw_BB_7_add64[64]}},fir_hw_BB_7_add64});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat66 = {fir_hw_BB_7_bit_select59[45:0], fir_hw_BB_7_bit_concat66_bit_select_operand_2[33:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_add67 = (fir_hw_BB_7_bit_concat66 + $signed({{15{fir_hw_BB_7_sext65_reg_stage1[64]}},fir_hw_BB_7_sext65_reg_stage1}));
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select68 = fir_hw_BB_7_add67[78:31];
-end
-always @(*) begin
-		fir_hw_BB_7_add69 = (fir_hw_BB_7_phi20_reg_stage1 + fir_hw_BB_7_bit_select68);
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select70 = fir_hw_BB_7_add69[46:15];
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_3) begin
-		fir_hw_BB_7_bit_select70_reg <= fir_hw_BB_7_bit_select70;
+	if ((for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0)) begin
+		fir_hw_BB_3_phi14 = fir_hw_BB_3_phi14_reg;
 	end
-end
-always @(*) begin
-		fir_hw_BB_7_ashr71 = ($signed(fir_hw_BB_7_load30) >>> 24'd11);
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select72 = fir_hw_BB_7_ashr71_width_extended[13:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat73 = {{fir_hw_BB_7_bit_concat73_bit_select_operand_0[16:0], fir_hw_BB_7_bit_select31[10:0]}, fir_hw_BB_7_bit_concat73_bit_select_operand_4[5:0]};
-end
-always @(*) begin
-	fir_hw_BB_7_mul74 = legup_mult_fir_hw_BB_7_mul74_out;
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat75 = {{fir_hw_BB_7_bit_concat75_bit_select_operand_0[15:0], fir_hw_BB_7_bit_select31[10:0]}, fir_hw_BB_7_bit_concat75_bit_select_operand_4[5:0]};
-end
-always @(*) begin
-	fir_hw_BB_7_mul76 = legup_mult_fir_hw_BB_7_mul76_out;
-end
-always @(*) begin
-		fir_hw_BB_7_sext77 = $signed({{1{fir_hw_BB_7_bit_select72[12]}},fir_hw_BB_7_bit_select72});
-end
-always @(*) begin
-	fir_hw_BB_7_mul78 = legup_mult_fir_hw_BB_7_mul78_out;
-end
-always @(*) begin
-		fir_hw_BB_7_sext79 = $signed({{1{fir_hw_BB_7_bit_select72[12]}},fir_hw_BB_7_bit_select72});
-end
-always @(*) begin
-	fir_hw_BB_7_mul80 = legup_mult_fir_hw_BB_7_mul80_out;
-end
-always @(*) begin
-		fir_hw_BB_7_sext81 = $signed({{2{fir_hw_BB_7_mul78[29]}},fir_hw_BB_7_mul78});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select82 = fir_hw_BB_7_sext81_width_extended[32:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat83 = {fir_hw_BB_7_bit_select82_width_extended[32:0], fir_hw_BB_7_bit_concat83_bit_select_operand_2[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_sext84 = $signed({{1{fir_hw_BB_7_mul76[31]}},fir_hw_BB_7_mul76});
-end
-always @(*) begin
-		fir_hw_BB_7_sext85 = $signed({{1{fir_hw_BB_7_mul80[27]}},fir_hw_BB_7_mul80});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select86 = fir_hw_BB_7_sext85_width_extended[29:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat87 = {fir_hw_BB_7_bit_select86_width_extended[29:0], fir_hw_BB_7_bit_concat87_bit_select_operand_2[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_add88 = ($signed({{1{fir_hw_BB_7_bit_concat87_reg_stage1[44]}},fir_hw_BB_7_bit_concat87_reg_stage1}) + $signed({{14{fir_hw_BB_7_sext84[31]}},fir_hw_BB_7_sext84}));
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select89 = fir_hw_BB_7_add88[45:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat90 = {{fir_hw_BB_7_bit_concat90_bit_select_operand_0[16:0], fir_hw_BB_7_mul74[33:0]}, fir_hw_BB_7_bit_concat90_bit_select_operand_4[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_sext91 = $signed({{3{fir_hw_BB_7_bit_concat83[46]}},fir_hw_BB_7_bit_concat83});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select92 = fir_hw_BB_7_sext91_width_extended[50:0];
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat93 = {fir_hw_BB_7_bit_select92_width_extended[50:0], fir_hw_BB_7_bit_concat93_bit_select_operand_2[16:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_add94 = ($signed({{1{fir_hw_BB_7_bit_concat93[63]}},fir_hw_BB_7_bit_concat93}) + {14'd0,fir_hw_BB_7_bit_concat90});
-end
-always @(*) begin
-		fir_hw_BB_7_sext95 = $signed({{3{fir_hw_BB_7_add94[64]}},fir_hw_BB_7_add94});
-end
-always @(*) begin
-		fir_hw_BB_7_bit_concat96 = {fir_hw_BB_7_bit_select89[45:0], fir_hw_BB_7_bit_concat96_bit_select_operand_2[33:0]};
-end
-always @(*) begin
-		fir_hw_BB_7_add97 = (fir_hw_BB_7_bit_concat96 + $signed({{15{fir_hw_BB_7_sext95_reg_stage1[64]}},fir_hw_BB_7_sext95_reg_stage1}));
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select = fir_hw_BB_7_add97[78:31];
-end
-always @(*) begin
-		fir_hw_BB_7_add98 = (fir_hw_BB_7_phi21_reg_stage1 + fir_hw_BB_7_bit_select);
-end
-always @(*) begin
-		fir_hw_BB_7_bit_select99 = fir_hw_BB_7_add98[46:15];
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_3) begin
-		fir_hw_BB_7_bit_select99_reg <= fir_hw_BB_7_bit_select99;
+	else if (((for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0)) & for_loop_src_fir_hw_cpp_35_9_valid_bit_3)) begin
+		fir_hw_BB_3_phi14 = fir_hw_BB_3_add92;
 	end
-end
-always @(*) begin
-		fir_hw_BB_7_icmp101 = (for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0 == {16'd0,fir_hw_BB_5_bit_concat12_reg});
-end
-always @(*) begin
-		fir_hw_BB_9_add102 = (fir_hw_BB_4_load3_reg + 9'd1);
-end
-always @(*) begin
-	fir_hw_local_coeff_clken = fir_hw_local_coeff_clken_pipeline_cond;
-end
-always @(*) begin
-	fir_hw_local_coeff_address_a = 'dx;
-	if (for_loop_src_fir_hw_cpp_27_6_valid_bit_1) begin
-		fir_hw_local_coeff_address_a = (fir_hw_BB_3_addr2_reg_stage1 >> 2'd2);
+	else if (((for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0)) & ~(for_loop_src_fir_hw_cpp_35_9_valid_bit_3))) begin
+		fir_hw_BB_3_phi14 = fir_hw_BB_3_add92_reg_stage2;
 	end
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_0) begin
-		fir_hw_local_coeff_address_a = (fir_hw_BB_7_addr32 >> 2'd2);
-	end
-end
-always @(*) begin
-	fir_hw_local_coeff_write_en_a = 'd0;
-	if (for_loop_src_fir_hw_cpp_27_6_state_enable_1) begin
-		fir_hw_local_coeff_write_en_a = 1'd1;
-	end
-end
-always @(*) begin
-	fir_hw_local_coeff_write_data_a = 'dx;
-	if (for_loop_src_fir_hw_cpp_27_6_valid_bit_1) begin
-		fir_hw_local_coeff_write_data_a = fir_hw_BB_3_load1;
-	end
-end
-always @(*) begin
-	fir_hw_local_coeff_read_en_a = 'd0;
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_0) begin
-		fir_hw_local_coeff_read_en_a = 1'd1;
+	else /* if (((cur_state == SHLS_F_fir_hw_BB_1_4) & (fsm_stall == 1'd0))) */  begin
+		fir_hw_BB_3_phi14 = 48'd0;
 	end
 end
 always @(posedge clk) begin
-	if (reset)
-		fir_hw_coeffs_loaded_inferred_reg <= 1'd0;
-	else	if ((cur_state == SHLS_F_fir_hw_BB_2_3)) begin
-		fir_hw_coeffs_loaded_inferred_reg <= 1'd1;
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_1) begin
+		fir_hw_BB_3_phi14_reg <= fir_hw_BB_3_phi14;
 	end
+	if (((cur_state == SHLS_F_fir_hw_BB_1_4) & (fsm_stall == 1'd0))) begin
+		fir_hw_BB_3_phi14_reg <= fir_hw_BB_3_phi14;
+	end
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select17 = for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0[8:0];
+end
+always @(*) begin
+		fir_hw_BB_3_sub = (fir_hw_BB_0_load_reg - fir_hw_BB_3_bit_select17);
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat18 = {fir_hw_BB_3_bit_concat18_bit_select_operand_0[22:0], fir_hw_BB_3_sub[8:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_addr19 = (1'd0 + (4 * {23'd0,fir_hw_BB_3_bit_concat18}));
+end
+always @(*) begin
+		fir_hw_BB_3_load20 = fir_hw_buffer_left_read_data_wire_a;
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select22 = fir_hw_BB_3_load20[10:0];
+end
+always @(*) begin
+		fir_hw_BB_3_addr23 = (1'd0 + (4 * {23'd0,fir_hw_BB_3_bit_concat18}));
+end
+always @(*) begin
+		fir_hw_BB_3_load24 = fir_hw_buffer_right_read_data_wire_a;
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select25 = fir_hw_BB_3_load24[10:0];
+end
+always @(*) begin
+		fir_hw_BB_3_addr26 = (0 + (4 * for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0));
+end
+always @(*) begin
+		fir_hw_BB_3_load27 = coeff_hw_read_data_wire_a;
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select28 = fir_hw_BB_3_load27[31:17];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select30 = fir_hw_BB_3_load27[16:0];
+end
+always @(*) begin
+		fir_hw_BB_3_ashr = ($signed(fir_hw_BB_3_load20) >>> 24'd11);
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select31 = fir_hw_BB_3_ashr_width_extended[13:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat32 = {{fir_hw_BB_3_bit_concat32_bit_select_operand_0[16:0], fir_hw_BB_3_bit_select22[10:0]}, fir_hw_BB_3_bit_concat32_bit_select_operand_4[5:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat35 = {fir_hw_BB_3_bit_concat35_bit_select_operand_0[16:0], fir_hw_BB_3_bit_select30[16:0]};
+end
+always @(*) begin
+	fir_hw_BB_3_mul = legup_mult_fir_hw_BB_3_mul_out;
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat37 = {{fir_hw_BB_3_bit_concat37_bit_select_operand_0[15:0], fir_hw_BB_3_bit_select22[10:0]}, fir_hw_BB_3_bit_concat37_bit_select_operand_4[5:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_sext = $signed(fir_hw_BB_3_bit_select28);
+end
+always @(*) begin
+	fir_hw_BB_3_mul38 = legup_mult_fir_hw_BB_3_mul38_out;
+end
+always @(*) begin
+		fir_hw_BB_3_sext39 = $signed({{1{fir_hw_BB_3_bit_select31[12]}},fir_hw_BB_3_bit_select31});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat40 = {fir_hw_BB_3_bit_concat40_bit_select_operand_0[14:0], fir_hw_BB_3_bit_select30[16:0]};
+end
+always @(*) begin
+	fir_hw_BB_3_mul41 = legup_mult_fir_hw_BB_3_mul41_out;
+end
+always @(*) begin
+		fir_hw_BB_3_sext42 = $signed({{1{fir_hw_BB_3_bit_select31[12]}},fir_hw_BB_3_bit_select31});
+end
+always @(*) begin
+		fir_hw_BB_3_sext43 = $signed(fir_hw_BB_3_bit_select28);
+end
+always @(*) begin
+	fir_hw_BB_3_mul44 = legup_mult_fir_hw_BB_3_mul44_out;
+end
+always @(*) begin
+		fir_hw_BB_3_sext45 = $signed({{2{fir_hw_BB_3_mul41[29]}},fir_hw_BB_3_mul41});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select46 = fir_hw_BB_3_sext45_width_extended[32:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat47 = {fir_hw_BB_3_bit_select46_width_extended[32:0], fir_hw_BB_3_bit_concat47_bit_select_operand_2[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_sext48 = $signed({{1{fir_hw_BB_3_mul38[31]}},fir_hw_BB_3_mul38});
+end
+always @(*) begin
+		fir_hw_BB_3_sext49 = $signed({{1{fir_hw_BB_3_mul44[27]}},fir_hw_BB_3_mul44});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select50 = fir_hw_BB_3_sext49_width_extended[29:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat51 = {fir_hw_BB_3_bit_select50_width_extended[29:0], fir_hw_BB_3_bit_concat51_bit_select_operand_2[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_add52 = ($signed({{1{fir_hw_BB_3_bit_concat51_reg_stage1[44]}},fir_hw_BB_3_bit_concat51_reg_stage1}) + $signed({{14{fir_hw_BB_3_sext48[31]}},fir_hw_BB_3_sext48}));
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select53 = fir_hw_BB_3_add52[45:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat54 = {{fir_hw_BB_3_bit_concat54_bit_select_operand_0[16:0], fir_hw_BB_3_mul[33:0]}, fir_hw_BB_3_bit_concat54_bit_select_operand_4[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_sext55 = $signed({{3{fir_hw_BB_3_bit_concat47[46]}},fir_hw_BB_3_bit_concat47});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select56 = fir_hw_BB_3_sext55_width_extended[50:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat57 = {fir_hw_BB_3_bit_select56_width_extended[50:0], fir_hw_BB_3_bit_concat57_bit_select_operand_2[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_add58 = ($signed({{1{fir_hw_BB_3_bit_concat57[63]}},fir_hw_BB_3_bit_concat57}) + {14'd0,fir_hw_BB_3_bit_concat54});
+end
+always @(*) begin
+		fir_hw_BB_3_sext59 = $signed({{3{fir_hw_BB_3_add58[64]}},fir_hw_BB_3_add58});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat60 = {fir_hw_BB_3_bit_select53[45:0], fir_hw_BB_3_bit_concat60_bit_select_operand_2[33:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_add61 = (fir_hw_BB_3_bit_concat60 + $signed({{15{fir_hw_BB_3_sext59_reg_stage1[64]}},fir_hw_BB_3_sext59_reg_stage1}));
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select62 = fir_hw_BB_3_add61[78:31];
+end
+always @(*) begin
+		fir_hw_BB_3_add63 = (fir_hw_BB_3_phi_reg_stage1 + fir_hw_BB_3_bit_select62);
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select64 = fir_hw_BB_3_add63[46:15];
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_3) begin
+		fir_hw_BB_3_bit_select64_reg <= fir_hw_BB_3_bit_select64;
+	end
+end
+always @(*) begin
+		fir_hw_BB_3_ashr65 = ($signed(fir_hw_BB_3_load24) >>> 24'd11);
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select66 = fir_hw_BB_3_ashr65_width_extended[13:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat67 = {{fir_hw_BB_3_bit_concat67_bit_select_operand_0[16:0], fir_hw_BB_3_bit_select25[10:0]}, fir_hw_BB_3_bit_concat67_bit_select_operand_4[5:0]};
+end
+always @(*) begin
+	fir_hw_BB_3_mul68 = legup_mult_fir_hw_BB_3_mul68_out;
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat69 = {{fir_hw_BB_3_bit_concat69_bit_select_operand_0[15:0], fir_hw_BB_3_bit_select25[10:0]}, fir_hw_BB_3_bit_concat69_bit_select_operand_4[5:0]};
+end
+always @(*) begin
+	fir_hw_BB_3_mul70 = legup_mult_fir_hw_BB_3_mul70_out;
+end
+always @(*) begin
+		fir_hw_BB_3_sext71 = $signed({{1{fir_hw_BB_3_bit_select66[12]}},fir_hw_BB_3_bit_select66});
+end
+always @(*) begin
+	fir_hw_BB_3_mul72 = legup_mult_fir_hw_BB_3_mul72_out;
+end
+always @(*) begin
+		fir_hw_BB_3_sext73 = $signed({{1{fir_hw_BB_3_bit_select66[12]}},fir_hw_BB_3_bit_select66});
+end
+always @(*) begin
+	fir_hw_BB_3_mul74 = legup_mult_fir_hw_BB_3_mul74_out;
+end
+always @(*) begin
+		fir_hw_BB_3_sext75 = $signed({{2{fir_hw_BB_3_mul72[29]}},fir_hw_BB_3_mul72});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select76 = fir_hw_BB_3_sext75_width_extended[32:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat77 = {fir_hw_BB_3_bit_select76_width_extended[32:0], fir_hw_BB_3_bit_concat77_bit_select_operand_2[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_sext78 = $signed({{1{fir_hw_BB_3_mul70[31]}},fir_hw_BB_3_mul70});
+end
+always @(*) begin
+		fir_hw_BB_3_sext79 = $signed({{1{fir_hw_BB_3_mul74[27]}},fir_hw_BB_3_mul74});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select80 = fir_hw_BB_3_sext79_width_extended[29:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat81 = {fir_hw_BB_3_bit_select80_width_extended[29:0], fir_hw_BB_3_bit_concat81_bit_select_operand_2[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_add82 = ($signed({{1{fir_hw_BB_3_bit_concat81_reg_stage1[44]}},fir_hw_BB_3_bit_concat81_reg_stage1}) + $signed({{14{fir_hw_BB_3_sext78[31]}},fir_hw_BB_3_sext78}));
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select83 = fir_hw_BB_3_add82[45:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat84 = {{fir_hw_BB_3_bit_concat84_bit_select_operand_0[16:0], fir_hw_BB_3_mul68[33:0]}, fir_hw_BB_3_bit_concat84_bit_select_operand_4[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_sext85 = $signed({{3{fir_hw_BB_3_bit_concat77[46]}},fir_hw_BB_3_bit_concat77});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select86 = fir_hw_BB_3_sext85_width_extended[50:0];
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat87 = {fir_hw_BB_3_bit_select86_width_extended[50:0], fir_hw_BB_3_bit_concat87_bit_select_operand_2[16:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_add88 = ($signed({{1{fir_hw_BB_3_bit_concat87[63]}},fir_hw_BB_3_bit_concat87}) + {14'd0,fir_hw_BB_3_bit_concat84});
+end
+always @(*) begin
+		fir_hw_BB_3_sext89 = $signed({{3{fir_hw_BB_3_add88[64]}},fir_hw_BB_3_add88});
+end
+always @(*) begin
+		fir_hw_BB_3_bit_concat90 = {fir_hw_BB_3_bit_select83[45:0], fir_hw_BB_3_bit_concat90_bit_select_operand_2[33:0]};
+end
+always @(*) begin
+		fir_hw_BB_3_add91 = (fir_hw_BB_3_bit_concat90 + $signed({{15{fir_hw_BB_3_sext89_reg_stage1[64]}},fir_hw_BB_3_sext89_reg_stage1}));
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select = fir_hw_BB_3_add91[78:31];
+end
+always @(*) begin
+		fir_hw_BB_3_add92 = (fir_hw_BB_3_phi14_reg_stage1 + fir_hw_BB_3_bit_select);
+end
+always @(*) begin
+		fir_hw_BB_3_bit_select93 = fir_hw_BB_3_add92[46:15];
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_3) begin
+		fir_hw_BB_3_bit_select93_reg <= fir_hw_BB_3_bit_select93;
+	end
+end
+always @(*) begin
+		fir_hw_BB_3_icmp95 = (for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0 == {16'd0,fir_hw_BB_1_bit_concat5_reg});
+end
+always @(*) begin
+		fir_hw_BB_5_add96 = (fir_hw_BB_0_load_reg + 9'd1);
 end
 always @(*) begin
 	fir_hw_buffer_left_clken = (fir_hw_buffer_left_clken_pipeline_cond | fir_hw_buffer_left_clken_sequential_cond);
 end
 always @(*) begin
 	fir_hw_buffer_left_address_a = 'dx;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
-		fir_hw_buffer_left_address_a = (fir_hw_BB_4_addr4 >> 2'd2);
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
+		fir_hw_buffer_left_address_a = (fir_hw_BB_0_addr >> 2'd2);
 	end
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_0) begin
-		fir_hw_buffer_left_address_a = (fir_hw_BB_7_addr26 >> 2'd2);
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_0) begin
+		fir_hw_buffer_left_address_a = (fir_hw_BB_3_addr19 >> 2'd2);
 	end
 end
 always @(*) begin
 	fir_hw_buffer_left_write_en_a = 'd0;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
 		fir_hw_buffer_left_write_en_a = 1'd1;
 	end
 end
 always @(*) begin
 	fir_hw_buffer_left_write_data_a = 'dx;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
-		fir_hw_buffer_left_write_data_a = fir_hw_BB_4_fifoVal;
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
+		fir_hw_buffer_left_write_data_a = fir_hw_BB_0_fifoVal;
 	end
 end
 always @(*) begin
 	fir_hw_buffer_left_read_en_a = 'd0;
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_0) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_0) begin
 		fir_hw_buffer_left_read_en_a = 1'd1;
 	end
 end
@@ -1647,46 +1523,46 @@ always @(*) begin
 end
 always @(*) begin
 	fir_hw_buffer_right_address_a = 'dx;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
-		fir_hw_buffer_right_address_a = (fir_hw_BB_4_addr6 >> 2'd2);
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
+		fir_hw_buffer_right_address_a = (fir_hw_BB_0_addr2 >> 2'd2);
 	end
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_0) begin
-		fir_hw_buffer_right_address_a = (fir_hw_BB_7_addr29 >> 2'd2);
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_0) begin
+		fir_hw_buffer_right_address_a = (fir_hw_BB_3_addr23 >> 2'd2);
 	end
 end
 always @(*) begin
 	fir_hw_buffer_right_write_en_a = 'd0;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
 		fir_hw_buffer_right_write_en_a = 1'd1;
 	end
 end
 always @(*) begin
 	fir_hw_buffer_right_write_data_a = 'dx;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
-		fir_hw_buffer_right_write_data_a = fir_hw_BB_4_fifoVal5;
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
+		fir_hw_buffer_right_write_data_a = fir_hw_BB_0_fifoVal1;
 	end
 end
 always @(*) begin
 	fir_hw_buffer_right_read_en_a = 'd0;
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_0) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_0) begin
 		fir_hw_buffer_right_read_en_a = 1'd1;
 	end
 end
 always @(posedge clk) begin
 	if (reset)
 		fir_hw_write_idx_inferred_reg <= 9'd0;
-	else	if ((cur_state == SHLS_F_fir_hw_BB_9_15)) begin
-		fir_hw_write_idx_inferred_reg <= fir_hw_BB_9_add102;
+	else	if ((cur_state == SHLS_F_fir_hw_BB_5_10)) begin
+		fir_hw_write_idx_inferred_reg <= fir_hw_BB_5_add96;
 	end
 end
 always @(posedge clk) begin
 	if (reset)
 		fir_hw_cnt_inferred_reg <= 16'd0;
 	else begin
-	if (((cur_state == SHLS_F_fir_hw_BB_6_10) & (fsm_stall == 1'd0))) begin
-		fir_hw_cnt_inferred_reg <= fir_hw_BB_6_select;
+	if (((cur_state == SHLS_F_fir_hw_BB_2_5) & (fsm_stall == 1'd0))) begin
+		fir_hw_cnt_inferred_reg <= fir_hw_BB_2_select;
 	end
-	if ((cur_state == SHLS_F_fir_hw_BB_8_13)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_4_8)) begin
 		fir_hw_cnt_inferred_reg <= 16'd0;
 	end
 	end
@@ -1695,338 +1571,199 @@ always @(posedge clk) begin
 	if (reset)
 		fir_hw_dec_cnt_inferred_reg <= 3'd0;
 	else begin
-	if (((cur_state == SHLS_F_fir_hw_BB_4_6) & (fsm_stall == 1'd0))) begin
-		fir_hw_dec_cnt_inferred_reg <= fir_hw_BB_4_add8;
+	if (((cur_state == SHLS_F_fir_hw_BB_0_1) & (fsm_stall == 1'd0))) begin
+		fir_hw_dec_cnt_inferred_reg <= fir_hw_BB_0_add;
 	end
-	if ((cur_state == SHLS_F_fir_hw_BB_5_8)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_1_3)) begin
 		fir_hw_dec_cnt_inferred_reg <= 3'd0;
 	end
 	end
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_valid_bit_0 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_27_6_state_stall_0)) begin
-		for_loop_src_fir_hw_cpp_27_6_valid_bit_0 <= (for_loop_src_fir_hw_cpp_27_6_II_counter & for_loop_src_fir_hw_cpp_27_6_start);
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_0 <= 1'd0;
+	else	if (~(for_loop_src_fir_hw_cpp_35_9_state_stall_0)) begin
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_0 <= (for_loop_src_fir_hw_cpp_35_9_II_counter[1] & for_loop_src_fir_hw_cpp_35_9_start);
 	end
 end
-assign for_loop_src_fir_hw_cpp_27_6_state_stall_0 = 1'd0;
+assign for_loop_src_fir_hw_cpp_35_9_state_stall_0 = 1'd0;
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_state_enable_0 = (for_loop_src_fir_hw_cpp_27_6_valid_bit_0 & ~(for_loop_src_fir_hw_cpp_27_6_state_stall_0));
+	for_loop_src_fir_hw_cpp_35_9_state_enable_0 = (for_loop_src_fir_hw_cpp_35_9_valid_bit_0 & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_0));
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_valid_bit_1 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_27_6_state_stall_1)) begin
-		for_loop_src_fir_hw_cpp_27_6_valid_bit_1 <= for_loop_src_fir_hw_cpp_27_6_state_enable_0;
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_1 <= 1'd0;
+	else	if (~(for_loop_src_fir_hw_cpp_35_9_state_stall_1)) begin
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_1 <= for_loop_src_fir_hw_cpp_35_9_state_enable_0;
 	end
 end
-assign for_loop_src_fir_hw_cpp_27_6_state_stall_1 = 1'd0;
+assign for_loop_src_fir_hw_cpp_35_9_state_stall_1 = 1'd0;
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_state_enable_1 = (for_loop_src_fir_hw_cpp_27_6_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_27_6_state_stall_1));
+	for_loop_src_fir_hw_cpp_35_9_state_enable_1 = (for_loop_src_fir_hw_cpp_35_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_1));
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_valid_bit_2 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_27_6_state_stall_2)) begin
-		for_loop_src_fir_hw_cpp_27_6_valid_bit_2 <= for_loop_src_fir_hw_cpp_27_6_state_enable_1;
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_2 <= 1'd0;
+	else	if (~(for_loop_src_fir_hw_cpp_35_9_state_stall_2)) begin
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_2 <= for_loop_src_fir_hw_cpp_35_9_state_enable_1;
 	end
 end
-assign for_loop_src_fir_hw_cpp_27_6_state_stall_2 = 1'd0;
+assign for_loop_src_fir_hw_cpp_35_9_state_stall_2 = 1'd0;
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_state_enable_2 = (for_loop_src_fir_hw_cpp_27_6_valid_bit_2 & ~(for_loop_src_fir_hw_cpp_27_6_state_stall_2));
+	for_loop_src_fir_hw_cpp_35_9_state_enable_2 = (for_loop_src_fir_hw_cpp_35_9_valid_bit_2 & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
 always @(posedge clk) begin
-	for_loop_src_fir_hw_cpp_27_6_II_counter <= 1'd1;
+	if (reset)
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_3 <= 1'd0;
+	else	if (~(for_loop_src_fir_hw_cpp_35_9_state_stall_3)) begin
+		for_loop_src_fir_hw_cpp_35_9_valid_bit_3 <= for_loop_src_fir_hw_cpp_35_9_state_enable_2;
+	end
+end
+assign for_loop_src_fir_hw_cpp_35_9_state_stall_3 = 1'd0;
+always @(*) begin
+	for_loop_src_fir_hw_cpp_35_9_state_enable_3 = (for_loop_src_fir_hw_cpp_35_9_valid_bit_3 & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_3));
+end
+always @(posedge clk) begin
+	for_loop_src_fir_hw_cpp_35_9_II_counter <= {for_loop_src_fir_hw_cpp_35_9_II_counter[0], for_loop_src_fir_hw_cpp_35_9_II_counter[1]};
+	if (reset)
+		for_loop_src_fir_hw_cpp_35_9_II_counter <= 2'd1;
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_start = (for_loop_src_fir_hw_cpp_27_6_activate_pipeline | ((for_loop_src_fir_hw_cpp_27_6_active & ~(for_loop_src_fir_hw_cpp_27_6_epilogue)) & ~(for_loop_src_fir_hw_cpp_27_6_pipeline_exit_cond)));
+	for_loop_src_fir_hw_cpp_35_9_start = (for_loop_src_fir_hw_cpp_35_9_activate_pipeline | ((for_loop_src_fir_hw_cpp_35_9_active & ~(for_loop_src_fir_hw_cpp_35_9_epilogue)) & ~(for_loop_src_fir_hw_cpp_35_9_pipeline_exit_cond)));
 	if (reset) begin
-		for_loop_src_fir_hw_cpp_27_6_start = 1'd0;
+		for_loop_src_fir_hw_cpp_35_9_start = 1'd0;
 	end
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_activate_pipeline = ((((fsm_stall == 1'd0) & for_loop_src_fir_hw_cpp_27_6_begin_pipeline) & ~(for_loop_src_fir_hw_cpp_27_6_active)) & ~(reset));
+	for_loop_src_fir_hw_cpp_35_9_activate_pipeline = ((((fsm_stall == 1'd0) & for_loop_src_fir_hw_cpp_35_9_begin_pipeline) & ~(for_loop_src_fir_hw_cpp_35_9_active)) & ~(reset));
 end
 always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_27_6_state_enable_0) begin
-		fir_hw_BB_3_addr2_reg_stage1 <= fir_hw_BB_3_addr2;
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_1) begin
+		fir_hw_BB_3_phi_reg_stage1 <= fir_hw_BB_3_phi;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_1) begin
+		fir_hw_BB_3_phi14_reg_stage1 <= fir_hw_BB_3_phi14;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_2) begin
+		fir_hw_BB_3_bit_concat51_reg_stage1 <= fir_hw_BB_3_bit_concat51;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_2) begin
+		fir_hw_BB_3_sext59_reg_stage1 <= fir_hw_BB_3_sext59;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_3) begin
+		fir_hw_BB_3_add63_reg_stage2 <= fir_hw_BB_3_add63;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_2) begin
+		fir_hw_BB_3_bit_concat81_reg_stage1 <= fir_hw_BB_3_bit_concat81;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_2) begin
+		fir_hw_BB_3_sext89_reg_stage1 <= fir_hw_BB_3_sext89;
+	end
+end
+always @(posedge clk) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_3) begin
+		fir_hw_BB_3_add92_reg_stage2 <= fir_hw_BB_3_add92;
 	end
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0 <= 10'd0;
+		for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0 <= 0;
 	else begin
-	if (for_loop_src_fir_hw_cpp_27_6_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0 <= 10'd0;
+	if (for_loop_src_fir_hw_cpp_35_9_activate_pipeline) begin
+		for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0 <= 0;
 	end
-	if ((for_loop_src_fir_hw_cpp_27_6_II_counter & for_loop_src_fir_hw_cpp_27_6_state_enable_0)) begin
-		for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0 <= (for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0 + 10'd1);
+	if ((for_loop_src_fir_hw_cpp_35_9_II_counter[1] & for_loop_src_fir_hw_cpp_35_9_state_enable_1)) begin
+		for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0 <= (for_loop_src_fir_hw_cpp_35_9_inductionVar_stage0 + 1);
 	end
 	end
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_pipeline_exit_cond = (for_loop_src_fir_hw_cpp_27_6_state_enable_0 & ({22'd0,for_loop_src_fir_hw_cpp_27_6_inductionVar_stage0} == 511));
+	for_loop_src_fir_hw_cpp_35_9_pipeline_exit_cond = (for_loop_src_fir_hw_cpp_35_9_state_enable_0 & fir_hw_BB_3_icmp95);
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_active <= 1'd0;
+		for_loop_src_fir_hw_cpp_35_9_active <= 1'd0;
 	else begin
-	if (for_loop_src_fir_hw_cpp_27_6_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_27_6_active <= 1'd1;
+	if (for_loop_src_fir_hw_cpp_35_9_activate_pipeline) begin
+		for_loop_src_fir_hw_cpp_35_9_active <= 1'd1;
 	end
-	if (for_loop_src_fir_hw_cpp_27_6_pipeline_finishing) begin
-		for_loop_src_fir_hw_cpp_27_6_active <= 1'd0;
+	if (for_loop_src_fir_hw_cpp_35_9_pipeline_finishing) begin
+		for_loop_src_fir_hw_cpp_35_9_active <= 1'd0;
 	end
 	end
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_begin_pipeline = 1'd0;
+	for_loop_src_fir_hw_cpp_35_9_begin_pipeline = 1'd0;
 	if (reset) begin
-		for_loop_src_fir_hw_cpp_27_6_begin_pipeline = 1'd0;
+		for_loop_src_fir_hw_cpp_35_9_begin_pipeline = 1'd0;
 	end
-	if (((cur_state == SHLS_F_fir_hw_BB_1_2) & (fsm_stall == 1'd0))) begin
-		for_loop_src_fir_hw_cpp_27_6_begin_pipeline = 1'd1;
+	if (((cur_state == SHLS_F_fir_hw_BB_1_4) & (fsm_stall == 1'd0))) begin
+		for_loop_src_fir_hw_cpp_35_9_begin_pipeline = 1'd1;
 	end
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_epilogue <= 1'd0;
+		for_loop_src_fir_hw_cpp_35_9_epilogue <= 1'd0;
 	else begin
-	if ((for_loop_src_fir_hw_cpp_27_6_pipeline_exit_cond & for_loop_src_fir_hw_cpp_27_6_active)) begin
-		for_loop_src_fir_hw_cpp_27_6_epilogue <= 1'd1;
+	if ((for_loop_src_fir_hw_cpp_35_9_pipeline_exit_cond & for_loop_src_fir_hw_cpp_35_9_active)) begin
+		for_loop_src_fir_hw_cpp_35_9_epilogue <= 1'd1;
 	end
-	if (for_loop_src_fir_hw_cpp_27_6_pipeline_finishing) begin
-		for_loop_src_fir_hw_cpp_27_6_epilogue <= 1'd0;
+	if (for_loop_src_fir_hw_cpp_35_9_pipeline_finishing) begin
+		for_loop_src_fir_hw_cpp_35_9_epilogue <= 1'd0;
 	end
 	end
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_pipeline_finish = (for_loop_src_fir_hw_cpp_27_6_pipeline_finishing | for_loop_src_fir_hw_cpp_27_6_pipeline_finish_reg);
+	for_loop_src_fir_hw_cpp_35_9_pipeline_finish = (for_loop_src_fir_hw_cpp_35_9_pipeline_finishing | for_loop_src_fir_hw_cpp_35_9_pipeline_finish_reg);
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_pipeline_finishing = ((for_loop_src_fir_hw_cpp_27_6_epilogue | for_loop_src_fir_hw_cpp_27_6_pipeline_exit_cond) & for_loop_src_fir_hw_cpp_27_6_only_last_stage_enabled);
+	for_loop_src_fir_hw_cpp_35_9_pipeline_finishing = ((for_loop_src_fir_hw_cpp_35_9_epilogue | for_loop_src_fir_hw_cpp_35_9_pipeline_exit_cond) & for_loop_src_fir_hw_cpp_35_9_only_last_stage_enabled);
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_only_last_stage_enabled = ((for_loop_src_fir_hw_cpp_27_6_num_active_iterations == 1'd1) & for_loop_src_fir_hw_cpp_27_6_state_enable_2);
+	for_loop_src_fir_hw_cpp_35_9_only_last_stage_enabled = ((for_loop_src_fir_hw_cpp_35_9_num_active_iterations == 1'd1) & for_loop_src_fir_hw_cpp_35_9_state_enable_3);
 end
 always @(posedge clk) begin
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_num_active_iterations <= 1'd0;
+		for_loop_src_fir_hw_cpp_35_9_num_active_iterations <= 1'd0;
 	else begin
-	if ((for_loop_src_fir_hw_cpp_27_6_inserting_new_iteration & ~(for_loop_src_fir_hw_cpp_27_6_state_enable_2))) begin
-		for_loop_src_fir_hw_cpp_27_6_num_active_iterations <= (for_loop_src_fir_hw_cpp_27_6_num_active_iterations + 1'd1);
+	if ((for_loop_src_fir_hw_cpp_35_9_inserting_new_iteration & ~(for_loop_src_fir_hw_cpp_35_9_state_enable_3))) begin
+		for_loop_src_fir_hw_cpp_35_9_num_active_iterations <= (for_loop_src_fir_hw_cpp_35_9_num_active_iterations + 1'd1);
 	end
-	if ((~(for_loop_src_fir_hw_cpp_27_6_inserting_new_iteration) & for_loop_src_fir_hw_cpp_27_6_state_enable_2)) begin
-		for_loop_src_fir_hw_cpp_27_6_num_active_iterations <= (for_loop_src_fir_hw_cpp_27_6_num_active_iterations - 1'd1);
+	if ((~(for_loop_src_fir_hw_cpp_35_9_inserting_new_iteration) & for_loop_src_fir_hw_cpp_35_9_state_enable_3)) begin
+		for_loop_src_fir_hw_cpp_35_9_num_active_iterations <= (for_loop_src_fir_hw_cpp_35_9_num_active_iterations - 1'd1);
 	end
 	end
 end
 always @(*) begin
-	for_loop_src_fir_hw_cpp_27_6_inserting_new_iteration = ((~(for_loop_src_fir_hw_cpp_27_6_state_stall_0) & for_loop_src_fir_hw_cpp_27_6_II_counter) & for_loop_src_fir_hw_cpp_27_6_start);
+	for_loop_src_fir_hw_cpp_35_9_inserting_new_iteration = ((~(for_loop_src_fir_hw_cpp_35_9_state_stall_0) & for_loop_src_fir_hw_cpp_35_9_II_counter[1]) & for_loop_src_fir_hw_cpp_35_9_start);
 end
 always @(posedge clk) begin
-	for_loop_src_fir_hw_cpp_27_6_pipeline_finish_reg <= for_loop_src_fir_hw_cpp_27_6_pipeline_finish;
+	for_loop_src_fir_hw_cpp_35_9_pipeline_finish_reg <= for_loop_src_fir_hw_cpp_35_9_pipeline_finish;
 	if (reset)
-		for_loop_src_fir_hw_cpp_27_6_pipeline_finish_reg <= 1'd0;
-	else	if (for_loop_src_fir_hw_cpp_27_6_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_27_6_pipeline_finish_reg <= 1'd0;
+		for_loop_src_fir_hw_cpp_35_9_pipeline_finish_reg <= 1'd0;
+	else	if (for_loop_src_fir_hw_cpp_35_9_activate_pipeline) begin
+		for_loop_src_fir_hw_cpp_35_9_pipeline_finish_reg <= 1'd0;
 	end
 end
 always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_0 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_46_9_state_stall_0)) begin
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_0 <= (for_loop_src_fir_hw_cpp_46_9_II_counter[1] & for_loop_src_fir_hw_cpp_46_9_start);
+	if (for_loop_src_fir_hw_cpp_35_9_activate_pipeline) begin
+		for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0 <= 1'd1;
 	end
-end
-assign for_loop_src_fir_hw_cpp_46_9_state_stall_0 = 1'd0;
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_state_enable_0 = (for_loop_src_fir_hw_cpp_46_9_valid_bit_0 & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_0));
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_1 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_46_9_state_stall_1)) begin
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_1 <= for_loop_src_fir_hw_cpp_46_9_state_enable_0;
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_1) begin
+		for_loop_src_fir_hw_cpp_35_9_in_first_iteration_stage0 <= 1'd0;
 	end
-end
-assign for_loop_src_fir_hw_cpp_46_9_state_stall_1 = 1'd0;
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_state_enable_1 = (for_loop_src_fir_hw_cpp_46_9_valid_bit_1 & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_1));
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_2 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_46_9_state_stall_2)) begin
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_2 <= for_loop_src_fir_hw_cpp_46_9_state_enable_1;
-	end
-end
-assign for_loop_src_fir_hw_cpp_46_9_state_stall_2 = 1'd0;
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_state_enable_2 = (for_loop_src_fir_hw_cpp_46_9_valid_bit_2 & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_3 <= 1'd0;
-	else	if (~(for_loop_src_fir_hw_cpp_46_9_state_stall_3)) begin
-		for_loop_src_fir_hw_cpp_46_9_valid_bit_3 <= for_loop_src_fir_hw_cpp_46_9_state_enable_2;
-	end
-end
-assign for_loop_src_fir_hw_cpp_46_9_state_stall_3 = 1'd0;
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_state_enable_3 = (for_loop_src_fir_hw_cpp_46_9_valid_bit_3 & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_3));
-end
-always @(posedge clk) begin
-	for_loop_src_fir_hw_cpp_46_9_II_counter <= {for_loop_src_fir_hw_cpp_46_9_II_counter[0], for_loop_src_fir_hw_cpp_46_9_II_counter[1]};
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_II_counter <= 2'd1;
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_start = (for_loop_src_fir_hw_cpp_46_9_activate_pipeline | ((for_loop_src_fir_hw_cpp_46_9_active & ~(for_loop_src_fir_hw_cpp_46_9_epilogue)) & ~(for_loop_src_fir_hw_cpp_46_9_pipeline_exit_cond)));
-	if (reset) begin
-		for_loop_src_fir_hw_cpp_46_9_start = 1'd0;
-	end
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_activate_pipeline = ((((fsm_stall == 1'd0) & for_loop_src_fir_hw_cpp_46_9_begin_pipeline) & ~(for_loop_src_fir_hw_cpp_46_9_active)) & ~(reset));
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_1) begin
-		fir_hw_BB_7_phi20_reg_stage1 <= fir_hw_BB_7_phi20;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_1) begin
-		fir_hw_BB_7_phi21_reg_stage1 <= fir_hw_BB_7_phi21;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_2) begin
-		fir_hw_BB_7_bit_concat57_reg_stage1 <= fir_hw_BB_7_bit_concat57;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_2) begin
-		fir_hw_BB_7_sext65_reg_stage1 <= fir_hw_BB_7_sext65;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_3) begin
-		fir_hw_BB_7_add69_reg_stage2 <= fir_hw_BB_7_add69;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_2) begin
-		fir_hw_BB_7_bit_concat87_reg_stage1 <= fir_hw_BB_7_bit_concat87;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_2) begin
-		fir_hw_BB_7_sext95_reg_stage1 <= fir_hw_BB_7_sext95;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_3) begin
-		fir_hw_BB_7_add98_reg_stage2 <= fir_hw_BB_7_add98;
-	end
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0 <= 0;
-	else begin
-	if (for_loop_src_fir_hw_cpp_46_9_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0 <= 0;
-	end
-	if ((for_loop_src_fir_hw_cpp_46_9_II_counter[1] & for_loop_src_fir_hw_cpp_46_9_state_enable_1)) begin
-		for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0 <= (for_loop_src_fir_hw_cpp_46_9_inductionVar_stage0 + 1);
-	end
-	end
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_pipeline_exit_cond = (for_loop_src_fir_hw_cpp_46_9_state_enable_0 & fir_hw_BB_7_icmp101);
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_active <= 1'd0;
-	else begin
-	if (for_loop_src_fir_hw_cpp_46_9_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_46_9_active <= 1'd1;
-	end
-	if (for_loop_src_fir_hw_cpp_46_9_pipeline_finishing) begin
-		for_loop_src_fir_hw_cpp_46_9_active <= 1'd0;
-	end
-	end
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_begin_pipeline = 1'd0;
-	if (reset) begin
-		for_loop_src_fir_hw_cpp_46_9_begin_pipeline = 1'd0;
-	end
-	if (((cur_state == SHLS_F_fir_hw_BB_5_9) & (fsm_stall == 1'd0))) begin
-		for_loop_src_fir_hw_cpp_46_9_begin_pipeline = 1'd1;
-	end
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_epilogue <= 1'd0;
-	else begin
-	if ((for_loop_src_fir_hw_cpp_46_9_pipeline_exit_cond & for_loop_src_fir_hw_cpp_46_9_active)) begin
-		for_loop_src_fir_hw_cpp_46_9_epilogue <= 1'd1;
-	end
-	if (for_loop_src_fir_hw_cpp_46_9_pipeline_finishing) begin
-		for_loop_src_fir_hw_cpp_46_9_epilogue <= 1'd0;
-	end
-	end
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_pipeline_finish = (for_loop_src_fir_hw_cpp_46_9_pipeline_finishing | for_loop_src_fir_hw_cpp_46_9_pipeline_finish_reg);
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_pipeline_finishing = ((for_loop_src_fir_hw_cpp_46_9_epilogue | for_loop_src_fir_hw_cpp_46_9_pipeline_exit_cond) & for_loop_src_fir_hw_cpp_46_9_only_last_stage_enabled);
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_only_last_stage_enabled = ((for_loop_src_fir_hw_cpp_46_9_num_active_iterations == 1'd1) & for_loop_src_fir_hw_cpp_46_9_state_enable_3);
-end
-always @(posedge clk) begin
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_num_active_iterations <= 1'd0;
-	else begin
-	if ((for_loop_src_fir_hw_cpp_46_9_inserting_new_iteration & ~(for_loop_src_fir_hw_cpp_46_9_state_enable_3))) begin
-		for_loop_src_fir_hw_cpp_46_9_num_active_iterations <= (for_loop_src_fir_hw_cpp_46_9_num_active_iterations + 1'd1);
-	end
-	if ((~(for_loop_src_fir_hw_cpp_46_9_inserting_new_iteration) & for_loop_src_fir_hw_cpp_46_9_state_enable_3)) begin
-		for_loop_src_fir_hw_cpp_46_9_num_active_iterations <= (for_loop_src_fir_hw_cpp_46_9_num_active_iterations - 1'd1);
-	end
-	end
-end
-always @(*) begin
-	for_loop_src_fir_hw_cpp_46_9_inserting_new_iteration = ((~(for_loop_src_fir_hw_cpp_46_9_state_stall_0) & for_loop_src_fir_hw_cpp_46_9_II_counter[1]) & for_loop_src_fir_hw_cpp_46_9_start);
-end
-always @(posedge clk) begin
-	for_loop_src_fir_hw_cpp_46_9_pipeline_finish_reg <= for_loop_src_fir_hw_cpp_46_9_pipeline_finish;
-	if (reset)
-		for_loop_src_fir_hw_cpp_46_9_pipeline_finish_reg <= 1'd0;
-	else	if (for_loop_src_fir_hw_cpp_46_9_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_46_9_pipeline_finish_reg <= 1'd0;
-	end
-end
-always @(posedge clk) begin
-	if (for_loop_src_fir_hw_cpp_46_9_activate_pipeline) begin
-		for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0 <= 1'd1;
-	end
-	if (for_loop_src_fir_hw_cpp_46_9_state_enable_1) begin
-		for_loop_src_fir_hw_cpp_46_9_in_first_iteration_stage0 <= 1'd0;
-	end
-end
-always @(*) begin
-	coeff_hw_read_data_wire_a = coeff_hw_read_data_a;
-end
-always @(*) begin
-	coeff_hw_clken_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_27_6_5) & ~(for_loop_src_fir_hw_cpp_27_6_state_stall_1));
-end
-always @(*) begin
-	fir_hw_local_coeff_clken_pipeline_cond = (((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_27_6_5) & ~(for_loop_src_fir_hw_cpp_27_6_state_stall_1)) | ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_1)));
 end
 always @(posedge clk) begin
 	if (reset)
@@ -2047,13 +1784,13 @@ always @(posedge clk) begin
 end
 always @(*) begin
 	input_l_consumed_taken = 1'd0;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
 		input_l_consumed_taken = ~(fsm_stall);
 	end
 end
-assign fir_hw_BB_4_bit_concat_bit_select_operand_0 = 23'd0;
+assign fir_hw_BB_0_bit_concat_bit_select_operand_0 = 23'd0;
 always @(*) begin
-	fir_hw_buffer_left_clken_not_in_pipeline = (1'd1 & ~((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12)));
+	fir_hw_buffer_left_clken_not_in_pipeline = (1'd1 & ~((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7)));
 end
 always @(*) begin
 	fir_hw_buffer_left_clken_sequential_cond = ((fir_hw_buffer_left_clken_not_in_pipeline & (cur_state != SHLS_0)) & ~(fsm_stall));
@@ -2077,96 +1814,99 @@ always @(posedge clk) begin
 end
 always @(*) begin
 	input_r_consumed_taken = 1'd0;
-	if ((cur_state == SHLS_F_fir_hw_BB_4_6)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_0_1)) begin
 		input_r_consumed_taken = ~(fsm_stall);
 	end
 end
 always @(*) begin
-	fir_hw_buffer_right_clken_not_in_pipeline = (1'd1 & ~((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12)));
+	fir_hw_buffer_right_clken_not_in_pipeline = (1'd1 & ~((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7)));
 end
 always @(*) begin
 	fir_hw_buffer_right_clken_sequential_cond = ((fir_hw_buffer_right_clken_not_in_pipeline & (cur_state != SHLS_0)) & ~(fsm_stall));
 end
-assign fir_hw_BB_4_bit_concat10_bit_select_operand_0 = 5'd0;
-assign fir_hw_BB_5_bit_concat12_bit_select_operand_0 = 16'd0;
-assign fir_hw_BB_6_bit_concat16_bit_select_operand_0 = 7'd0;
+assign fir_hw_BB_0_bit_concat4_bit_select_operand_0 = 5'd0;
+assign fir_hw_BB_1_bit_concat5_bit_select_operand_0 = 16'd0;
+assign fir_hw_BB_2_bit_concat10_bit_select_operand_0 = 7'd0;
 always @(posedge clk) begin
-	res_data_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+	res_data_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
 end
 always @(posedge clk) begin
-	res_data_SHLS_F_fir_hw_BB_6_10_stalln_reg <= ~(fsm_stall);
+	res_data_SHLS_F_fir_hw_BB_2_5_stalln_reg <= ~(fsm_stall);
 end
 always @(*) begin
-	res_data_SHLS_F_fir_hw_BB_6_10_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_6_10) & (res_data_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_6_10_stalln_reg));
+	res_data_SHLS_F_fir_hw_BB_2_5_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_5) & (res_data_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_2_5_stalln_reg));
 end
 always @(posedge clk) begin
-	res_last_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+	res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
 end
 always @(posedge clk) begin
-	res_last_SHLS_F_fir_hw_BB_6_10_stalln_reg <= ~(fsm_stall);
+	res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg <= ~(fsm_stall);
 end
 always @(*) begin
-	res_last_SHLS_F_fir_hw_BB_6_10_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_6_10) & (res_last_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_6_10_stalln_reg));
+	res_last_SHLS_F_fir_hw_BB_2_5_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_5) & (res_last_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_5_stalln_reg));
 end
 always @(posedge clk) begin
-	res_keep_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+	res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
 end
 always @(posedge clk) begin
-	res_keep_SHLS_F_fir_hw_BB_6_10_stalln_reg <= ~(fsm_stall);
+	res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg <= ~(fsm_stall);
 end
 always @(*) begin
-	res_keep_SHLS_F_fir_hw_BB_6_10_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_6_10) & (res_keep_SHLS_F_fir_hw_BB_6_10_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_6_10_stalln_reg));
+	res_keep_SHLS_F_fir_hw_BB_2_5_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_5) & (res_keep_SHLS_F_fir_hw_BB_2_5_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_5_stalln_reg));
 end
-assign fir_hw_BB_6_bit_concat19_bit_select_operand_0 = 7'd0;
+assign fir_hw_BB_2_bit_concat13_bit_select_operand_0 = 7'd0;
 always @(posedge clk) begin
-	res_data_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+	res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
 end
 always @(posedge clk) begin
-	res_data_SHLS_F_fir_hw_BB_6_11_stalln_reg <= ~(fsm_stall);
+	res_data_SHLS_F_fir_hw_BB_2_6_stalln_reg <= ~(fsm_stall);
 end
 always @(*) begin
-	res_data_SHLS_F_fir_hw_BB_6_11_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_6_11) & (res_data_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_6_11_stalln_reg));
+	res_data_SHLS_F_fir_hw_BB_2_6_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_6) & (res_data_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_data_SHLS_F_fir_hw_BB_2_6_stalln_reg));
 end
 always @(posedge clk) begin
-	res_last_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+	res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
 end
 always @(posedge clk) begin
-	res_last_SHLS_F_fir_hw_BB_6_11_stalln_reg <= ~(fsm_stall);
+	res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg <= ~(fsm_stall);
 end
 always @(*) begin
-	res_last_SHLS_F_fir_hw_BB_6_11_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_6_11) & (res_last_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_6_11_stalln_reg));
+	res_last_SHLS_F_fir_hw_BB_2_6_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_6) & (res_last_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_last_SHLS_F_fir_hw_BB_2_6_stalln_reg));
 end
 always @(posedge clk) begin
-	res_keep_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
+	res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a <= ((fsm_stall & res_valid) & ~(res_ready));
 end
 always @(posedge clk) begin
-	res_keep_SHLS_F_fir_hw_BB_6_11_stalln_reg <= ~(fsm_stall);
+	res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg <= ~(fsm_stall);
 end
 always @(*) begin
-	res_keep_SHLS_F_fir_hw_BB_6_11_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_6_11) & (res_keep_SHLS_F_fir_hw_BB_6_11_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_6_11_stalln_reg));
+	res_keep_SHLS_F_fir_hw_BB_2_6_enable_cond_a = ((cur_state == SHLS_F_fir_hw_BB_2_6) & (res_keep_SHLS_F_fir_hw_BB_2_6_not_accessed_due_to_stall_a | res_keep_SHLS_F_fir_hw_BB_2_6_stalln_reg));
 end
-assign fir_hw_BB_7_bit_concat25_bit_select_operand_0 = 23'd0;
+assign fir_hw_BB_3_bit_concat18_bit_select_operand_0 = 23'd0;
 always @(*) begin
 	fir_hw_buffer_left_read_data_wire_a = fir_hw_buffer_left_read_data_a;
 end
 always @(*) begin
-	fir_hw_buffer_left_clken_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_1));
+	fir_hw_buffer_left_clken_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_1));
 end
 always @(*) begin
 	fir_hw_buffer_right_read_data_wire_a = fir_hw_buffer_right_read_data_a;
 end
 always @(*) begin
-	fir_hw_buffer_right_clken_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_1));
+	fir_hw_buffer_right_clken_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_1));
 end
 always @(*) begin
-	fir_hw_local_coeff_read_data_wire_a = fir_hw_local_coeff_read_data_a;
+	coeff_hw_read_data_wire_a = coeff_hw_read_data_a;
 end
 always @(*) begin
-	fir_hw_BB_7_ashr_width_extended = {{1{fir_hw_BB_7_ashr[12]}},fir_hw_BB_7_ashr};
+	coeff_hw_clken_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_1));
 end
-assign fir_hw_BB_7_bit_concat39_bit_select_operand_0 = 17'd0;
-assign fir_hw_BB_7_bit_concat39_bit_select_operand_4 = 6'd0;
-assign fir_hw_BB_7_bit_concat40_bit_select_operand_0 = 17'd0;
+always @(*) begin
+	fir_hw_BB_3_ashr_width_extended = {{1{fir_hw_BB_3_ashr[12]}},fir_hw_BB_3_ashr};
+end
+assign fir_hw_BB_3_bit_concat32_bit_select_operand_0 = 17'd0;
+assign fir_hw_BB_3_bit_concat32_bit_select_operand_4 = 6'd0;
+assign fir_hw_BB_3_bit_concat35_bit_select_operand_0 = 17'd0;
 always @(*) begin
 	legup_mult_unsigned_17_17_1_0_clock = clk;
 end
@@ -2174,28 +1914,28 @@ always @(*) begin
 	legup_mult_unsigned_17_17_1_0_aclr = reset;
 end
 always @(*) begin
-	legup_mult_unsigned_17_17_1_0_clken = legup_mult_fir_hw_BB_7_mul_en;
+	legup_mult_unsigned_17_17_1_0_clken = legup_mult_fir_hw_BB_3_mul_en;
 end
 always @(*) begin
-	legup_mult_unsigned_17_17_1_0_dataa = fir_hw_BB_7_bit_concat39;
+	legup_mult_unsigned_17_17_1_0_dataa = fir_hw_BB_3_bit_concat32;
 end
 always @(*) begin
-	legup_mult_unsigned_17_17_1_0_datab = fir_hw_BB_7_bit_concat40;
+	legup_mult_unsigned_17_17_1_0_datab = fir_hw_BB_3_bit_concat35;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul_out_actual = legup_mult_unsigned_17_17_1_0_result;
+	legup_mult_fir_hw_BB_3_mul_out_actual = legup_mult_unsigned_17_17_1_0_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul_out = $signed(legup_mult_fir_hw_BB_7_mul_out_actual);
+	legup_mult_fir_hw_BB_3_mul_out = $signed(legup_mult_fir_hw_BB_3_mul_out_actual);
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul_en = legup_mult_fir_hw_BB_7_mul_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul_en = legup_mult_fir_hw_BB_3_mul_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
+	legup_mult_fir_hw_BB_3_mul_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
-assign fir_hw_BB_7_bit_concat42_bit_select_operand_0 = 16'd0;
-assign fir_hw_BB_7_bit_concat42_bit_select_operand_4 = 6'd0;
+assign fir_hw_BB_3_bit_concat37_bit_select_operand_0 = 16'd0;
+assign fir_hw_BB_3_bit_concat37_bit_select_operand_4 = 6'd0;
 always @(*) begin
 	legup_mult_unsigned_17_27_2_1_clock = clk;
 end
@@ -2203,27 +1943,27 @@ always @(*) begin
 	legup_mult_unsigned_17_27_2_1_aclr = reset;
 end
 always @(*) begin
-	legup_mult_unsigned_17_27_2_1_clken = legup_mult_fir_hw_BB_7_mul43_en;
+	legup_mult_unsigned_17_27_2_1_clken = legup_mult_fir_hw_BB_3_mul38_en;
 end
 always @(*) begin
-	legup_mult_unsigned_17_27_2_1_dataa = fir_hw_BB_7_bit_concat42;
+	legup_mult_unsigned_17_27_2_1_dataa = fir_hw_BB_3_bit_concat37;
 end
 always @(*) begin
-	legup_mult_unsigned_17_27_2_1_datab = fir_hw_BB_7_sext;
+	legup_mult_unsigned_17_27_2_1_datab = fir_hw_BB_3_sext;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul43_out_actual = legup_mult_unsigned_17_27_2_1_result;
+	legup_mult_fir_hw_BB_3_mul38_out_actual = legup_mult_unsigned_17_27_2_1_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul43_out = legup_mult_fir_hw_BB_7_mul43_out_actual[31:0];
+	legup_mult_fir_hw_BB_3_mul38_out = legup_mult_fir_hw_BB_3_mul38_out_actual[31:0];
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul43_en = legup_mult_fir_hw_BB_7_mul43_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul38_en = legup_mult_fir_hw_BB_3_mul38_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul43_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_3));
+	legup_mult_fir_hw_BB_3_mul38_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_3));
 end
-assign fir_hw_BB_7_bit_concat45_bit_select_operand_0 = 15'd0;
+assign fir_hw_BB_3_bit_concat40_bit_select_operand_0 = 15'd0;
 always @(*) begin
 	legup_mult_signed_18_13_1_2_clock = clk;
 end
@@ -2231,25 +1971,25 @@ always @(*) begin
 	legup_mult_signed_18_13_1_2_aclr = reset;
 end
 always @(*) begin
-	legup_mult_signed_18_13_1_2_clken = legup_mult_fir_hw_BB_7_mul46_en;
+	legup_mult_signed_18_13_1_2_clken = legup_mult_fir_hw_BB_3_mul41_en;
 end
 always @(*) begin
-	legup_mult_signed_18_13_1_2_dataa = {1'd0,fir_hw_BB_7_bit_concat45};
+	legup_mult_signed_18_13_1_2_dataa = {1'd0,fir_hw_BB_3_bit_concat40};
 end
 always @(*) begin
-	legup_mult_signed_18_13_1_2_datab = fir_hw_BB_7_sext44;
+	legup_mult_signed_18_13_1_2_datab = fir_hw_BB_3_sext39;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul46_out_actual = legup_mult_signed_18_13_1_2_result;
+	legup_mult_fir_hw_BB_3_mul41_out_actual = legup_mult_signed_18_13_1_2_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul46_out = legup_mult_fir_hw_BB_7_mul46_out_actual[29:0];
+	legup_mult_fir_hw_BB_3_mul41_out = legup_mult_fir_hw_BB_3_mul41_out_actual[29:0];
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul46_en = legup_mult_fir_hw_BB_7_mul46_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul41_en = legup_mult_fir_hw_BB_3_mul41_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul46_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
+	legup_mult_fir_hw_BB_3_mul41_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
 always @(*) begin
 	legup_mult_signed_13_15_1_3_clock = clk;
@@ -2258,55 +1998,55 @@ always @(*) begin
 	legup_mult_signed_13_15_1_3_aclr = reset;
 end
 always @(*) begin
-	legup_mult_signed_13_15_1_3_clken = legup_mult_fir_hw_BB_7_mul49_en;
+	legup_mult_signed_13_15_1_3_clken = legup_mult_fir_hw_BB_3_mul44_en;
 end
 always @(*) begin
-	legup_mult_signed_13_15_1_3_dataa = fir_hw_BB_7_sext47;
+	legup_mult_signed_13_15_1_3_dataa = fir_hw_BB_3_sext42;
 end
 always @(*) begin
-	legup_mult_signed_13_15_1_3_datab = fir_hw_BB_7_sext48;
+	legup_mult_signed_13_15_1_3_datab = fir_hw_BB_3_sext43;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul49_out_actual = legup_mult_signed_13_15_1_3_result;
+	legup_mult_fir_hw_BB_3_mul44_out_actual = legup_mult_signed_13_15_1_3_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul49_out = $signed(legup_mult_fir_hw_BB_7_mul49_out_actual);
+	legup_mult_fir_hw_BB_3_mul44_out = $signed(legup_mult_fir_hw_BB_3_mul44_out_actual);
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul49_en = legup_mult_fir_hw_BB_7_mul49_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul44_en = legup_mult_fir_hw_BB_3_mul44_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul49_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
+	legup_mult_fir_hw_BB_3_mul44_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
 always @(*) begin
-	fir_hw_BB_7_sext50_width_extended = {{3{fir_hw_BB_7_sext50[29]}},fir_hw_BB_7_sext50};
+	fir_hw_BB_3_sext45_width_extended = {{3{fir_hw_BB_3_sext45[29]}},fir_hw_BB_3_sext45};
 end
 always @(*) begin
-	fir_hw_BB_7_bit_select51_width_extended = {{3{fir_hw_BB_7_bit_select51[29]}},fir_hw_BB_7_bit_select51};
+	fir_hw_BB_3_bit_select46_width_extended = {{3{fir_hw_BB_3_bit_select46[29]}},fir_hw_BB_3_bit_select46};
 end
-assign fir_hw_BB_7_bit_concat52_bit_select_operand_2 = 17'd0;
+assign fir_hw_BB_3_bit_concat47_bit_select_operand_2 = 17'd0;
 always @(*) begin
-	fir_hw_BB_7_sext54_width_extended = {{2{fir_hw_BB_7_sext54[27]}},fir_hw_BB_7_sext54};
-end
-always @(*) begin
-	fir_hw_BB_7_bit_select56_width_extended = {{2{fir_hw_BB_7_bit_select56[27]}},fir_hw_BB_7_bit_select56};
-end
-assign fir_hw_BB_7_bit_concat57_bit_select_operand_2 = 17'd0;
-assign fir_hw_BB_7_bit_concat60_bit_select_operand_0 = 17'd0;
-assign fir_hw_BB_7_bit_concat60_bit_select_operand_4 = 17'd0;
-always @(*) begin
-	fir_hw_BB_7_sext61_width_extended = {{4{fir_hw_BB_7_sext61[46]}},fir_hw_BB_7_sext61};
+	fir_hw_BB_3_sext49_width_extended = {{2{fir_hw_BB_3_sext49[27]}},fir_hw_BB_3_sext49};
 end
 always @(*) begin
-	fir_hw_BB_7_bit_select62_width_extended = {{4{fir_hw_BB_7_bit_select62[46]}},fir_hw_BB_7_bit_select62};
+	fir_hw_BB_3_bit_select50_width_extended = {{2{fir_hw_BB_3_bit_select50[27]}},fir_hw_BB_3_bit_select50};
 end
-assign fir_hw_BB_7_bit_concat63_bit_select_operand_2 = 17'd0;
-assign fir_hw_BB_7_bit_concat66_bit_select_operand_2 = 34'd0;
+assign fir_hw_BB_3_bit_concat51_bit_select_operand_2 = 17'd0;
+assign fir_hw_BB_3_bit_concat54_bit_select_operand_0 = 17'd0;
+assign fir_hw_BB_3_bit_concat54_bit_select_operand_4 = 17'd0;
 always @(*) begin
-	fir_hw_BB_7_ashr71_width_extended = {{1{fir_hw_BB_7_ashr71[12]}},fir_hw_BB_7_ashr71};
+	fir_hw_BB_3_sext55_width_extended = {{4{fir_hw_BB_3_sext55[46]}},fir_hw_BB_3_sext55};
 end
-assign fir_hw_BB_7_bit_concat73_bit_select_operand_0 = 17'd0;
-assign fir_hw_BB_7_bit_concat73_bit_select_operand_4 = 6'd0;
+always @(*) begin
+	fir_hw_BB_3_bit_select56_width_extended = {{4{fir_hw_BB_3_bit_select56[46]}},fir_hw_BB_3_bit_select56};
+end
+assign fir_hw_BB_3_bit_concat57_bit_select_operand_2 = 17'd0;
+assign fir_hw_BB_3_bit_concat60_bit_select_operand_2 = 34'd0;
+always @(*) begin
+	fir_hw_BB_3_ashr65_width_extended = {{1{fir_hw_BB_3_ashr65[12]}},fir_hw_BB_3_ashr65};
+end
+assign fir_hw_BB_3_bit_concat67_bit_select_operand_0 = 17'd0;
+assign fir_hw_BB_3_bit_concat67_bit_select_operand_4 = 6'd0;
 always @(*) begin
 	legup_mult_unsigned_17_17_1_4_clock = clk;
 end
@@ -2314,28 +2054,28 @@ always @(*) begin
 	legup_mult_unsigned_17_17_1_4_aclr = reset;
 end
 always @(*) begin
-	legup_mult_unsigned_17_17_1_4_clken = legup_mult_fir_hw_BB_7_mul74_en;
+	legup_mult_unsigned_17_17_1_4_clken = legup_mult_fir_hw_BB_3_mul68_en;
 end
 always @(*) begin
-	legup_mult_unsigned_17_17_1_4_dataa = fir_hw_BB_7_bit_concat73;
+	legup_mult_unsigned_17_17_1_4_dataa = fir_hw_BB_3_bit_concat67;
 end
 always @(*) begin
-	legup_mult_unsigned_17_17_1_4_datab = fir_hw_BB_7_bit_concat40;
+	legup_mult_unsigned_17_17_1_4_datab = fir_hw_BB_3_bit_concat35;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul74_out_actual = legup_mult_unsigned_17_17_1_4_result;
+	legup_mult_fir_hw_BB_3_mul68_out_actual = legup_mult_unsigned_17_17_1_4_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul74_out = $signed(legup_mult_fir_hw_BB_7_mul74_out_actual);
+	legup_mult_fir_hw_BB_3_mul68_out = $signed(legup_mult_fir_hw_BB_3_mul68_out_actual);
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul74_en = legup_mult_fir_hw_BB_7_mul74_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul68_en = legup_mult_fir_hw_BB_3_mul68_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul74_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
+	legup_mult_fir_hw_BB_3_mul68_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
-assign fir_hw_BB_7_bit_concat75_bit_select_operand_0 = 16'd0;
-assign fir_hw_BB_7_bit_concat75_bit_select_operand_4 = 6'd0;
+assign fir_hw_BB_3_bit_concat69_bit_select_operand_0 = 16'd0;
+assign fir_hw_BB_3_bit_concat69_bit_select_operand_4 = 6'd0;
 always @(*) begin
 	legup_mult_unsigned_17_27_2_5_clock = clk;
 end
@@ -2343,25 +2083,25 @@ always @(*) begin
 	legup_mult_unsigned_17_27_2_5_aclr = reset;
 end
 always @(*) begin
-	legup_mult_unsigned_17_27_2_5_clken = legup_mult_fir_hw_BB_7_mul76_en;
+	legup_mult_unsigned_17_27_2_5_clken = legup_mult_fir_hw_BB_3_mul70_en;
 end
 always @(*) begin
-	legup_mult_unsigned_17_27_2_5_dataa = fir_hw_BB_7_bit_concat75;
+	legup_mult_unsigned_17_27_2_5_dataa = fir_hw_BB_3_bit_concat69;
 end
 always @(*) begin
-	legup_mult_unsigned_17_27_2_5_datab = fir_hw_BB_7_sext;
+	legup_mult_unsigned_17_27_2_5_datab = fir_hw_BB_3_sext;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul76_out_actual = legup_mult_unsigned_17_27_2_5_result;
+	legup_mult_fir_hw_BB_3_mul70_out_actual = legup_mult_unsigned_17_27_2_5_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul76_out = legup_mult_fir_hw_BB_7_mul76_out_actual[31:0];
+	legup_mult_fir_hw_BB_3_mul70_out = legup_mult_fir_hw_BB_3_mul70_out_actual[31:0];
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul76_en = legup_mult_fir_hw_BB_7_mul76_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul70_en = legup_mult_fir_hw_BB_3_mul70_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul76_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_3));
+	legup_mult_fir_hw_BB_3_mul70_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_3));
 end
 always @(*) begin
 	legup_mult_signed_18_13_1_6_clock = clk;
@@ -2370,25 +2110,25 @@ always @(*) begin
 	legup_mult_signed_18_13_1_6_aclr = reset;
 end
 always @(*) begin
-	legup_mult_signed_18_13_1_6_clken = legup_mult_fir_hw_BB_7_mul78_en;
+	legup_mult_signed_18_13_1_6_clken = legup_mult_fir_hw_BB_3_mul72_en;
 end
 always @(*) begin
-	legup_mult_signed_18_13_1_6_dataa = {1'd0,fir_hw_BB_7_bit_concat45};
+	legup_mult_signed_18_13_1_6_dataa = {1'd0,fir_hw_BB_3_bit_concat40};
 end
 always @(*) begin
-	legup_mult_signed_18_13_1_6_datab = fir_hw_BB_7_sext77;
+	legup_mult_signed_18_13_1_6_datab = fir_hw_BB_3_sext71;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul78_out_actual = legup_mult_signed_18_13_1_6_result;
+	legup_mult_fir_hw_BB_3_mul72_out_actual = legup_mult_signed_18_13_1_6_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul78_out = legup_mult_fir_hw_BB_7_mul78_out_actual[29:0];
+	legup_mult_fir_hw_BB_3_mul72_out = legup_mult_fir_hw_BB_3_mul72_out_actual[29:0];
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul78_en = legup_mult_fir_hw_BB_7_mul78_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul72_en = legup_mult_fir_hw_BB_3_mul72_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul78_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
+	legup_mult_fir_hw_BB_3_mul72_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
 always @(*) begin
 	legup_mult_signed_13_15_1_7_clock = clk;
@@ -2397,50 +2137,50 @@ always @(*) begin
 	legup_mult_signed_13_15_1_7_aclr = reset;
 end
 always @(*) begin
-	legup_mult_signed_13_15_1_7_clken = legup_mult_fir_hw_BB_7_mul80_en;
+	legup_mult_signed_13_15_1_7_clken = legup_mult_fir_hw_BB_3_mul74_en;
 end
 always @(*) begin
-	legup_mult_signed_13_15_1_7_dataa = fir_hw_BB_7_sext79;
+	legup_mult_signed_13_15_1_7_dataa = fir_hw_BB_3_sext73;
 end
 always @(*) begin
-	legup_mult_signed_13_15_1_7_datab = fir_hw_BB_7_sext48;
+	legup_mult_signed_13_15_1_7_datab = fir_hw_BB_3_sext43;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul80_out_actual = legup_mult_signed_13_15_1_7_result;
+	legup_mult_fir_hw_BB_3_mul74_out_actual = legup_mult_signed_13_15_1_7_result;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul80_out = $signed(legup_mult_fir_hw_BB_7_mul80_out_actual);
+	legup_mult_fir_hw_BB_3_mul74_out = $signed(legup_mult_fir_hw_BB_3_mul74_out_actual);
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul80_en = legup_mult_fir_hw_BB_7_mul80_en_pipeline_cond;
+	legup_mult_fir_hw_BB_3_mul74_en = legup_mult_fir_hw_BB_3_mul74_en_pipeline_cond;
 end
 always @(*) begin
-	legup_mult_fir_hw_BB_7_mul80_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_46_9_12) & ~(for_loop_src_fir_hw_cpp_46_9_state_stall_2));
+	legup_mult_fir_hw_BB_3_mul74_en_pipeline_cond = ((cur_state == SHLS_pipeline_wait_for_loop_src_fir_hw_cpp_35_9_7) & ~(for_loop_src_fir_hw_cpp_35_9_state_stall_2));
 end
 always @(*) begin
-	fir_hw_BB_7_sext81_width_extended = {{3{fir_hw_BB_7_sext81[29]}},fir_hw_BB_7_sext81};
+	fir_hw_BB_3_sext75_width_extended = {{3{fir_hw_BB_3_sext75[29]}},fir_hw_BB_3_sext75};
 end
 always @(*) begin
-	fir_hw_BB_7_bit_select82_width_extended = {{3{fir_hw_BB_7_bit_select82[29]}},fir_hw_BB_7_bit_select82};
+	fir_hw_BB_3_bit_select76_width_extended = {{3{fir_hw_BB_3_bit_select76[29]}},fir_hw_BB_3_bit_select76};
 end
-assign fir_hw_BB_7_bit_concat83_bit_select_operand_2 = 17'd0;
+assign fir_hw_BB_3_bit_concat77_bit_select_operand_2 = 17'd0;
 always @(*) begin
-	fir_hw_BB_7_sext85_width_extended = {{2{fir_hw_BB_7_sext85[27]}},fir_hw_BB_7_sext85};
-end
-always @(*) begin
-	fir_hw_BB_7_bit_select86_width_extended = {{2{fir_hw_BB_7_bit_select86[27]}},fir_hw_BB_7_bit_select86};
-end
-assign fir_hw_BB_7_bit_concat87_bit_select_operand_2 = 17'd0;
-assign fir_hw_BB_7_bit_concat90_bit_select_operand_0 = 17'd0;
-assign fir_hw_BB_7_bit_concat90_bit_select_operand_4 = 17'd0;
-always @(*) begin
-	fir_hw_BB_7_sext91_width_extended = {{4{fir_hw_BB_7_sext91[46]}},fir_hw_BB_7_sext91};
+	fir_hw_BB_3_sext79_width_extended = {{2{fir_hw_BB_3_sext79[27]}},fir_hw_BB_3_sext79};
 end
 always @(*) begin
-	fir_hw_BB_7_bit_select92_width_extended = {{4{fir_hw_BB_7_bit_select92[46]}},fir_hw_BB_7_bit_select92};
+	fir_hw_BB_3_bit_select80_width_extended = {{2{fir_hw_BB_3_bit_select80[27]}},fir_hw_BB_3_bit_select80};
 end
-assign fir_hw_BB_7_bit_concat93_bit_select_operand_2 = 17'd0;
-assign fir_hw_BB_7_bit_concat96_bit_select_operand_2 = 34'd0;
+assign fir_hw_BB_3_bit_concat81_bit_select_operand_2 = 17'd0;
+assign fir_hw_BB_3_bit_concat84_bit_select_operand_0 = 17'd0;
+assign fir_hw_BB_3_bit_concat84_bit_select_operand_4 = 17'd0;
+always @(*) begin
+	fir_hw_BB_3_sext85_width_extended = {{4{fir_hw_BB_3_sext85[46]}},fir_hw_BB_3_sext85};
+end
+always @(*) begin
+	fir_hw_BB_3_bit_select86_width_extended = {{4{fir_hw_BB_3_bit_select86[46]}},fir_hw_BB_3_bit_select86};
+end
+assign fir_hw_BB_3_bit_concat87_bit_select_operand_2 = 17'd0;
+assign fir_hw_BB_3_bit_concat90_bit_select_operand_2 = 34'd0;
 always @(*) begin
 	ready = (cur_state == SHLS_0);
 end
@@ -2448,8 +2188,58 @@ always @(posedge clk) begin
 	if ((cur_state == SHLS_0)) begin
 		finish <= 1'd0;
 	end
-	if ((cur_state == SHLS_F_fir_hw_BB_9_16)) begin
+	if ((cur_state == SHLS_F_fir_hw_BB_5_11)) begin
 		finish <= (fsm_stall == 1'd0);
+	end
+end
+assign input_l_ready = (~(reset) & (~(input_l_consumed_valid) | input_l_consumed_taken));
+assign input_r_ready = (~(reset) & (~(input_r_consumed_valid) | input_r_consumed_taken));
+always @(*) begin
+	res_data = 0;
+	if ((cur_state == SHLS_F_fir_hw_BB_2_5)) begin
+		res_data = fir_hw_BB_3_bit_select64_reg;
+	end
+	if ((cur_state == SHLS_F_fir_hw_BB_2_6)) begin
+		res_data = fir_hw_BB_3_bit_select93_reg;
+	end
+end
+always @(*) begin
+	res_valid = 1'd0;
+	if (res_data_SHLS_F_fir_hw_BB_2_5_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+	if (res_last_SHLS_F_fir_hw_BB_2_5_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+	if (res_keep_SHLS_F_fir_hw_BB_2_5_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+	if (res_data_SHLS_F_fir_hw_BB_2_6_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+	if (res_last_SHLS_F_fir_hw_BB_2_6_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+	if (res_keep_SHLS_F_fir_hw_BB_2_6_enable_cond_a) begin
+		res_valid = 1'd1;
+	end
+end
+always @(*) begin
+	res_last = 8'd0;
+	if ((cur_state == SHLS_F_fir_hw_BB_2_5)) begin
+		res_last = fir_hw_BB_2_bit_concat10;
+	end
+	if ((cur_state == SHLS_F_fir_hw_BB_2_6)) begin
+		res_last = fir_hw_BB_2_bit_concat13_reg;
+	end
+end
+always @(*) begin
+	res_keep = 4'd0;
+	if ((cur_state == SHLS_F_fir_hw_BB_2_5)) begin
+		res_keep = -4'd1;
+	end
+	if ((cur_state == SHLS_F_fir_hw_BB_2_6)) begin
+		res_keep = -4'd1;
 	end
 end
 always @(*) begin
@@ -2457,68 +2247,18 @@ always @(*) begin
 end
 always @(*) begin
 	coeff_hw_read_en_a = 1'd0;
-	if (for_loop_src_fir_hw_cpp_27_6_state_enable_0) begin
+	if (for_loop_src_fir_hw_cpp_35_9_state_enable_0) begin
 		coeff_hw_read_en_a = 1'd1;
 	end
 end
 always @(*) begin
 	coeff_hw_address_a = 9'd0;
-	if (for_loop_src_fir_hw_cpp_27_6_valid_bit_0) begin
-		coeff_hw_address_a = (fir_hw_BB_3_addr >> 2'd2);
+	if (for_loop_src_fir_hw_cpp_35_9_valid_bit_0) begin
+		coeff_hw_address_a = (fir_hw_BB_3_addr26 >> 2'd2);
 	end
 end
 assign coeff_hw_read_en_b = 1'd0;
 assign coeff_hw_address_b = 9'd0;
-assign input_l_ready = (~(reset) & (~(input_l_consumed_valid) | input_l_consumed_taken));
-assign input_r_ready = (~(reset) & (~(input_r_consumed_valid) | input_r_consumed_taken));
-always @(*) begin
-	res_data = 0;
-	if ((cur_state == SHLS_F_fir_hw_BB_6_10)) begin
-		res_data = fir_hw_BB_7_bit_select70_reg;
-	end
-	if ((cur_state == SHLS_F_fir_hw_BB_6_11)) begin
-		res_data = fir_hw_BB_7_bit_select99_reg;
-	end
-end
-always @(*) begin
-	res_valid = 1'd0;
-	if (res_data_SHLS_F_fir_hw_BB_6_10_enable_cond_a) begin
-		res_valid = 1'd1;
-	end
-	if (res_last_SHLS_F_fir_hw_BB_6_10_enable_cond_a) begin
-		res_valid = 1'd1;
-	end
-	if (res_keep_SHLS_F_fir_hw_BB_6_10_enable_cond_a) begin
-		res_valid = 1'd1;
-	end
-	if (res_data_SHLS_F_fir_hw_BB_6_11_enable_cond_a) begin
-		res_valid = 1'd1;
-	end
-	if (res_last_SHLS_F_fir_hw_BB_6_11_enable_cond_a) begin
-		res_valid = 1'd1;
-	end
-	if (res_keep_SHLS_F_fir_hw_BB_6_11_enable_cond_a) begin
-		res_valid = 1'd1;
-	end
-end
-always @(*) begin
-	res_last = 8'd0;
-	if ((cur_state == SHLS_F_fir_hw_BB_6_10)) begin
-		res_last = fir_hw_BB_6_bit_concat16;
-	end
-	if ((cur_state == SHLS_F_fir_hw_BB_6_11)) begin
-		res_last = fir_hw_BB_6_bit_concat19_reg;
-	end
-end
-always @(*) begin
-	res_keep = 4'd0;
-	if ((cur_state == SHLS_F_fir_hw_BB_6_10)) begin
-		res_keep = -4'd1;
-	end
-	if ((cur_state == SHLS_F_fir_hw_BB_6_11)) begin
-		res_keep = -4'd1;
-	end
-end
 
 endmodule
 

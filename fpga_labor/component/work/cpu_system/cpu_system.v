@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Sat Jun 13 13:49:36 2026
+// Created by SmartDesign Tue Jun 23 14:28:52 2026
 // Version: 2025.2 2025.2.0.14
 //////////////////////////////////////////////////////////////////////
 
@@ -306,8 +306,6 @@ wire   [1:0]  DM_net_0;
 wire   [15:0] DQ;
 wire   [1:0]  DQS;
 wire   [1:0]  DQS_N;
-wire          fir_hw_top_0_finish;
-wire          fir_hw_top_0_ready;
 wire          MMUART_1_RXD;
 wire          MMUART_1_TXD_net_0;
 wire   [1:0]  MPFS_DISCOVERY_KIT_MSS_0_FIC_1_AXI4_INITIATOR_ARBURST;
@@ -355,7 +353,6 @@ wire   [31:0] MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWDATA;
 wire          MPFS_DISCOVERY_KIT_MSS_0_FIC_3_APB_INITIATOR_PWRITE;
 wire          MPFS_DISCOVERY_KIT_MSS_0_MSS_RESET_N_M2F;
 wire          ODT0_net_0;
-wire          OR2_0_Y;
 wire          PF_CCC_C0_0_OUT0_FABCLK_0_1;
 wire          PF_CCC_C0_0_OUT1_FABCLK_0;
 wire          PF_CCC_C0_0_PLL_LOCK_0;
@@ -1268,7 +1265,7 @@ fir_hw_top fir_hw_top_0(
         .axi4target_wvalid   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WVALID ),
         .axi4target_wlast    ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WLAST ),
         .axi4target_bready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BREADY ),
-        .start               ( OR2_0_Y ),
+        .start               ( CoreGPIO_C0_0_GPIO_OUT1to1 ),
         .input_l_valid       ( input_l_valid_IN_POST_INV1_0 ),
         .input_r_valid       ( input_r_valid_IN_POST_INV2_0 ),
         .res_ready           ( bypass_hw_top_0_AXI4S_master_TREADY ),
@@ -1306,8 +1303,8 @@ fir_hw_top fir_hw_top_0(
         .axi4target_awready  ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_AWREADY ),
         .axi4target_wready   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_WREADY ),
         .axi4target_bvalid   ( COREAXI4INTERCONNECT_C0_0_AXI4mslave1_0_BVALID ),
-        .ready               ( fir_hw_top_0_ready ),
-        .finish              ( fir_hw_top_0_finish ),
+        .ready               (  ),
+        .finish              (  ),
         .input_l_ready       ( bypass_hw_top_0_input_l_ready ),
         .input_r_ready       ( bypass_hw_top_0_input_r_ready ),
         .res_valid           ( bypass_hw_top_0_AXI4S_master_TVALID ),
@@ -1456,15 +1453,6 @@ MPFS_DISCOVERY_KIT_MSS MPFS_DISCOVERY_KIT_MSS_0(
         .DQ                   ( DQ ),
         .DQS                  ( DQS ),
         .DQS_N                ( DQS_N ) 
-        );
-
-//--------OR2
-OR2 OR2_0(
-        // Inputs
-        .A ( fir_hw_top_0_ready ),
-        .B ( fir_hw_top_0_finish ),
-        // Outputs
-        .Y ( OR2_0_Y ) 
         );
 
 //--------PF_CCC_C0
