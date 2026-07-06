@@ -1,0 +1,1572 @@
+   1              		.file	"rtcc.c"
+   2              		.option nopic
+   3              		.attribute arch, "rv64i2p0_m2p0_a2p0_c2p0"
+   4              		.attribute unaligned_access, 0
+   5              		.attribute stack_align, 16
+   6              		.text
+   7              	.Ltext0:
+   8              		.cfi_sections	.debug_frame
+   9              		.comm	deviceTime,8,8
+  10              		.comm	dirtyTime,1,1
+  11              		.comm	seconds_counter,2,2
+  12              		.section	.text.rtcc_init,"ax",@progbits
+  13              		.align	1
+  14              		.globl	rtcc_init
+  16              	rtcc_init:
+  17              	.LFB0:
+  18              		.file 1 "../src/middleware/mcc_tcpip_lite/rtcc.c"
+   1:../src/middleware/mcc_tcpip_lite/rtcc.c **** /*********************************************************************
+   2:../src/middleware/mcc_tcpip_lite/rtcc.c **** * Software License Agreement:
+   3:../src/middleware/mcc_tcpip_lite/rtcc.c **** *
+   4:../src/middleware/mcc_tcpip_lite/rtcc.c **** * The software supplied herewith by Microchip Technology Incorporated
+   5:../src/middleware/mcc_tcpip_lite/rtcc.c **** * (the "Company") for its PICmicro® Microcontroller is intended and
+   6:../src/middleware/mcc_tcpip_lite/rtcc.c **** * supplied to you, the Company's customer, for use solely and
+   7:../src/middleware/mcc_tcpip_lite/rtcc.c **** * exclusively on Microchip PICmicro Microcontroller products. The
+   8:../src/middleware/mcc_tcpip_lite/rtcc.c **** * software is owned by the Company and/or its supplier, and is
+   9:../src/middleware/mcc_tcpip_lite/rtcc.c **** * protected under applicable copyright laws. All rights are reserved.
+  10:../src/middleware/mcc_tcpip_lite/rtcc.c **** * Any use in violation of the foregoing restrictions may subject the
+  11:../src/middleware/mcc_tcpip_lite/rtcc.c **** * user to criminal sanctions under applicable laws, as well as to
+  12:../src/middleware/mcc_tcpip_lite/rtcc.c **** * civil liability for the breach of the terms and conditions of this
+  13:../src/middleware/mcc_tcpip_lite/rtcc.c **** * license.
+  14:../src/middleware/mcc_tcpip_lite/rtcc.c **** *
+  15:../src/middleware/mcc_tcpip_lite/rtcc.c **** * THIS SOFTWARE IS PROVIDED IN AN "AS IS" CONDITION. NO WARRANTIES,
+  16:../src/middleware/mcc_tcpip_lite/rtcc.c **** * WHETHER EXPRESS, IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED
+  17:../src/middleware/mcc_tcpip_lite/rtcc.c **** * TO, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+  18:../src/middleware/mcc_tcpip_lite/rtcc.c **** * PARTICULAR PURPOSE APPLY TO THIS SOFTWARE. THE COMPANY SHALL NOT,
+  19:../src/middleware/mcc_tcpip_lite/rtcc.c **** * IN ANY CIRCUMSTANCES, BE LIABLE FOR SPECIAL, INCIDENTAL OR
+  20:../src/middleware/mcc_tcpip_lite/rtcc.c **** * CONSEQUENTIAL DAMAGES, FOR ANY REASON WHATSOEVER.
+  21:../src/middleware/mcc_tcpip_lite/rtcc.c **** *********************************************************************/
+  22:../src/middleware/mcc_tcpip_lite/rtcc.c **** #include <time.h>
+  23:../src/middleware/mcc_tcpip_lite/rtcc.c **** #include <stdint.h>
+  24:../src/middleware/mcc_tcpip_lite/rtcc.c **** #include <stdbool.h>
+  25:../src/middleware/mcc_tcpip_lite/rtcc.c **** #include "rtcc.h"
+  26:../src/middleware/mcc_tcpip_lite/rtcc.c **** //#include "../mcc.h"
+  27:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  28:../src/middleware/mcc_tcpip_lite/rtcc.c **** volatile time_t deviceTime;
+  29:../src/middleware/mcc_tcpip_lite/rtcc.c **** volatile bool dirtyTime;
+  30:../src/middleware/mcc_tcpip_lite/rtcc.c **** extern volatile uint64_t g_tick_counter;
+  31:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  32:../src/middleware/mcc_tcpip_lite/rtcc.c **** volatile uint16_t seconds_counter;
+  33:../src/middleware/mcc_tcpip_lite/rtcc.c **** /******************************************************************************
+  34:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  35:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Summary:
+  36:../src/middleware/mcc_tcpip_lite/rtcc.c ****     Initialize the clock calendar driver.
+  37:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  38:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Description:
+  39:../src/middleware/mcc_tcpip_lite/rtcc.c ****     This function configured the basics of a software driven RTCC peripheral.
+  40:../src/middleware/mcc_tcpip_lite/rtcc.c ****     It relies upon a periodic TMR1 event to provide time keeping.
+  41:../src/middleware/mcc_tcpip_lite/rtcc.c ****     The Timer 1 clock provides a steady 100kHz time base.
+  42:../src/middleware/mcc_tcpip_lite/rtcc.c ****     0x8000 counts in the TMR1 register will provide a 1HZ tick.
+  43:../src/middleware/mcc_tcpip_lite/rtcc.c ****     CLOCKS_PER_SEC is configured for 1 and all is well.
+  44:../src/middleware/mcc_tcpip_lite/rtcc.c ****  
+  45:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Precondition:
+  46:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+  47:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  48:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Parameters:
+  49:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+  50:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  51:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Returns:
+  52:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+  53:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  54:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Remarks:
+  55:../src/middleware/mcc_tcpip_lite/rtcc.c ****     The C stdlib functions understand UNIX time but they need a UNIX time counter.
+  56:../src/middleware/mcc_tcpip_lite/rtcc.c ****     UNIX time is the number of seconds elapsed since Midnight Jan 1, 1970
+  57:../src/middleware/mcc_tcpip_lite/rtcc.c ****   ***************************************************************************/
+  58:../src/middleware/mcc_tcpip_lite/rtcc.c **** void rtcc_init(void)
+  59:../src/middleware/mcc_tcpip_lite/rtcc.c **** {
+  19              		.loc 1 59 1
+  20              		.cfi_startproc
+  21 0000 4111     		addi	sp,sp,-16
+  22              		.cfi_def_cfa_offset 16
+  23 0002 22E4     		sd	s0,8(sp)
+  24              		.cfi_offset 8, -8
+  25 0004 0008     		addi	s0,sp,16
+  26              		.cfi_def_cfa 8, 0
+  60:../src/middleware/mcc_tcpip_lite/rtcc.c **** #if 0
+  61:../src/middleware/mcc_tcpip_lite/rtcc.c ****     deviceTime = 1293861600;
+  62:../src/middleware/mcc_tcpip_lite/rtcc.c ****     TMR1_SetInterruptHandler(rtcc_handler);
+  63:../src/middleware/mcc_tcpip_lite/rtcc.c **** #else
+  64:../src/middleware/mcc_tcpip_lite/rtcc.c ****     deviceTime = 1293861600;
+  27              		.loc 1 64 16
+  28 0006 97070000 		lla	a5,deviceTime
+  28      93870700 
+  29 000e 37C71E4D 		li	a4,1293860864
+  30 0012 1307072E 		addi	a4,a4,736
+  31 0016 98E3     		sd	a4,0(a5)
+  65:../src/middleware/mcc_tcpip_lite/rtcc.c ****     g_tick_counter = deviceTime * 1000;
+  32              		.loc 1 65 33
+  33 0018 97070000 		lla	a5,deviceTime
+  33      93870700 
+  34 0020 9863     		ld	a4,0(a5)
+  35 0022 9307803E 		li	a5,1000
+  36 0026 B307F702 		mul	a5,a4,a5
+  37 002a 3E87     		mv	a4,a5
+  38              		.loc 1 65 20
+  39 002c 97070000 		lla	a5,g_tick_counter
+  39      93870700 
+  40 0034 98E3     		sd	a4,0(a5)
+  66:../src/middleware/mcc_tcpip_lite/rtcc.c **** #endif
+  67:../src/middleware/mcc_tcpip_lite/rtcc.c **** }
+  41              		.loc 1 67 1
+  42 0036 0100     		nop
+  43 0038 2264     		ld	s0,8(sp)
+  44              		.cfi_restore 8
+  45              		.cfi_def_cfa 2, 16
+  46 003a 4101     		addi	sp,sp,16
+  47              		.cfi_def_cfa_offset 0
+  48 003c 8280     		jr	ra
+  49              		.cfi_endproc
+  50              	.LFE0:
+  52              		.section	.text.rtcc_handler,"ax",@progbits
+  53              		.align	1
+  54              		.globl	rtcc_handler
+  56              	rtcc_handler:
+  57              	.LFB1:
+  68:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  69:../src/middleware/mcc_tcpip_lite/rtcc.c **** /****************************************************************************
+  70:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Function:
+  71:../src/middleware/mcc_tcpip_lite/rtcc.c ****     void rtcc_handler(void) (TMR1 version)
+  72:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  73:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Summary:
+  74:../src/middleware/mcc_tcpip_lite/rtcc.c ****     maintain deviceTime (seconds) using the LCDIF flag/interrupt.
+  75:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  76:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Description:
+  77:../src/middleware/mcc_tcpip_lite/rtcc.c ****     This function decrements seconds_counter until 0 and then increments deviceTime.
+  78:../src/middleware/mcc_tcpip_lite/rtcc.c ****     seconds_counter reloads with CLOCK_PER_SEC.
+  79:../src/middleware/mcc_tcpip_lite/rtcc.c ****     This version of the function uses Timer 1 as the time base.
+  80:../src/middleware/mcc_tcpip_lite/rtcc.c ****     Timer 1 is reloaded with 0x8000 to cause TMR1IF to overflow every second.
+  81:../src/middleware/mcc_tcpip_lite/rtcc.c ****  
+  82:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Precondition:
+  83:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+  84:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  85:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Parameters:
+  86:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+  87:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  88:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Returns:
+  89:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+  90:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  91:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Remarks:
+  92:../src/middleware/mcc_tcpip_lite/rtcc.c ****     TMR1IF is not looked at or modified because there could be other tasks running
+  93:../src/middleware/mcc_tcpip_lite/rtcc.c ****     on this interrupt.
+  94:../src/middleware/mcc_tcpip_lite/rtcc.c ****   ***************************************************************************/
+  95:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+  96:../src/middleware/mcc_tcpip_lite/rtcc.c **** void rtcc_handler(void)
+  97:../src/middleware/mcc_tcpip_lite/rtcc.c **** {
+  58              		.loc 1 97 1
+  59              		.cfi_startproc
+  60 0000 4111     		addi	sp,sp,-16
+  61              		.cfi_def_cfa_offset 16
+  62 0002 22E4     		sd	s0,8(sp)
+  63              		.cfi_offset 8, -8
+  64 0004 0008     		addi	s0,sp,16
+  65              		.cfi_def_cfa 8, 0
+  98:../src/middleware/mcc_tcpip_lite/rtcc.c **** 	deviceTime++;
+  66              		.loc 1 98 12
+  67 0006 97070000 		lla	a5,deviceTime
+  67      93870700 
+  68 000e 9C63     		ld	a5,0(a5)
+  69 0010 13871700 		addi	a4,a5,1
+  70 0014 97070000 		lla	a5,deviceTime
+  70      93870700 
+  71 001c 98E3     		sd	a4,0(a5)
+  99:../src/middleware/mcc_tcpip_lite/rtcc.c **** }
+  72              		.loc 1 99 1
+  73 001e 0100     		nop
+  74 0020 2264     		ld	s0,8(sp)
+  75              		.cfi_restore 8
+  76              		.cfi_def_cfa 2, 16
+  77 0022 4101     		addi	sp,sp,16
+  78              		.cfi_def_cfa_offset 0
+  79 0024 8280     		jr	ra
+  80              		.cfi_endproc
+  81              	.LFE1:
+  83              		.section	.text.rtcc_set,"ax",@progbits
+  84              		.align	1
+  85              		.globl	rtcc_set
+  87              	rtcc_set:
+  88              	.LFB2:
+ 100:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 101:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 102:../src/middleware/mcc_tcpip_lite/rtcc.c **** /****************************************************************************
+ 103:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Function:
+ 104:../src/middleware/mcc_tcpip_lite/rtcc.c ****     void rtcc_set(time_t time)
+ 105:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 106:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Summary:
+ 107:../src/middleware/mcc_tcpip_lite/rtcc.c ****     set the device time to the passed unix time value.
+ 108:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 109:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Description:
+ 110:../src/middleware/mcc_tcpip_lite/rtcc.c ****     Update the device time with the passed unix time.
+ 111:../src/middleware/mcc_tcpip_lite/rtcc.c ****     Interrupts are disabled for the copy.
+ 112:../src/middleware/mcc_tcpip_lite/rtcc.c ****     Interrupt state is restored to the original state on exit.
+ 113:../src/middleware/mcc_tcpip_lite/rtcc.c ****     
+ 114:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Precondition:
+ 115:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+ 116:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 117:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Parameters:
+ 118:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+ 119:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 120:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Returns:
+ 121:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+ 122:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 123:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Remarks:
+ 124:../src/middleware/mcc_tcpip_lite/rtcc.c ****     
+ 125:../src/middleware/mcc_tcpip_lite/rtcc.c ****   ***************************************************************************/
+ 126:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 127:../src/middleware/mcc_tcpip_lite/rtcc.c **** void rtcc_set(time_t *t)
+ 128:../src/middleware/mcc_tcpip_lite/rtcc.c **** {
+  89              		.loc 1 128 1
+  90              		.cfi_startproc
+  91 0000 0111     		addi	sp,sp,-32
+  92              		.cfi_def_cfa_offset 32
+  93 0002 22EC     		sd	s0,24(sp)
+  94              		.cfi_offset 8, -8
+  95 0004 0010     		addi	s0,sp,32
+  96              		.cfi_def_cfa 8, 0
+  97 0006 2334A4FE 		sd	a0,-24(s0)
+ 129:../src/middleware/mcc_tcpip_lite/rtcc.c **** #if 0
+ 130:../src/middleware/mcc_tcpip_lite/rtcc.c ****     bool gie_val;
+ 131:../src/middleware/mcc_tcpip_lite/rtcc.c ****     gie_val = (bool)GIE;
+ 132:../src/middleware/mcc_tcpip_lite/rtcc.c ****     INTERRUPT_GlobalInterruptDisable();
+ 133:../src/middleware/mcc_tcpip_lite/rtcc.c ****     deviceTime = *t;
+ 134:../src/middleware/mcc_tcpip_lite/rtcc.c ****     GIE = gie_val;
+ 135:../src/middleware/mcc_tcpip_lite/rtcc.c **** #else
+ 136:../src/middleware/mcc_tcpip_lite/rtcc.c ****     deviceTime = *t;
+  98              		.loc 1 136 18
+  99 000a 833784FE 		ld	a5,-24(s0)
+ 100 000e 9863     		ld	a4,0(a5)
+ 101              		.loc 1 136 16
+ 102 0010 97070000 		lla	a5,deviceTime
+ 102      93870700 
+ 103 0018 98E3     		sd	a4,0(a5)
+ 137:../src/middleware/mcc_tcpip_lite/rtcc.c **** #endif
+ 138:../src/middleware/mcc_tcpip_lite/rtcc.c **** }
+ 104              		.loc 1 138 1
+ 105 001a 0100     		nop
+ 106 001c 6264     		ld	s0,24(sp)
+ 107              		.cfi_restore 8
+ 108              		.cfi_def_cfa 2, 32
+ 109 001e 0561     		addi	sp,sp,32
+ 110              		.cfi_def_cfa_offset 0
+ 111 0020 8280     		jr	ra
+ 112              		.cfi_endproc
+ 113              	.LFE2:
+ 115              		.section	.text.time,"ax",@progbits
+ 116              		.align	1
+ 117              		.globl	time
+ 119              	time:
+ 120              	.LFB3:
+ 139:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 140:../src/middleware/mcc_tcpip_lite/rtcc.c **** /****************************************************************************
+ 141:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Function:
+ 142:../src/middleware/mcc_tcpip_lite/rtcc.c ****     time_t time(time_t *t)
+ 143:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 144:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Summary:
+ 145:../src/middleware/mcc_tcpip_lite/rtcc.c ****     return the current device time.
+ 146:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 147:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Description:
+ 148:../src/middleware/mcc_tcpip_lite/rtcc.c ****     This function retrieves the device time as either a return value or 
+ 149:../src/middleware/mcc_tcpip_lite/rtcc.c ****     filling in a variable passed by reference.  Interrupts are disabled
+ 150:../src/middleware/mcc_tcpip_lite/rtcc.c ****     during the copy and restored on exit.
+ 151:../src/middleware/mcc_tcpip_lite/rtcc.c ****  
+ 152:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Precondition:
+ 153:../src/middleware/mcc_tcpip_lite/rtcc.c ****     None
+ 154:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 155:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Parameters:
+ 156:../src/middleware/mcc_tcpip_lite/rtcc.c ****     time_t *t : A time_t pointer for the current time.
+ 157:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 158:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Returns:
+ 159:../src/middleware/mcc_tcpip_lite/rtcc.c ****     time_t value of the current time.
+ 160:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 161:../src/middleware/mcc_tcpip_lite/rtcc.c ****   Remarks:
+ 162:../src/middleware/mcc_tcpip_lite/rtcc.c ****     This function is a prerequisit to supporting the standard C time libraries.
+ 163:../src/middleware/mcc_tcpip_lite/rtcc.c ****   ***************************************************************************/
+ 164:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 165:../src/middleware/mcc_tcpip_lite/rtcc.c **** /* implement the time(&t) function for the standard libraries */
+ 166:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 167:../src/middleware/mcc_tcpip_lite/rtcc.c **** /* time.h does not implment time as it is application dependent */
+ 168:../src/middleware/mcc_tcpip_lite/rtcc.c **** time_t time(time_t *t)
+ 169:../src/middleware/mcc_tcpip_lite/rtcc.c **** {
+ 121              		.loc 1 169 1
+ 122              		.cfi_startproc
+ 123 0000 7971     		addi	sp,sp,-48
+ 124              		.cfi_def_cfa_offset 48
+ 125 0002 22F4     		sd	s0,40(sp)
+ 126              		.cfi_offset 8, -8
+ 127 0004 0018     		addi	s0,sp,48
+ 128              		.cfi_def_cfa 8, 0
+ 129 0006 233CA4FC 		sd	a0,-40(s0)
+ 170:../src/middleware/mcc_tcpip_lite/rtcc.c **** #if 0
+ 171:../src/middleware/mcc_tcpip_lite/rtcc.c ****     bool   gie_val;
+ 172:../src/middleware/mcc_tcpip_lite/rtcc.c ****     time_t  the_time;
+ 173:../src/middleware/mcc_tcpip_lite/rtcc.c ****     
+ 174:../src/middleware/mcc_tcpip_lite/rtcc.c ****     gie_val = (bool)GIE;  //jira: CAE_MCU8-5647
+ 175:../src/middleware/mcc_tcpip_lite/rtcc.c ****     INTERRUPT_GlobalInterruptDisable();
+ 176:../src/middleware/mcc_tcpip_lite/rtcc.c ****     the_time = deviceTime;
+ 177:../src/middleware/mcc_tcpip_lite/rtcc.c ****     GIE = gie_val;
+ 178:../src/middleware/mcc_tcpip_lite/rtcc.c **** #else
+ 179:../src/middleware/mcc_tcpip_lite/rtcc.c ****     time_t  the_time;
+ 180:../src/middleware/mcc_tcpip_lite/rtcc.c ****     deviceTime = g_tick_counter / 1000;
+ 130              		.loc 1 180 33
+ 131 000a 97070000 		lla	a5,g_tick_counter
+ 131      93870700 
+ 132 0012 9863     		ld	a4,0(a5)
+ 133 0014 9307803E 		li	a5,1000
+ 134 0018 B357F702 		divu	a5,a4,a5
+ 135 001c 3E87     		mv	a4,a5
+ 136              		.loc 1 180 16
+ 137 001e 97070000 		lla	a5,deviceTime
+ 137      93870700 
+ 138 0026 98E3     		sd	a4,0(a5)
+ 181:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 182:../src/middleware/mcc_tcpip_lite/rtcc.c ****     the_time = deviceTime;
+ 139              		.loc 1 182 14
+ 140 0028 97070000 		lla	a5,deviceTime
+ 140      93870700 
+ 141 0030 9C63     		ld	a5,0(a5)
+ 142 0032 2334F4FE 		sd	a5,-24(s0)
+ 183:../src/middleware/mcc_tcpip_lite/rtcc.c **** #endif
+ 184:../src/middleware/mcc_tcpip_lite/rtcc.c ****     if(t)
+ 143              		.loc 1 184 7
+ 144 0036 833784FD 		ld	a5,-40(s0)
+ 145 003a 91C7     		beq	a5,zero,.L5
+ 185:../src/middleware/mcc_tcpip_lite/rtcc.c ****     {
+ 186:../src/middleware/mcc_tcpip_lite/rtcc.c ****         *t = the_time;
+ 146              		.loc 1 186 12
+ 147 003c 833784FD 		ld	a5,-40(s0)
+ 148 0040 033784FE 		ld	a4,-24(s0)
+ 149 0044 98E3     		sd	a4,0(a5)
+ 150              	.L5:
+ 187:../src/middleware/mcc_tcpip_lite/rtcc.c ****     }
+ 188:../src/middleware/mcc_tcpip_lite/rtcc.c **** 
+ 189:../src/middleware/mcc_tcpip_lite/rtcc.c ****     return(the_time);
+ 151              		.loc 1 189 11
+ 152 0046 833784FE 		ld	a5,-24(s0)
+ 190:../src/middleware/mcc_tcpip_lite/rtcc.c **** }
+ 153              		.loc 1 190 1
+ 154 004a 3E85     		mv	a0,a5
+ 155 004c 2274     		ld	s0,40(sp)
+ 156              		.cfi_restore 8
+ 157              		.cfi_def_cfa 2, 48
+ 158 004e 4561     		addi	sp,sp,48
+ 159              		.cfi_def_cfa_offset 0
+ 160 0050 8280     		jr	ra
+ 161              		.cfi_endproc
+ 162              	.LFE3:
+ 164              		.text
+ 165              	.Letext0:
+ 166              		.file 2 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 167              		.file 3 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\lib\\gcc\\riscv64-u
+ 168              		.file 4 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 169              		.file 5 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 170              		.file 6 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 171              		.file 7 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 172              		.file 8 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 173              		.file 9 "c:\\microchip\\softconsole-v2022.2-risc-v-747\\riscv-unknown-elf-gcc\\riscv64-unknown-elf
+ 174              		.file 10 "../src/middleware/mcc_tcpip_lite/rtcc.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 rtcc.c
+                            *COM*:0000000000000008 deviceTime
+                            *COM*:0000000000000001 dirtyTime
+                            *COM*:0000000000000002 seconds_counter
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:16     .text.rtcc_init:0000000000000000 rtcc_init
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:20     .text.rtcc_init:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:21     .text.rtcc_init:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:22     .text.rtcc_init:0000000000000002 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:24     .text.rtcc_init:0000000000000004 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:26     .text.rtcc_init:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:28     .text.rtcc_init:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:33     .text.rtcc_init:0000000000000018 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:39     .text.rtcc_init:000000000000002c .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:42     .text.rtcc_init:0000000000000036 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:44     .text.rtcc_init:000000000000003a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:45     .text.rtcc_init:000000000000003a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:47     .text.rtcc_init:000000000000003c .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:49     .text.rtcc_init:000000000000003e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:56     .text.rtcc_handler:0000000000000000 rtcc_handler
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:59     .text.rtcc_handler:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:60     .text.rtcc_handler:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:61     .text.rtcc_handler:0000000000000002 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:63     .text.rtcc_handler:0000000000000004 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:65     .text.rtcc_handler:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:67     .text.rtcc_handler:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:73     .text.rtcc_handler:000000000000001e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:75     .text.rtcc_handler:0000000000000022 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:76     .text.rtcc_handler:0000000000000022 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:78     .text.rtcc_handler:0000000000000024 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:80     .text.rtcc_handler:0000000000000026 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:87     .text.rtcc_set:0000000000000000 rtcc_set
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:90     .text.rtcc_set:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:91     .text.rtcc_set:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:92     .text.rtcc_set:0000000000000002 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:94     .text.rtcc_set:0000000000000004 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:96     .text.rtcc_set:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:99     .text.rtcc_set:000000000000000a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:102    .text.rtcc_set:0000000000000010 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:105    .text.rtcc_set:000000000000001a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:107    .text.rtcc_set:000000000000001e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:108    .text.rtcc_set:000000000000001e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:110    .text.rtcc_set:0000000000000020 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:112    .text.rtcc_set:0000000000000022 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:119    .text.time:0000000000000000 time
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:122    .text.time:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:123    .text.time:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:124    .text.time:0000000000000002 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:126    .text.time:0000000000000004 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:128    .text.time:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:131    .text.time:000000000000000a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:137    .text.time:000000000000001e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:140    .text.time:0000000000000028 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:144    .text.time:0000000000000036 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:147    .text.time:000000000000003c .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:152    .text.time:0000000000000046 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:154    .text.time:000000000000004a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:156    .text.time:000000000000004e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:157    .text.time:000000000000004e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:159    .text.time:0000000000000050 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:161    .text.time:0000000000000052 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:52     .text.rtcc_init:000000000000003e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:83     .text.rtcc_handler:0000000000000026 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:115    .text.rtcc_set:0000000000000022 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:164    .text.time:0000000000000052 .L0 
+                     .debug_frame:0000000000000000 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:28     .text.rtcc_init:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:33     .text.rtcc_init:0000000000000018 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:39     .text.rtcc_init:000000000000002c .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:67     .text.rtcc_handler:0000000000000006 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:70     .text.rtcc_handler:0000000000000014 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:102    .text.rtcc_set:0000000000000010 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:131    .text.time:000000000000000a .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:137    .text.time:000000000000001e .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:140    .text.time:0000000000000028 .L0 
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:150    .text.time:0000000000000046 .L5
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:1539   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5709   .debug_str:0000000000001642 .LASF1040
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6721   .debug_str:0000000000004f3a .LASF1041
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5985   .debug_str:0000000000002618 .LASF1042
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:2092   .debug_ranges:0000000000000000 .Ldebug_ranges0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5311   .debug_line:0000000000000000 .Ldebug_line0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:2104   .debug_macro:0000000000000000 .Ldebug_macro0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5759   .debug_str:0000000000001a23 .LASF904
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6155   .debug_str:00000000000031d6 .LASF905
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7041   .debug_str:00000000000060bf .LASF906
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5935   .debug_str:0000000000002330 .LASF910
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7293   .debug_str:0000000000006f5a .LASF907
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6487   .debug_str:00000000000042df .LASF908
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5647   .debug_str:0000000000001360 .LASF909
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6807   .debug_str:0000000000005361 .LASF911
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6195   .debug_str:0000000000003387 .LASF912
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6363   .debug_str:0000000000003bb3 .LASF913
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6695   .debug_str:0000000000004d81 .LASF914
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6925   .debug_str:00000000000059d6 .LASF915
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7269   .debug_str:0000000000006e35 .LASF916
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5667   .debug_str:000000000000143e .LASF917
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5873   .debug_str:0000000000002062 .LASF918
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5627   .debug_str:0000000000001226 .LASF919
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6759   .debug_str:0000000000005101 .LASF920
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6645   .debug_str:0000000000004b12 .LASF921
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5353   .debug_str:00000000000001a7 .LASF922
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6447   .debug_str:000000000000402d .LASF923
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7223   .debug_str:0000000000006b95 .LASF924
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6251   .debug_str:0000000000003611 .LASF925
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6897   .debug_str:00000000000057f7 .LASF926
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6313   .debug_str:000000000000391d .LASF931
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6049   .debug_str:00000000000029c4 .LASF927
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7103   .debug_str:00000000000064c4 .LASF928
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6449   .debug_str:0000000000004038 .LASF929
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6085   .debug_str:0000000000002ba2 .LASF930
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5455   .debug_str:0000000000000889 .LASF932
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5461   .debug_str:00000000000008c1 .LASF933
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7387   .debug_str:000000000000752e .LASF934
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7053   .debug_str:0000000000006169 .LASF935
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6113   .debug_str:0000000000002d00 .LASF936
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5717   .debug_str:0000000000001776 .LASF937
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7115   .debug_str:0000000000006542 .LASF938
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5835   .debug_str:0000000000001e80 .LASF939
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6701   .debug_str:0000000000004dcf .LASF940
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7363   .debug_str:00000000000073dc .LASF941
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5617   .debug_str:000000000000113d .LASF942
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7357   .debug_str:000000000000735d .LASF943
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6815   .debug_str:000000000000539b .LASF944
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5697   .debug_str:00000000000015b5 .LASF945
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7193   .debug_str:0000000000006a0f .LASF946
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6617   .debug_str:000000000000496a .LASF947
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7161   .debug_str:000000000000687a .LASF948
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5903   .debug_str:00000000000021ec .LASF949
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5593   .debug_str:0000000000000fd9 .LASF950
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5373   .debug_str:00000000000002a2 .LASF951
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6867   .debug_str:000000000000561c .LASF952
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5489   .debug_str:0000000000000ab8 .LASF953
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6081   .debug_str:0000000000002b6d .LASF954
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6597   .debug_str:00000000000048a0 .LASF955
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5609   .debug_str:00000000000010e1 .LASF956
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7157   .debug_str:000000000000685d .LASF957
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6943   .debug_str:0000000000005ae1 .LASF958
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5533   .debug_str:0000000000000d29 .LASF959
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6267   .debug_str:00000000000036c8 .LASF960
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5953   .debug_str:0000000000002436 .LASF961
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5789   .debug_str:0000000000001be8 .LASF962
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6577   .debug_str:00000000000047d2 .LASF963
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6713   .debug_str:0000000000004e8f .LASF964
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6357   .debug_str:0000000000003b8e .LASF965
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6219   .debug_str:00000000000034bc .LASF966
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5839   .debug_str:0000000000001e9b .LASF967
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7221   .debug_str:0000000000006b8d .LASF968
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6331   .debug_str:00000000000039e7 .LASF969
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6413   .debug_str:0000000000003eb4 .LASF970
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5413   .debug_str:0000000000000513 .LASF971
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6111   .debug_str:0000000000002cf8 .LASF972
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6919   .debug_str:0000000000005979 .LASF973
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5675   .debug_str:00000000000014a9 .LASF974
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5409   .debug_str:00000000000004ef .LASF975
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6097   .debug_str:0000000000002c66 .LASF976
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6391   .debug_str:0000000000003d3b .LASF977
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5361   .debug_str:000000000000020b .LASF978
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7219   .debug_str:0000000000006b87 .LASF979
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6285   .debug_str:00000000000037bc .LASF980
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6217   .debug_str:00000000000034b4 .LASF981
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6071   .debug_str:0000000000002af0 .LASF982
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5375   .debug_str:00000000000002a9 .LASF983
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5509   .debug_str:0000000000000bc6 .LASF984
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6743   .debug_str:0000000000005059 .LASF985
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5911   .debug_str:0000000000002226 .LASF986
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6569   .debug_str:0000000000004774 .LASF987
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5619   .debug_str:000000000000114b .LASF988
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6855   .debug_str:00000000000055aa .LASF989
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6107   .debug_str:0000000000002cde .LASF990
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7255   .debug_str:0000000000006d57 .LASF991
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6585   .debug_str:000000000000483c .LASF992
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6221   .debug_str:00000000000034c7 .LASF993
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5895   .debug_str:0000000000002191 .LASF802
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6901   .debug_str:0000000000005890 .LASF994
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6445   .debug_str:0000000000004027 .LASF995
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6169   .debug_str:0000000000003261 .LASF996
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6123   .debug_str:0000000000002d85 .LASF997
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6825   .debug_str:00000000000053fe .LASF998
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6733   .debug_str:0000000000004fe9 .LASF999
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5549   .debug_str:0000000000000dbb .LASF1000
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7287   .debug_str:0000000000006f35 .LASF1001
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6593   .debug_str:000000000000487e .LASF1002
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6793   .debug_str:000000000000528c .LASF1003
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7209   .debug_str:0000000000006b02 .LASF1004
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7247   .debug_str:0000000000006ce1 .LASF1005
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5655   .debug_str:00000000000013a3 .LASF1006
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6193   .debug_str:0000000000003382 .LASF1007
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6435   .debug_str:0000000000003fdd .LASF1008
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5737   .debug_str:0000000000001843 .LASF1009
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6877   .debug_str:00000000000056d4 .LASF1010
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7039   .debug_str:00000000000060b2 .LASF1011
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6581   .debug_str:0000000000004814 .LASF1012
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6773   .debug_str:00000000000051c4 .LASF1013
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5471   .debug_str:0000000000000926 .LASF1014
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5527   .debug_str:0000000000000cf1 .LASF1015
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5645   .debug_str:0000000000001352 .LASF1016
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6883   .debug_str:000000000000570a .LASF1017
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7317   .debug_str:000000000000711e .LASF1018
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6545   .debug_str:0000000000004640 .LASF1019
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5457   .debug_str:000000000000088e .LASF1020
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5349   .debug_str:0000000000000183 .LASF1043
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5763   .debug_str:0000000000001a7c .LASF1021
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6479   .debug_str:0000000000004280 .LASF1022
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6257   .debug_str:0000000000003669 .LASF1023
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5651   .debug_str:000000000000137d .LASF1024
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5855   .debug_str:0000000000001faf .LASF1025
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5435   .debug_str:0000000000000677 .LASF1026
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6809   .debug_str:000000000000536c .LASF1027
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6159   .debug_str:00000000000031f4 .LASF1028
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5473   .debug_str:0000000000000930 .LASF1029
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5997   .debug_str:0000000000002739 .LASF1030
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7375   .debug_str:000000000000748a .LASF1031
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6053   .debug_str:00000000000029d5 .LASF1032
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6077   .debug_str:0000000000002b4d .LASF1033
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5875   .debug_str:000000000000206b .LASF1034
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5365   .debug_str:000000000000024a .LASF1035
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7163   .debug_str:000000000000687f .LASF1036
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6005   .debug_str:000000000000279d .LASF1037
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6939   .debug_str:0000000000005ac3 .LASF1044
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:120    .text.time:0000000000000000 .LFB3
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:162    .text.time:0000000000000052 .LFE3
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5341   .debug_str:000000000000013a .LASF1045
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6675   .debug_str:0000000000004cc6 .LASF1046
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:88     .text.rtcc_set:0000000000000000 .LFB2
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:113    .text.rtcc_set:0000000000000022 .LFE2
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6587   .debug_str:0000000000004845 .LASF1038
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:57     .text.rtcc_handler:0000000000000000 .LFB1
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:81     .text.rtcc_handler:0000000000000026 .LFE1
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5499   .debug_str:0000000000000b51 .LASF1039
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:17     .text.rtcc_init:0000000000000000 .LFB0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:50     .text.rtcc_init:000000000000003e .LFE0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:176    .debug_info:0000000000000000 .Ldebug_info0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:2408   .debug_macro:0000000000000000 .Ldebug_macro2
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6187   .debug_str:0000000000003348 .LASF342
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6465   .debug_str:00000000000040ec .LASF343
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5601   .debug_str:000000000000103c .LASF344
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3439   .debug_macro:0000000000000000 .Ldebug_macro3
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3459   .debug_macro:0000000000000000 .Ldebug_macro4
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6407   .debug_str:0000000000003e7c .LASF359
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3491   .debug_macro:0000000000000000 .Ldebug_macro5
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3505   .debug_macro:0000000000000000 .Ldebug_macro6
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3573   .debug_macro:0000000000000000 .Ldebug_macro7
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3602   .debug_macro:0000000000000000 .Ldebug_macro8
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7187   .debug_str:00000000000069d0 .LASF400
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3631   .debug_macro:0000000000000000 .Ldebug_macro9
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3675   .debug_macro:0000000000000000 .Ldebug_macro10
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:3839   .debug_macro:0000000000000000 .Ldebug_macro11
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6523   .debug_str:00000000000044c1 .LASF588
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4207   .debug_macro:0000000000000000 .Ldebug_macro12
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4221   .debug_macro:0000000000000000 .Ldebug_macro13
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7181   .debug_str:000000000000697d .LASF594
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4253   .debug_macro:0000000000000000 .Ldebug_macro14
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4279   .debug_macro:0000000000000000 .Ldebug_macro15
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4290   .debug_macro:0000000000000000 .Ldebug_macro16
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4334   .debug_macro:0000000000000000 .Ldebug_macro17
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4513   .debug_macro:0000000000000000 .Ldebug_macro18
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4524   .debug_macro:0000000000000000 .Ldebug_macro19
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4550   .debug_macro:0000000000000000 .Ldebug_macro20
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4561   .debug_macro:0000000000000000 .Ldebug_macro21
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4572   .debug_macro:0000000000000000 .Ldebug_macro22
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4583   .debug_macro:0000000000000000 .Ldebug_macro23
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7027   .debug_str:000000000000602d .LASF699
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4639   .debug_macro:0000000000000000 .Ldebug_macro24
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4656   .debug_macro:0000000000000000 .Ldebug_macro25
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6243   .debug_str:00000000000035c9 .LASF717
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7005   .debug_str:0000000000005e83 .LASF718
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4700   .debug_macro:0000000000000000 .Ldebug_macro26
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5561   .debug_str:0000000000000e34 .LASF729
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6563   .debug_str:0000000000004730 .LASF730
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4735   .debug_macro:0000000000000000 .Ldebug_macro27
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4746   .debug_macro:0000000000000000 .Ldebug_macro28
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4781   .debug_macro:0000000000000000 .Ldebug_macro29
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7351   .debug_str:000000000000731d .LASF775
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4882   .debug_macro:0000000000000000 .Ldebug_macro30
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4899   .debug_macro:0000000000000000 .Ldebug_macro31
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6879   .debug_str:00000000000056e1 .LASF789
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5691   .debug_str:0000000000001585 .LASF790
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4931   .debug_macro:0000000000000000 .Ldebug_macro32
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5795   .debug_str:0000000000001c53 .LASF798
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:4957   .debug_macro:0000000000000000 .Ldebug_macro33
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5079   .debug_macro:0000000000000000 .Ldebug_macro34
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5931   .debug_str:0000000000002304 .LASF897
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5291   .debug_macro:0000000000000000 .Ldebug_macro35
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6437   .debug_str:0000000000003fe7 .LASF903
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5821   .debug_str:0000000000001dec .LASF0
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6141   .debug_str:00000000000030f5 .LASF1
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5451   .debug_str:0000000000000857 .LASF2
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5815   .debug_str:0000000000001d7c .LASF3
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5487   .debug_str:0000000000000aa6 .LASF4
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6205   .debug_str:000000000000342b .LASF5
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6953   .debug_str:0000000000005b66 .LASF6
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5779   .debug_str:0000000000001b51 .LASF7
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7217   .debug_str:0000000000006b73 .LASF8
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7071   .debug_str:0000000000006267 .LASF9
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5833   .debug_str:0000000000001e6d .LASF10
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6153   .debug_str:00000000000031c3 .LASF11
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6289   .debug_str:00000000000037ef .LASF12
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7367   .debug_str:000000000000742f .LASF13
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5391   .debug_str:00000000000003fe .LASF14
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6847   .debug_str:0000000000005538 .LASF15
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6247   .debug_str:00000000000035f1 .LASF16
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5369   .debug_str:000000000000026e .LASF17
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7231   .debug_str:0000000000006c25 .LASF18
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5723   .debug_str:00000000000017ac .LASF19
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5407   .debug_str:00000000000004d8 .LASF20
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5869   .debug_str:000000000000203c .LASF21
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7093   .debug_str:0000000000006455 .LASF22
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5727   .debug_str:00000000000017db .LASF23
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7197   .debug_str:0000000000006a34 .LASF24
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7015   .debug_str:0000000000005f15 .LASF25
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6425   .debug_str:0000000000003f46 .LASF26
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5919   .debug_str:0000000000002262 .LASF27
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6783   .debug_str:000000000000522c .LASF28
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5563   .debug_str:0000000000000e46 .LASF29
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6591   .debug_str:0000000000004864 .LASF30
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6457   .debug_str:0000000000004080 .LASF31
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6571   .debug_str:000000000000477a .LASF32
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7237   .debug_str:0000000000006c60 .LASF33
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5453   .debug_str:0000000000000869 .LASF34
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7199   .debug_str:0000000000006a4e .LASF35
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6461   .debug_str:00000000000040b6 .LASF36
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6475   .debug_str:0000000000004249 .LASF37
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6263   .debug_str:0000000000003699 .LASF38
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6417   .debug_str:0000000000003ee6 .LASF39
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6835   .debug_str:000000000000545c .LASF40
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6367   .debug_str:0000000000003bdd .LASF41
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6253   .debug_str:0000000000003623 .LASF42
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5441   .debug_str:00000000000006b1 .LASF43
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5465   .debug_str:00000000000008d9 .LASF44
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6731   .debug_str:0000000000004fd6 .LASF45
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6777   .debug_str:00000000000051ec .LASF46
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7343   .debug_str:00000000000072c3 .LASF47
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6207   .debug_str:0000000000003436 .LASF48
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5333   .debug_str:00000000000000ca .LASF49
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7179   .debug_str:000000000000695b .LASF50
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5673   .debug_str:0000000000001489 .LASF51
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7285   .debug_str:0000000000006f16 .LASF52
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7113   .debug_str:0000000000006529 .LASF53
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6121   .debug_str:0000000000002d67 .LASF54
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5641   .debug_str:00000000000012e2 .LASF55
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6827   .debug_str:0000000000005406 .LASF56
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6485   .debug_str:00000000000042bc .LASF57
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6927   .debug_str:00000000000059dd .LASF58
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5663   .debug_str:00000000000013fe .LASF59
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6819   .debug_str:00000000000053b9 .LASF60
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6299   .debug_str:0000000000003868 .LASF61
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5901   .debug_str:00000000000021cf .LASF62
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6233   .debug_str:0000000000003568 .LASF63
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6197   .debug_str:0000000000003399 .LASF64
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5811   .debug_str:0000000000001d49 .LASF65
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5671   .debug_str:0000000000001462 .LASF66
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6813   .debug_str:0000000000005382 .LASF67
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6463   .debug_str:00000000000040c9 .LASF68
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6163   .debug_str:0000000000003215 .LASF69
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5991   .debug_str:00000000000026d1 .LASF70
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5971   .debug_str:000000000000251b .LASF71
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6531   .debug_str:0000000000004536 .LASF72
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6801   .debug_str:0000000000005323 .LASF73
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7409   .debug_str:000000000000762b .LASF74
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7227   .debug_str:0000000000006be4 .LASF75
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6693   .debug_str:0000000000004d5a .LASF76
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6941   .debug_str:0000000000005ac8 .LASF77
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6031   .debug_str:00000000000028e0 .LASF78
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6805   .debug_str:0000000000005348 .LASF79
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7267   .debug_str:0000000000006e25 .LASF80
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7243   .debug_str:0000000000006c98 .LASF81
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6557   .debug_str:00000000000046bb .LASF82
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5599   .debug_str:000000000000102a .LASF83
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6589   .debug_str:0000000000004852 .LASF84
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7131   .debug_str:00000000000066de .LASF85
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6543   .debug_str:000000000000462e .LASF86
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6375   .debug_str:0000000000003c2c .LASF87
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7347   .debug_str:00000000000072f7 .LASF88
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6419   .debug_str:0000000000003f09 .LASF89
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5849   .debug_str:0000000000001f4c .LASF90
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5359   .debug_str:00000000000001f9 .LASF91
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6311   .debug_str:00000000000038fa .LASF92
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5865   .debug_str:0000000000002010 .LASF93
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6323   .debug_str:0000000000003985 .LASF94
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5883   .debug_str:00000000000020c0 .LASF95
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5427   .debug_str:00000000000005fb .LASF96
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7081   .debug_str:00000000000062e0 .LASF97
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6055   .debug_str:00000000000029dd .LASF98
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7143   .debug_str:000000000000678b .LASF99
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6185   .debug_str:0000000000003336 .LASF100
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7123   .debug_str:0000000000006624 .LASF101
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6627   .debug_str:00000000000049da .LASF102
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5515   .debug_str:0000000000000bf0 .LASF103
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5943   .debug_str:00000000000023ae .LASF104
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7413   .debug_str:000000000000766c .LASF105
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5337   .debug_str:0000000000000108 .LASF106
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7029   .debug_str:0000000000006043 .LASF107
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6145   .debug_str:000000000000315b .LASF108
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6715   .debug_str:0000000000004e94 .LASF109
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7279   .debug_str:0000000000006eb3 .LASF110
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5973   .debug_str:0000000000002532 .LASF111
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7353   .debug_str:0000000000007334 .LASF112
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6087   .debug_str:0000000000002ba7 .LASF113
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6343   .debug_str:0000000000003a86 .LASF114
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6459   .debug_str:00000000000040a7 .LASF115
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5729   .debug_str:00000000000017ef .LASF116
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7183   .debug_str:0000000000006990 .LASF117
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5877   .debug_str:0000000000002071 .LASF118
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6177   .debug_str:00000000000032d9 .LASF119
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6881   .debug_str:00000000000056f1 .LASF120
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5463   .debug_str:00000000000008ca .LASF121
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5787   .debug_str:0000000000001bcc .LASF122
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7049   .debug_str:0000000000006138 .LASF123
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7319   .debug_str:000000000000712f .LASF124
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5857   .debug_str:0000000000001fc2 .LASF125
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7411   .debug_str:0000000000007642 .LASF126
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6639   .debug_str:0000000000004acd .LASF127
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7173   .debug_str:0000000000006919 .LASF128
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6533   .debug_str:0000000000004549 .LASF129
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6849   .debug_str:000000000000554f .LASF130
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5603   .debug_str:000000000000104b .LASF131
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5831   .debug_str:0000000000001e4f .LASF132
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7185   .debug_str:00000000000069b8 .LASF133
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6287   .debug_str:00000000000037c8 .LASF134
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5543   .debug_str:0000000000000d7a .LASF135
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5583   .debug_str:0000000000000f74 .LASF136
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5613   .debug_str:00000000000010f2 .LASF137
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5715   .debug_str:0000000000001756 .LASF138
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5711   .debug_str:000000000000170a .LASF139
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6845   .debug_str:0000000000005515 .LASF140
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7369   .debug_str:0000000000007442 .LASF141
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7245   .debug_str:0000000000006cbc .LASF142
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6553   .debug_str:000000000000469d .LASF143
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6201   .debug_str:00000000000033e8 .LASF144
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6525   .debug_str:00000000000044d0 .LASF145
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6225   .debug_str:00000000000034e2 .LASF146
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6091   .debug_str:0000000000002bda .LASF147
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6361   .debug_str:0000000000003ba3 .LASF148
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6295   .debug_str:000000000000383c .LASF149
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6515   .debug_str:0000000000004470 .LASF150
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6495   .debug_str:0000000000004322 .LASF151
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5753   .debug_str:00000000000019e1 .LASF152
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5719   .debug_str:000000000000177f .LASF153
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6947   .debug_str:0000000000005b03 .LASF154
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5755   .debug_str:00000000000019fa .LASF155
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6529   .debug_str:00000000000044ff .LASF156
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7277   .debug_str:0000000000006e7c .LASF157
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5947   .debug_str:00000000000023d6 .LASF158
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6653   .debug_str:0000000000004b5d .LASF159
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5439   .debug_str:000000000000069c .LASF160
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6179   .debug_str:00000000000032f2 .LASF161
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5777   .debug_str:0000000000001b39 .LASF162
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7399   .debug_str:00000000000075ab .LASF163
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6999   .debug_str:0000000000005e47 .LASF164
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6727   .debug_str:0000000000004fb4 .LASF165
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5559   .debug_str:0000000000000e1a .LASF166
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5853   .debug_str:0000000000001f9a .LASF167
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5411   .debug_str:00000000000004fc .LASF168
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7101   .debug_str:00000000000064ad .LASF169
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6073   .debug_str:0000000000002af8 .LASF170
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6931   .debug_str:0000000000005a15 .LASF171
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7313   .debug_str:00000000000070ab .LASF172
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7377   .debug_str:0000000000007494 .LASF173
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5959   .debug_str:000000000000248d .LASF174
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7079   .debug_str:00000000000062c9 .LASF175
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6975   .debug_str:0000000000005cc3 .LASF176
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6669   .debug_str:0000000000004c6d .LASF177
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6857   .debug_str:00000000000055b3 .LASF178
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5843   .debug_str:0000000000001ec2 .LASF179
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6957   .debug_str:0000000000005ba1 .LASF180
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5867   .debug_str:0000000000002025 .LASF181
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5733   .debug_str:0000000000001820 .LASF182
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5481   .debug_str:0000000000000a59 .LASF183
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6213   .debug_str:000000000000347e .LASF184
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6579   .debug_str:00000000000047da .LASF185
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7253   .debug_str:0000000000006d1d .LASF186
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7327   .debug_str:000000000000718f .LASF187
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5699   .debug_str:00000000000015be .LASF188
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6757   .debug_str:00000000000050eb .LASF189
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6037   .debug_str:0000000000002945 .LASF190
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6371   .debug_str:0000000000003c07 .LASF191
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6265   .debug_str:00000000000036b2 .LASF192
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6741   .debug_str:0000000000005049 .LASF193
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5523   .debug_str:0000000000000c9d .LASF194
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6423   .debug_str:0000000000003f2b .LASF195
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5687   .debug_str:0000000000001558 .LASF196
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5511   .debug_str:0000000000000bcd .LASF197
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5443   .debug_str:00000000000006cb .LASF198
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6719   .debug_str:0000000000004eff .LASF199
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5505   .debug_str:0000000000000b6d .LASF200
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5817   .debug_str:0000000000001d8e .LASF201
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6631   .debug_str:0000000000004a02 .LASF202
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7175   .debug_str:0000000000006936 .LASF203
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7295   .debug_str:0000000000006f6d .LASF204
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6033   .debug_str:0000000000002903 .LASF205
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7083   .debug_str:00000000000062fe .LASF206
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7271   .debug_str:0000000000006e3c .LASF207
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5579   .debug_str:0000000000000f02 .LASF208
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5535   .debug_str:0000000000000d30 .LASF209
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6403   .debug_str:0000000000003e5a .LASF210
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5801   .debug_str:0000000000001cd2 .LASF211
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5381   .debug_str:0000000000000374 .LASF212
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7213   .debug_str:0000000000006b2a .LASF213
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6315   .debug_str:0000000000003925 .LASF214
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6505   .debug_str:00000000000043aa .LASF215
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7311   .debug_str:0000000000007068 .LASF216
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6513   .debug_str:0000000000004459 .LASF217
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5351   .debug_str:000000000000018e .LASF218
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6497   .debug_str:0000000000004339 .LASF219
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7137   .debug_str:0000000000006708 .LASF220
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6237   .debug_str:000000000000359f .LASF221
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5669   .debug_str:0000000000001446 .LASF222
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5325   .debug_str:000000000000006e .LASF223
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5977   .debug_str:0000000000002591 .LASF224
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6551   .debug_str:0000000000004682 .LASF225
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5345   .debug_str:000000000000014d .LASF226
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7201   .debug_str:0000000000006a68 .LASF227
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5889   .debug_str:000000000000210a .LASF228
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6537   .debug_str:000000000000456c .LASF229
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6989   .debug_str:0000000000005d7e .LASF230
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6337   .debug_str:0000000000003a2a .LASF231
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6775   .debug_str:00000000000051d2 .LASF232
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5573   .debug_str:0000000000000ec7 .LASF233
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7345   .debug_str:00000000000072e0 .LASF234
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6837   .debug_str:000000000000547f .LASF235
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6611   .debug_str:000000000000491e .LASF236
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6327   .debug_str:00000000000039ba .LASF237
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6161   .debug_str:00000000000031fd .LASF238
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6041   .debug_str:0000000000002979 .LASF239
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5653   .debug_str:0000000000001389 .LASF240
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6511   .debug_str:000000000000441b .LASF241
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6765   .debug_str:0000000000005141 .LASF242
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6965   .debug_str:0000000000005c43 .LASF243
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5799   .debug_str:0000000000001c8d .LASF244
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6293   .debug_str:0000000000003824 .LASF245
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5635   .debug_str:000000000000129e .LASF246
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5657   .debug_str:00000000000013ad .LASF247
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6275   .debug_str:0000000000003733 .LASF248
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5399   .debug_str:0000000000000465 .LASF249
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6739   .debug_str:000000000000502d .LASF250
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6215   .debug_str:0000000000003496 .LASF251
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6167   .debug_str:0000000000003248 .LASF252
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5597   .debug_str:000000000000100f .LASF253
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5445   .debug_str:00000000000006e3 .LASF254
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5477   .debug_str:0000000000000a0e .LASF255
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6935   .debug_str:0000000000005a68 .LASF256
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5401   .debug_str:0000000000000477 .LASF257
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6725   .debug_str:0000000000004f6e .LASF258
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5683   .debug_str:0000000000001522 .LASF259
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6065   .debug_str:0000000000002a84 .LASF260
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6711   .debug_str:0000000000004e74 .LASF261
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6655   .debug_str:0000000000004b9b .LASF262
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5929   .debug_str:00000000000022ec .LASF263
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6681   .debug_str:0000000000004ce4 .LASF264
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5425   .debug_str:00000000000005e5 .LASF265
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6039   .debug_str:000000000000295d .LASF266
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5587   .debug_str:0000000000000f9d .LASF267
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5379   .debug_str:000000000000034d .LASF268
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6791   .debug_str:0000000000005276 .LASF269
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6059   .debug_str:0000000000002a47 .LASF270
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5437   .debug_str:0000000000000686 .LASF271
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7097   .debug_str:0000000000006485 .LASF272
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5743   .debug_str:0000000000001892 .LASF273
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7273   .debug_str:0000000000006e4d .LASF274
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6099   .debug_str:0000000000002c70 .LASF275
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6595   .debug_str:0000000000004889 .LASF276
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5661   .debug_str:00000000000013e3 .LASF277
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5827   .debug_str:0000000000001e1d .LASF278
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5565   .debug_str:0000000000000e60 .LASF279
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5363   .debug_str:0000000000000210 .LASF280
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5327   .debug_str:000000000000008c .LASF281
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6997   .debug_str:0000000000005e02 .LASF282
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6995   .debug_str:0000000000005ded .LASF283
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6115   .debug_str:0000000000002d0a .LASF284
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5771   .debug_str:0000000000001aca .LASF285
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7059   .debug_str:00000000000061e0 .LASF286
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6761   .debug_str:0000000000005108 .LASF287
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6335   .debug_str:0000000000003a05 .LASF288
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5677   .debug_str:00000000000014b8 .LASF289
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6613   .debug_str:0000000000004939 .LASF290
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6277   .debug_str:000000000000374b .LASF291
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5781   .debug_str:0000000000001b67 .LASF292
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5335   .debug_str:00000000000000e7 .LASF293
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6015   .debug_str:000000000000283b .LASF294
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6963   .debug_str:0000000000005c26 .LASF295
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6353   .debug_str:0000000000003b62 .LASF296
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6393   .debug_str:0000000000003d43 .LASF297
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6025   .debug_str:000000000000289a .LASF298
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6147   .debug_str:0000000000003173 .LASF299
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6189   .debug_str:0000000000003352 .LASF300
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5891   .debug_str:0000000000002149 .LASF301
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6871   .debug_str:0000000000005675 .LASF302
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6427   .debug_str:0000000000003f55 .LASF303
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7159   .debug_str:0000000000006866 .LASF304
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6565   .debug_str:0000000000004743 .LASF305
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5323   .debug_str:0000000000000064 .LASF306
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7301   .debug_str:0000000000006fae .LASF307
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6933   .debug_str:0000000000005a57 .LASF308
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5785   .debug_str:0000000000001bbe .LASF309
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5751   .debug_str:00000000000019d3 .LASF310
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5395   .debug_str:0000000000000437 .LASF311
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5925   .debug_str:00000000000022c9 .LASF312
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5329   .debug_str:00000000000000a7 .LASF313
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6985   .debug_str:0000000000005d49 .LASF314
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5343   .debug_str:0000000000000143 .LASF315
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5501   .debug_str:0000000000000b5b .LASF316
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7167   .debug_str:00000000000068d5 .LASF317
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6183   .debug_str:0000000000003320 .LASF318
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6619   .debug_str:0000000000004972 .LASF319
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5317   .debug_str:000000000000002f .LASF320
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5459   .debug_str:000000000000089f .LASF321
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5331   .debug_str:00000000000000c0 .LASF322
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6021   .debug_str:0000000000002874 .LASF323
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6687   .debug_str:0000000000004d20 .LASF324
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6383   .debug_str:0000000000003c8d .LASF325
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6707   .debug_str:0000000000004e37 .LASF326
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7117   .debug_str:000000000000654c .LASF327
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5385   .debug_str:00000000000003b4 .LASF328
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5767   .debug_str:0000000000001aa5 .LASF329
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7359   .debug_str:0000000000007365 .LASF330
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6001   .debug_str:000000000000277a .LASF331
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6249   .debug_str:00000000000035f9 .LASF332
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6047   .debug_str:00000000000029b7 .LASF333
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5433   .debug_str:0000000000000668 .LASF334
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5701   .debug_str:00000000000015ff .LASF335
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7389   .debug_str:0000000000007537 .LASF336
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7263   .debug_str:0000000000006dde .LASF337
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6737   .debug_str:0000000000005012 .LASF338
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6273   .debug_str:000000000000371d .LASF339
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7373   .debug_str:000000000000747b .LASF340
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6211   .debug_str:0000000000003467 .LASF341
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6351   .debug_str:0000000000003b4c .LASF345
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7189   .debug_str:00000000000069df .LASF346
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5747   .debug_str:00000000000018d0 .LASF347
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6491   .debug_str:00000000000042fe .LASF348
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6779   .debug_str:0000000000005204 .LASF349
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7125   .debug_str:0000000000006639 .LASF350
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6045   .debug_str:00000000000029a3 .LASF351
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5965   .debug_str:00000000000024d7 .LASF352
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6271   .debug_str:0000000000003707 .LASF353
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5859   .debug_str:0000000000001fd7 .LASF354
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6415   .debug_str:0000000000003ec3 .LASF355
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7069   .debug_str:000000000000625a .LASF356
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6181   .debug_str:0000000000003309 .LASF357
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7383   .debug_str:00000000000074f5 .LASF358
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6607   .debug_str:00000000000048f2 .LASF360
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6583   .debug_str:0000000000004822 .LASF361
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6035   .debug_str:000000000000291d .LASF362
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5879   .debug_str:0000000000002085 .LASF363
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5629   .debug_str:000000000000122c .LASF364
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7147   .debug_str:00000000000067b7 .LASF365
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6281   .debug_str:0000000000003791 .LASF366
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6261   .debug_str:0000000000003687 .LASF367
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6209   .debug_str:0000000000003459 .LASF368
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7251   .debug_str:0000000000006d0d .LASF369
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7395   .debug_str:000000000000758d .LASF370
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6823   .debug_str:00000000000053e6 .LASF371
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6137   .debug_str:00000000000030c9 .LASF372
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6451   .debug_str:000000000000403e .LASF373
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6615   .debug_str:0000000000004957 .LASF374
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6781   .debug_str:000000000000521c .LASF375
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6325   .debug_str:00000000000039aa .LASF376
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6649   .debug_str:0000000000004b3e .LASF377
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5741   .debug_str:000000000000187c .LASF378
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6751   .debug_str:00000000000050bb .LASF379
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5419   .debug_str:0000000000000553 .LASF380
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5319   .debug_str:0000000000000048 .LASF381
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7135   .debug_str:00000000000066f8 .LASF382
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5495   .debug_str:0000000000000b23 .LASF383
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7051   .debug_str:0000000000006148 .LASF384
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5553   .debug_str:0000000000000dd9 .LASF385
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5611   .debug_str:00000000000010e7 .LASF386
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6671   .debug_str:0000000000004c83 .LASF387
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6321   .debug_str:000000000000397b .LASF388
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6599   .debug_str:00000000000048a7 .LASF389
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5725   .debug_str:00000000000017be .LASF390
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7177   .debug_str:000000000000694d .LASF391
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6623   .debug_str:00000000000049a2 .LASF392
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5989   .debug_str:00000000000026c5 .LASF393
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5585   .debug_str:0000000000000f93 .LASF394
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5367   .debug_str:0000000000000255 .LASF395
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7073   .debug_str:000000000000627a .LASF396
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5567   .debug_str:0000000000000e79 .LASF397
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5665   .debug_str:0000000000001415 .LASF398
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6981   .debug_str:0000000000005cff .LASF399
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6663   .debug_str:0000000000004c25 .LASF401
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6455   .debug_str:000000000000406b .LASF402
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6851   .debug_str:000000000000556d .LASF403
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6929   .debug_str:0000000000005a05 .LASF404
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6191   .debug_str:000000000000336e .LASF405
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5945   .debug_str:00000000000023c1 .LASF406
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6411   .debug_str:0000000000003e9f .LASF407
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5681   .debug_str:000000000000150d .LASF408
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6567   .debug_str:000000000000475a .LASF409
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5659   .debug_str:00000000000013c8 .LASF410
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6105   .debug_str:0000000000002cc3 .LASF411
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6439   .debug_str:0000000000003ff1 .LASF412
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6753   .debug_str:00000000000050cc .LASF413
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7043   .debug_str:00000000000060c9 .LASF414
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6723   .debug_str:0000000000004f62 .LASF415
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6329   .debug_str:00000000000039d7 .LASF416
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6377   .debug_str:0000000000003c43 .LASF417
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6317   .debug_str:0000000000003961 .LASF418
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6541   .debug_str:0000000000004622 .LASF419
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6811   .debug_str:0000000000005375 .LASF420
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7105   .debug_str:00000000000064cc .LASF421
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5529   .debug_str:0000000000000cfe .LASF422
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6305   .debug_str:00000000000038bc .LASF423
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6667   .debug_str:0000000000004c5d .LASF424
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6603   .debug_str:00000000000048c9 .LASF425
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7099   .debug_str:000000000000649c .LASF426
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5961   .debug_str:00000000000024a2 .LASF427
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5503   .debug_str:0000000000000b61 .LASF428
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6677   .debug_str:0000000000004ccf .LASF429
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5639   .debug_str:00000000000012d3 .LASF430
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7337   .debug_str:0000000000007297 .LASF431
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6833   .debug_str:0000000000005453 .LASF432
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6729   .debug_str:0000000000004fcc .LASF433
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6359   .debug_str:0000000000003b99 .LASF434
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6891   .debug_str:00000000000057d1 .LASF435
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6489   .debug_str:00000000000042ec .LASF436
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6803   .debug_str:0000000000005337 .LASF437
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5809   .debug_str:0000000000001d33 .LASF438
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5707   .debug_str:0000000000001630 .LASF439
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5813   .debug_str:0000000000001d6b .LASF440
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7215   .debug_str:0000000000006b66 .LASF441
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6973   .debug_str:0000000000005cba .LASF442
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5537   .debug_str:0000000000000d4c .LASF443
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6355   .debug_str:0000000000003b80 .LASF444
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6369   .debug_str:0000000000003bfa .LASF445
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6561   .debug_str:0000000000004723 .LASF446
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6651   .debug_str:0000000000004b53 .LASF447
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6341   .debug_str:0000000000003a7b .LASF448
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5631   .debug_str:0000000000001280 .LASF449
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6405   .debug_str:0000000000003e71 .LASF450
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6895   .debug_str:00000000000057ec .LASF451
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6061   .debug_str:0000000000002a60 .LASF452
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6223   .debug_str:00000000000034cf .LASF453
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6865   .debug_str:000000000000560a .LASF454
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6679   .debug_str:0000000000004cd8 .LASF455
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5545   .debug_str:0000000000000d92 .LASF456
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6915   .debug_str:000000000000594e .LASF457
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6575   .debug_str:00000000000047c4 .LASF458
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6519   .debug_str:000000000000448a .LASF459
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7233   .debug_str:0000000000006c36 .LASF460
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5521   .debug_str:0000000000000c8e .LASF461
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5591   .debug_str:0000000000000fd4 .LASF462
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6101   .debug_str:0000000000002ca1 .LASF463
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6373   .debug_str:0000000000003c20 .LASF464
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6269   .debug_str:00000000000036cf .LASF465
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6971   .debug_str:0000000000005ca8 .LASF466
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5823   .debug_str:0000000000001df7 .LASF467
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6789   .debug_str:0000000000005269 .LASF468
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6443   .debug_str:000000000000401e .LASF469
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6921   .debug_str:000000000000597e .LASF470
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5769   .debug_str:0000000000001abb .LASF471
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7283   .debug_str:0000000000006efa .LASF472
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6347   .debug_str:0000000000003b1c .LASF473
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7323   .debug_str:0000000000007161 .LASF474
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5807   .debug_str:0000000000001d10 .LASF475
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7111   .debug_str:000000000000651b .LASF476
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5539   .debug_str:0000000000000d56 .LASF477
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7401   .debug_str:00000000000075bf .LASF478
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6979   .debug_str:0000000000005cf3 .LASF479
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5589   .debug_str:0000000000000fb6 .LASF480
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5951   .debug_str:0000000000002423 .LASF481
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6913   .debug_str:000000000000593b .LASF482
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6767   .debug_str:000000000000517f .LASF483
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7025   .debug_str:0000000000006020 .LASF484
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7089   .debug_str:00000000000063d5 .LASF485
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7205   .debug_str:0000000000006ac0 .LASF486
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5403   .debug_str:00000000000004b8 .LASF487
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7013   .debug_str:0000000000005efd .LASF488
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5313   .debug_str:0000000000000000 .LASF489
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7017   .debug_str:0000000000005f29 .LASF490
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5621   .debug_str:0000000000001151 .LASF491
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6011   .debug_str:00000000000027f8 .LASF492
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6643   .debug_str:0000000000004af6 .LASF493
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7195   .debug_str:0000000000006a17 .LASF494
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6771   .debug_str:00000000000051a5 .LASF495
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7305   .debug_str:0000000000007001 .LASF496
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5885   .debug_str:00000000000020d7 .LASF497
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5819   .debug_str:0000000000001dcc .LASF498
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6477   .debug_str:0000000000004264 .LASF499
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6787   .debug_str:0000000000005252 .LASF500
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5557   .debug_str:0000000000000e01 .LASF501
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5637   .debug_str:00000000000012b8 .LASF502
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6309   .debug_str:00000000000038e1 .LASF503
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6151   .debug_str:00000000000031ab .LASF504
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7235   .debug_str:0000000000006c44 .LASF505
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5713   .debug_str:0000000000001733 .LASF506
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5871   .debug_str:000000000000204f .LASF507
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5555   .debug_str:0000000000000deb .LASF508
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5397   .debug_str:0000000000000448 .LASF509
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6629   .debug_str:00000000000049f3 .LASF510
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6755   .debug_str:00000000000050d2 .LASF511
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5705   .debug_str:0000000000001622 .LASF512
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6839   .debug_str:0000000000005491 .LASF513
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6605   .debug_str:00000000000048de .LASF514
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5937   .debug_str:000000000000233b .LASF515
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6747   .debug_str:0000000000005079 .LASF516
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7149   .debug_str:00000000000067e4 .LASF517
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7169   .debug_str:00000000000068ea .LASF518
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5939   .debug_str:0000000000002363 .LASF519
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7371   .debug_str:0000000000007456 .LASF520
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5467   .debug_str:00000000000008f2 .LASF521
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6175   .debug_str:00000000000032ac .LASF522
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6797   .debug_str:00000000000052dd .LASF523
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5851   .debug_str:0000000000001f61 .LASF524
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5783   .debug_str:0000000000001b89 .LASF525
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6057   .debug_str:0000000000002a0a .LASF526
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6245   .debug_str:00000000000035d8 .LASF527
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6625   .debug_str:00000000000049b0 .LASF528
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7211   .debug_str:0000000000006b09 .LASF529
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7417   .debug_str:0000000000007689 .LASF530
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5881   .debug_str:0000000000002096 .LASF531
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7333   .debug_str:0000000000007256 .LASF532
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6203   .debug_str:0000000000003400 .LASF533
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7061   .debug_str:00000000000061f0 .LASF534
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5525   .debug_str:0000000000000cb6 .LASF535
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5983   .debug_str:00000000000025e5 .LASF536
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7155   .debug_str:0000000000006835 .LASF537
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6007   .debug_str:00000000000027ad .LASF538
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5797   .debug_str:0000000000001c5e .LASF539
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6431   .debug_str:0000000000003f82 .LASF540
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6255   .debug_str:000000000000363b .LASF541
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5955   .debug_str:000000000000243d .LASF542
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7405   .debug_str:00000000000075e6 .LASF543
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6199   .debug_str:00000000000033bb .LASF544
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7087   .debug_str:0000000000006389 .LASF545
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6885   .debug_str:0000000000005719 .LASF546
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7057   .debug_str:0000000000006181 .LASF547
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6717   .debug_str:0000000000004ea2 .LASF548
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7303   .debug_str:0000000000006fc3 .LASF549
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7139   .debug_str:0000000000006720 .LASF550
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7361   .debug_str:0000000000007379 .LASF551
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6735   .debug_str:0000000000004fef .LASF552
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5423   .debug_str:0000000000000582 .LASF553
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5581   .debug_str:0000000000000f1c .LASF554
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6345   .debug_str:0000000000003aa5 .LASF555
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7129   .debug_str:0000000000006692 .LASF556
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5845   .debug_str:0000000000001edc .LASF557
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7151   .debug_str:0000000000006807 .LASF558
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7003   .debug_str:0000000000005e6a .LASF559
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5415   .debug_str:000000000000051b .LASF560
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5957   .debug_str:0000000000002473 .LASF561
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6987   .debug_str:0000000000005d61 .LASF562
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7257   .debug_str:0000000000006d5d .LASF563
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7127   .debug_str:000000000000664f .LASF564
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7365   .debug_str:00000000000073e7 .LASF565
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5625   .debug_str:000000000000121c .LASF566
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5513   .debug_str:0000000000000be5 .LASF567
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6799   .debug_str:0000000000005310 .LASF568
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6283   .debug_str:00000000000037a1 .LASF569
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6621   .debug_str:0000000000004988 .LASF570
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6697   .debug_str:0000000000004d8d .LASF571
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5493   .debug_str:0000000000000b03 .LASF572
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7067   .debug_str:0000000000006246 .LASF573
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7019   .debug_str:0000000000005f4c .LASF574
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5643   .debug_str:0000000000001305 .LASF575
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7165   .debug_str:000000000000688e .LASF576
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6869   .debug_str:0000000000005622 .LASF577
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6143   .debug_str:000000000000310e .LASF578
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5793   .debug_str:0000000000001c16 .LASF579
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5761   .debug_str:0000000000001a2f .LASF580
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7225   .debug_str:0000000000006b9d .LASF581
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6959   .debug_str:0000000000005bbd .LASF582
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5987   .debug_str:000000000000267a .LASF583
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6559   .debug_str:00000000000046dd .LASF584
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5775   .debug_str:0000000000001afb .LASF585
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7047   .debug_str:0000000000006109 .LASF586
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7045   .debug_str:00000000000060d4 .LASF587
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6029   .debug_str:00000000000028d1 .LASF589
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5913   .debug_str:000000000000222d .LASF590
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7261   .debug_str:0000000000006dcf .LASF591
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5907   .debug_str:00000000000021ff .LASF592
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5841   .debug_str:0000000000001eb4 .LASF593
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6785   .debug_str:0000000000005249 .LASF595
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6157   .debug_str:00000000000031e4 .LASF596
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7035   .debug_str:0000000000006085 .LASF597
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5731   .debug_str:0000000000001808 .LASF598
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6555   .debug_str:00000000000046ad .LASF599
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6907   .debug_str:00000000000058d3 .LASF600
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6709   .debug_str:0000000000004e5c .LASF601
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7109   .debug_str:0000000000006513 .LASF602
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6165   .debug_str:000000000000323d .LASF603
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7379   .debug_str:00000000000074dd .LASF604
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6673   .debug_str:0000000000004c99 .LASF605
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5679   .debug_str:00000000000014d6 .LASF606
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7095   .debug_str:0000000000006468 .LASF607
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6227   .debug_str:0000000000003503 .LASF608
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5909   .debug_str:0000000000002208 .LASF609
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7011   .debug_str:0000000000005ed5 .LASF610
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6173   .debug_str:000000000000328c .LASF611
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6231   .debug_str:000000000000353e .LASF612
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6647   .debug_str:0000000000004b1a .LASF613
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7315   .debug_str:00000000000070f0 .LASF614
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7229   .debug_str:0000000000006c05 .LASF615
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6955   .debug_str:0000000000005b77 .LASF616
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5695   .debug_str:00000000000015a5 .LASF617
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6083   .debug_str:0000000000002b7a .LASF618
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7145   .debug_str:00000000000067a3 .LASF619
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6637   .debug_str:0000000000004a6f .LASF620
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6429   .debug_str:0000000000003f6a .LASF621
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6297   .debug_str:0000000000003850 .LASF622
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6601   .debug_str:00000000000048b1 .LASF623
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7191   .debug_str:00000000000069f7 .LASF624
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6961   .debug_str:0000000000005c0e .LASF625
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6683   .debug_str:0000000000004cf9 .LASF626
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7335   .debug_str:0000000000007282 .LASF627
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5721   .debug_str:0000000000001793 .LASF628
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5339   .debug_str:0000000000000123 .LASF629
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6609   .debug_str:0000000000004908 .LASF630
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5749   .debug_str:00000000000018dd .LASF631
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7121   .debug_str:000000000000657c .LASF632
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6937   .debug_str:0000000000005aa7 .LASF633
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5623   .debug_str:0000000000001171 .LASF634
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5517   .debug_str:0000000000000c12 .LASF635
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6899   .debug_str:0000000000005800 .LASF636
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5447   .debug_str:00000000000006fd .LASF637
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7085   .debug_str:0000000000006314 .LASF638
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5377   .debug_str:00000000000002af .LASF639
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6397   .debug_str:0000000000003d90 .LASF640
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6387   .debug_str:0000000000003ccd .LASF641
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6125   .debug_str:0000000000002d8b .LASF642
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6539   .debug_str:00000000000045ad .LASF643
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6095   .debug_str:0000000000002c0c .LASF644
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5893   .debug_str:0000000000002165 .LASF645
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6875   .debug_str:00000000000056a4 .LASF646
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5739   .debug_str:000000000000184f .LASF647
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6401   .debug_str:0000000000003e2d .LASF648
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5355   .debug_str:00000000000001af .LASF649
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7265   .debug_str:0000000000006df9 .LASF650
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7281   .debug_str:0000000000006eca .LASF651
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6067   .debug_str:0000000000002a9e .LASF652
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6905   .debug_str:00000000000058a3 .LASF653
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6395   .debug_str:0000000000003d62 .LASF654
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6951   .debug_str:0000000000005b3f .LASF655
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5941   .debug_str:0000000000002384 .LASF656
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6117   .debug_str:0000000000002d21 .LASF657
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7259   .debug_str:0000000000006d9a .LASF658
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5999   .debug_str:0000000000002743 .LASF659
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6473   .debug_str:0000000000004212 .LASF660
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6009   .debug_str:00000000000027c1 .LASF661
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5607   .debug_str:00000000000010a8 .LASF662
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5429   .debug_str:000000000000060f .LASF663
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6339   .debug_str:0000000000003a42 .LASF664
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6911   .debug_str:00000000000058fe .LASF665
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7007   .debug_str:0000000000005e94 .LASF666
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6795   .debug_str:00000000000052a3 .LASF667
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6547   .debug_str:000000000000464f .LASF668
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6705   .debug_str:0000000000004ddf .LASF669
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5389   .debug_str:00000000000003e1 .LASF670
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7077   .debug_str:00000000000062af .LASF671
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5949   .debug_str:0000000000002410 .LASF672
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6993   .debug_str:0000000000005dcc .LASF673
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6301   .debug_str:0000000000003880 .LASF674
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6259   .debug_str:000000000000367a .LASF675
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5917   .debug_str:0000000000002254 .LASF676
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6501   .debug_str:000000000000436d .LASF677
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6467   .debug_str:00000000000040fa .LASF678
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5547   .debug_str:0000000000000da4 .LASF679
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5315   .debug_str:0000000000000017 .LASF680
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5993   .debug_str:0000000000002703 .LASF681
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5575   .debug_str:0000000000000ee2 .LASF682
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7009   .debug_str:0000000000005ec3 .LASF683
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5757   .debug_str:0000000000001a10 .LASF684
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5703   .debug_str:000000000000160f .LASF685
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6075   .debug_str:0000000000002b3a .LASF686
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7001   .debug_str:0000000000005e56 .LASF687
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6229   .debug_str:000000000000352a .LASF688
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6023   .debug_str:0000000000002887 .LASF689
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6887   .debug_str:00000000000057a5 .LASF690
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5649   .debug_str:0000000000001369 .LASF691
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7349   .debug_str:000000000000730a .LASF692
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7153   .debug_str:0000000000006821 .LASF693
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7291   .debug_str:0000000000006f46 .LASF694
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6831   .debug_str:000000000000543f .LASF695
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6821   .debug_str:00000000000053d1 .LASF696
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5633   .debug_str:000000000000128a .LASF697
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6861   .debug_str:00000000000055d6 .LASF698
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6333   .debug_str:00000000000039f1 .LASF700
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7299   .debug_str:0000000000006f9d .LASF701
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6119   .debug_str:0000000000002d56 .LASF702
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7391   .debug_str:0000000000007551 .LASF703
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6635   .debug_str:0000000000004a5e .LASF704
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6421   .debug_str:0000000000003f1b .LASF705
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6665   .debug_str:0000000000004c40 .LASF706
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5689   .debug_str:000000000000156e .LASF707
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7339   .debug_str:00000000000072a1 .LASF708
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6149   .debug_str:0000000000003194 .LASF709
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6279   .debug_str:000000000000376d .LASF710
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6171   .debug_str:0000000000003268 .LASF711
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7037   .debug_str:000000000000608e .LASF712
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5829   .debug_str:0000000000001e35 .LASF713
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6873   .debug_str:000000000000568a .LASF714
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5571   .debug_str:0000000000000ead .LASF715
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6657   .debug_str:0000000000004bb0 .LASF716
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6019   .debug_str:0000000000002862 .LASF719
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7297   .debug_str:0000000000006f86 .LASF720
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6689   .debug_str:0000000000004d35 .LASF721
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6441   .debug_str:000000000000400c .LASF722
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6003   .debug_str:000000000000278b .LASF723
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6399   .debug_str:0000000000003df8 .LASF724
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6661   .debug_str:0000000000004bf3 .LASF725
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7329   .debug_str:00000000000071cb .LASF726
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5475   .debug_str:0000000000000937 .LASF727
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6469   .debug_str:000000000000411a .LASF728
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6843   .debug_str:00000000000054a6 .LASF731
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7091   .debug_str:00000000000063e6 .LASF732
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5485   .debug_str:0000000000000a92 .LASF733
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5927   .debug_str:00000000000022d9 .LASF734
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7063   .debug_str:0000000000006219 .LASF735
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7207   .debug_str:0000000000006ae3 .LASF736
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6291   .debug_str:0000000000003802 .LASF737
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7031   .debug_str:0000000000006067 .LASF738
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5975   .debug_str:000000000000254d .LASF739
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5605   .debug_str:0000000000001063 .LASF740
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5491   .debug_str:0000000000000abe .LASF741
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7021   .debug_str:0000000000005f71 .LASF742
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6817   .debug_str:00000000000053a7 .LASF743
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5863   .debug_str:0000000000002004 .LASF744
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5979   .debug_str:00000000000025aa .LASF745
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5825   .debug_str:0000000000001e08 .LASF746
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5803   .debug_str:0000000000001ceb .LASF747
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6389   .debug_str:0000000000003d28 .LASF748
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6307   .debug_str:00000000000038d0 .LASF749
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7407   .debug_str:0000000000007619 .LASF750
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6385   .debug_str:0000000000003cba .LASF751
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6763   .debug_str:000000000000512d .LASF752
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6063   .debug_str:0000000000002a6f .LASF753
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6859   .debug_str:00000000000055c3 .LASF754
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6691   .debug_str:0000000000004d47 .LASF755
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5519   .debug_str:0000000000000c7b .LASF756
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6027   .debug_str:00000000000028be .LASF757
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6079   .debug_str:0000000000002b57 .LASF758
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6829   .debug_str:000000000000542f .LASF759
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6483   .debug_str:00000000000042ab .LASF760
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6103   .debug_str:0000000000002cb2 .LASF761
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5837   .debug_str:0000000000001e8a .LASF762
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6493   .debug_str:0000000000004311 .LASF763
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6909   .debug_str:00000000000058ed .LASF764
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6409   .debug_str:0000000000003e8e .LASF765
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5569   .debug_str:0000000000000e9c .LASF766
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6969   .debug_str:0000000000005c95 .LASF767
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6109   .debug_str:0000000000002ce6 .LASF768
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6699   .debug_str:0000000000004dbc .LASF769
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5887   .debug_str:00000000000020f5 .LASF770
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7275   .debug_str:0000000000006e67 .LASF771
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6641   .debug_str:0000000000004ae3 .LASF772
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7239   .debug_str:0000000000006c75 .LASF773
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5923   .debug_str:00000000000022b3 .LASF774
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6685   .debug_str:0000000000004d11 .LASF776
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5905   .debug_str:00000000000021f1 .LASF777
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6319   .debug_str:000000000000396e .LASF778
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7341   .debug_str:00000000000072b8 .LASF779
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5933   .debug_str:0000000000002318 .LASF780
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6769   .debug_str:000000000000518e .LASF781
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5387   .debug_str:00000000000003c9 .LASF782
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5765   .debug_str:0000000000001a8c .LASF783
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6633   .debug_str:0000000000004a44 .LASF784
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7403   .debug_str:00000000000075cc .LASF785
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7107   .debug_str:00000000000064d9 .LASF786
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5921   .debug_str:000000000000227b .LASF787
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5347   .debug_str:0000000000000167 .LASF788
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6241   .debug_str:00000000000035ba .LASF791
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5577   .debug_str:0000000000000ef2 .LASF792
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7321   .debug_str:0000000000007150 .LASF793
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5693   .debug_str:0000000000001595 .LASF794
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5805   .debug_str:0000000000001cfd .LASF795
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6043   .debug_str:0000000000002993 .LASF796
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6863   .debug_str:00000000000055eb .LASF797
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7241   .debug_str:0000000000006c88 .LASF799
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6453   .debug_str:000000000000404f .LASF800
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7415   .debug_str:0000000000007682 .LASF801
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6703   .debug_str:0000000000004dd9 .LASF803
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7381   .debug_str:00000000000074ed .LASF804
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5405   .debug_str:00000000000004ce .LASF805
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6841   .debug_str:00000000000054a1 .LASF806
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7171   .debug_str:000000000000690f .LASF807
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7289   .debug_str:0000000000006f3a .LASF808
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6991   .debug_str:0000000000005dc4 .LASF809
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6239   .debug_str:00000000000035b1 .LASF810
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5321   .debug_str:0000000000000059 .LASF811
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6893   .debug_str:00000000000057df .LASF812
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6549   .debug_str:000000000000467b .LASF813
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7331   .debug_str:000000000000724e .LASF814
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6967   .debug_str:0000000000005c84 .LASF815
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5479   .debug_str:0000000000000a4d .LASF816
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6535   .debug_str:0000000000004560 .LASF817
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7033   .debug_str:000000000000607c .LASF818
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6903   .debug_str:0000000000005897 .LASF819
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7133   .debug_str:00000000000066ef .LASF820
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5735   .debug_str:0000000000001839 .LASF821
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7141   .debug_str:0000000000006781 .LASF822
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7075   .debug_str:00000000000062a2 .LASF823
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7309   .debug_str:000000000000705a .LASF824
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7055   .debug_str:0000000000006173 .LASF825
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6509   .debug_str:0000000000004410 .LASF826
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7397   .debug_str:000000000000759d .LASF827
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7203   .debug_str:0000000000006aa7 .LASF828
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6745   .debug_str:000000000000505f .LASF829
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7355   .debug_str:0000000000007343 .LASF830
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6089   .debug_str:0000000000002bc0 .LASF831
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5745   .debug_str:00000000000018b8 .LASF832
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6527   .debug_str:00000000000044e6 .LASF833
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5541   .debug_str:0000000000000d61 .LASF834
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5861   .debug_str:0000000000001feb .LASF835
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7393   .debug_str:000000000000756c .LASF836
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5431   .debug_str:000000000000064c .LASF837
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5685   .debug_str:000000000000153a .LASF838
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6139   .debug_str:00000000000030d8 .LASF839
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5497   .debug_str:0000000000000b39 .LASF840
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7325   .debug_str:0000000000007175 .LASF841
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5371   .debug_str:0000000000000279 .LASF842
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5595   .debug_str:0000000000000feb .LASF843
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6949   .debug_str:0000000000005b19 .LASF844
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5357   .debug_str:00000000000001da .LASF845
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5531   .debug_str:0000000000000d0f .LASF846
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6945   .debug_str:0000000000005ae7 .LASF847
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6433   .debug_str:0000000000003fb2 .LASF848
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5483   .debug_str:0000000000000a6c .LASF849
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5995   .debug_str:0000000000002711 .LASF850
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6923   .debug_str:00000000000059b7 .LASF851
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5969   .debug_str:0000000000002501 .LASF852
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6365   .debug_str:0000000000003bc1 .LASF853
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7023   .debug_str:0000000000005ff5 .LASF854
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6013   .debug_str:0000000000002815 .LASF855
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6983   .debug_str:0000000000005d21 .LASF856
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7065   .debug_str:0000000000006227 .LASF857
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6481   .debug_str:0000000000004291 .LASF858
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6093   .debug_str:0000000000002bf0 .LASF859
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5615   .debug_str:0000000000001112 .LASF860
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5791   .debug_str:0000000000001bf0 .LASF861
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6471   .debug_str:00000000000041ea .LASF862
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6507   .debug_str:00000000000043e9 .LASF863
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5847   .debug_str:0000000000001f2a .LASF864
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6503   .debug_str:0000000000004386 .LASF865
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6853   .debug_str:0000000000005581 .LASF866
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6521   .debug_str:000000000000449d .LASF867
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5981   .debug_str:00000000000025bf .LASF868
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5963   .debug_str:00000000000024ae .LASF869
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7385   .debug_str:000000000000750a .LASF870
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5393   .debug_str:0000000000000411 .LASF871
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6659   .debug_str:0000000000004bca .LASF872
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7249   .debug_str:0000000000006ce9 .LASF873
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6381   .debug_str:0000000000003c67 .LASF874
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5967   .debug_str:00000000000024e5 .LASF875
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6573   .debug_str:00000000000047a7 .LASF876
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6303   .debug_str:000000000000389e .LASF877
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5417   .debug_str:000000000000053b .LASF878
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6069   .debug_str:0000000000002ac4 .LASF879
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5383   .debug_str:000000000000038d .LASF880
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5507   .debug_str:0000000000000ba8 .LASF881
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5899   .debug_str:00000000000021b0 .LASF882
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5773   .debug_str:0000000000001ae1 .LASF883
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6349   .debug_str:0000000000003b32 .LASF884
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6379   .debug_str:0000000000003c4f .LASF885
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6889   .debug_str:00000000000057b9 .LASF886
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6235   .debug_str:0000000000003589 .LASF887
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5915   .debug_str:000000000000223c .LASF888
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5551   .debug_str:0000000000000dc1 .LASF889
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6917   .debug_str:000000000000595f .LASF890
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6977   .debug_str:0000000000005cdb .LASF891
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6499   .debug_str:0000000000004353 .LASF892
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5421   .debug_str:000000000000056a .LASF893
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7119   .debug_str:0000000000006562 .LASF894
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5897   .debug_str:0000000000002196 .LASF895
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6749   .debug_str:000000000000509f .LASF896
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6517   .debug_str:000000000000447e .LASF898
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6051   .debug_str:00000000000029ca .LASF899
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:5469   .debug_str:000000000000091f .LASF900
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:6017   .debug_str:000000000000285a .LASF901
+C:\Users\zero6575\AppData\Local\Temp\ccZQmH2j.s:7307   .debug_str:000000000000703a .LASF902
+                           .group:0000000000000000 wm4.0.29db371e8b94e604acd9f4c2cef2c360
+                           .group:0000000000000000 wm4._newlib_version.h.4.9ba035841e762c3308916a0ce96032e7
+                           .group:0000000000000000 wm4.newlib.h.24.c310527e65dab9224e8fef4278ad2129
+                           .group:0000000000000000 wm4.ieeefp.h.195.a810689bf65b84f4ad2c33b483468c94
+                           .group:0000000000000000 wm4.features.h.22.fad1cec3bc7ff06488171438dbdcfd02
+                           .group:0000000000000000 wm4.config.h.83.0359905d884ebfe41c79e1d7c780ef62
+                           .group:0000000000000000 wm4._ansi.h.31.de524f58584151836e90d8620a16f8e8
+                           .group:0000000000000000 wm4._default_types.h.6.74c1620e62c751216328238764a7f2e5
+                           .group:0000000000000000 wm4.stddef.h.39.a38874c8f8a57e66301090908ec2a69f
+                           .group:0000000000000000 wm4.cdefs.h.49.6260d97adb8d27534cbdc0f868b8ea87
+                           .group:0000000000000000 wm4._types.h.20.dd0d04dca3800a0d2a6129b87f3adbb2
+                           .group:0000000000000000 wm4.stddef.h.161.5349cb105733e8777bfb0cf53c4e3f34
+                           .group:0000000000000000 wm4._types.h.127.c5cfac939eadb83d223592dbacad7524
+                           .group:0000000000000000 wm4.reent.h.17.487f8c1f76499d088b190f62530a0034
+                           .group:0000000000000000 wm4.lock.h.2.c0958401bd0ce484d507ee19aacab817
+                           .group:0000000000000000 wm4.reent.h.77.1187f1075ff88452c642b29ed9a9030d
+                           .group:0000000000000000 wm4.time.h.14.849270cc7997ccc4e05edd146e568a9f
+                           .group:0000000000000000 wm4.stddef.h.161.19e15733342b50ead2919490b095303e
+                           .group:0000000000000000 wm4.time.h.2.2a9bb4e458da4ea34ffea78824e2e6f7
+                           .group:0000000000000000 wm4.time.h.25.0e6a0fdbc9955f5707ed54246ed2e089
+                           .group:0000000000000000 wm4.types.h.40.8b6acba56cefbb11746718204edc8f5e
+                           .group:0000000000000000 wm4._stdint.h.10.c24fa3af3bc1706662bb5593a907e841
+                           .group:0000000000000000 wm4._endian.h.18.1bf9649e8e5bbc91042012680270b9ed
+                           .group:0000000000000000 wm4.endian.h.9.49f3a4695c1b61e8a0808de3c4a106cb
+                           .group:0000000000000000 wm4._timeval.h.30.0e8bfd94e85db17dda3286ee81496fe6
+                           .group:0000000000000000 wm4.timespec.h.41.d855182eb0e690443ab8651bcedca6e1
+                           .group:0000000000000000 wm4.select.h.19.97ca6fd0c752a0f3b6719fd314d361e6
+                           .group:0000000000000000 wm4.types.h.51.5571ec98f267d17d3c670b7a3ba33afa
+                           .group:0000000000000000 wm4.sched.h.22.c60982713a5c428609783c78f9c78d95
+                           .group:0000000000000000 wm4._pthreadtypes.h.36.fcee9961c35163dde6267ef772ad1972
+                           .group:0000000000000000 wm4.time.h.162.85256a1e684b58f061361067da714e0e
+                           .group:0000000000000000 wm4._intsup.h.10.b28b45fc63caeb010c3f7ee592257700
+                           .group:0000000000000000 wm4.stdint.h.23.d53047a68f4a85177f80b422d52785ed
+                           .group:0000000000000000 wm4.stdbool.h.29.07dce69c3b78884144b7f7bd19483461
+
+UNDEFINED SYMBOLS
+g_tick_counter

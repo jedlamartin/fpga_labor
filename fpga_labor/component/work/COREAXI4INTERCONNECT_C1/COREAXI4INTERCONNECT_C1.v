@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////////////
-// Created by SmartDesign Tue Apr  7 19:19:10 2026
-// Version: 2025.1 2025.1.0.14
+// Created by SmartDesign Mon Jul  6 16:17:44 2026
+// Version: 2025.2 2025.2.0.14
 //////////////////////////////////////////////////////////////////////
 
 `timescale 1ns / 100ps
@@ -21,7 +21,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "ID_WIDTH:1"  \
 "MASTER0_CHAN_RS:true"  \
 "MASTER0_CLOCK_DOMAIN_CROSSING:false"  \
-"MASTER0_DATA_WIDTH:32"  \
+"MASTER0_DATA_WIDTH:64"  \
 "MASTER0_DWC_DATA_FIFO_DEPTH:16"  \
 "MASTER0_READ_INTERLEAVE:false"  \
 "MASTER0_READ_SLAVE0:true"  \
@@ -91,7 +91,7 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "MASTER0_WRITE_SLAVE31:true"  \
 "MASTER1_CHAN_RS:true"  \
 "MASTER1_CLOCK_DOMAIN_CROSSING:false"  \
-"MASTER1_DATA_WIDTH:32"  \
+"MASTER1_DATA_WIDTH:64"  \
 "MASTER1_DWC_DATA_FIFO_DEPTH:16"  \
 "MASTER1_READ_INTERLEAVE:false"  \
 "MASTER1_READ_SLAVE0:true"  \
@@ -1150,10 +1150,10 @@ create_and_configure_core -core_vlnv {Actel:DirectCore:COREAXI4INTERCONNECT:2.9.
 "SLAVE0_CLOCK_DOMAIN_CROSSING:false"  \
 "SLAVE0_DATA_WIDTH:64"  \
 "SLAVE0_DWC_DATA_FIFO_DEPTH:16"  \
-"SLAVE0_END_ADDR:0xdfffffff"  \
+"SLAVE0_END_ADDR:0x7fffffff"  \
 "SLAVE0_END_ADDR_UPPER:0x0"  \
 "SLAVE0_READ_INTERLEAVE:false"  \
-"SLAVE0_START_ADDR:0x80000000"  \
+"SLAVE0_START_ADDR:0x60000000"  \
 "SLAVE0_START_ADDR_UPPER:0x0"  \
 "SLAVE0_TYPE:0"  \
 "SLAVE1_CHAN_RS:true"  \
@@ -1643,9 +1643,9 @@ input  [0:0]  MASTER0_AWUSER;
 input         MASTER0_AWVALID;
 input         MASTER0_BREADY;
 input         MASTER0_RREADY;
-input  [31:0] MASTER0_WDATA;
+input  [63:0] MASTER0_WDATA;
 input         MASTER0_WLAST;
-input  [3:0]  MASTER0_WSTRB;
+input  [7:0]  MASTER0_WSTRB;
 input  [0:0]  MASTER0_WUSER;
 input         MASTER0_WVALID;
 input  [63:0] MASTER1_ARADDR;
@@ -1674,9 +1674,9 @@ input  [0:0]  MASTER1_AWUSER;
 input         MASTER1_AWVALID;
 input         MASTER1_BREADY;
 input         MASTER1_RREADY;
-input  [31:0] MASTER1_WDATA;
+input  [63:0] MASTER1_WDATA;
 input         MASTER1_WLAST;
-input  [3:0]  MASTER1_WSTRB;
+input  [7:0]  MASTER1_WSTRB;
 input  [0:0]  MASTER1_WUSER;
 input         MASTER1_WVALID;
 input         SLAVE0_ARREADY;
@@ -1701,7 +1701,7 @@ output [0:0]  MASTER0_BID;
 output [1:0]  MASTER0_BRESP;
 output [0:0]  MASTER0_BUSER;
 output        MASTER0_BVALID;
-output [31:0] MASTER0_RDATA;
+output [63:0] MASTER0_RDATA;
 output [0:0]  MASTER0_RID;
 output        MASTER0_RLAST;
 output [1:0]  MASTER0_RRESP;
@@ -1714,7 +1714,7 @@ output [0:0]  MASTER1_BID;
 output [1:0]  MASTER1_BRESP;
 output [0:0]  MASTER1_BUSER;
 output        MASTER1_BVALID;
-output [31:0] MASTER1_RDATA;
+output [63:0] MASTER1_RDATA;
 output [0:0]  MASTER1_RID;
 output        MASTER1_RLAST;
 output [1:0]  MASTER1_RRESP;
@@ -1788,17 +1788,17 @@ wire          MASTER0_BREADY;
 wire   [1:0]  AXI4mmaster0_BRESP;
 wire   [0:0]  AXI4mmaster0_BUSER;
 wire          AXI4mmaster0_BVALID;
-wire   [31:0] AXI4mmaster0_RDATA;
+wire   [63:0] AXI4mmaster0_RDATA;
 wire   [0:0]  AXI4mmaster0_RID;
 wire          AXI4mmaster0_RLAST;
 wire          MASTER0_RREADY;
 wire   [1:0]  AXI4mmaster0_RRESP;
 wire   [0:0]  AXI4mmaster0_RUSER;
 wire          AXI4mmaster0_RVALID;
-wire   [31:0] MASTER0_WDATA;
+wire   [63:0] MASTER0_WDATA;
 wire          MASTER0_WLAST;
 wire          AXI4mmaster0_WREADY;
-wire   [3:0]  MASTER0_WSTRB;
+wire   [7:0]  MASTER0_WSTRB;
 wire   [0:0]  MASTER0_WUSER;
 wire          MASTER0_WVALID;
 wire   [63:0] MASTER1_ARADDR;
@@ -1832,17 +1832,17 @@ wire          MASTER1_BREADY;
 wire   [1:0]  AXI4mmaster1_BRESP;
 wire   [0:0]  AXI4mmaster1_BUSER;
 wire          AXI4mmaster1_BVALID;
-wire   [31:0] AXI4mmaster1_RDATA;
+wire   [63:0] AXI4mmaster1_RDATA;
 wire   [0:0]  AXI4mmaster1_RID;
 wire          AXI4mmaster1_RLAST;
 wire          MASTER1_RREADY;
 wire   [1:0]  AXI4mmaster1_RRESP;
 wire   [0:0]  AXI4mmaster1_RUSER;
 wire          AXI4mmaster1_RVALID;
-wire   [31:0] MASTER1_WDATA;
+wire   [63:0] MASTER1_WDATA;
 wire          MASTER1_WLAST;
 wire          AXI4mmaster1_WREADY;
-wire   [3:0]  MASTER1_WSTRB;
+wire   [7:0]  MASTER1_WSTRB;
 wire   [0:0]  MASTER1_WUSER;
 wire          MASTER1_WVALID;
 wire   [63:0] AXI4mslave0_ARADDR;
@@ -1927,7 +1927,7 @@ wire   [1:0]  AXI4mmaster0_BRESP_net_0;
 wire          AXI4mmaster0_BVALID_net_0;
 wire          AXI4mmaster0_ARREADY_net_0;
 wire   [0:0]  AXI4mmaster0_RID_net_0;
-wire   [31:0] AXI4mmaster0_RDATA_net_0;
+wire   [63:0] AXI4mmaster0_RDATA_net_0;
 wire   [1:0]  AXI4mmaster0_RRESP_net_0;
 wire          AXI4mmaster0_RLAST_net_0;
 wire          AXI4mmaster0_RVALID_net_0;
@@ -1940,7 +1940,7 @@ wire   [1:0]  AXI4mmaster1_BRESP_net_0;
 wire          AXI4mmaster1_BVALID_net_0;
 wire          AXI4mmaster1_ARREADY_net_0;
 wire   [0:0]  AXI4mmaster1_RID_net_0;
-wire   [31:0] AXI4mmaster1_RDATA_net_0;
+wire   [63:0] AXI4mmaster1_RDATA_net_0;
 wire   [1:0]  AXI4mmaster1_RRESP_net_0;
 wire          AXI4mmaster1_RLAST_net_0;
 wire          AXI4mmaster1_RVALID_net_0;
@@ -1955,13 +1955,13 @@ wire   [2:0]  MASTER0_HBURST_const_net_0;
 wire   [6:0]  MASTER0_HPROT_const_net_0;
 wire   [2:0]  MASTER0_HSIZE_const_net_0;
 wire   [1:0]  MASTER0_HTRANS_const_net_0;
-wire   [31:0] MASTER0_HWDATA_const_net_0;
+wire   [63:0] MASTER0_HWDATA_const_net_0;
 wire   [31:0] MASTER1_HADDR_const_net_0;
 wire   [2:0]  MASTER1_HBURST_const_net_0;
 wire   [6:0]  MASTER1_HPROT_const_net_0;
 wire   [2:0]  MASTER1_HSIZE_const_net_0;
 wire   [1:0]  MASTER1_HTRANS_const_net_0;
-wire   [31:0] MASTER1_HWDATA_const_net_0;
+wire   [63:0] MASTER1_HWDATA_const_net_0;
 wire   [31:0] MASTER2_HADDR_const_net_0;
 wire   [2:0]  MASTER2_HBURST_const_net_0;
 wire   [6:0]  MASTER2_HPROT_const_net_0;
@@ -2490,13 +2490,13 @@ assign MASTER0_HBURST_const_net_0    = 3'h0;
 assign MASTER0_HPROT_const_net_0     = 7'h00;
 assign MASTER0_HSIZE_const_net_0     = 3'h0;
 assign MASTER0_HTRANS_const_net_0    = 2'h0;
-assign MASTER0_HWDATA_const_net_0    = 32'h00000000;
+assign MASTER0_HWDATA_const_net_0    = 64'h0000000000000000;
 assign MASTER1_HADDR_const_net_0     = 32'h00000000;
 assign MASTER1_HBURST_const_net_0    = 3'h0;
 assign MASTER1_HPROT_const_net_0     = 7'h00;
 assign MASTER1_HSIZE_const_net_0     = 3'h0;
 assign MASTER1_HTRANS_const_net_0    = 2'h0;
-assign MASTER1_HWDATA_const_net_0    = 32'h00000000;
+assign MASTER1_HWDATA_const_net_0    = 64'h0000000000000000;
 assign MASTER2_HADDR_const_net_0     = 32'h00000000;
 assign MASTER2_HBURST_const_net_0    = 3'h0;
 assign MASTER2_HPROT_const_net_0     = 7'h00;
@@ -3096,7 +3096,7 @@ assign MASTER0_ARREADY             = AXI4mmaster0_ARREADY_net_0;
 assign AXI4mmaster0_RID_net_0[0]   = AXI4mmaster0_RID[0];
 assign MASTER0_RID[0:0]            = AXI4mmaster0_RID_net_0[0];
 assign AXI4mmaster0_RDATA_net_0    = AXI4mmaster0_RDATA;
-assign MASTER0_RDATA[31:0]         = AXI4mmaster0_RDATA_net_0;
+assign MASTER0_RDATA[63:0]         = AXI4mmaster0_RDATA_net_0;
 assign AXI4mmaster0_RRESP_net_0    = AXI4mmaster0_RRESP;
 assign MASTER0_RRESP[1:0]          = AXI4mmaster0_RRESP_net_0;
 assign AXI4mmaster0_RLAST_net_0    = AXI4mmaster0_RLAST;
@@ -3122,7 +3122,7 @@ assign MASTER1_ARREADY             = AXI4mmaster1_ARREADY_net_0;
 assign AXI4mmaster1_RID_net_0[0]   = AXI4mmaster1_RID[0];
 assign MASTER1_RID[0:0]            = AXI4mmaster1_RID_net_0[0];
 assign AXI4mmaster1_RDATA_net_0    = AXI4mmaster1_RDATA;
-assign MASTER1_RDATA[31:0]         = AXI4mmaster1_RDATA_net_0;
+assign MASTER1_RDATA[63:0]         = AXI4mmaster1_RDATA_net_0;
 assign AXI4mmaster1_RRESP_net_0    = AXI4mmaster1_RRESP;
 assign MASTER1_RRESP[1:0]          = AXI4mmaster1_RRESP_net_0;
 assign AXI4mmaster1_RLAST_net_0    = AXI4mmaster1_RLAST;
@@ -3146,7 +3146,7 @@ COREAXI4INTERCONNECT #(
         .ID_WIDTH                       ( 1 ),
         .MASTER0_CHAN_RS                ( 1 ),
         .MASTER0_CLOCK_DOMAIN_CROSSING  ( 0 ),
-        .MASTER0_DATA_WIDTH             ( 32 ),
+        .MASTER0_DATA_WIDTH             ( 64 ),
         .MASTER0_DWC_DATA_FIFO_DEPTH    ( 16 ),
         .MASTER0_READ_INTERLEAVE        ( 0 ),
         .MASTER0_READ_SLAVE0            ( 1 ),
@@ -3216,7 +3216,7 @@ COREAXI4INTERCONNECT #(
         .MASTER0_WRITE_SLAVE31          ( 1 ),
         .MASTER1_CHAN_RS                ( 1 ),
         .MASTER1_CLOCK_DOMAIN_CROSSING  ( 0 ),
-        .MASTER1_DATA_WIDTH             ( 32 ),
+        .MASTER1_DATA_WIDTH             ( 64 ),
         .MASTER1_DWC_DATA_FIFO_DEPTH    ( 16 ),
         .MASTER1_READ_INTERLEAVE        ( 0 ),
         .MASTER1_READ_SLAVE0            ( 1 ),
@@ -4275,10 +4275,10 @@ COREAXI4INTERCONNECT #(
         .SLAVE0_CLOCK_DOMAIN_CROSSING   ( 0 ),
         .SLAVE0_DATA_WIDTH              ( 64 ),
         .SLAVE0_DWC_DATA_FIFO_DEPTH     ( 16 ),
-        .SLAVE0_END_ADDR                ( 'hdfffffff ),
+        .SLAVE0_END_ADDR                ( 'h7fffffff ),
         .SLAVE0_END_ADDR_UPPER          ( 'h0 ),
         .SLAVE0_READ_INTERLEAVE         ( 0 ),
-        .SLAVE0_START_ADDR              ( 'h80000000 ),
+        .SLAVE0_START_ADDR              ( 'h60000000 ),
         .SLAVE0_START_ADDR_UPPER        ( 'h0 ),
         .SLAVE0_TYPE                    ( 0 ),
         .SLAVE1_CHAN_RS                 ( 1 ),
@@ -5476,13 +5476,13 @@ COREAXI4INTERCONNECT_C1_0(
         .MASTER0_HPROT      ( MASTER0_HPROT_const_net_0 ), // tied to 7'h00 from definition
         .MASTER0_HSIZE      ( MASTER0_HSIZE_const_net_0 ), // tied to 3'h0 from definition
         .MASTER0_HTRANS     ( MASTER0_HTRANS_const_net_0 ), // tied to 2'h0 from definition
-        .MASTER0_HWDATA     ( MASTER0_HWDATA_const_net_0 ), // tied to 32'h00000000 from definition
+        .MASTER0_HWDATA     ( MASTER0_HWDATA_const_net_0 ), // tied to 64'h0000000000000000 from definition
         .MASTER1_HADDR      ( MASTER1_HADDR_const_net_0 ), // tied to 32'h00000000 from definition
         .MASTER1_HBURST     ( MASTER1_HBURST_const_net_0 ), // tied to 3'h0 from definition
         .MASTER1_HPROT      ( MASTER1_HPROT_const_net_0 ), // tied to 7'h00 from definition
         .MASTER1_HSIZE      ( MASTER1_HSIZE_const_net_0 ), // tied to 3'h0 from definition
         .MASTER1_HTRANS     ( MASTER1_HTRANS_const_net_0 ), // tied to 2'h0 from definition
-        .MASTER1_HWDATA     ( MASTER1_HWDATA_const_net_0 ), // tied to 32'h00000000 from definition
+        .MASTER1_HWDATA     ( MASTER1_HWDATA_const_net_0 ), // tied to 64'h0000000000000000 from definition
         .MASTER2_HADDR      ( MASTER2_HADDR_const_net_0 ), // tied to 32'h00000000 from definition
         .MASTER2_HBURST     ( MASTER2_HBURST_const_net_0 ), // tied to 3'h0 from definition
         .MASTER2_HPROT      ( MASTER2_HPROT_const_net_0 ), // tied to 7'h00 from definition
