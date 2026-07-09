@@ -81,6 +81,8 @@
 #include "bv.h"
 #include "trendlog.h"
 
+#include "app_main.h"
+
 struct mss_uart_instance* g_uart = &g_mss_uart1_lo;
 
 #if defined(TARGET_ALOE)
@@ -2292,10 +2294,13 @@ e51_task(void *pvParameters)
     bip_set_broadcast_addr(ulong_temp);
     bip_set_port(0xBAC0);
     bip_set_socket(0x0000);
+
+    audio_stream_init();
     while (1)
     {
         prvLinkStatusTask();
         Network_Manage();
+        audio_stream_service_pipeline();
         if ((I_Am_Request) && (0 != ip_database_info.ipv4_myAddress))
         {
             /* Send I am if it looks like we have an IP address set */

@@ -46,6 +46,7 @@ MICROCHIP PROVIDES THIS SOFTWARE CONDITIONALLY UPON YOUR ACCEPTANCE OF THESE TER
 #include "tftp.h"
 
 void BACnet_Handler(uint8_t *packet, int16_t length);
+void audio_control_packet_callback(uint8_t *packet, int16_t length);
 
 const udp_handler_t UDP_CallBackTable[] = \
 {    
@@ -54,6 +55,7 @@ const udp_handler_t UDP_CallBackTable[] = \
     {123, NTP_Handler},
     {0xBAC0, BACnet_Handler},
     {SOURCEPORT_TFTP, TFTP_Handler},
+    {1234, audio_control_packet_callback}
 };
 
 // ***************** Leave the stuff below this line alone *********************

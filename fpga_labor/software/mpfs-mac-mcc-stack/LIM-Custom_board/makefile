@@ -29,10 +29,23 @@ RM := rm -rf
 -include src/application/hart2/subdir.mk
 -include src/application/hart1/subdir.mk
 -include src/application/hart0/subdir.mk
+-include src/application/subdir.mk
 -include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(CC_DEPS)),)
+-include $(CC_DEPS)
+endif
+ifneq ($(strip $(C++_DEPS)),)
+-include $(C++_DEPS)
+endif
+ifneq ($(strip $(C_UPPER_DEPS)),)
+-include $(C_UPPER_DEPS)
+endif
+ifneq ($(strip $(CXX_DEPS)),)
+-include $(CXX_DEPS)
+endif
 ifneq ($(strip $(ASM_DEPS)),)
 -include $(ASM_DEPS)
 endif
@@ -41,6 +54,9 @@ ifneq ($(strip $(S_UPPER_DEPS)),)
 endif
 ifneq ($(strip $(C_DEPS)),)
 -include $(C_DEPS)
+endif
+ifneq ($(strip $(CPP_DEPS)),)
+-include $(CPP_DEPS)
 endif
 endif
 
@@ -78,8 +94,8 @@ main-build: mpfs-mac-mcc-stack.elf secondary-outputs
 # Tool invocations
 mpfs-mac-mcc-stack.elf: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: GNU RISC-V Cross C Linker'
-	riscv64-unknown-elf-gcc -march=rv64imac -mabi=lp64 -mcmodel=medany -msmall-data-limit=8 -mstrict-align -mno-save-restore -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -pedantic -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wpadded -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\Users\zero6575\Libero\fpga_labor\fpga_labor\software\mpfs-mac-mcc-stack\src\boards\custom_board\platform_config\lim-debug\linker\mpfs-lim.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"mpfs-mac-mcc-stack.map" --specs=nano.specs --specs=nosys.specs -o "mpfs-mac-mcc-stack.elf" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Invoking: GNU RISC-V Cross C++ Linker'
+	riscv64-unknown-elf-g++ -march=rv64imac -mabi=lp64 -mcmodel=medany -msmall-data-limit=8 -mstrict-align -mno-save-restore -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -pedantic -Wunused -Wuninitialized -Wall -Wextra -Wmissing-declarations -Wconversion -Wpointer-arith -Wpadded -Wshadow -Wlogical-op -Waggregate-return -Wfloat-equal  -g3 -T "C:\Users\zero6575\Libero\fpga_labor\fpga_labor\software\mpfs-mac-mcc-stack\src\boards\custom_board\platform_config\lim-debug\linker\mpfs-lim.ld" -nostartfiles -Xlinker --gc-sections -Wl,-Map,"mpfs-mac-mcc-stack.map" --specs=nano.specs --specs=nosys.specs -fno-use-cxa-atexit -o "mpfs-mac-mcc-stack.elf" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -103,7 +119,7 @@ mpfs-mac-mcc-stack.siz: mpfs-mac-mcc-stack.elf makefile objects.mk $(OPTIONAL_TO
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(SECONDARY_FLASH)$(SECONDARY_LIST)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS) mpfs-mac-mcc-stack.elf
+	-$(RM) $(CC_DEPS)$(C++_DEPS)$(OBJS)$(C_UPPER_DEPS)$(CXX_DEPS)$(SECONDARY_FLASH)$(SECONDARY_LIST)$(SECONDARY_SIZE)$(ASM_DEPS)$(S_UPPER_DEPS)$(C_DEPS)$(CPP_DEPS) mpfs-mac-mcc-stack.elf
 	-@echo ' '
 
 pre-build:
