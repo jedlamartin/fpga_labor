@@ -82,6 +82,7 @@
 #include "trendlog.h"
 
 #include "app_main.h"
+#include "inc/dma.h"
 
 struct mss_uart_instance* g_uart = &g_mss_uart1_lo;
 
@@ -2295,6 +2296,7 @@ e51_task(void *pvParameters)
     bip_set_port(0xBAC0);
     bip_set_socket(0x0000);
 
+    init();
     audio_stream_init();
     while (1)
     {

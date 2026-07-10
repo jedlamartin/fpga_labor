@@ -1,63 +1,60 @@
-# ====================================================================
-# Libero SoC Project Files & Auto-Generated Folders
-# ====================================================================
-synthesis/
-designer/
-simulation/
-tooldata/
-phy_synthesis/
-smartgen/
-component/work/
-stimulus/
-viewdraw/
-
-# Core project recovery files that should NOT be ignored:
-!*.prjx
-!*.cxz
-
-# ====================================================================
-# Generic Tool Logs, Diagnostics, and Tcl Journals
-# ====================================================================
+# ==========================================
+# Microchip Libero SoC (FPGA Hardware)
+# ==========================================
+# We are tracking .prjx, /component/, and /smartgen/ in this workflow!
+*.bak
 *.log
-*.txt
+*.log.bak*
 *.jou
-*.core
-*.err
-*.xml
-*.lock
-*.tcl.rc
+*.msg
 
-# Keep documentation PDFs if they are inside a docs folder
-!docs/*.pdf
+# Ignore massive generated hardware build folders
+/fpga_labor/designer/
+/fpga_labor/synthesis/
+/fpga_labor/simulation/
+/fpga_labor/tooldata/
+/fpga_labor/viewdraw/
+/fpga_labor/syndist/
+/fpga_labor/identify_idc/
 
-# ====================================================================
-# Synopsys Synplify & Identify Debugger Artifacts
-# ====================================================================
-*_syn.prj
-*.cdc
-*.impl
-*.srr
-*.srs
-*.srm
-*.swi
-*.fdb
-*.snd
-*.hdb
-identify.db
+# Ignore constraints layout logs
+/fpga_labor/constraint/*.log
+/fpga_labor/constraint/*.def
 
-# ====================================================================
-# HLS Workspace & Eclipse IDE Junk (Skipping metadata/plugin histories)
-# ====================================================================
+# ==========================================
+# SoftConsole / Eclipse (RISC-V Firmware)
+# ==========================================
+# Ignore Eclipse workspace metadata
 .metadata/
-.recommenders/
-**/hls_output/.hls/
-**/hls_output/reports/
-**/*.bc
-**/*.sw_binary
+.safetable/
+.root/
 
-# Retain the critical Eclipse configuration structures to share project layouts
-!.project
-!.cproject
-!.settings/
-!**/src/
-!**/config.tcl
+# Ignore compiled C/C++ firmware outputs
+**/Debug-*/
+**/Release-*/
+**/LIM-*/
+*.elf
+*.hex
+*.map
+*.lst
+*.o
+*.d
+*.bin
+
+# ==========================================
+# SmartHLS (C++ to RTL)
+# ==========================================
+# Ignore LLVM intermediates and HLS synthesis logs
+hls_output/
+reports/
+syntmp/
+dot_graphs/
+*.bc
+*.sw_binary
+*.ll
+
+# ==========================================
+# OS Generated Files
+# ==========================================
+Thumbs.db
+.DS_Store

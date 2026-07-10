@@ -2,7 +2,7 @@
 // Smart High-Level Synthesis Tool Version 2025.2
 // Copyright (c) 2015-2025 Microchip Technology Inc. All Rights Reserved.
 // For support, please visit https://onlinedocs.microchip.com/v2/keyword-lookup?keyword=techsupport&redirect=true&version=latest.
-// Date: Tue Jun 23 12:30:44 2026
+// Date: Fri Jul 10 16:04:12 2026
 // ----------------------------------------------------------------------------
 `define MEMORY_CONTROLLER_ADDR_SIZE 32
 //

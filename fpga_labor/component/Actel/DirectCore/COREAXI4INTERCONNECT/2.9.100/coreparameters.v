@@ -1,5 +1,5 @@
 //--------------------------------------------------------------------
-// Created by Microsemi SmartDesign Mon Jul  6 16:17:44 2026
+// Created by Microsemi SmartDesign Fri Jul 10 19:35:32 2026
 // Parameters for COREAXI4INTERCONNECT
 //--------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ parameter FAMILY = 27;
 parameter ID_WIDTH = 1;
 parameter MASTER0_CHAN_RS = 1;
 parameter MASTER0_CLOCK_DOMAIN_CROSSING = 0;
-parameter MASTER0_DATA_WIDTH = 64;
+parameter MASTER0_DATA_WIDTH = 32;
 parameter MASTER0_DWC_DATA_FIFO_DEPTH = 16;
 parameter MASTER0_READ_INTERLEAVE = 0;
 parameter MASTER0_READ_SLAVE0 = 1;
@@ -1141,10 +1141,10 @@ parameter SLAVE0_CHAN_RS = 1;
 parameter SLAVE0_CLOCK_DOMAIN_CROSSING = 0;
 parameter SLAVE0_DATA_WIDTH = 64;
 parameter SLAVE0_DWC_DATA_FIFO_DEPTH = 16;
-parameter SLAVE0_END_ADDR = 'h7fffffff;
+parameter SLAVE0_END_ADDR = 'hcfffffff;
 parameter SLAVE0_END_ADDR_UPPER = 'h0;
 parameter SLAVE0_READ_INTERLEAVE = 0;
-parameter SLAVE0_START_ADDR = 'h60000000;
+parameter SLAVE0_START_ADDR = 'h80000000;
 parameter SLAVE0_START_ADDR_UPPER = 'h0;
 parameter SLAVE0_TYPE = 0;
 parameter SLAVE1_CHAN_RS = 1;

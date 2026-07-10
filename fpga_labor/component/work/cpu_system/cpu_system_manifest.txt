@@ -1,0 +1,11 @@
+Microchip Technology Inc. - Microchip Libero Software Release 2025.2 (Version 2025.2.0.14)
+
+Date      :  Fri Jul 10 19:36:20 2026
+Project   :  C:\Users\zero6575\Libero\fpga_labor\fpga_labor
+Component :  cpu_system
+Family    :  PolarFireSoC
+
+
+HDL source files for all Synthesis and Simulation tools:
+    C:/Users/zero6575/Libero/fpga_labor/fpga_labor/component/work/cpu_system/cpu_system.v
+
